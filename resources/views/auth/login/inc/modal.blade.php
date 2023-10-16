@@ -12,7 +12,7 @@
 			</div>
 
 			<form role="form" method="POST" action="{{ \App\Helpers\UrlGen::login() }}">
-				<div class="modal-body" style="padding: 0 1rem">
+				<div class="modal-body" style="padding: 0 2.3rem">
 					<div class="row">
 						<div class="col-12">
 							<h4 class="font-weight-bold mb-3">Добро пожаловать в Барсовоз</h4>

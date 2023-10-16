@@ -12,11 +12,11 @@
                     $ratingCacheFormat = number_format($ratingCache, 1);
 					$ratingCacheFormatInt = number_format($ratingCache);
                 @endphp
-                {{ $ratingCacheFormat }} {{ trans_choice('reviews::messages.count_stars', getPlural($ratingCacheFormatInt), [], config('app.locale')) }}
+                {{ $ratingCacheFormat }}
             </span>
         </p>
     </div>
-    
+
     @section('after_styles')
         @parent
         <style>

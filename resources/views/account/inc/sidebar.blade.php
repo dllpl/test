@@ -16,6 +16,9 @@
 					<ul class="menu-nav__sublist list-reset">
 						@foreach($menu as $key => $value)
 							<li class="menu-nav__subitem">
+								@if(strpos($value['url'], 'account/close'))
+									@continue
+								@endif
 								<a href="{{ $value['url'] }}" class="link link--grey {!! (isset($value['isActive']) && $value['isActive']) ? 'active' : '' !!}">
 									<i class="{{ $value['icon'] }}" style="color: #79B285"></i>&nbsp; {{ $value['name'] }}
 									@if (isset($value['countVar']) && !empty($value['countVar']))

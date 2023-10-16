@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 return [
     'no_categories_found' => 'Категории не найдены',
@@ -100,7 +100,7 @@ return [
     'urgent' => 'Срочные',
     'urgent_listings_only' => 'Только срочные объявления',
     'app_is_also_available_in_your_country' => ':appName также доступна в вашей стране: <a href=":url"><strong>:country</strong></a>. Начать лучшие предложения <a href=":url"><strong>here</strong></a> сейчас!',
-    'login_for_faster_access_to_the_best_deals' => '<a href=":login_url"><strong>Авторизоваться</strong></a> для более быстрого доступа к лучшим сделкам. <a href=":register_url"><strong>Нажмите тут</strong></a> если у вас нет учетной записи.',
+    'login_for_faster_access_to_the_best_deals' => '<a href=":login_url" class="title--accent"><strong>Авторизуйтесь</strong></a> в Личном кабинете, чтобы связаться с продавцом. Ещё нет аккаунта - пройдите <a href=":register_url" class="title--accent"><strong>регистрацию</strong></a>.',
     'list_of_categories_and_sub_categories' => 'Список категорий и подкатегорий',
     'list_of_cities_in' => 'Список городов в',
     'do_you_have_anything' => 'Вам есть что продать или арендовать?',
