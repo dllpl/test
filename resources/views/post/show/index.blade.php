@@ -275,8 +275,8 @@
 										@endif
 										<li class="saler__item">
 											@if (config('plugins.reviews.installed'))
-												@if (view()->exists('reviews::ratings-user'))
-													@include('reviews::ratings-user')
+												@if (view()->exists('reviews::ratings-single'))
+													@include('reviews::ratings-single')
 												@endif
 											@endif
 										</li>
