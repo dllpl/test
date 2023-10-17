@@ -158,8 +158,6 @@ class MessagesController extends AccountBaseController
 		$endpoint = '/threads';
 		$data = makeApiRequest('post', $endpoint, $request->all(), [], true);
 
-        dd($data);
-
 		// Parsing the API response
 		$message = !empty(data_get($data, 'message')) ? data_get($data, 'message') : 'Unknown Error.';
 
