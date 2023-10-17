@@ -103,7 +103,7 @@
 								@endphp
 								<li>
 									<a href="{!! request()->fullUrlWithoutQuery(['page', 'type']) !!}" class="{{ $aClass }}">
-										{{ t('All Listings') }} <span>({{ data_get($count, '0') }})</span>
+										{{ t('All Listings') }} <span class="counter">({{ data_get($count, '0') }})</span>
 									</a>
 								</li>
 								@if (config('settings.single.show_listing_types'))
@@ -117,7 +117,7 @@
 												<li>
 													<a href="{!! $postTypeUrl !!}" class="active">
 														{{ data_get($postType, 'name') }}
-														<span>
+														<span class="counter">
 														({{ $postTypeCount }})
 													</span>
 													</a>
@@ -126,7 +126,7 @@
 												<li>
 													<a href="{!! $postTypeUrl !!}">
 														{{ data_get($postType, 'name') }}
-														<span>
+														<span class="counter">
 														({{ $postTypeCount }})
 													</span>
 													</a>

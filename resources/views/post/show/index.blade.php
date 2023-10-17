@@ -52,9 +52,7 @@
 		<section class="message-avtorization">
 			<div class="container">
 				<p class="message-avtorization__content">
-					<a href="#" class="message-avtorization__link">
-						{!! $siteCountryInfo !!}
-					</a>.
+					<a href="#" class="message-avtorization__link">{!! $siteCountryInfo !!}</a>
 				</p>
 			</div>
 		</section>

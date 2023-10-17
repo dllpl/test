@@ -133,7 +133,7 @@ $socialAndAppsLinksAreEnabled = ($socialLinksAreEnabled || $appsLinksAreEnabled)
 					</a>
 				</li>
 				<li class="copyright__item">
-					© {{ date('Y') }} {{ config('settings.app.name') }}. {{ t('all_rights_reserved') }}.
+					{{ config('settings.app.name') }}, {{ date('Y') }}
 				</li>
 			</ul>
 		</div>

@@ -40,7 +40,7 @@
 				}
 
 				$cityName = data_get($city, 'name');
-				$fullCityName = !empty($adminName) ? $cityName . ', ' . $adminName : $cityName;
+				$fullCityName = $cityName;
 				$displayedCityName = str($cityName)->limit(25);
 			@endphp
 			<div class="col mb-1 list-link list-unstyled">
