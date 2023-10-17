@@ -121,23 +121,23 @@
 								<input name="panel" type="hidden" value="user">
 
 								<ul class="list-reset form__list">
-									{{-- gender_id --}}
-									<?php $genderIdError = (isset($errors) && $errors->has('gender_id')) ? ' is-invalid' : ''; ?>
-									<li class="form__item">
-										<label class="form__label" for="gender_id">{{ t('gender') }}</label>
-										<select name="gender_id" id="genderId" class="input input--default {{ $genderIdError }}">
-											<option value="0" @selected(empty(old('gender_id')))>
-												{{ t('Select') }}
-											</option>
-											@if ($genders->count() > 0)
-												@foreach ($genders as $gender)
-													<option value="{{ $gender->id }}" @selected(old('gender_id', $user->gender_id) == $gender->id)>
-														{{ $gender->name }}
-													</option>
-												@endforeach
-											@endif
-										</select>
-									</li>
+{{--									--}}{{-- gender_id --}}
+{{--									<?php $genderIdError = (isset($errors) && $errors->has('gender_id')) ? ' is-invalid' : ''; ?>--}}
+{{--									<li class="form__item">--}}
+{{--										<label class="form__label" for="gender_id">{{ t('gender') }}</label>--}}
+{{--										<select name="gender_id" id="genderId" class="input input--default {{ $genderIdError }}">--}}
+{{--											<option value="0" @selected(empty(old('gender_id')))>--}}
+{{--												{{ t('Select') }}--}}
+{{--											</option>--}}
+{{--											@if ($genders->count() > 0)--}}
+{{--												@foreach ($genders as $gender)--}}
+{{--													<option value="{{ $gender->id }}" @selected(old('gender_id', $user->gender_id) == $gender->id)>--}}
+{{--														{{ $gender->name }}--}}
+{{--													</option>--}}
+{{--												@endforeach--}}
+{{--											@endif--}}
+{{--										</select>--}}
+{{--									</li>--}}
 									{{-- name --}}
 									<?php $nameError = (isset($errors) && $errors->has('name')) ? ' is-invalid' : ''; ?>
 									<li class="form__item required">
@@ -230,6 +230,7 @@
 												   type="tel"
 												   class="input input--default form-control{{ $phoneError }}"
 												   value="{{ $phoneValueOld }}"
+
 											>
 											<span class="input-group-text iti-group-text">
 														<input name="phone_hidden" id="phoneHidden" type="checkbox" class="input input--default"

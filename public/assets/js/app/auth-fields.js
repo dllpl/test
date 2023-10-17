@@ -30,31 +30,31 @@ if (typeof defaultAuthField === 'undefined') {
 }
 
 $(document).ready(function () {
-	
+
 	/* Apply the 'intl-tel-input' plugin to the modal phone field */
 	let mPhoneInput = document.querySelector('#mPhone');
 	let mIti = applyIntlTelInput(mPhoneInput, phoneCountries, phoneCountry);
-	
+
 	/* Apply the 'intl-tel-input' plugin to the phone field */
 	let phoneInput = document.querySelector("input[name='phone']:not([type=hidden]):not(.m-phone)");
 	let iti = applyIntlTelInput(phoneInput, phoneCountries, phoneCountry);
-	
+
 	/* Apply the 'intl-tel-input' plugin to the 2nd modal phone field */
 	let fromPhoneInput = document.querySelector('#fromPhone');
 	let fIti = applyIntlTelInput(fromPhoneInput, phoneCountries, phoneCountry);
-	
+
 	/* Select an auth field */
 	selectAuthField(null, defaultAuthField);
 	$(document).on('click', 'a.auth-field', function(e) {
 		e.preventDefault();
 		selectAuthField(this);
-		
+
 		return false;
 	});
 	$(document).on('change', 'input.auth-field-input', function(e) {
 		selectAuthField(this);
 	});
-	
+
 });
 
 /**
@@ -70,18 +70,18 @@ function applyIntlTelInput(inputEl, countries, phoneCountry = null)
 	if (isEmpty(inputEl)) {
 		return null;
 	}
-	
+
 	let params = {
 		/* hiddenInput: 'phone_intl', */
-		initialCountry: '',
+		initialCountry: 'ru',
 		separateDialCode: true,
 		preferredCountries: [],
 	};
-	
+
 	if (!isEmpty(siteUrl)) {
 		params.utilsScript = siteUrl + '/assets/plugins/intl-tel-input/17.0.18/js/utils.js';
 	}
-	
+
 	if (!isEmpty(phoneCountry)) {
 		/* Is the current country's item/object? */
 		let isCurrPhoneCountryItem = function(e) {
@@ -95,28 +95,28 @@ function applyIntlTelInput(inputEl, countries, phoneCountry = null)
 			params.initialCountry = phoneCountry.toLowerCase();
 		}
 	}
-	
+
 	/* Replace dynamically the countries list */
 	if (!isEmpty(countries)) {
 		/* Get all the countries data */
 		var allCountries = window.intlTelInputGlobals.getCountryData();
 		allCountries.length = 0;
-		
+
 		$.each(countries, function (i, country) {
 			allCountries.push(country);
 		});
-		
+
 		if (allCountries.length > 1 && !isEmpty(phoneCountry)) {
 			params.preferredCountries = [phoneCountry.toLowerCase()];
 		}
 	}
-	
+
 	/*
 	 * Store the instance variable in 'window.iti',
 	 * so we can access it in the console e.g. window.iti.getNumber()
 	 */
 	let iti = window.intlTelInput(inputEl, params);
-	
+
 	/* Populate phone hidden inputs */
 	const populatePhoneHiddenInputs = function() {
 		/* phone_intl */
@@ -129,7 +129,7 @@ function applyIntlTelInput(inputEl, countries, phoneCountry = null)
 				}
 			});
 		}
-		
+
 		/* phone_country */
 		let phoneCountryEls = document.querySelectorAll("input[name='phone_country']");
 		if (phoneCountryEls.length) {
@@ -143,12 +143,12 @@ function applyIntlTelInput(inputEl, countries, phoneCountry = null)
 			});
 		}
 	};
-	
+
 	inputEl.addEventListener('focus', populatePhoneHiddenInputs);
 	inputEl.addEventListener('blur', populatePhoneHiddenInputs);
 	inputEl.addEventListener('change', populatePhoneHiddenInputs);
 	inputEl.addEventListener('keyup', populatePhoneHiddenInputs);
-	
+
 	return iti;
 }
 
@@ -161,7 +161,7 @@ function applyIntlTelInput(inputEl, countries, phoneCountry = null)
  */
 function selectAuthField(thisEl = null, defaultAuthField = null) {
 	defaultAuthField = defaultAuthField ? defaultAuthField : 'email';
-	
+
 	/* Select default auth field */
 	let authFieldTagName;
 	let authField;
@@ -171,28 +171,28 @@ function selectAuthField(thisEl = null, defaultAuthField = null) {
 	} else {
 		authField = defaultAuthField;
 	}
-	
+
 	if (!authField || authField.length == 0) {
 		jsAlert('Impossible to get the auth field!', 'error', false);
 		return false;
 	}
-	
+
 	/* Update the 'auth_field' filed value */
 	if (!isEmpty(authFieldTagName) && authFieldTagName == 'a') {
 		$("input[name='auth_field']:not([type=radio], [type=checkbox])").val(authField);
 	}
-	
+
 	/* Get the auth field items (email|phone) & the selected item elements */
 	let itemsEl = $('.auth-field-item');
 	let canBeHiddenItemsEl = $('.auth-field-item:not(.force-to-display)');
 	let selectedItemEl = $("input[name='" + authField + "']").closest('.auth-field-item');
-	
+
 	/* Manage required '<sup>' tag in the auth field items' label */
 	itemsEl.removeClass('required');
 	itemsEl.find('label sup').remove();
 	selectedItemEl.addClass('required');
 	selectedItemEl.find('label').append(' <sup>*</sup>');
-	
+
 	/* Manage auth field items display */
 	if (isLogged !== true) {
 		/*
