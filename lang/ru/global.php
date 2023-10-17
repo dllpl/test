@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 return [
     'no_categories_found' => 'Категории не найдены',
