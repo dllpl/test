@@ -4,6 +4,7 @@
 .idea
 .vscode
 /public/css/*
+!/public/css/custom.css
 /public/js/app.js
 /public/css/app.css
 /public/storage
