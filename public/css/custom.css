@@ -35,6 +35,15 @@ input:focus {
         display: block;
     }
 }
+
+a:not(.link--btn,.link--light):hover {
+    color: var(--accent);
+}
+
+a:is(.link--btn,.link--light):not(.link--dark):hover {
+    color: var(--dark);
+}
+
 .burger__icon {
     width: 36px;
     height: 28px;
@@ -1651,7 +1660,7 @@ p {
     gap: 5px;
 }
 .product__grid {
-    grid-template-areas: "img img saler saler" "specific specific options options" "desc desc desc desc" "map map map map" "bottom bottom bottom bottom";
+    grid-template-areas: "img img saler saler" "specific specific options options" "desc desc map map" "bottom bottom bottom bottom";
 }
 @media (max-width: 1024px) {
     .product__grid {
@@ -1670,7 +1679,6 @@ p {
     -ms-grid-column: 1;
     -ms-grid-column-span: 2;
     grid-area: img;
-    height: 500px;
     /*background-color: var(--dark-grey);*/
 }
 .product__info {

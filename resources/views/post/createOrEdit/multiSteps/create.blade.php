@@ -20,7 +20,7 @@
 
 @php
 	$postInput ??= [];
-	
+
 	$postTypes ??= [];
 	$countries ??= [];
 @endphp
@@ -29,19 +29,19 @@
 	@includeFirst([config('larapen.core.customizedViewPath') . 'common.spacer', 'common.spacer'])
 	<div class="main-container">
 		<div class="container">
-			<div class="row">
-				
+			<div class="row" style="margin-bottom: 30px">
+
 				@includeFirst([config('larapen.core.customizedViewPath') . 'post.inc.notification', 'post.inc.notification'])
-				
+
 				<div class="col-md-9 page-content">
 					<div class="inner-box category-content" style="overflow: visible;">
 						<h2 class="title-2">
 							<strong><i class="far fa-edit"></i> {{ t('create_new_listing') }}</strong>
 						</h2>
-						
+
 						<div class="row">
 							<div class="col-xl-12">
-								
+
 								<form class="form-horizontal" id="postForm" method="POST" action="{{ request()->fullUrl() }}" enctype="multipart/form-data">
 									{!! csrf_field() !!}
 									<fieldset>
@@ -60,7 +60,7 @@
 											<input type="hidden" name="category_id" id="categoryId" value="{{ old('category_id', data_get($postInput, 'category_id', 0)) }}">
 											<input type="hidden" name="category_type" id="categoryType" value="{{ old('category_type', data_get($postInput, 'category_type')) }}">
 										</div>
-										
+
 										@if (config('settings.single.show_listing_types'))
 											{{-- post_type_id --}}
 											@php
@@ -124,7 +124,7 @@
 												<div class="form-text text-muted">{{ t('describe_what_makes_your_listing_unique') }}...</div>
 											</div>
 										</div>
-										
+
 										{{-- cfContainer --}}
 										<div id="cfContainer"></div>
 
@@ -160,7 +160,7 @@
 												@endif
 											</div>
 										</div>
-										
+
 										{{-- country_code --}}
 										@php
 											$countryCodeError = (isset($errors) && $errors->has('country_code')) ? ' is-invalid' : '';
@@ -192,7 +192,7 @@
 										@else
 											<input id="countryCode" name="country_code" type="hidden" value="{{ config('country.code') }}">
 										@endif
-										
+
 										@php
 											$adminType = config('country.admin_type', 0);
 										@endphp
@@ -217,7 +217,7 @@
 											<input type="hidden" id="selectedCityId" name="selected_city_id" value="{{ old('selected_city_id', 0) }}">
 											<input type="hidden" id="selectedCityName" name="selected_city_name" value="{{ old('selected_city_name') }}">
 										@endif
-									
+
 										{{-- city_id --}}
 										<?php $cityIdError = (isset($errors) && $errors->has('city_id')) ? ' is-invalid' : ''; ?>
 										<div id="cityBox" class="row mb-3 required">
@@ -230,7 +230,7 @@
 												</select>
 											</div>
 										</div>
-										
+
 										{{-- tags --}}
 										@php
 											$tagsError = (isset($errors) && $errors->has('tags.*')) ? ' is-invalid' : '';
@@ -255,7 +255,7 @@
 												</div>
 											</div>
 										</div>
-										
+
 										{{-- is_permanent --}}
 										@if (config('settings.single.permanent_listings_enabled') == '3')
 											<input type="hidden" name="is_permanent" id="isPermanent" value="0">
@@ -279,14 +279,14 @@
 												</div>
 											</div>
 										@endif
-										
-										
+
+
 										<div class="content-subheading">
 											<i class="fas fa-user"></i>
 											<strong>{{ t('seller_information') }}</strong>
 										</div>
-										
-										
+
+
 										{{-- contact_name --}}
 										<?php $contactNameError = (isset($errors) && $errors->has('contact_name')) ? ' is-invalid' : ''; ?>
 										@if (auth()->check())
@@ -309,7 +309,7 @@
 												</div>
 											</div>
 										@endif
-										
+
 										{{-- auth_field (as notification channel) --}}
 										@php
 											$authFields = getAuthFields(true);
@@ -342,11 +342,11 @@
 										@else
 											<input id="{{ $authFieldValue }}AuthField" name="auth_field" type="hidden" value="{{ $authFieldValue }}">
 										@endif
-										
+
 										@php
 											$forceToDisplay = isBothAuthFieldsCanBeDisplayed() ? ' force-to-display' : '';
 										@endphp
-										
+
 										{{-- email --}}
 										@php
 											$emailError = (isset($errors) && $errors->has('email')) ? ' is-invalid' : '';
@@ -372,7 +372,7 @@
 												</div>
 											</div>
 										</div>
-										
+
 										{{-- phone --}}
 										@php
 											$phoneError = (isset($errors) && $errors->has('phone')) ? ' is-invalid' : '';
@@ -413,7 +413,7 @@
 												<input name="phone_country" type="hidden" value="{{ old('phone_country', $phoneCountryValue) }}">
 											</div>
 										</div>
-										
+
 										@if (!auth()->check())
 											@if (in_array(config('settings.single.auto_registration'), [1, 2]))
 												{{-- auto_registration --}}
@@ -441,9 +441,9 @@
 												@endif
 											@endif
 										@endif
-										
+
 										@include('layouts.inc.tools.captcha', ['colLeft' => 'col-md-3', 'colRight' => 'col-md-8'])
-										
+
 										@if (!auth()->check())
 											{{-- accept_terms --}}
 											@php
@@ -465,7 +465,7 @@
 													</div>
 												</div>
 											</div>
-											
+
 											{{-- accept_marketing_offers --}}
 											@php
 												$acceptMarketingOffersError = (isset($errors) && $errors->has('accept_marketing_offers')) ? ' is-invalid' : '';
@@ -494,7 +494,7 @@
 												<button id="nextStepBtn" class="btn btn-primary btn-lg">{{ t('Next') }}</button>
 											</div>
 										</div>
-										
+
 									</fieldset>
 								</form>
 
@@ -507,7 +507,7 @@
 				<div class="col-md-3 reg-sidebar">
 					@includeFirst([config('larapen.core.customizedViewPath') . 'post.createOrEdit.inc.right-sidebar', 'post.createOrEdit.inc.right-sidebar'])
 				</div>
-				
+
 			</div>
 		</div>
 	</div>

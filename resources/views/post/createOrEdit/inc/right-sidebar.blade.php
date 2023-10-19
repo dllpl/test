@@ -59,8 +59,8 @@
 		@endif
 	@endif
 
-	<div class="card sidebar-card border-color-primary">
-		<div class="card-header bg-primary border-color-primary text-white uppercase">
+	<div class="card sidebar-card" style=" border-color:#79b285 ">
+		<div class="card-header text-white uppercase" style="background-color:#79b285; border-color:#79b285 ">
 			<strong>{{ t('how_to_sell_quickly') }}</strong>
 		</div>
 		<div class="card-content">

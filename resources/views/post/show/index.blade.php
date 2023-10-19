@@ -398,6 +398,12 @@
 
 					<div class="product__map">
 						@if (config('settings.single.show_listing_on_googlemap') && isset($post['lat'], $post['lon']))
+							<h2 class="product__title title title--xl">
+								Адрес
+							</h2>
+							<div class="title mb-2">
+								{{ data_get($post, 'city.name') }}
+							</div>
 							<div id="map" style="height: 350px"></div>
 						@endif
 					</div>
