@@ -1830,6 +1830,6 @@ Note:
     'city_selection_hint' => 'Select a city selection mode. This will be applied to all city selection field in the app\'s front forms. NOTE: The <code>More Cities</code> or <code>Change City</code> links will always be opened in modal.',
     'display_states_search_tip_label' => 'Display the states search tip',
     'display_states_search_tip_hint' => 'Display (or hide) the states search tooltip in listings search forms.',
-    'background_image_darken_label' => 'Background Image Darken',
+    'background_image_darken_label' => 'Фоновое изображение затемняется',
     'background_image_darken_hint' => 'Background Image Darken (From 0.0 to 1.0 per step of 0.05). Note: The option uses the <code>linear-gradient()</code> CSS function.',
 ];
