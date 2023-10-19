@@ -2,11 +2,11 @@
 	$bcTab ??= [];
 	$admin ??= null;
 	$city ??= null;
-	
+
 	$adminType = config('country.admin_type', 0);
 	$relAdminType = (in_array($adminType, ['1', '2'])) ? $adminType : 1;
 	$adminCode = data_get($city, 'subadmin' . $relAdminType . '_code') ?? data_get($admin, 'code') ?? 0;
-	
+
 	// Search base URL
 	$searchWithoutQuery = \App\Helpers\UrlGen::searchWithoutQuery();
 	$filterBy = request()->get('filterBy');
