@@ -28,12 +28,12 @@ $nextStepUrl = qsUrl($nextStepUrl, request()->only(['package']), null, false);
     <div class="main-container">
         <div class="container">
             <div class="row">
-    
+
                 @includeFirst([config('larapen.core.customizedViewPath') . 'post.inc.notification', 'post.inc.notification'])
-                
+
                 <div class="col-md-12 page-content">
-                    <div class="inner-box">
-						
+                    <div class="inner-box" style="margin-bottom: 30px">
+
                         <h2 class="title-2">
 							<strong><i class="fas fa-camera"></i> {{ t('Photos') }}</strong>
 							<?php
@@ -46,14 +46,14 @@ $nextStepUrl = qsUrl($nextStepUrl, request()->only(['package']), null, false);
 												  data-bs-toggle="tooltip"
 												  title="' . $post->title . '"
 										>' . str($post->title)->limit(45) . '</a>';
-										
+
 										echo $postLink;
 									}
 								}
 							} catch (\Throwable $e) {}
 							?>
 						</h2>
-						
+
                         <div class="row">
                             <div class="col-md-12">
                                 <form class="form-horizontal" id="postForm" method="POST" action="{{ request()->fullUrl() }}" enctype="multipart/form-data">
@@ -78,7 +78,7 @@ $nextStepUrl = qsUrl($nextStepUrl, request()->only(['package']), null, false);
                                         @endif
                                         <div id="uploadError" class="mt-2" style="display: none;"></div>
                                         <div id="uploadSuccess" class="alert alert-success fade show mt-2" style="display: none;"></div>
-										
+
 										{{-- button --}}
                                         <div class="input-group row mt-4">
                                             <div class="col-md-12 text-center">
@@ -86,7 +86,7 @@ $nextStepUrl = qsUrl($nextStepUrl, request()->only(['package']), null, false);
                                                 <a id="nextStepAction" href="{{ $nextStepUrl }}" class="btn btn-default btn-lg">{{ t('Next') }}</a>
                                             </div>
                                         </div>
-                                    	
+
                                     </fieldset>
                                 </form>
                             </div>
@@ -121,7 +121,7 @@ $nextStepUrl = qsUrl($nextStepUrl, request()->only(['package']), null, false);
 	<script src="{{ url('common/js/fileinput/locales/' . config('app.locale') . '.js') }}" type="text/javascript"></script>
     <script>
 		var pictureFieldEl = $('#pictureField');
-		
+
         /* Initialize with defaults (pictures) */
         @if (isset($post, $picturesLimit) && is_numeric($picturesLimit) && $picturesLimit > 0)
         <?php
@@ -170,10 +170,10 @@ $nextStepUrl = qsUrl($nextStepUrl, request()->only(['package']), null, false);
 						<?php
 						/* Get the file path */
 						$filePath = $post->pictures->get($i)->filename;
-						
+
 						/* Get the file's deletion URL */
 						$initialPreviewConfigUrl = url('posts/' . $post->id . '/photos/' . $post->pictures->get($i)->id . '/delete');
-						
+
 						/* Get the file size */
 						try {
 							$fileSize = (isset($disk) && !empty($filePath) && $disk->exists($filePath)) ? (int)$disk->size($filePath) : 0;
@@ -199,10 +199,10 @@ $nextStepUrl = qsUrl($nextStepUrl, request()->only(['package']), null, false);
 					zoomClass: 'btn btn-default btn-sm',
 					indicatorNew: '<i class="fas fa-check-circle" style="color: #09c509;font-size: 20px;margin-top: -15px;display: block;"></i>'
 				},
-				
+
                 elErrorContainer: '#uploadError',
 				msgErrorClass: 'alert alert-block alert-danger',
-				
+
 				uploadClass: 'btn btn-success'
             });
         @endif
@@ -211,12 +211,12 @@ $nextStepUrl = qsUrl($nextStepUrl, request()->only(['package']), null, false);
 		pictureFieldEl.on('filebatchselected', function(event, files) {
 			$(this).fileinput('upload');
 		});
-		
+
 		/* Show upload status message */
         pictureFieldEl.on('filebatchpreupload', function(event, data, id, index) {
             $('#uploadSuccess').html('<ul></ul>').hide();
         });
-		
+
 		/* Show upload success message */
         pictureFieldEl.on('filebatchuploadsuccess', function(event, data, previewId, index) {
             /* Show uploads success messages */
@@ -229,7 +229,7 @@ $nextStepUrl = qsUrl($nextStepUrl, request()->only(['package']), null, false);
             });
             $('#uploadSuccess ul').append(out);
             $('#uploadSuccess').fadeIn('slow');
-            
+
             /* Change button label */
             $('#nextStepAction').html('{{ $nextStepLabel }}').removeClass('btn-default').addClass('btn-primary');
         });
@@ -237,14 +237,14 @@ $nextStepUrl = qsUrl($nextStepUrl, request()->only(['package']), null, false);
 		pictureFieldEl.on('filebatchuploaderror', function(event, data, msg) {
 			showErrorMessage(msg);
 		});
-		
+
 		/* Before deletion */
         pictureFieldEl.on('filepredelete', function(xhr) {
             var abort = true;
             if (confirm("{{ t('Are you sure you want to delete this picture') }}")) {
                 abort = false;
             }
-            
+
             return abort;
         });
 		/* Show deletion success message */
@@ -253,12 +253,12 @@ $nextStepUrl = qsUrl($nextStepUrl, request()->only(['package']), null, false);
 			if (typeof xhr.responseJSON === 'undefined') {
 				return false;
 			}
-			
+
 			let obj = xhr.responseJSON;
 			if (typeof obj.status === 'undefined' || typeof obj.message === 'undefined') {
 				return false;
 			}
-			
+
 			/* Deletion Notification */
 			if (parseInt(obj.status) === 1) {
 				showSuccessMessage(obj.message);
@@ -270,7 +270,7 @@ $nextStepUrl = qsUrl($nextStepUrl, request()->only(['package']), null, false);
 		pictureFieldEl.on('filedeleteerror', function(event, data, msg) {
 			showErrorMessage(msg);
 		});
-		
+
 		/* Reorder (Sort) files */
 		pictureFieldEl.on('filesorted', function(event, params) {
 			reorderPictures(params);
@@ -286,11 +286,11 @@ $nextStepUrl = qsUrl($nextStepUrl, request()->only(['package']), null, false);
 			if (typeof params.stack === 'undefined') {
 				return false;
 			}
-			
+
 			waitingDialog.show('{{ t('Processing') }}...');
-			
+
 			let postId = '{{ request()->segment(2) }}';
-			
+
 			let ajax = $.ajax({
 				method: 'POST',
 				url: siteUrl + '/posts/' + postId + '/photos/reorder',
@@ -300,22 +300,22 @@ $nextStepUrl = qsUrl($nextStepUrl, request()->only(['package']), null, false);
 				}
 			});
 			ajax.done(function(data) {
-				
+
 				setTimeout(function() {
 					waitingDialog.hide();
 				}, 250);
-				
+
 				if (typeof data.status === 'undefined') {
 					return false;
 				}
-				
+
 				/* Reorder Notification */
 				if (parseInt(data.status) === 1) {
 					showSuccessMessage(data.message);
 				} else {
 					showErrorMessage(data.message);
 				}
-				
+
 				return false;
 			});
 			ajax.fail(function (xhr, textStatus, errorThrown) {
@@ -324,10 +324,10 @@ $nextStepUrl = qsUrl($nextStepUrl, request()->only(['package']), null, false);
 					showErrorMessage(message);
 				}
 			});
-			
+
 			return false;
 		}
-		
+
 		/**
 		 * Show Success Message
 		 * @param message
@@ -336,15 +336,15 @@ $nextStepUrl = qsUrl($nextStepUrl, request()->only(['package']), null, false);
 		{
 			let errorEl = $('#uploadError');
 			let successEl = $('#uploadSuccess');
-			
+
 			errorEl.hide().empty();
 			errorEl.removeClass('alert alert-block alert-danger');
-			
+
 			successEl.html('<ul></ul>').hide();
 			successEl.find('ul').append(message);
 			successEl.fadeIn('fast');
 		}
-		
+
 		/**
 		 * Show Errors Message
 		 * @param message
@@ -352,18 +352,18 @@ $nextStepUrl = qsUrl($nextStepUrl, request()->only(['package']), null, false);
 		function showErrorMessage(message)
 		{
 			jsAlert(message, 'error', false);
-			
+
 			let errorEl = $('#uploadError');
 			let successEl = $('#uploadSuccess');
-			
+
 			/* Error Notification */
 			successEl.empty().hide();
-			
+
 			errorEl.html('<ul></ul>').hide();
 			errorEl.addClass('alert alert-block alert-danger');
 			errorEl.find('ul').append(message);
 			errorEl.fadeIn('fast');
 		}
     </script>
-    
+
 @endsection

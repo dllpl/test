@@ -23,16 +23,16 @@
     <div class="main-container">
         <div class="container">
             <div class="row">
-    
+
                 @includeFirst([config('larapen.core.customizedViewPath') . 'post.inc.notification', 'post.inc.notification'])
-                
+
                 <div class="col-md-12 page-content">
-                    <div class="inner-box">
-						
+                    <div class="inner-box"  style="margin-bottom: 30px">
+
                         <h2 class="title-2">
 							<strong><i class="fas fa-camera"></i> {{ t('Photos') }}</strong>
 						</h2>
-						
+
                         <div class="row">
                             <div class="col-md-12">
                                 <form class="form-horizontal" id="postForm" method="POST" action="{{ request()->fullUrl() }}" enctype="multipart/form-data">
@@ -56,7 +56,7 @@
                                         @endif
                                         <div id="uploadError" class="mt-2" style="display: none;"></div>
                                         <div id="uploadSuccess" class="alert alert-success fade show mt-2" style="display: none;"></div>
-										
+
 										{{-- button --}}
                                         <div class="input-group row mt-4">
                                             <div class="col-md-12 text-center">
@@ -64,7 +64,7 @@
 												<button id="nextStepBtn" class="btn btn-primary btn-lg"> {{ $nextStepLabel ?? t('Next') }} </button>
                                             </div>
                                         </div>
-                                    	
+
                                     </fieldset>
                                 </form>
                             </div>
@@ -99,7 +99,7 @@
 	<script src="{{ url('common/js/fileinput/locales/' . config('app.locale') . '.js') }}" type="text/javascript"></script>
     <script>
 		var pictureFieldEl = $('#pictureField');
-		
+
         /* Initialize with defaults (pictures) */
         @if (isset($picturesLimit) && is_numeric($picturesLimit) && $picturesLimit > 0)
 			<?php
@@ -150,7 +150,7 @@
 							<?php
 								/* Get the file's deletion URL */
 								$deleteUrl = url('posts/create/photos/' . $i . '/delete');
-								
+
 								/* Get the file size */
 								try {
 									$fileSize = (isset($disk) && !empty($filePath) && $disk->exists($filePath)) ? (int)$disk->size($filePath) : 0;
@@ -176,24 +176,24 @@
 					zoomClass: 'btn btn-default btn-sm',
 					indicatorNew: '<i class="fas fa-check-circle" style="color: #09c509;font-size: 20px;margin-top: -15px;display: block;"></i>'
 				},
-				
+
 				elErrorContainer: '#uploadError',
 				msgErrorClass: 'alert alert-block alert-danger',
-				
+
 				browseClass: 'btn btn-default'
             });
         @endif
-		
+
 		/* Auto-upload files */
 		pictureFieldEl.on('filebatchselected', function(event, files) {
 			$(this).fileinput('upload');
 		});
-		
+
 		/* Show upload status message */
 		pictureFieldEl.on('filebatchpreupload', function(event, data, id, index) {
 			$('#uploadSuccess').html('<ul></ul>').hide();
 		});
-		
+
 		/* Show upload success message */
 		pictureFieldEl.on('filebatchuploadsuccess', function(event, data, previewId, index) {
 			/* Show uploads success messages */
@@ -206,7 +206,7 @@
 			});
 			$('#uploadSuccess ul').append(out);
 			$('#uploadSuccess').fadeIn('slow');
-			
+
 			/* Change button label */
 			$('#nextStepAction').html('{{ $nextStepLabel }}').removeClass('btn-default').addClass('btn-primary');
 		});
@@ -214,7 +214,7 @@
 		pictureFieldEl.on('filebatchuploaderror', function(event, data, msg) {
 			showErrorMessage(msg);
 		});
-		
+
 		/* Before deletion */
         pictureFieldEl.on('filepredelete', function(jqXHR) {
             var abort = true;
@@ -229,12 +229,12 @@
 			if (typeof jqXHR.responseJSON === 'undefined') {
 				return false;
 			}
-			
+
 			let obj = jqXHR.responseJSON;
 			if (typeof obj.status === 'undefined' || typeof obj.message === 'undefined') {
 				return false;
 			}
-			
+
 			/* Deletion Notification */
 			if (parseInt(obj.status) === 1) {
 				showSuccessMessage(obj.message);
@@ -246,12 +246,12 @@
 		pictureFieldEl.on('filedeleteerror', function(event, data, msg) {
 			showErrorMessage(msg);
 		});
-		
+
 		/* Reorder (Sort) files */
 		pictureFieldEl.on('filesorted', function(event, params) {
 			reorderPictures(params);
 		});
-		
+
 		/**
 		 * Reorder (Sort) pictures
 		 * @param params
@@ -262,9 +262,9 @@
 			if (typeof params.stack === 'undefined') {
 				return false;
 			}
-			
+
 			waitingDialog.show('{{ t('Processing') }}...');
-			
+
 			let ajax = $.ajax({
 				method: 'POST',
 				url: siteUrl + '/posts/create/photos/reorder',
@@ -274,22 +274,22 @@
 				}
 			});
 			ajax.done(function(data) {
-		
+
 				setTimeout(function() {
 					waitingDialog.hide();
 				}, 250);
-		
+
 				if (typeof data.status === 'undefined') {
 					return false;
 				}
-				
+
 				/* Reorder Notification */
 				if (parseInt(data.status) === 1) {
 					showSuccessMessage(data.message);
 				} else {
 					showErrorMessage(data.message);
 				}
-				
+
 				return false;
 			});
 			ajax.fail(function (xhr, textStatus, errorThrown) {
@@ -298,10 +298,10 @@
 					showErrorMessage(message);
 				}
 			});
-			
+
 			return false;
 		}
-		
+
 		/**
 		 * Show Success Message
 		 * @param message
@@ -310,15 +310,15 @@
 		{
 			let errorEl = $('#uploadError');
 			let successEl = $('#uploadSuccess');
-			
+
 			errorEl.hide().empty();
 			errorEl.removeClass('alert alert-block alert-danger');
-			
+
 			successEl.html('<ul></ul>').hide();
 			successEl.find('ul').append(message);
 			successEl.fadeIn('slow');
 		}
-		
+
 		/**
 		 * Show Errors Message
 		 * @param message
@@ -326,18 +326,18 @@
 		function showErrorMessage(message)
 		{
 			jsAlert(message, 'error', false);
-			
+
 			let errorEl = $('#uploadError');
 			let successEl = $('#uploadSuccess');
-			
+
 			/* Error Notification */
 			successEl.empty().hide();
-			
+
 			errorEl.html('<ul></ul>').hide();
 			errorEl.addClass('alert alert-block alert-danger');
 			errorEl.find('ul').append(message);
 			errorEl.fadeIn('slow');
 		}
     </script>
-    
+
 @endsection
