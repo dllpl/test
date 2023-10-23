@@ -509,4 +509,16 @@
 			$(this).val(picker.startDate.format('{{ t('datepicker_format') }}') + ' - ' + picker.endDate.format('{{ t('datepicker_format') }}'));
 		});
 	});
+
+	/** Обработка поля VIN-номера */
+	document.getElementById("cf.27").addEventListener("input", function(event) {
+		const allowedChars = /^[0-9A-HJ-NPR-Z]+$/i
+		const inputValue = event.target.value
+
+		if (!allowedChars.test(inputValue)) {
+			event.target.value = inputValue.replace(/[^0-9A-HJ-NPR-Z]+/ig, "").toUpperCase()
+		} else {
+			event.target.value = inputValue.toUpperCase()
+		}
+	});
 </script>

@@ -49,7 +49,11 @@
                             @if ($fieldType == 'url')
                                 <a href="{{ $fieldValue }}" target="_blank" rel="nofollow">{{ $fieldValue }}</a>
                             @else
-                                {{ $fieldValue }}
+                                @if($fieldName === 'VIN')
+                                    {{ mb_substr($fieldValue, 0, 4) . '***********' }}
+                                @else
+                                    {{ $fieldValue }}
+                                @endif
                             @endif
                         </p>
                     </li>

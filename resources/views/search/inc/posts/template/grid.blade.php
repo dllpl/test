@@ -21,7 +21,19 @@
                     </a>
                 </div>
                 <h4 class="preview__title title title--large title--accent">
-                    <a href="{{ \App\Helpers\UrlGen::post($post) }}">{{ str(data_get($post, 'title'))->limit(70) }}</a>
+                    @switch($post['category']['name'])
+                        @case('Автомобили')
+                            <a href="{{ \App\Helpers\UrlGen::post($post) }}">Автомобиль {{ str(data_get($post, 'title'))->limit(70) }} в г. {{ data_get($post, 'city.name') }}</a>
+                            @break
+                        @case('Продажа')
+                            <a href="{{ \App\Helpers\UrlGen::post($post) }}">Продажа {{ str(data_get($post, 'title'))->limit(70) }} в г. {{ data_get($post, 'city.name') }}</a>
+                            @break
+                        @case('Логистика')
+                            asdasd
+                            @break
+                        @default
+                            <a href="{{ \App\Helpers\UrlGen::post($post) }}">{{ str(data_get($post, 'title'))->limit(70) }}</a>
+                    @endswitch
                 </h4>
                 <span class="preview__price price">{!! data_get($post, 'price_formatted') !!}</span>
                 <div class="preview__wrapp">

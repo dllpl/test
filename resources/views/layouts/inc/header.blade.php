@@ -95,6 +95,7 @@ if ($multiCountriesIsEnabled) {
 							</svg>
 							<span class="header__content-adaptive">Чат</span>
 						</a>
+						<span class="badge badge-pill link--accent count-threads-with-new-messages d-lg-inline-block d-md-none">0</span>
 					</li>
 
 					<li class="header__item dropdown no-arrow open-on-hover">

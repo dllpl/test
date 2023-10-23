@@ -16,6 +16,7 @@
 
 namespace App\Http\Controllers\Web\Public\Account;
 
+use App\Helpers\UrlGen;
 use Larapen\LaravelMetaTags\Facades\MetaTag;
 
 class SavedSearchesController extends AccountBaseController

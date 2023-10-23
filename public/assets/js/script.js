@@ -497,7 +497,7 @@ function getPackagePrice(selectedPackage) {
  * Check Threads with New Messages
  */
 function checkNewMessages() {
-	var oldValue = $('.dropdown-toggle .count-threads-with-new-messages').html();
+	var oldValue = $('.count-threads-with-new-messages').html();
 	if (typeof oldValue === 'undefined') {
 		return false;
 	}

@@ -38,12 +38,15 @@
 								<h3 class="m-t-0 color-danger">
 									<i class="fas fa-exclamation-triangle"></i> {{ t('Page not found') }}
 								</h3>
-								<p>
+								<p class="mb-3">
 									<?php
 									$defaultErrorMessage = t('Meanwhile, you may return to homepage', ['url' => url('/')]);
 									?>
 									{!! isset($exception) ? ($exception->getMessage() ? $exception->getMessage() : $defaultErrorMessage) : $defaultErrorMessage !!}
 								</p>
+								<a class="link link--btn link--accent" href="{{url()->previous()}}" style="color: white">
+									{{ t('Back') }}
+								</a>
 							</div>
 						</div>
 						

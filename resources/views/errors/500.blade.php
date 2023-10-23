@@ -36,7 +36,7 @@
 								<h3 class="m-t-0 color-danger">
 									<i class="fas fa-exclamation-triangle"></i> {{ t('Internal Server Error') }}
 								</h3>
-								<p>
+								<p class="mb-3">
 									<?php
 									$defaultErrorMessage = t('An internal server error has occurred');
 									$extractedMessage = null;
@@ -63,6 +63,9 @@
 									echo (!empty($extractedMessage)) ? $extractedMessage : $defaultErrorMessage;
 									?>
 								</p>
+								<a class="link link--btn link--accent" href="{{url()->previous()}}" style="color: white">
+									{{ t('Back') }}
+								</a>
 							</div>
 						</div>
 

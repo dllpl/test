@@ -364,30 +364,34 @@
 						</div>
 					</div>
 					<div class="product__specific">
-						<h2 class="product__title title title--xl">
-							Характеристики
-						</h2>
-						<ul class="product__list list-reset">
-							{{-- Custom Fields --}}
-							@includeFirst([config('larapen.core.customizedViewPath') . 'post.show.inc.details.fields-values', 'post.show.inc.details.fields-values'])
-						</ul>
+						@if(!empty($customFields))
+							<h2 class="product__title title title--xl">
+								Характеристики
+							</h2>
+							<ul class="product__list list-reset">
+								{{-- Custom Fields --}}
+								@includeFirst([config('larapen.core.customizedViewPath') . 'post.show.inc.details.fields-values', 'post.show.inc.details.fields-values'])
+							</ul>
+						@endif
 					</div>
 					<div class="product__options">
-						<h2 class="product__title title title--xl">
-							Дополнительные опции
-						</h2>
-						@foreach($customFields as $field)
-						@php $fieldValue = data_get($field, 'value'); @endphp
-							@if (is_array($fieldValue) && count($fieldValue) > 0)
-									@foreach($fieldValue as $valueItem)
-										<li class="product__item">
-											<p class="product__value">
-													{{ $valueItem }}
-											</p>
-										</li>
-									@endforeach
-							@endif
-						@endforeach
+						@if(!empty($customFields))
+							<h2 class="product__title title title--xl">
+								Дополнительные опции
+							</h2>
+							@foreach($customFields as $field)
+							@php $fieldValue = data_get($field, 'value'); @endphp
+								@if (is_array($fieldValue) && count($fieldValue) > 0)
+										@foreach($fieldValue as $valueItem)
+											<li class="product__item">
+												<p class="product__value">
+														{{ $valueItem }}
+												</p>
+											</li>
+										@endforeach
+								@endif
+							@endforeach
+						@endif
 					</div>
 					<div class="product__description">
 						<h2 class="product__title title title--xl">Описание</h2>
@@ -410,7 +414,7 @@
 
 					<div class="product__bottom">
 						@foreach(data_get($post, 'tags') as $iTag)
-							<a class="product__bottom-link link link--dark" href="{{ \App\Helpers\UrlGen::tag($iTag) }}">
+							<a class="product__bottom-link link link--grey-light" href="{{ \App\Helpers\UrlGen::tag($iTag) }}">
 								{{ $iTag }}
 							</a>
 						@endforeach
