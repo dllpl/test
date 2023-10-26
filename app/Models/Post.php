@@ -19,6 +19,7 @@ namespace App\Models;
 use App\Helpers\Date;
 use App\Helpers\Number;
 use App\Helpers\RemoveFromString;
+use App\Helpers\Translit;
 use App\Helpers\UrlGen;
 use App\Models\Post\ReviewsPlugin;
 use App\Models\Post\SimilarByCategory;
@@ -682,6 +683,8 @@ class Post extends BaseModel implements Feedable
 				
 				$value = stripNonUtf($value);
 				$value = slugify($value);
+
+                $value = Translit::make($value);
 				
 				// To prevent 404 error when the slug starts by a banned slug/prefix,
 				// Add a tilde (~) as prefix to it.
@@ -697,7 +700,7 @@ class Post extends BaseModel implements Feedable
 			},
 		);
 	}
-	
+
 	/*
 	 * For API calls, to allow listings sharing
 	 */

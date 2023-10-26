@@ -374,25 +374,33 @@
 							</ul>
 						@endif
 					</div>
-					<div class="product__options">
-						@if(!empty($customFields))
-							<h2 class="product__title title title--xl">
-								Дополнительные опции
-							</h2>
-							@foreach($customFields as $field)
-							@php $fieldValue = data_get($field, 'value'); @endphp
-								@if (is_array($fieldValue) && count($fieldValue) > 0)
-										@foreach($fieldValue as $valueItem)
-											<li class="product__item">
-												<p class="product__value">
-														{{ $valueItem }}
-												</p>
-											</li>
-										@endforeach
-								@endif
-							@endforeach
-						@endif
-					</div>
+					@php
+						$valueItem = [];
+						if(!empty($customFields)) {
+                            foreach ($customFields as $field) {
+                                $fieldValue = data_get($field, 'value');
+                                if (is_array($fieldValue) && count($fieldValue) > 0) {
+										foreach ($fieldValue as $item) {
+										$valueItem[] = $item;
+									}
+                                }
+                            }
+						}
+					@endphp
+					@if(!empty($valueItem))
+						<div class="product__options">
+								<h2 class="product__title title title--xl">
+									Дополнительные опции
+								</h2>
+								@foreach($valueItem as $item)
+									<li class="product__item">
+										<p class="product__value">
+											{{ $item }}
+										</p>
+									</li>
+								@endforeach
+						</div>
+					@endif
 					<div class="product__description">
 						<h2 class="product__title title title--xl">Описание</h2>
 						<div class="title">

@@ -2,8 +2,9 @@
     $posts ??= [];
     $totalPosts ??= 0;
 
+    /** Берем поле наличия для каждого **/
     foreach ($posts as $key => $value) {
-        $posts[$key]['postValues'] = \DB::table('post_values')->where('post_id', $posts[$key]['id'])->get()->toArray();
+        $posts[$key]['available_field'] = \DB::table('post_values')->where('post_id', $posts[$key]['id'])->where('field_id', 28)->first();
     }
 
 @endphp
@@ -21,8 +22,12 @@
             @endif
             <li class="preview">
                 <div class="preview__img-wrapp">
-                    <a href="{{ \App\Helpers\UrlGen::post($post) }}">
+                    <a href="{{ \App\Helpers\UrlGen::post($post) }}" class="position-relative">
                         {!! imgTag(data_get($post, 'picture.filename'), 'medium', ['class' => 'preview__img img img--preview', 'alt' => data_get($post, 'title')]) !!}
+                        {{-- Плашка в наличии --}}
+                        @if($post['available_field'] && $post['available_field']->value == 177)
+                            <span class="position-absolute badge__available" style="top:10%">в наличии</span>
+                        @endif
                     </a>
                 </div>
                 <h4 class="preview__title title title--large title--accent">
