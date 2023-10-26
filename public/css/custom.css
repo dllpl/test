@@ -18,6 +18,38 @@
     color: var(--accent);
 }
 
+.inner-box {
+    border: 0
+}
+
+.inner-box {
+    border-style: solid;
+    border-width: 0;
+    border-color: #e2e2e2;
+    box-shadow: none;
+}
+
+.chat-row {
+    border: none;
+}
+
+.inner-box {
+    background: #F6F4F4 none repeat scroll 0 0;
+    margin-bottom: 0;
+    padding: 20px 15px;
+}
+
+.nav-pills>li.active>a:not(.btn), .nav-pills>li.active>a:not(.btn):focus, .nav-pills>li.active>a:not(.btn):hover {
+    background-color: var(--accent);
+    color: #fff;
+}
+
+.btn-secondary {
+    color: #fff;
+    background-color: var(--accent);
+    border-color: var(--accent);
+}
+
 input:focus {
     border-color: var(--accent) !important;
     box-shadow: none !important;

@@ -1,6 +1,11 @@
 @php
     $posts ??= [];
     $totalPosts ??= 0;
+
+    foreach ($posts as $key => $value) {
+        $posts[$key]['postValues'] = \DB::table('post_values')->where('post_id', $posts[$key]['id'])->get()->toArray();
+    }
+
 @endphp
 @if (!empty($posts) && $totalPosts > 0)
     <ul class="grid grid--coll-3 list-reset">
@@ -21,19 +26,7 @@
                     </a>
                 </div>
                 <h4 class="preview__title title title--large title--accent">
-                    @switch($post['category']['name'])
-                        @case('Автомобили')
-                            <a href="{{ \App\Helpers\UrlGen::post($post) }}">Автомобиль {{ str(data_get($post, 'title'))->limit(70) }} в г. {{ data_get($post, 'city.name') }}</a>
-                            @break
-                        @case('Продажа')
-                            <a href="{{ \App\Helpers\UrlGen::post($post) }}">Продажа {{ str(data_get($post, 'title'))->limit(70) }} в г. {{ data_get($post, 'city.name') }}</a>
-                            @break
-                        @case('Логистика')
-                            asdasd
-                            @break
-                        @default
-                            <a href="{{ \App\Helpers\UrlGen::post($post) }}">{{ str(data_get($post, 'title'))->limit(70) }}</a>
-                    @endswitch
+                    <a href="{{ \App\Helpers\UrlGen::post($post) }}">{{ str(data_get($post, 'title'))->limit(70) }}</a>
                 </h4>
                 <span class="preview__price price">{!! data_get($post, 'price_formatted') !!}</span>
                 <div class="preview__wrapp">
