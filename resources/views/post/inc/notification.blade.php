@@ -5,7 +5,11 @@
             <h5><strong>{{ t('oops_an_error_has_occurred') }}</strong></h5>
             <ul class="list list-check">
                 @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
+                    @if(strpos($error, 'vin'))
+                        <li>Поле VIN пустое или уже есть в системе</li>
+                    @else
+                        <li>{{ $error }}</li>
+                    @endif
                 @endforeach
             </ul>
         </div>

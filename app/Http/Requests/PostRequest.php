@@ -21,6 +21,7 @@ use App\Helpers\RemoveFromString;
 use App\Models\Category;
 use App\Models\Package;
 use App\Models\Picture;
+use App\Models\PostValue;
 use App\Rules\BetweenRule;
 use App\Rules\BlacklistTitleRule;
 use App\Rules\BlacklistWordRule;
@@ -144,7 +145,13 @@ class PostRequest extends Request
 		} else {
 			$input['is_permanent'] = 0;
 		}
-		
+
+        if(isset($input['cf'])) {
+            if(isset($input['cf']['27'])) {
+                $input['cf']['27'] = PostValue::where('field_id', 27)->where('value', $input['cf']['27'])->first() ? null : $input['cf']['27'];
+            }
+        }
+
 		request()->merge($input); // Required!
 		$this->merge($input);
 	}
