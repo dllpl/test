@@ -555,6 +555,7 @@
 			$("#full_address").val('{{ old('address', data_get($postInput, 'address')) }}')
 			$('#geo_lat').val({{ old('lat', data_get($postInput, 'lat')) }})
 			$('#geo_lon').val({{ old('lat', data_get($postInput, 'lon')) }})
+
 		});
 	</script>
 @endsection

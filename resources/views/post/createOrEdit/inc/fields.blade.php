@@ -510,19 +510,43 @@
 		});
 	});
 
+	const url = 'https://partsapi.ru/api.php?method=VINdecode'
+	const key = '{{env('VIN_API', '5cdb1bdd38ea05fb81466bafb1d86efb')}}'
+
 	/** Обработка поля VIN-номера */
-	document.getElementById("cf.27").addEventListener("input", function(event) {
-		const allowedChars = /^[0-9A-HJ-NPR-Z]+$/i
-		const inputValue = event.target.value
+	let vin_field = document.getElementById("cf.27") ?? null;
 
-		if (!allowedChars.test(inputValue)) {
-			event.target.value = inputValue.replace(/[^0-9A-HJ-NPR-Z]+/ig, "").toUpperCase()
-		} else {
-			event.target.value = inputValue.toUpperCase()
+	if(vin_field) {
+
+		document.getElementById("cf.27").addEventListener("input", function(event) {
+			const allowedChars = /^[0-9A-HJ-NPR-Z]+$/i
+			const inputValue = event.target.value
+
+			if (!allowedChars.test(inputValue)) {
+				event.target.value = inputValue.replace(/[^0-9A-HJ-NPR-Z]+/ig, "").toUpperCase()
+			} else {
+				event.target.value = inputValue.toUpperCase()
+			}
+		})
+
+		document.getElementById("cf.27").addEventListener("change", function () {
+			makeRequest()
+		})
+
+		function toggleDisabled(disabled) {
+			document.querySelectorAll('#cfContainer input,select').forEach(element => element.disabled = disabled);
 		}
-	})
-	document.getElementById("cf.27").addEventListener("change", function(event) {
 
-	})
+		function makeRequest() {
+			toggleDisabled(true)
+			fetch(`https://partsapi.ru/api.php?method=VINdecode&key=${key}&vin=${event.target.value}&lang=ru`)
+					.then((response) => response.json())
+					.then((data) => {
+						jsAlert('VIN номер валидный', 'success');
+						toggleDisabled(false)
+					})
+		}
 
+		makeRequest()
+	}
 </script>
