@@ -209,7 +209,7 @@
 												$adminName = data_get($post, 'city.subAdmin' . $relAdminType . '.name');
 												$cityId = data_get($post, 'city.id', 0);
 												$cityName = data_get($post, 'city.name');
-												$fullCityName = !empty($adminName) ? $cityName . ', ' . $adminName : $cityName;
+												$fullCityName = $cityName;
 											@endphp
 											<input type="hidden" id="selectedAdminType" name="selected_admin_type" value="{{ old('selected_admin_type', $adminType) }}">
 											<input type="hidden" id="selectedAdminCode" name="selected_admin_code" value="{{ old('selected_admin_code', $adminCode) }}">
@@ -229,6 +229,16 @@
 														{{ t('select_a_city') }}
 													</option>
 												</select>
+											</div>
+										</div>
+										<div id="geo" class="row mb-3 required">
+											<label class="col-md-3 col-form-label{{ $cityIdError }}" for="full_address">Адрес<sup>*</sup></label>
+											<div class="col-md-8">
+												<input id="full_address" name="full_address" placeholder="Укажите полный адрес" class="form-control input-md{{ $titleError }}"
+													   type="text" value="{{ old('address', data_get($post, 'address')) }}">
+
+												<input type="hidden" id="geo_lat" name="geo_lat" value="{{ old('lat',  data_get($post, 'lat')) }}">
+												<input type="hidden" id="geo_lon" name="geo_lon" value="{{ old('lon',  data_get($post, 'lon')) }}">
 											</div>
 										</div>
 
@@ -434,6 +444,35 @@
 	<script>
 		defaultAuthField = '{{ old('auth_field', $authFieldValue ?? getAuthField()) }}';
 		phoneCountry = '{{ old('phone_country', ($phoneCountryValue ?? '')) }}';
+	</script>
+
+	<link href="https://cdn.jsdelivr.net/npm/suggestions-jquery@21.12.0/dist/css/suggestions.min.css" rel="stylesheet" />
+	<script src="https://cdn.jsdelivr.net/npm/suggestions-jquery@21.12.0/dist/js/jquery.suggestions.min.js"></script>
+
+	<script>
+		$(function() {
+			$('#cityId').on('change', (e)=> {
+				$('#full_address').val($("#cityId option:selected").text())
+			})
+
+			$("#full_address").suggestions({
+				token: "{{env('DADATA_API_TOKEN', '8122273c27d35ba75910a900bfc2e4a9b3925e1a')}}",
+				type: "ADDRESS",
+				onSearchStart: function (params) {
+					params.locations = {city: $("#cityId option:selected").text()}
+				},
+				onSearchComplete: function (query, suggestions) {
+					if(suggestions.length) {
+						$('#geo_lat').val(suggestions[0].data.geo_lat)
+						$('#geo_lon').val(suggestions[0].data.geo_lon)
+					}
+				}
+			});
+
+			$("#full_address").val('{{ old('address', data_get($post, 'address')) }}')
+			$('#geo_lat').val({{ old('lat', data_get($post, 'lat')) }})
+			$('#geo_lon').val({{ old('lat', data_get($post, 'lon')) }})
+		});
 	</script>
 @endsection
 

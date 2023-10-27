@@ -2,7 +2,7 @@
 	$fields ??= [];
 	$errors ??= [];
 	$oldInput ??= [];
-	
+
 	if (empty($languageCode)) {
 		$languageCode = config('app.locale', session('langCode'));
 	}
@@ -13,26 +13,26 @@
 			$modelFieldId = data_get($field, 'id');
 			$modelFieldType = data_get($field, 'type');
 			$modelDefaultValue = data_get($field, 'default_value');
-			
+
 			// Fields parameters
 			$fieldId = 'cf.' . $modelFieldId;
 			$fieldName = 'cf[' . $modelFieldId . ']';
 			$fieldOld = 'cf.' . $modelFieldId;
-			
+
 			// Errors & Required CSS
 			$requiredClass = (data_get($field, 'required') == 1) ? 'required' : '';
 			$errorClass = (isset($errors[$fieldOld])) ? ' is-invalid' : '';
-			
+
 			// Get the default value
 			$defaultValue = $oldInput[$modelFieldId] ?? $modelDefaultValue;
-			
+
 			// Get field other attributes
 			$fieldOptions = data_get($field, 'options') ?? [];
 			$fieldOptions = is_array($fieldOptions) ? $fieldOptions : [];
 		@endphp
-		
+
 		@if ($modelFieldType == 'checkbox')
-			
+
 			{{-- checkbox --}}
 			<div class="row mb-3 {{ $requiredClass }}" style="margin-top: -10px;">
 				<label class="col-md-3 col-form-label" for="{{ $fieldId }}"></label>
@@ -52,9 +52,9 @@
 					<div class="form-text text-muted">{!! data_get($field, 'help') !!}</div>
 				</div>
 			</div>
-		
+
 		@elseif ($modelFieldType == 'checkbox_multiple')
-			
+
 			@if (!empty($fieldOptions))
 				{{-- checkbox_multiple --}}
 				<div class="row mb-3 {{ $requiredClass }}" style="margin-top: -10px;">
@@ -71,7 +71,7 @@
 						@foreach ($fieldOptions as $option)
 							@php
 								$modelOptionId = data_get($option, 'id');
-								
+
 								// Get the default value
 								$defaultValue = (is_array($modelDefaultValue)) ? data_get($modelDefaultValue, $modelOptionId . '.id') : $modelDefaultValue;
 								$defaultValue = data_get($oldInput, $modelFieldId . '.' . $modelOptionId, $defaultValue);
@@ -93,9 +93,9 @@
 					</div>
 				</div>
 			@endif
-			
+
 		@elseif ($modelFieldType == 'file')
-			
+
 			{{-- file --}}
 			<div class="row mb-3 {{ $requiredClass }}">
 				<label class="col-md-3 col-form-label" for="{{ $fieldId }}">
@@ -120,9 +120,9 @@
 					@endif
 				</div>
 			</div>
-		
+
 		@elseif ($modelFieldType == 'radio')
-			
+
 			@if (!empty($fieldOptions))
 				{{-- radio --}}
 				<div class="row mb-3 {{ $requiredClass }}">
@@ -154,9 +154,9 @@
 					<div class="form-text text-muted">{!! data_get($field, 'help') !!}</div>
 				</div>
 			@endif
-		
+
 		@elseif ($modelFieldType == 'select')
-			
+
 			{{-- select --}}
 			<div class="row mb-3 {{ $requiredClass }}">
 				<label class="col-md-3 col-form-label{{ $errorClass }}" for="{{ $fieldId }}">
@@ -187,9 +187,9 @@
 					<div class="form-text text-muted">{!! data_get($field, 'help') !!}</div>
 				</div>
 			</div>
-		
+
 		@elseif ($modelFieldType == 'textarea')
-			
+
 			{{-- textarea --}}
 			<div class="row mb-3 {{ $requiredClass }}">
 				<label class="col-md-3 col-form-label" for="{{ $fieldId }}">
@@ -212,9 +212,9 @@
 					<div class="form-text text-muted">{!! data_get($field, 'help') !!}</div>
 				</div>
 			</div>
-		
+
 		@elseif ($modelFieldType == 'url')
-			
+
 			{{-- url --}}
 			<div class="row mb-3 {{ $requiredClass }}">
 				<label class="col-md-3 col-form-label" for="{{ $fieldId }}">
@@ -233,9 +233,9 @@
 					<div class="form-text text-muted">{!! data_get($field, 'help') !!}</div>
 				</div>
 			</div>
-		
+
 		@elseif ($modelFieldType == 'number')
-			
+
 			{{-- number --}}
 			<div class="row mb-3 {{ $requiredClass }}">
 				<label class="col-md-3 col-form-label" for="{{ $fieldId }}">
@@ -258,9 +258,9 @@
 					<div class="form-text text-muted">{!! data_get($field, 'help') !!}</div>
 				</div>
 			</div>
-		
+
 		@elseif ($modelFieldType == 'date')
-			
+
 			{{-- date --}}
 			<div class="row mb-3 {{ $requiredClass }}">
 				<label class="col-md-3 col-form-label" for="{{ $fieldId }}">
@@ -281,9 +281,9 @@
 					<div class="form-text text-muted">{!! data_get($field, 'help') !!}</div>
 				</div>
 			</div>
-			
+
 		@elseif ($modelFieldType == 'date_time')
-			
+
 			{{-- date_time --}}
 			<div class="row mb-3 {{ $requiredClass }}">
 				<label class="col-md-3 col-form-label" for="{{ $fieldId }}">
@@ -304,9 +304,9 @@
 					<div class="form-text text-muted">{!! data_get($field, 'help') !!}</div>
 				</div>
 			</div>
-			
+
 		@elseif ($modelFieldType == 'date_range')
-			
+
 			{{-- date_range --}}
 			<div class="row mb-3 {{ $requiredClass }}">
 				<label class="col-md-3 col-form-label" for="{{ $fieldId }}">
@@ -327,9 +327,9 @@
 					<div class="form-text text-muted">{!! data_get($field, 'help') !!}</div>
 				</div>
 			</div>
-			
+
 		@else
-			
+
 			{{-- text --}}
 			<div class="row mb-3 {{ $requiredClass }}">
 				<label class="col-md-3 col-form-label" for="{{ $fieldId }}">
@@ -352,7 +352,7 @@
 					<div class="form-text text-muted">{!! data_get($field, 'help') !!}</div>
 				</div>
 			</div>
-			
+
 		@endif
 	@endforeach
 @endif
@@ -410,7 +410,7 @@
 		dateEl.on('apply.daterangepicker', function(ev, picker) {
 			$(this).val(picker.startDate.format('{{ t('datepicker_format') }}'));
 		});
-		
+
 		{{-- Single Date (with Time) --}}
 		let dateTimeEl = $('#cfContainer .cf-date_time');
 		dateTimeEl.daterangepicker({
@@ -460,7 +460,7 @@
 		dateTimeEl.on('apply.daterangepicker', function(ev, picker) {
 			$(this).val(picker.startDate.format('{{ t('datepicker_format_datetime') }}'));
 		});
-		
+
 		{{-- Date Range --}}
 		let dateRangeEl = $('#cfContainer .cf-date_range');
 		dateRangeEl.daterangepicker({
@@ -520,5 +520,9 @@
 		} else {
 			event.target.value = inputValue.toUpperCase()
 		}
-	});
+	})
+	document.getElementById("cf.27").addEventListener("change", function(event) {
+
+	})
+
 </script>

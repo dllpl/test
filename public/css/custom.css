@@ -33,6 +33,11 @@
     border: none;
 }
 
+.alert-success{
+    background-color: var(--accent);
+    color: var(--light);
+}
+
 .inner-box {
     background: #F6F4F4 none repeat scroll 0 0;
     margin-bottom: 0;

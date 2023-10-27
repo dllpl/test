@@ -36,12 +36,12 @@ trait UpdateMultiStepsFormTrait
 	public function updateMultiStepsForm($id, PostRequest $request)
 	{
 		$countryCode = $request->input('country_code', config('country.code'));
-		
+
 		$user = null;
 		if (auth('sanctum')->check()) {
 			$user = auth('sanctum')->user();
 		}
-		
+
 		$post = null;
 		if (!empty($user)) {
 			$post = Post::countryOf($countryCode)->withoutGlobalScopes([VerifiedScope::class, ReviewedScope::class])
@@ -49,17 +49,17 @@ trait UpdateMultiStepsFormTrait
 				->where('id', $id)
 				->first();
 		}
-		
+
 		if (empty($post)) {
 			return $this->respondNotFound(t('post_not_found'));
 		}
-		
+
 		// Get the Post's City
 		$city = City::find($request->input('city_id', 0));
 		if (empty($city)) {
 			return $this->respondError(t('posting_listings_is_disabled'));
 		}
-		
+
 		// Conditions to Verify User's Email or Phone
 		$emailVerificationRequired = config('settings.mail.email_verification') == '1'
 			&& $request->filled('email')
@@ -67,7 +67,7 @@ trait UpdateMultiStepsFormTrait
 		$phoneVerificationRequired = config('settings.sms.phone_verification') == '1'
 			&& $request->filled('phone')
 			&& $request->input('phone') != $post->phone;
-		
+
 		/*
 		 * Allow admin users to approve the changes,
 		 * If listings approbation option is enable,
@@ -81,48 +81,49 @@ trait UpdateMultiStepsFormTrait
 				$post->reviewed_at = null;
 			}
 		}
-		
+
 		// Update Post
 		$input = $request->only($post->getFillable());
 		foreach ($input as $key => $value) {
 			$post->{$key} = $value;
 		}
-		
+
 		// Checkboxes
 		$post->negotiable = $request->input('negotiable');
 		$post->phone_hidden = $request->input('phone_hidden');
-		
+
 		// Other fields
-		$post->lat = $city->latitude;
-		$post->lon = $city->longitude;
+        $post->lat = !empty($request->geo_lat) ? (double) $request->geo_lat : $city->latitude;
+        $post->lon = !empty($request->geo_lon) ? (double) $request->geo_lon :  $city->longitude;
+        $post->address = $request->full_address;
 		$post->ip_addr = $request->input('ip_addr', Ip::get());
-		
+
 		// Email verification key generation
 		if ($emailVerificationRequired) {
 			$post->email_token = md5(microtime() . mt_rand());
 			$post->email_verified_at = null;
 		}
-		
+
 		// Phone verification key generation
 		if ($phoneVerificationRequired) {
 			$post->phone_token = mt_rand(100000, 999999);
 			$post->phone_verified_at = null;
 		}
-		
+
 		// Save
 		$post->save();
-		
+
 		$data = [
 			'success' => true,
 			'message' => t('your_listing_has_been_updated'),
 			'result'  => (new PostResource($post))->toArray($request),
 		];
-		
+
 		$extra = [];
-		
+
 		// Custom Fields
 		$this->storeFieldsValues($post, $request);
-		
+
 		// Send Email Verification message
 		if ($emailVerificationRequired) {
 			$extra['sendEmailVerification'] = $this->sendEmailVerification($post);
@@ -134,7 +135,7 @@ trait UpdateMultiStepsFormTrait
 				$extra['mail']['message'] = $extra['sendEmailVerification']['message'];
 			}
 		}
-		
+
 		// Send Phone Verification message
 		if ($phoneVerificationRequired) {
 			$extra['sendPhoneVerification'] = $this->sendPhoneVerification($post);
@@ -146,9 +147,9 @@ trait UpdateMultiStepsFormTrait
 				$extra['mail']['message'] = $extra['sendPhoneVerification']['message'];
 			}
 		}
-		
+
 		$data['extra'] = $extra;
-		
+
 		return $this->apiResponse($data);
 	}
 }

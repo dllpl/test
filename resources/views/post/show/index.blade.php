@@ -414,9 +414,9 @@
 								Адрес
 							</h2>
 							<div class="title mb-2">
-								{{ data_get($post, 'city.name') }}
+								{{ data_get($post, 'address') }}
 							</div>
-							<div id="map" style="height: 350px"></div>
+							<div id="map" style="height: 280px"></div>
 						@endif
 					</div>
 
@@ -601,15 +601,14 @@
 					let myMap = new ymaps.Map("map", {
 						center: [{{$post['lat']}},{{$post['lon']}}],
 						zoom: zoom,
-						controls: []
 					}, {
 						suppressMapOpenBlock: true
 					});
 
 
 					let myPlacemark = new ymaps.Placemark([{{$post['lat']}},{{$post['lon']}}], {
-						balloonContent: '{{ data_get($post, 'city.name') }}',
-						hintContent: '{{ data_get($post, 'city.name') }}',
+						balloonContent: '{{ data_get($post, 'address') }}',
+						hintContent: '{{ data_get($post, 'address') }}',
 					}, {
 						iconImageSize: [30, 42],
 						iconImageOffset: [-15, -42],

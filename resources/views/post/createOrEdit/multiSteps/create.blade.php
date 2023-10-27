@@ -26,6 +26,7 @@
 @endphp
 
 @section('content')
+
 	@includeFirst([config('larapen.core.customizedViewPath') . 'common.spacer', 'common.spacer'])
 	<div class="main-container">
 		<div class="container">
@@ -230,7 +231,16 @@
 												</select>
 											</div>
 										</div>
+										<div id="geo" class="row mb-3 required">
+											<label class="col-md-3 col-form-label{{ $cityIdError }}" for="full_address">Адрес<sup>*</sup></label>
+											<div class="col-md-8">
+												<input id="full_address" name="full_address" placeholder="Укажите полный адрес" class="form-control input-md{{ $titleError }}"
+													   type="text" value="{{ old('address', data_get($postInput, 'address')) }}">
 
+												<input type="hidden" id="geo_lat" name="geo_lat" value="{{ old('lat',  data_get($postInput, 'lat')) }}">
+												<input type="hidden" id="geo_lon" name="geo_lon" value="{{ old('lon',  data_get($postInput, 'lat')) }}">
+											</div>
+										</div>
 										{{-- tags --}}
 										@php
 											$tagsError = (isset($errors) && $errors->has('tags.*')) ? ' is-invalid' : '';
@@ -518,6 +528,35 @@
 @endsection
 
 @section('after_scripts')
+	<link href="https://cdn.jsdelivr.net/npm/suggestions-jquery@21.12.0/dist/css/suggestions.min.css" rel="stylesheet" />
+	<script src="https://cdn.jsdelivr.net/npm/suggestions-jquery@21.12.0/dist/js/jquery.suggestions.min.js"></script>
+
+	<script>
+		$(function() {
+			$('#cityId').on('change', (e)=> {
+				$('#full_address').val($("#cityId option:selected").text())
+				$("#full_address").suggestions().update()
+			})
+
+			$("#full_address").suggestions({
+				token: "{{env('DADATA_API_TOKEN', '8122273c27d35ba75910a900bfc2e4a9b3925e1a')}}",
+				type: "ADDRESS",
+				onSearchStart: function (params) {
+					params.locations = {city: $("#cityId option:selected").text()}
+				},
+				onSearchComplete: function (query, suggestions) {
+					if(suggestions.length) {
+						$('#geo_lat').val(suggestions[0].data.geo_lat)
+						$('#geo_lon').val(suggestions[0].data.geo_lon)
+					}
+				}
+			});
+
+			$("#full_address").val('{{ old('address', data_get($postInput, 'address')) }}')
+			$('#geo_lat').val({{ old('lat', data_get($postInput, 'lat')) }})
+			$('#geo_lon').val({{ old('lat', data_get($postInput, 'lon')) }})
+		});
+	</script>
 @endsection
 
 @includeFirst([config('larapen.core.customizedViewPath') . 'post.createOrEdit.inc.form-assets', 'post.createOrEdit.inc.form-assets'])

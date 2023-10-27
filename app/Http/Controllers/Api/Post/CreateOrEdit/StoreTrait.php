@@ -38,12 +38,12 @@ trait StoreTrait
 		if (empty($city)) {
 			return $this->respondError(t('posting_listings_is_disabled'));
 		}
-		
+
 		$user = null;
 		if (auth('sanctum')->check()) {
 			$user = auth('sanctum')->user();
 		}
-		
+
 		// Conditions to Verify User's Email or Phone
 		if (!empty($user)) {
 			$emailVerificationRequired = config('settings.mail.email_verification') == '1'
@@ -56,44 +56,45 @@ trait StoreTrait
 			$emailVerificationRequired = config('settings.mail.email_verification') == '1' && $request->filled('email');
 			$phoneVerificationRequired = config('settings.sms.phone_verification') == '1' && $request->filled('phone');
 		}
-		
+
 		// New Post
 		$post = new Post();
 		$input = $request->only($post->getFillable());
 		foreach ($input as $key => $value) {
 			$post->{$key} = $value;
 		}
-		
+
 		// Checkboxes
 		$post->negotiable = $request->input('negotiable');
 		$post->phone_hidden = $request->input('phone_hidden');
-		
+
 		// Other fields
 		$post->country_code = $request->input('country_code', config('country.code'));
 		$post->user_id = (isset($user) && isset($user->id)) ? $user->id : null;
-		$post->lat = $city->latitude;
-		$post->lon = $city->longitude;
+        $post->lat = !empty($request->geo_lat) ? (double) $request->geo_lat : $city->latitude;
+        $post->lon = !empty($request->geo_lon) ? (double) $request->geo_lon :  $city->longitude;
+        $post->address = $request->full_address;
 		$post->ip_addr = $request->input('ip_addr', Ip::get());
 		$post->tmp_token = md5(microtime() . mt_rand(100000, 999999));
 		$post->reviewed_at = null;
-		
+
 		if ($request->filled('email') || $request->filled('phone')) {
 			$post->email_verified_at = now();
 			$post->phone_verified_at = now();
-			
+
 			// Email verification key generation
 			if ($emailVerificationRequired) {
 				$post->email_token = md5(microtime() . mt_rand());
 				$post->email_verified_at = null;
 			}
-			
+
 			// Mobile activation key generation
 			if ($phoneVerificationRequired) {
 				$post->phone_token = mt_rand(100000, 999999);
 				$post->phone_verified_at = null;
 			}
 		}
-		
+
 		if (
 			config('settings.single.listings_review_activation') != '1'
 			&& !$emailVerificationRequired
@@ -101,28 +102,28 @@ trait StoreTrait
 		) {
 			$post->reviewed_at = now();
 		}
-		
+
 		// Save
 		$post->save();
-		
+
 		$data = [
 			'success' => true,
 			'message' => $this->apiMsg['post']['success'],
 			'result'  => (new PostResource($post))->toArray($request),
 		];
-		
+
 		$extra = [];
-		
+
 		// Save all pictures
 		$extra['pictures'] = $this->storeSingleStepPictures($post->id, $request);
-		
+
 		// Custom Fields
 		$this->storeFieldsValues($post, $request);
-		
+
 		// Auto-Register the Author
 		$extra['autoRegisteredUser'] = $this->autoRegister($post, $request);
-		
-		
+
+
 		// Make Payment (If needed)
 		if (!isFromTheAppsWebEnvironment()) {
 			// Check if the selected Package has been already paid for this Post
@@ -132,7 +133,7 @@ trait StoreTrait
 					$alreadyPaidPackage = true;
 				}
 			}
-			
+
 			// Check if Payment is required
 			$package = Package::find($request->input('package_id'));
 			if (!empty($package)) {
@@ -143,12 +144,12 @@ trait StoreTrait
 				}
 			}
 		}
-		
+
 		// If no payment is made (Continue)
-		
+
 		$data['success'] = true;
 		$data['message'] = $this->apiMsg['post']['success'];
-		
+
 		// Send Verification Link or Code
 		// Email
 		if ($emailVerificationRequired) {
@@ -162,7 +163,7 @@ trait StoreTrait
 				$extra['mail']['message'] = $extra['sendEmailVerification']['message'];
 			}
 		}
-		
+
 		// Phone
 		if ($phoneVerificationRequired) {
 			// Send Verification Code by SMS
@@ -175,13 +176,13 @@ trait StoreTrait
 				$extra['mail']['message'] = $extra['sendPhoneVerification']['message'];
 			}
 		}
-		
+
 		// Once Verification Notification is sent (containing Link or Code),
 		// Send Confirmation Notification, when user clicks on the Verification Link or enters the Verification Code.
 		// Done in the "app/Observers/PostObserver.php" file.
-		
+
 		$data['extra'] = $extra;
-		
+
 		return $this->apiResponse($data);
 	}
 }
