@@ -538,15 +538,70 @@
 		}
 
 		function makeRequest() {
+			jsAlert('Ищем данные по VIN. Пожалуйста, подождите.', 'warning');
 			toggleDisabled(true)
 			fetch(`https://partsapi.ru/api.php?method=VINdecode&key=${key}&vin=${event.target.value}&lang=ru`)
 					.then((response) => response.json())
 					.then((data) => {
-						jsAlert('VIN номер валидный', 'success');
+						console.log(data)
+						if(!data.result[0].manuName && !data.result[0].modelName) {
+							jsAlert('Не смогли найти Ваш VIN номер. Укажите данные вручную.', 'warning');
+						} else {
+							jsAlert('VIN номер валидный. Некоторые поля подставлены автоматически.', 'success');
+
+							let powerHpFrom = data.result[0]?.powerHpFrom ?? null
+							let cylinderCapacityLiter = data.result[0]?.cylinderCapacityLiter ?? null
+							let impulsionType = data.result[0]?.impulsionType ?? null
+							let fuelType = data.result[0]?.fuelType ?? null
+							let marka = data.result[0]?.manuName ?? null
+							let model = data.result[0]?.modelName ?? null
+
+							if(cylinderCapacityLiter) {
+								$('select[id="cf.34"] > option').each(function(e) {
+									if(this.text == cylinderCapacityLiter) {
+										$('select[id="cf.34"]').find(`option[value=${this.value}]`).attr("selected",true)
+										$('#select2-cf34-container').text(this.text)
+									}
+								});
+							}
+							if(powerHpFrom) {
+								$('input[id="cf.49"]').val(powerHpFrom)
+							}
+							if(impulsionType) {
+								let privod = '';
+
+								if(impulsionType.toLowerCase().includes('front')) {
+									privod = 'Передний'
+								} else if (impulsionType.toLowerCase().includes('back')) {
+									privod = 'Задний'
+								} else {
+									privod = 'Полный'
+								}
+
+								$('select[id="cf.36"] > option').each(function(e) {
+									if(this.text === privod) {
+										$('select[id="cf.36"]').find(`option[value=${this.value}]`).attr("selected",true)
+										$('#select2-cf36-container').text(privod)
+									}
+								});
+							}
+							if(fuelType) {
+								let fuel = '';
+								//TODO дописать если добавим поле тип топлива
+							}
+							if(marka) {
+								$('#select2-cf51-container').text(marka)
+							}
+							if(model) {
+								$('#select2-cf50-container').text(model)
+							}
+						}
+					})
+					.finally(()=> {
 						toggleDisabled(false)
 					})
 		}
 
-		makeRequest()
+		// makeRequest()
 	}
 </script>
