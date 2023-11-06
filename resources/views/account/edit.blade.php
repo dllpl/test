@@ -1083,5 +1083,19 @@
 			$('#avatarUploadSuccess ul li').append(out);
 			$('#avatarUploadSuccess').fadeIn('slow');
 		});
+
+		$('#super_user_send_request').on('click', function () {
+			jsAlert('Отправляем запрос на сертификацию', 'warning');
+			$.ajax({
+				method: 'POST',
+				url: $(this).data('url'),
+				success: function (data) {
+					jsAlert(`${data.msg}. С Вами свяжется менеджер, ожидайте звонка`, 'success')
+					$('#super_user_send_request').attr('disabled', true)
+					$('#super_user_send_request').html('<i class="fa fa-clock"></i> Завявка в обработке')
+				}
+			});
+		});
+
 	</script>
 @endsection

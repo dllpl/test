@@ -13,11 +13,11 @@
 		@includeFirst([config('larapen.core.customizedViewPath') . 'home.inc.spacer', 'home.inc.spacer'], ['hideOnMobile' => $hideOnMobile])
 	@endif
 
-	<section class="ads-new ads">
-		<div class="ads__top">
-			<div class="ads__top-wrapp container">
+	<section class="accent-block">
+		<div class="accent-block__top">
+			<div class="accent-block__top-wrapp container">
 				<h3 class="title title--light">{!! data_get($widget, 'title') !!}</h3>
-				<a href="{{ data_get($widget, 'link') }}" class="ads__link link link--light link--underline">
+				<a href="{{ data_get($widget, 'link') }}" class="accent-block__link link link--light link--underline">
 					{{ t('View more') }}
 				</a>
 			</div>

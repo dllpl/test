@@ -527,25 +527,25 @@
 		@endif
 
 		{{-- Promo Listing Button --}}
-		<section class="ads-add">
-			<div class="ads-add__wrapp container">
-				<div class="ads-add__content">
+		<section class="accent-block-add">
+			<div class="accent-block-add__wrapp container">
+				<div class="accent-block-add__content">
 					<h3 class="title title--light title--xl">
 						{{--						{{ t('do_you_have_anything') }}--}}
 						Разместите объявление
 					</h3>
-					<p class="ads-add__subtitle">
+					<p class="accent-block-add__subtitle">
 						{{--						{{ t('sell_products_and_services_online_for_free') }}--}}
 						И начните продавать или продвигать свои услуги вместе с Барсовоз
 					</p>
 				</div>
 				@if (!auth()->check() && config('settings.single.guests_can_post_listings') != '1')
-					<a href="#quickLogin" class="ads-add__link link link--btn-big link--dark" data-bs-toggle="modal">
+					<a href="#quickLogin" class="accent-block-add__link link link--btn-big link--dark" data-bs-toggle="modal">
 						{{--						{{ t('start_now') }}--}}
 						Разместить объявление
 					</a>
 				@else
-					<a href="{{ \App\Helpers\UrlGen::addPost() }}" class="ads-add__link link link--btn-big link--dark">
+					<a href="{{ \App\Helpers\UrlGen::addPost() }}" class="accent-block-add__link link link--btn-big link--dark">
 						{{--						{{ t('start_now') }}--}}
 						Разместить объявление
 					</a>

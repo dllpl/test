@@ -149,6 +149,19 @@
 										</a>
 									</li>
 								@endif
+									@php
+										$count_new = \DB::table('request_to_super')->where('status', 0)->count();
+                                        //TODO Сделать страничку с таблицей
+									@endphp
+									<li class="sidebar-item">
+										<a href="{{ admin_url('genders') }}" class="sidebar-link">
+											<i class="mdi mdi-adjust"></i>
+											<span class="hide-menu">Сертификация</span>
+											@if($count_new)
+												<span style="margin-left: 5px; background: orange; padding: 3px; border-radius: 20px; color: white;">{{$count_new}}</span>
+											@endif
+										</a>
+									</li>
 							</ul>
 						</li>
 					@endif

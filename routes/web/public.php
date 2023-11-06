@@ -157,6 +157,9 @@ Route::namespace('Auth')
 		
 		// User Logout
 		Route::get(dynamicRoute('routes.logout'), [LoginController::class, 'logout']);
+
+        Route::post('user/super/sendRequest', [\App\Http\Controllers\Web\Public\Account\SuperUserController::class, 'sendRequest'])
+            ->name('super-user.send-request');
 	});
 
 

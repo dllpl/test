@@ -34,6 +34,17 @@
 
 			@endforeach
 		@endif
+			@if(\App\Helpers\Role::isSuperUser())
+				<span class="search__link link link--btn link--accent" style="padding: 10px;"><i class="fa fa-check-circle"></i> Сертифицирован</span>
+			@else
+				@if(\App\Helpers\SuperUser::status() === null)
+					<button data-url="{{route('super-user.send-request')}}" id="super_user_send_request" class="btn-reset search__link link link--btn link--accent" style="padding: 10px;">Пройти сертификацию</button>
+				@elseif(\App\Helpers\SuperUser::status() === 0)
+					<span class="search__link link link--btn link--accent" style="padding: 10px;"><i class="fa fa-clock"></i> Завявка в обработке</span>
+				@elseif(\App\Helpers\SuperUser::status() === 2)
+					<span class="search__link link link--btn link--accent" style="padding: 10px;"><i class="fa fa-times-circle"></i> Завявка отклонена</span>
+				@endif
+			@endif
 	</div>
 </div>
 
