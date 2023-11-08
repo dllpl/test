@@ -51,6 +51,7 @@ use App\Http\Controllers\Web\Admin\SubAdmin1Controller;
 use App\Http\Controllers\Web\Admin\SubAdmin2Controller;
 use App\Http\Controllers\Web\Admin\SystemController;
 use App\Http\Controllers\Web\Admin\UserController;
+use App\Http\Controllers\Web\Admin\CertController;
 use Illuminate\Support\Facades\Route;
 
 // Auth
@@ -126,8 +127,10 @@ Route::middleware(['admin', 'clearance', 'banned.user', 'no.http.cache'])
 		PanelRoutes::resource('report_types', ReportTypeController::class);
 		PanelRoutes::resource('roles', RoleController::class);
 		PanelRoutes::resource('settings', SettingController::class);
-		PanelRoutes::resource('users', UserController::class);
-		
+        PanelRoutes::resource('users', UserController::class);
+
+        PanelRoutes::resource('certification', CertController::class);
+
 		// Others
 		Route::get('account', [UserController::class, 'account']);
 		Route::post('ajax/{table}/{field}', [InlineRequestController::class, 'make'])
