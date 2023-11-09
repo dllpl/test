@@ -146,7 +146,7 @@ class PostRequest extends Request
 			$input['is_permanent'] = 0;
 		}
 
-        if(isset($input['cf'])) {
+        if(isset($input['cf'], $input['post_id'])) {
             if(isset($input['cf']['27'])) {
                 $input['cf']['27'] = PostValue::where('field_id', 27)
                     ->where('value', $input['cf']['27'])
