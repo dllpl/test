@@ -22,11 +22,6 @@
         /** Берем поле наличия для каждого **/
         $posts[$key]['available_field'] = \DB::table('post_values')->where('post_id', $posts[$key]['id'])->where('field_id', 28)->first();
     }
-
-    $user_cert = true;
-
-
-
 @endphp
 @if (!empty($posts) && $totalPosts > 0)
     <ul class="grid grid--coll-3 list-reset">
