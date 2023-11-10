@@ -92,6 +92,11 @@
                                                                href="{{route('cert.action', ['action'=>'decline', 'request_id'=>$item->s_id])}}"
                                                             >Отказать</a>
                                                             @break
+                                                        @case(2)
+                                                            <a class="bulk-action btn btn-warning shadow"
+                                                               href="{{route('cert.action', ['action'=>'rollback', 'request_id'=>$item->s_id])}}"
+                                                            >В обработку</a>
+                                                            @break
                                                         @default
                                                             <span>-</span>
                                                     @endswitch

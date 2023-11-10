@@ -32,6 +32,9 @@ class CertController extends Controller
                 $query->update(['status' => 2]);
                 $msg = "Заявка №$request_id. Успешно отказана.";
                 break;
+            case 'rollback':
+                $query->update(['status' => 0]);
+                $msg = "Заявка №$request_id. Возвращена в обработку.";
             default:
                 $msg = 'Неизвестный статус';
         }
