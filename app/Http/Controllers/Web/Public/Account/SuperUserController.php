@@ -11,7 +11,11 @@ class SuperUserController extends Controller
     public function sendRequest(Request $request)
     {
         $res = \DB::table('request_to_super')
-            ->updateOrInsert(['user_id'=>$request->user()->id]);
+            ->insert([
+                'user_id'=>$request->user()->id,
+                'created_at'=>date('d.m.Y H:i:s'),
+                'updated_at'=>date('d.m.Y H:i:s')
+            ]);
 
         return response()->json(['status'=>true,'msg'=>"Ваша заявка принята и находится в обработке" ]);
     }
