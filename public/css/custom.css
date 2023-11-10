@@ -60,11 +60,18 @@ input:focus {
     box-shadow: none !important;
 }
 
-.badge__available {
+.badge__available--accent {
     background-color: var(--accent);
     color: var(--light);
     padding: 5px;
-    font-size: 16px;
+    font-size: 14px;
+}
+
+.badge__available--heart {
+    background-color: var(--heart);
+    color: var(--light);
+    padding: 5px;
+    font-size: 14px;
 }
 
 /** Не удалять */

@@ -15,7 +15,7 @@
     }
 
     /** Тайминг для показа объяв 24 часа */
-    $time = env('CERT_HOUR', 24);
+    $hour_to_public = env('CERT_HOUR', 24);
 
 
     foreach ($posts as $key => $value) {
@@ -26,7 +26,10 @@
 @if (!empty($posts) && $totalPosts > 0)
     <ul class="grid grid--coll-3 list-reset">
         @foreach($posts as $key => $post)
-            @if((time() - strtotime($post['created_at']) >= $time * 60 * 60) || $user_cert)
+            @php
+                $time = (time() - strtotime($post['created_at']) >= $hour_to_public * 60 * 60);
+            @endphp
+            @if((time() - strtotime($post['created_at']) >= $hour_to_public * 60 * 60) || $user_cert)
 
                 @if (data_get($post, 'featured') == 1)
                     @if (!empty(data_get($post, 'latestPayment.package')))
@@ -37,14 +40,28 @@
                         @endif
                     @endif
                 @endif
+                @php
+                    if((time() - strtotime($post['created_at']) <= $hour_to_public * 60 * 60)) {
+                        $date_to_public = date('d.m.Y H:i:s', strtotime($post['created_at'] . " + $hour_to_public hours"));
+                        $d1 = new DateTime($date_to_public);
+                        $d2 = new DateTime();
+                        $interval= $d1->diff($d2);
+                        $time_lost = $interval->h . ' ч. ' . $interval->i . ' мин. ';
+                    }
+
+                @endphp
                 <li class="preview">
                     <div class="preview__img-wrapp">
                         <a href="{{ \App\Helpers\UrlGen::post($post) }}" class="position-relative">
                             {!! imgTag(data_get($post, 'picture.filename'), 'medium', ['class' => 'preview__img img img--preview', 'alt' => data_get($post, 'title')]) !!}
                             {{-- Плашка в наличии --}}
                             @if($post['available_field'] && $post['available_field']->value == 177)
-                                <span class="position-absolute badge__available" style="top:10%">в наличии</span>
+                                <span class="position-absolute badge__available--accent" style="top:10%">в наличии</span>
                             @endif
+                            @if((time() - strtotime($post['created_at']) <= $hour_to_public * 60 * 60))
+                                <span class="position-absolute badge__available--heart" style="bottom:5%">До публикации {{$time_lost}}</span>
+                            @endif
+
                         </a>
                     </div>
                     <h4 class="preview__title title title--large title--accent">
