@@ -64,7 +64,7 @@ Route::namespace('Auth')
 				Route::post('login', 'login')->name('admin.login');
 				Route::get('logout', 'logout')->name('admin.logout');
 			});
-		
+
 		// Password Reset Routes...
 		Route::controller(ForgotPasswordController::class)
 			->group(function ($router) {
@@ -82,7 +82,7 @@ Route::middleware(['admin', 'clearance', 'banned.user', 'no.http.cache'])
 				Route::get('dashboard', 'dashboard');
 				Route::get('/', 'redirect');
 			});
-		
+
 		// Extra (must be called before CRUD)
 		Route::get('homepage/{action}', [HomeSectionController::class, 'reset'])->where('action', 'reset_(.*)');
 		Route::controller(LanguageController::class)
@@ -94,7 +94,7 @@ Route::middleware(['admin', 'clearance', 'banned.user', 'no.http.cache'])
 		Route::get('permissions/create_default_entries', [PermissionController::class, 'createDefaultEntries']);
 		Route::get('blacklists/add', [BlacklistController::class, 'banUser']);
 		Route::get('categories/rebuild-nested-set-nodes', [CategoryController::class, 'rebuildNestedSetNodes']);
-		
+
 		// Panel's Default Routes
 		PanelRoutes::resource('advertisings', AdvertisingController::class);
 		PanelRoutes::resource('blacklists', BlacklistController::class);
@@ -129,14 +129,18 @@ Route::middleware(['admin', 'clearance', 'banned.user', 'no.http.cache'])
 		PanelRoutes::resource('settings', SettingController::class);
         PanelRoutes::resource('users', UserController::class);
 
-        PanelRoutes::resource('certification', CertController::class);
+        Route::group(['prefix' => 'cert', 'as'=>'cert.'], function () {
+            Route::get('index', [CertController::class, 'index'])->name('index');
+
+            Route::get('action/{action}/{request_id}', [CertController::class, 'action'])->name('action');
+        });
 
 		// Others
 		Route::get('account', [UserController::class, 'account']);
 		Route::post('ajax/{table}/{field}', [InlineRequestController::class, 'make'])
 			->where('table', '[^/]+')
 			->where('field', '[^/]+');
-		
+
 		// Backup
 		Route::controller(BackupController::class)
 			->group(function ($router) {
@@ -145,7 +149,7 @@ Route::middleware(['admin', 'clearance', 'banned.user', 'no.http.cache'])
 				Route::get('backups/download', 'download');
 				Route::delete('backups/delete', 'delete');
 			});
-		
+
 		// Actions
 		Route::controller(ActionController::class)
 			->group(function ($router) {
@@ -153,7 +157,7 @@ Route::middleware(['admin', 'clearance', 'banned.user', 'no.http.cache'])
 				Route::get('actions/clear_images_thumbnails', 'clearImagesThumbnails');
 				Route::get('actions/maintenance/{mode}', 'maintenance')->where('mode', 'down|up');
 			});
-		
+
 		// Re-send Email or Phone verification message
 		Route::controller(UserController::class)
 			->group(function ($router) {
@@ -167,7 +171,7 @@ Route::middleware(['admin', 'clearance', 'banned.user', 'no.http.cache'])
 				Route::get('posts/{id}/verify/resend/email', 'reSendEmailVerification');
 				Route::get('posts/{id}/verify/resend/sms', 'reSendPhoneVerification');
 			});
-		
+
 		// Plugins
 		Route::controller(PluginController::class)
 			->group(function ($router) {
@@ -178,7 +182,7 @@ Route::middleware(['admin', 'clearance', 'banned.user', 'no.http.cache'])
 				Route::get('plugins/{plugin}/uninstall', 'uninstall');
 				Route::get('plugins/{plugin}/delete', 'delete');
 			});
-		
+
 		// System Info
 		Route::get('system', [SystemController::class, 'systemInfo']);
 	});

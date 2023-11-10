@@ -42,7 +42,7 @@
 							</li>
 						</ul>
 					</li>
-					
+
 					<li class="sidebar-item">
 						<a href="{{ admin_url('dashboard') }}" class="sidebar-link waves-effect waves-dark">
 							<i data-feather="home" class="feather-icon"></i> <span class="hide-menu">{{ trans('admin.dashboard') }}</span>
@@ -104,7 +104,7 @@
 							</ul>
 						</li>
 					@endif
-					
+
 					@if (
 						auth()->user()->can('user-list')
 						|| auth()->user()->can('role-list')
@@ -149,10 +149,22 @@
 										</a>
 									</li>
 								@endif
+									@php
+										$cert_count = \DB::table('request_to_super')->where('status', 0)->count();
+									@endphp
+									<li class="sidebar-item">
+										<a href="{{ route('cert.index') }}" class="sidebar-link">
+											<i class="mdi mdi-adjust"></i>
+											<span class="hide-menu">Сертификация&nbsp;</span>
+											@if($cert_count)
+												<span class="bg-orange color-white" style="border-radius: 8px">{{$cert_count}} нов.</span>
+											@endif
+										</a>
+									</li>
 							</ul>
 						</li>
 					@endif
-					
+
 					@if (auth()->user()->can('payment-list') || userHasSuperAdminPermissions())
 						<li class="sidebar-item">
 							<a href="{{ admin_url('payments') }}" class="sidebar-link">
@@ -168,7 +180,7 @@
 						</li>
 					@endif
 					{!! $pluginsMenu !!}
-					
+
 					{{-- ======================================= --}}
 					@if (
 						auth()->user()->can('setting-list')
@@ -188,7 +200,7 @@
 							<i class="mdi mdi-dots-horizontal"></i>
 							<span class="hide-menu">{{ trans('admin.configuration') }}</span>
 						</li>
-						
+
 						@if (
 							auth()->user()->can('setting-list')
 							|| auth()->user()->can('language-list')
@@ -215,7 +227,7 @@
 							</li>
 						@endif
 					@endif
-					
+
 					@if (auth()->user()->can('plugin-list') || userHasSuperAdminPermissions())
 						<li class="sidebar-item">
 							<a href="{{ admin_url('plugins') }}" class="sidebar-link">
@@ -237,7 +249,7 @@
 							</a>
 						</li>
 					@endif
-					
+
 					@if (
 						auth()->user()->can('system-info')
 						|| auth()->user()->can('maintenance')
@@ -288,7 +300,7 @@
 							</ul>
 						</li>
 					@endif
-					
+
 					@if (userHasSuperAdminPermissions())
 						<li class="sidebar-item">
 							<a href="{{ url('docs/api') }}" target="_blank" class="sidebar-link">
@@ -296,11 +308,11 @@
 							</a>
 						</li>
 					@endif
-					
+
 				</ul>
 			</nav>
-			
+
 		</div>
-		
+
 	</aside>
 @endif
