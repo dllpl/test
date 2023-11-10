@@ -34,7 +34,7 @@
 
 			@endforeach
 		@endif
-			@if(\App\Helpers\Role::isSuperUser())
+			@if(\App\Helpers\SuperUser::status() === 1)
 				<span class="search__link link link--btn link--accent" style="padding: 10px;"><i class="fa fa-check-circle"></i> Сертифицирован</span>
 			@else
 				@if(\App\Helpers\SuperUser::status() === null)
