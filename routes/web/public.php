@@ -51,6 +51,7 @@ use App\Http\Controllers\Web\Public\Search\UserController;
 use App\Http\Controllers\Web\Public\SitemapController;
 use App\Http\Controllers\Web\Public\SitemapsController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Web\Public\ModelAndMarkController;
 
 // Select Language
 Route::namespace('Locale')
@@ -454,3 +455,9 @@ Route::namespace('Search')
 		Route::get(dynamicRoute('routes.searchPostsBySubCat'), [CategoryController::class, 'index']);
 		Route::get(dynamicRoute('routes.searchPostsByCat'), [CategoryController::class, 'index']);
 	});
+
+
+Route::group(['middleware' => 'auth', 'as' => 'base.', 'prefix' => 'base'], function () {
+    Route::get('models', [ModelAndMarkController::class, 'getModelsByMark'])->name('models');
+    Route::get('marks', [ModelAndMarkController::class, 'getMarks'])->name('marks');
+});

@@ -167,7 +167,15 @@
 				</label>
 				<div class="col-md-8">
 					@php
-						$select2Type = (count($fieldOptions) <= 10) ? 'selecter' : 'large-data-selecter';
+//						$select2Type = (count($fieldOptions) <= 10) ? 'selecter' : 'large-data-selecter';
+                        if(count($fieldOptions) <= 10) {
+                            $select2Type = 'selecter';
+                        } else {
+                            $select2Type = 'large-data-selecter';
+                        }
+                        if ($fieldName === 'cf[51]' || $fieldName === 'cf[50]') {
+                            $select2Type = 'selecter-custom';
+                        }
 					@endphp
 					<select id="{{ $fieldId }}" name="{{ $fieldName }}" class="form-control {{ $select2Type . $errorClass }}">
 						<option value="{{ $modelDefaultValue }}" @selected(empty(old($fieldOld)) || old($fieldOld)==$modelDefaultValue)>
@@ -508,7 +516,75 @@
 		dateRangeEl.on('apply.daterangepicker', function(ev, picker) {
 			$(this).val(picker.startDate.format('{{ t('datepicker_format') }}') + ' - ' + picker.endDate.format('{{ t('datepicker_format') }}'));
 		});
+
+
 	});
+
+
+	let mark_field = $('select[id="cf.51"]')
+	let model_field = $('select[id="cf.50"]')
+
+	if(mark_field && model_field) {
+		mark_field.select2({
+			ajax: {
+				url: '{{route('base.marks')}}',
+				dataType: 'json',
+				delay: 250,
+				data: (params) => {
+					return {
+						search: params.term,
+						page: params.page || 1
+					}
+				},
+				processResults: ({data}, params) => {
+					params.page = params.page || 1
+					return {
+						results: data.data,
+						pagination: {
+							more: (params.page * 30) < data.total
+						}
+					};
+				},
+				cache: true,
+				minimumInputLength: 1,
+			},
+			placeholder: 'Поиск марки',
+		});
+
+		model_field.select2({
+			ajax: {
+				url: '{{route('base.models')}}',
+				dataType: 'json',
+				delay: 250,
+				data: (params) => {
+					return {
+						mark_id: window.mark_id,
+						search: params.term,
+						page: params.page || 1
+					}
+				},
+				processResults: ({data}, params) => {
+					params.page = params.page || 1
+					return {
+						results: data.data,
+						pagination: {
+							more: (params.page * 30) < data.total
+						}
+					};
+				},
+				cache: true,
+				minimumInputLength: 1,
+			},
+			placeholder: 'Поиск модели',
+		});
+
+		mark_field.on("select2:selecting", function(e) {
+			model_field.val(null).trigger('change')
+			window.mark_id = e.params.args.data.mark_id
+			model_field.prop('disabled', false)
+		});
+		model_field.prop('disabled', true)
+	}
 
 	const url = 'https://partsapi.ru/api.php?method=VINdecode'
 	const key = '{{env('VIN_API', '5cdb1bdd38ea05fb81466bafb1d86efb')}}'
@@ -605,3 +681,4 @@
 		// makeRequest()
 	}
 </script>
+
