@@ -36,7 +36,7 @@ class ModelAndMarkController extends Controller
     {
         $request->validate(['mark_id' => 'required|string']);
 
-        $query = DB::table('model')->select('name as text', 'id')
+        $query = DB::table('model')->select('name as text', 'name as id')
             ->where('mark_id',$request->mark_id);
 
         if ($request->search) {

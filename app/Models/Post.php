@@ -651,28 +651,66 @@ class Post extends BaseModel implements Feedable
 	
 	protected function title(): Attribute
 	{
-		return Attribute::make(
-			get: function ($value) {
-				$value = mb_ucfirst($value);
-				$cleanedValue = RemoveFromString::contactInfo($value, false, true);
-				
-				if (!$this->relationLoaded('user')) {
-					return $cleanedValue;
-				}
-				
-				if (!isAdminPanel()) {
-					if (!empty($this->user)) {
-						if (!$this->user->hasAllPermissions(Permission::getStaffPermissions())) {
-							$value = $cleanedValue;
-						}
-					} else {
-						$value = $cleanedValue;
-					}
-				}
-				
-				return $value;
-			},
-		);
+        if($this->category_id === 138 || $this->category_id === 139) {
+            return Attribute::make(
+                get: function ($value) {
+                    $value = mb_ucfirst($value);
+                    $cleanedValue = RemoveFromString::contactInfo($value, false, true);
+
+                    if (!$this->relationLoaded('user')) {
+                        return $cleanedValue;
+                    }
+
+                    if (!isAdminPanel()) {
+                        if (!empty($this->user)) {
+                            if (!$this->user->hasAllPermissions(Permission::getStaffPermissions())) {
+                                $value = $cleanedValue;
+                            }
+                        } else {
+                            $value = $cleanedValue;
+                        }
+                    }
+
+                    $customFields = CategoryField::getFields($this->category_id, $this->id)->all();
+
+                    if(isset($customFields[14], $customFields[14]->default_value) && !empty($customFields[14]->default_value))
+                        $value = $customFields[14]->default_value . ' ';
+                    if(isset($customFields[15], $customFields[15]->default_value) && !empty($customFields[15]->default_value))
+                        $value .= $customFields[15]->default_value;
+                    if(isset($customFields[7], $customFields[7]->default_value) && !empty($customFields[7]->default_value)) {
+                        $filed = FieldOption::where('id', $customFields[7]->default_value)->select('value')->first()->value;
+                        $value .= ' '. $filed . ' л.';
+                    }
+                    if(isset($customFields[2], $customFields[2]->default_value) && !empty($customFields[2]->default_value))
+                        $value .= ' '. $customFields[2]->default_value . ' г.';
+
+                    return $value;
+                },
+            );
+        } else {
+            return Attribute::make(
+                get: function ($value) {
+                    $value = mb_ucfirst($value);
+                    $cleanedValue = RemoveFromString::contactInfo($value, false, true);
+
+                    if (!$this->relationLoaded('user')) {
+                        return $cleanedValue;
+                    }
+
+                    if (!isAdminPanel()) {
+                        if (!empty($this->user)) {
+                            if (!$this->user->hasAllPermissions(Permission::getStaffPermissions())) {
+                                $value = $cleanedValue;
+                            }
+                        } else {
+                            $value = $cleanedValue;
+                        }
+                    }
+
+                    return $value;
+                },
+            );
+        }
 	}
 	
 	protected function slug(): Attribute
