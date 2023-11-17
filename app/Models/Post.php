@@ -673,16 +673,16 @@ class Post extends BaseModel implements Feedable
 
                     $customFields = CategoryField::getFields($this->category_id, $this->id)->all();
 
-                    if(isset($customFields[14], $customFields[14]->default_value) && !empty($customFields[14]->default_value))
-                        $value = $customFields[14]->default_value . ' ';
-                    if(isset($customFields[15], $customFields[15]->default_value) && !empty($customFields[15]->default_value))
-                        $value .= $customFields[15]->default_value;
-                    if(isset($customFields[7], $customFields[7]->default_value) && !empty($customFields[7]->default_value)) {
-                        $filed = FieldOption::where('id', $customFields[7]->default_value)->select('value')->first()->value;
+                    if(isset($customFields[0], $customFields[0]->default_value) && !empty($customFields[0]->default_value) && is_string($customFields[0]->default_value))
+                        $value = $customFields[0]->default_value . ' ';
+                    if(isset($customFields[1], $customFields[1]->default_value) && !empty($customFields[1]->default_value) && is_string($customFields[1]->default_value))
+                        $value .= $customFields[1]->default_value;
+                    if(isset($customFields[8], $customFields[8]->default_value) && !empty($customFields[8]->default_value) && is_string($customFields[8]->default_value)) {
+                        $filed = FieldOption::where('id', $customFields[8]->default_value)->select('value')->first()->value;
                         $value .= ' '. $filed . ' л.';
                     }
-                    if(isset($customFields[2], $customFields[2]->default_value) && !empty($customFields[2]->default_value))
-                        $value .= ' '. $customFields[2]->default_value . ' г.';
+                    if(isset($customFields[13], $customFields[13]->default_value) && !empty($customFields[13]->default_value) && is_string($customFields[13]->default_value))
+                        $value .= ' '. $customFields[13]->default_value . ' г.';
 
                     return $value;
                 },
