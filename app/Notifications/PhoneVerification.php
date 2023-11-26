@@ -16,6 +16,7 @@
 
 namespace App\Notifications;
 
+use App\Http\Controllers\WhatsAppController;
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Messages\VonageMessage;
 use Illuminate\Notifications\Notification;
@@ -48,7 +49,10 @@ class PhoneVerification extends Notification implements ShouldQueue
 		}
 		
 		if (config('settings.sms.driver') == 'twilio') {
-			return [TwilioChannel::class];
+
+            WhatsAppController::send($this->entity->phone, $this->smsMessage());
+
+//			return [TwilioChannel::class];
 		}
 		
 		return ['vonage'];

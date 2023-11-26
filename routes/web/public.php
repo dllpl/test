@@ -52,6 +52,7 @@ use App\Http\Controllers\Web\Public\SitemapController;
 use App\Http\Controllers\Web\Public\SitemapsController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Web\Public\ModelAndMarkController;
+use App\Http\Controllers\Web\Public\Account\CertController;
 
 // Select Language
 Route::namespace('Locale')
@@ -299,6 +300,7 @@ Route::namespace('Post')
 // ACCOUNT
 Route::namespace('Account')
 	->prefix('account')
+    ->as('user.')
 	->group(function ($router) {
 		// Messenger
 		// Contact Post's Author
@@ -371,6 +373,9 @@ Route::namespace('Account')
 				
 				// Transactions
 				Route::get('transactions', [TransactionsController::class, 'index']);
+
+                // Сертификация
+                Route::get('cert', [CertController::class, 'index'])->name('cert.index');
 			});
 	});
 
