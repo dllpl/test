@@ -79,7 +79,7 @@
                                                 <td>
                                                     @switch($item->status)
                                                         @case(0)
-                                                            <div class="d-flex justify-content-around">
+                                                            <div class="d-flex justify-content-between">
                                                                 <a class="bulk-action btn btn-primary shadow"
                                                                    href="{{route('cert.action', ['action'=>'accept', 'request_id'=>$item->s_id])}}">Принять</a>
                                                                 <a class="bulk-action btn btn-danger shadow"
