@@ -13,8 +13,8 @@ class SuperUserController extends Controller
         $res = \DB::table('request_to_super')
             ->insert([
                 'user_id'=>$request->user()->id,
-                'created_at'=>date('d.m.Y H:i:s'),
-                'updated_at'=>date('d.m.Y H:i:s')
+                'created_at'=>date('Y-m-d H:i:s'),
+                'updated_at'=>date('Y-m-d H:i:s')
             ]);
 
         return response()->json(['status'=>true,'msg'=>"Ваша заявка принята и находится в обработке" ]);
