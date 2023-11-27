@@ -326,6 +326,7 @@
 @yield('after_scripts')
 @yield('captcha_footer')
 
+
 @if (isset($plugins) && !empty($plugins))
 	@foreach($plugins as $plugin)
 		@yield($plugin . '_scripts')

@@ -475,11 +475,22 @@ class UrlGen
 			$url = request()->url();
 		} else {
 			$path = str_replace(['{countryCode}/'], [''], config('routes.search'));
+
 			$url = $countryCodePath . $path;
 			// request()->server->set('REQUEST_URI', $url);
 		}
+
+        if(request()->has('l')) {
+            $location = '?l=' . request()->get('l');
+        } else {
+            if(session()->has('l')) {
+                $location = '?l=' . session()->get('l');
+            } else {
+                $location = '';
+            }
+        }
 		
-		return url($url);
+		return url($url . $location);
 	}
 	
 	/**

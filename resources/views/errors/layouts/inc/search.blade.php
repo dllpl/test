@@ -10,6 +10,7 @@ $searchUrl = \App\Helpers\UrlGen::searchWithoutQuery();
 
         <form id="search" name="search" action="{{ \App\Helpers\UrlGen::searchWithoutQuery() }}" method="GET" class="search__form form-search">
             <input name="q" placeholder="{{ t('what') }}" type="text" value="" class="input-reset input input--search">
+<input name="l" value="{{session()->has('l') ? session()->get('l') : ''}}" type="text" hidden>
             <button class="btn-reset form-search__btn">
                 <span class="form-search__btn-text">{{ t('find') }}</span>
                 <svg class="icon icon--search">
@@ -22,7 +23,7 @@ $searchUrl = \App\Helpers\UrlGen::searchWithoutQuery();
             <svg class="icon icon--geo">
                 <use xlink:href="images/sprite.svg#geo"></use>
             </svg>
-            <span>Выберите свой город</span>
+            <span>{{ session()->has('location') ? session()->get('location') : 'Выберите свой город' }}</span>
         </a>
     </div>
 </section>

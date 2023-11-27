@@ -37,6 +37,15 @@
 		}
 	}
 
+
+    if($qLocation) {
+        session()->put('location', $qLocation);
+        if(request()->has('l')) {
+            session()->put('l', request()->get('l'));
+        }
+    }
+
+
 	// FilterBy
 	$qFilterBy = request()->get('filterBy');
 	$qFilterBy = (is_string($qFilterBy)) ? $qFilterBy : null;
