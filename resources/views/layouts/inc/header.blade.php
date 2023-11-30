@@ -27,7 +27,7 @@ if ($multiCountriesIsEnabled) {
 			<img src="{{ config('settings.app.logo_url') }}"
 				 alt="{{ strtolower(config('settings.app.name')) }}" class="main-logo" data-bs-placement="bottom"
 				 data-bs-toggle="tooltip"
-				 title="{!! $logoLabel !!}" style="height: 26px"/>
+				 title="{!! $logoLabel !!}" style="height: 22px"/>
 		</a>
 
 		<button class="burger btn-reset" aria-label="Открыть меню" aria-expanded="false" data-burger>
