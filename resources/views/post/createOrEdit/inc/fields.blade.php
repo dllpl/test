@@ -593,15 +593,15 @@
 
 		model_field.prop('disabled', true)
 
-		let old_mark_field = "{{ $old_model_field }}"
-		let old_model_field = "{{ $old_model_field }}"
+		let old_mark_field = "{{ $old_model_field ?? '' }}"
+		let old_model_field = "{{ $old_model_field ?? '' }}"
 
 		if(old_mark_field?.length) {
-			let markFieldOption = new Option("{{ $old_mark_field }}", "{{ $old_mark_field }}", true, true)
+			let markFieldOption = new Option(old_mark_field, old_mark_field, true, true)
 			mark_field.append(markFieldOption).trigger('change');
 		}
 		if(old_model_field?.length) {
-			let modelFieldOption = new Option("{{ $old_model_field }}", "{{ $old_model_field }}", true, true)
+			let modelFieldOption = new Option(old_model_field, old_model_field, true, true)
 			model_field.append(modelFieldOption).trigger('change');
 			model_field.prop('disabled', false)
 		}
