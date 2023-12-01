@@ -1,5 +1,5 @@
 @if (isset($customFields) && !empty($customFields))
-	<form id="cfForm" role="form" class="form" action="{{ request()->url() }}" method="GET">
+	<form id="cfForm" role="form" class="form menu-nav__categories-item" action="{{ request()->url() }}" method="GET">
 		@php
 			$disabledFieldsTypes = ['file', 'video'];
 			$clearFilterBtn = '';
@@ -12,21 +12,21 @@
 				$fieldId = 'cf.' . data_get($field, 'id');
 				$fieldName = 'cf[' . data_get($field, 'id') . ']';
 				$fieldOld = 'cf.' . data_get($field, 'id');
-				
+
 				// Get the default value
 				$defaultValue = (request()->filled($fieldOld)) ? request()->input($fieldOld) : data_get($field, 'default_value');
-				
+
 				// Field Query String
 				$fieldQueryStringId = 'cf' . data_get($field, 'id') . 'QueryString';
 				$fieldQueryStringValue = \App\Helpers\Arr::query(request()->except(['page', $fieldId]));
 				$fieldQueryString = '<input type="hidden" id="' . $fieldQueryStringId . '" value="' . $fieldQueryStringValue . '">';
-				
+
 				// Clear Filter Button
 				$clearFilterBtn = \App\Helpers\UrlGen::getCustomFieldFilterClearLink($fieldOld, $cat ?? null, $city ?? null);
 			@endphp
-			
+
 			@if (in_array(data_get($field, 'type'), ['text', 'textarea', 'url', 'number']))
-				
+
 				{{-- text --}}
 				<div class="block-title has-arrow sidebar-header">
 					<h5>
@@ -47,16 +47,16 @@
 							>
 						</div>
 						<div class="col-lg-3 col-md-12 col-sm-12">
-							<button class="btn btn-default btn-block" type="submit">{{ t('go') }}</button>
+							<button class="btn btn-default btn-block" type="submit"><i class="fa fa-search"></i></button>
 						</div>
 					</div>
 				</div>
 				{!! $fieldQueryString !!}
 				<div style="clear:both"></div>
-			
+
 			@endif
 			@if (data_get($field, 'type') == 'checkbox')
-				
+
 				{{-- checkbox --}}
 				<div class="block-title has-arrow sidebar-header">
 					<h5>
@@ -81,10 +81,10 @@
 				</div>
 				{!! $fieldQueryString !!}
 				<div style="clear:both"></div>
-			
+
 			@endif
 			@if (data_get($field, 'type') == 'checkbox_multiple')
-				
+
 				@if (!empty(data_get($field, 'options')))
 					{{-- checkbox_multiple --}}
 					<div class="block-title has-arrow sidebar-header">
@@ -104,7 +104,7 @@
 							@foreach (data_get($field, 'options') as $option)
 								@php
 									$optionId = data_get($option, 'id');
-									
+
 									// Get the default value
 									$defaultValue = (request()->filled($fieldOld . '.' . $optionId))
 										? request()->input($fieldOld . '.' . $optionId)
@@ -117,7 +117,7 @@
 												? data_get($field, 'default_value.' . $optionId . '.value')
 												: data_get($field, 'default_value')
 										);
-									
+
 									// Field Query String
 									$fieldQueryStringId = 'cf' . data_get($field, 'id') . $optionId . 'QueryString';
 									$fieldQueryStringValue = \App\Helpers\Arr::query(request()->except(['page', $fieldId . '.' . $optionId]));
@@ -141,10 +141,10 @@
 					</div>
 					<div style="clear:both"></div>
 				@endif
-			
+
 			@endif
 			@if (data_get($field, 'type') == 'radio')
-				
+
 				@if (!empty(data_get($field, 'options')))
 					{{-- radio --}}
 					<div class="block-title has-arrow sidebar-header">
@@ -183,10 +183,10 @@
 					{!! $fieldQueryString !!}
 					<div style="clear:both"></div>
 				@endif
-				
+
 			@endif
 			@if (data_get($field, 'type') == 'select')
-			
+
 				{{-- select --}}
 				<div class="block-title has-arrow sidebar-header">
 					<h5>
@@ -220,10 +220,10 @@
 				</div>
 				{!! $fieldQueryString !!}
 				<div style="clear:both"></div>
-			
+
 			@endif
 			@if (in_array(data_get($field, 'type'), ['date', 'date_time', 'date_range']))
-			
+
 				{{-- date --}}
 				<div class="block-title has-arrow sidebar-header">
 					<h5>
@@ -260,9 +260,9 @@
 				</div>
 				{!! $fieldQueryString !!}
 				<div style="clear:both"></div>
-			
+
 			@endif
-			
+
 		@endforeach
 	</form>
 	<div style="clear:both"></div>
@@ -282,10 +282,10 @@
 			$('#cfForm').find('select').change(function() {
 				/* Get full field's ID */
 				var fullFieldId = $(this).attr('id');
-				
+
 				/* Get full field's ID without dots */
 				var jsFullFieldId = fullFieldId.split('.').join('');
-				
+
 				/* Get real field's ID */
 				var tmp = fullFieldId.split('.');
 				if (typeof tmp[1] !== 'undefined') {
@@ -293,29 +293,29 @@
 				} else {
 					return false;
 				}
-				
+
 				/* Get saved QueryString */
 				var fieldQueryString = $('#' + jsFullFieldId + 'QueryString').val();
-				
+
 				/* Add the field's value to the QueryString */
 				if (fieldQueryString !== '') {
 					fieldQueryString = fieldQueryString + '&';
 				}
 				fieldQueryString = fieldQueryString + 'cf['+fieldId+']=' + $(this).val();
-				
+
 				/* Redirect to the new search URL */
 				var searchUrl = baseUrl + '?' + fieldQueryString;
 				redirect(searchUrl);
 			});
-			
+
 			/* Radio & Checkbox */
 			$('#cfForm').find('input[type=radio], input[type=checkbox]').click(function() {
 				/* Get full field's ID */
 				var fullFieldId = $(this).attr('id');
-				
+
 				/* Get full field's ID without dots */
 				var jsFullFieldId = fullFieldId.split('.').join('');
-				
+
 				/* Get real field's ID */
 				var tmp = fullFieldId.split('.');
 				if (typeof tmp[1] !== 'undefined') {
@@ -326,10 +326,10 @@
 				} else {
 					return false;
 				}
-				
+
 				/* Get saved QueryString */
 				var fieldQueryString = $('#' + jsFullFieldId + 'QueryString').val();
-				
+
 				/* Check if field is checked */
 				if ($(this).prop('checked') == true) {
 					/* Add the field's value to the QueryString */
@@ -342,12 +342,12 @@
 						fieldQueryString = fieldQueryString + 'cf[' + fieldId + ']=' + $(this).val();
 					}
 				}
-				
+
 				/* Redirect to the new search URL */
 				var searchUrl = baseUrl + '?' + fieldQueryString;
 				redirect(searchUrl);
 			});
-			
+
 			/*
 			 * Custom Fields Date Picker
 			 * https://www.daterangepicker.com/#options
@@ -398,7 +398,7 @@
 			$('#cfForm .cf-date').on('apply.daterangepicker', function(ev, picker) {
 				$(this).val(picker.startDate.format('{{ t('datepicker_format') }}'));
 			});
-			
+
 			{{-- Date Range --}}
 			$('#cfForm .cf-date_range').daterangepicker({
 				autoUpdateInput: false,
