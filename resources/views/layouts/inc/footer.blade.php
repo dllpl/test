@@ -14,7 +14,7 @@ $appsLinksAreEnabled = (
 $socialAndAppsLinksAreEnabled = ($socialLinksAreEnabled || $appsLinksAreEnabled);
 ?>
 
-<footer class="footer mt-5">
+<footer class="footer">
 	@if (!config('settings.footer.hide_links'))
 		<div class="footer__container container">
 			<div class="footer__content">
