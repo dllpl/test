@@ -156,7 +156,7 @@ h1.intro-title {
 
 /* List Gap */
 ul li, ol li {
-	padding: 2px 0 2px 0;
+	/*padding: 2px 0 2px 0;*/
 }
 .footer-nav li {
 	padding: 3px 0 3px 0;
