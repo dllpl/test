@@ -323,8 +323,8 @@ p {
     --container-width: calc(var(--content-width) + (var(--container-offset) * 2));
     --container-fluid-width: calc(var(--content-fluid-width) + (var(--container-offset) * 2));
     --light: #fff;
-    --dark: #101010;
-    --accent: #79B285;
+    --dark: #1A1449;
+    --accent: #1A1449;
     --main-dark: #F6F4F4;
     --dark-grey: #686868;
     --heart: #FF4848;
