@@ -1372,6 +1372,7 @@ p {
     display: -ms-flexbox;
     display: flex;
     height: 150px;
+    background: linear-gradient(to right, #1A1449, #E94B5A);
 }
 @media (max-width: 576px) {
     .catalog-promo__img-wrapp {
