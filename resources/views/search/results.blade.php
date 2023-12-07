@@ -383,7 +383,7 @@
 					</h3>
 					<p class="accent-block-add__subtitle">
 {{--						{{ t('sell_products_and_services_online_for_free') }}--}}
-						И начните продавать или продвигать свои услуги вместе с Барсовоз
+						И начните продавать или продвигать свои услуги вместе с AUTOMOST
 					</p>
 				</div>
 				@if (!auth()->check() && config('settings.single.guests_can_post_listings') != '1')

@@ -17,46 +17,48 @@
             border-radius: 0.25rem;
         }
     </style>
-    <ul class="list-reset" style="display: flex; justify-content: space-between;">
-        <li>Вперед</li>
+    <ul class="list-reset mt-5" style="display: flex; justify-content: space-between; color: #3F3F3E; font-weight: 500; font-size: 12px;">
+{{--        <li>Вперед</li>--}}
         {{-- Previous Page Link --}}
         @if (!data_get($paginator, 'prev'))
             <li aria-disabled="true" aria-label="@lang('pagination.previous')">
-                <span aria-hidden="true">Назад</span>
+                <span aria-hidden="true" class="text-decoration-underline">Назад</span>
             </li>
         @else
             <li>
-                <a class="page-link" href="{{ data_get($paginator, 'prev') }}" rel="prev" aria-label="@lang('pagination.previous')">Назад</a>
+                <a class="page-link text-decoration-underline" href="{{ data_get($paginator, 'prev') }}" rel="prev" aria-label="@lang('pagination.previous')" >Назад</a>
             </li>
         @endif
-        {{-- Pagination Elements --}}
-        @if (is_array($elements) && count($elements) > 0)
-            @foreach ($elements as $element)
-                @continue($loop->first || $loop->last)
-                {{-- "Three Dots" Separator --}}
-                @if (!data_get($element, 'url'))
-                    <li class="disabled" aria-disabled="true">{{ data_get($element, 'label') }}</li>
-                @else
-                    {{-- Array Of Links --}}
-                    @if ((int)data_get($element, 'label') == $currentPage)
-                        <li class="active" aria-current="page">{{ data_get($element, 'label') }}</li>
+        <div class="d-flex w-100 justify-content-around">
+            {{-- Pagination Elements --}}
+            @if (is_array($elements) && count($elements) > 0)
+                @foreach ($elements as $element)
+                    @continue($loop->first || $loop->last)
+                    {{-- "Three Dots" Separator --}}
+                    @if (!data_get($element, 'url'))
+                        <li class="disabled" aria-disabled="true">{{ data_get($element, 'label') }}</li>
                     @else
-                        <li><a href="{{ data_get($element, 'url') }}">{{ data_get($element, 'label') }}</a></li>
+                        {{-- Array Of Links --}}
+                        @if ((int)data_get($element, 'label') == $currentPage)
+                            <li class="active" aria-current="page">{{ data_get($element, 'label') }}</li>
+                        @else
+                            <li><a href="{{ data_get($element, 'url') }}">{{ data_get($element, 'label') }}</a></li>
+                        @endif
                     @endif
-                @endif
-            @endforeach
-        @endif
+                @endforeach
+            @endif
+        </div>
         {{-- Next Page Link --}}
         @if (data_get($paginator, 'next'))
             <li>
-                <a href="{{ data_get($paginator, 'next') }}" rel="next" aria-label="@lang('pagination.next')">Вперед</a>
+                <a href="{{ data_get($paginator, 'next') }}" rel="next" aria-label="@lang('pagination.next')" class="text-decoration-underline">Вперед</a>
             </li>
         @else
             <li class="disabled" aria-disabled="true" aria-label="@lang('pagination.next')">
-                <span aria-hidden="true">Вперед</span>
+                <span aria-hidden="true" class="text-decoration-underline">Вперед</span>
             </li>
         @endif
-        <li>Назад</li>
+{{--        <li>Назад</li>--}}
     </ul>
 {{--    <ul class="pagination justify-content-center" role="navigation">--}}
 {{--        --}}{{-- Previous Page Link --}}

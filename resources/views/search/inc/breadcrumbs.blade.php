@@ -17,8 +17,11 @@
 @endphp
 <div class="container">
 	<nav aria-label="breadcrumb" role="navigation" class="search-breadcrumb">
-		<ol class="breadcrumb">
-			<li class="breadcrumb-item"><a href="{{ url('/') }}"><i class="fas fa-home"></i></a></li>
+		<ol class="breadcrumb"><i class=""></i>
+			<li class="breadcrumb-item"><a href="{{ url('/') }}">
+					<svg class="icon icon--geo">
+						<use xlink:href="images/sprite.svg#geo"></use>
+					</svg></a></li>
 			<li class="breadcrumb-item">
 				<a href="{{ $searchWithoutQuery }}">
 					{{ config('country.name') }}

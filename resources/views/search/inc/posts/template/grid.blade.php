@@ -56,7 +56,7 @@
                             {!! imgTag(data_get($post, 'picture.filename'), 'medium', ['class' => 'preview__img img img--preview', 'alt' => data_get($post, 'title')]) !!}
                             {{-- Плашка в наличии --}}
                             @if($post['available_field'] && $post['available_field']->value == 177)
-                                <span class="position-absolute badge__available--accent" style="top:10%">в наличии</span>
+                                <div class="position-absolute badge__available--accent" style=""><p>в наличии</p></div>
                             @endif
                             @if((time() - strtotime($post['created_at']) <= $hour_to_public * 60 * 60))
                                 <span class="position-absolute badge__available--heart" style="bottom:5%">До публикации {{$time_lost}}</span>

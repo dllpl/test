@@ -29,9 +29,9 @@
 					{{----}}
 				</ul>
 				
-				<ul class="nav navbar-nav ms-auto navbar-right">
-					@includeFirst([config('larapen.core.customizedViewPath') . 'layouts.inc.menu.select-language', 'layouts.inc.menu.select-language'])
-				</ul>
+{{--				<ul class="nav navbar-nav ms-auto navbar-right">--}}
+{{--					@includeFirst([config('larapen.core.customizedViewPath') . 'layouts.inc.menu.select-language', 'layouts.inc.menu.select-language'])--}}
+{{--				</ul>--}}
 			</div>
 			
 			

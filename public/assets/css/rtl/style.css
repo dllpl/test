@@ -2148,7 +2148,7 @@ html[dir="rtl"] body .intro h1, .intro html[dir="rtl"] body h1, html[dir="rtl"] 
 /* =============================================================== */
 .footer {
 	background: #fff;
-	border-top: solid 1px var(--border-color);
+	/*border-top: solid 1px var(--border-color);*/
 	padding: 30px 0;
 	font-size: 12px;
 	color: #4e575d;
