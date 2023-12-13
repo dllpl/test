@@ -528,8 +528,8 @@
 	});
 
 
-	let mark_field = $('select[id="cf.51"]')
-	let model_field = $('select[id="cf.50"]')
+	let mark_field = $('select[id="cf.50"]')
+	let model_field = $('select[id="cf.51"]')
 
 	if(mark_field && model_field) {
 		mark_field.select2({
