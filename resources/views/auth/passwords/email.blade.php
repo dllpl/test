@@ -86,7 +86,7 @@
 {{--						</div>--}}
 
 						<div class="card-body" style="padding: 2.3em 2.3em">
-							<h4 class="font-weight-bold mb-3">Добро пожаловать в Барсовоз</h4>
+							<h4 class="font-weight-bold mb-3">Добро пожаловать в Автомост</h4>
 							<p style="font-weight: 500" class="mb-4">Забыли пароль? <br>
 								Введите эл. почту, использованную при регистрации
 							</p>

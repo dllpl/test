@@ -15,7 +15,7 @@
 				<div class="modal-body" style="padding: 0 2.3rem">
 					<div class="row">
 						<div class="col-12">
-							<h4 class="font-weight-bold mb-3">Добро пожаловать в Барсовоз</h4>
+							<h4 class="font-weight-bold mb-3">Добро пожаловать в Автомост</h4>
 							<p>В первый раз здесь?
 								<span class="text-decoration-underline">
 									<a href="{{ \App\Helpers\UrlGen::register() }}" style="color: #686868">

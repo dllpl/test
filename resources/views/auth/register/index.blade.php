@@ -64,7 +64,7 @@
 					<section class="registration">
 						<div class="registration__container">
 							<h1 class="registration__title title title--medium">Зарегистируйтесь на&nbsp;сайте, чтобы начать покупать и&nbsp;продавать
-								вместе с&nbsp;Барсовоз</h1>
+								вместе с&nbsp;Автомост</h1>
 
 							<div class="registration__grid grid grid--coll-2">
 								<div class="registration__left">
@@ -241,7 +241,7 @@
 										<p class="registration__title title title--medium">Размещайте бесплатные объявления</p>
 										<p>
 											Имеете&nbsp;ли вы&nbsp;что-нибудь для продажи, аренды или предоставляете услуги, работу? Публикуйте ваши объявления
-											на&nbsp;Барсовоз&nbsp;—
+											на&nbsp;Автомост&nbsp;—
 											это бесплатно и&nbsp;просто в&nbsp;использовании
 										</p>
 									</div>
