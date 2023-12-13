@@ -189,7 +189,7 @@
 						@endif
 					</div>
 					@if((time() - strtotime($post['created_at']) <= $hour_to_public * 60 * 60))
-						<div style="color: var(--heart-new); font-weight: bold; margin-bottom: 10px">До публикации в общий доступ отсталось 123 </div>
+						<div style="color: var(--heart-new); font-weight: bold; margin-bottom: 10px">До публикации в общий доступ отсталось {{$time_lost}} </div>
 					@endif
 					<div class="product__header-bottom">
 						@if (!config('settings.single.hide_dates'))
