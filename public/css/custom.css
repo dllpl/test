@@ -842,6 +842,11 @@ p {
     transition: fill 0.3s ease;
 }
 
+.btn-primary {
+    background-color: var(--accent);
+    border-color: var(--accent);
+}
+
 .menu-nav {
     width: 255px;
     -ms-flex-negative: 0;
