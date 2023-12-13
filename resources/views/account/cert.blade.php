@@ -5,9 +5,10 @@
         <div class="search__container container">
             <a href="{{ \App\Helpers\UrlGen::searchWithoutQuery() }}" class="search__link link link--btn link--accent">Все объявления</a>
 
-            <form id="search" name="search" action="{{ \App\Helpers\UrlGen::searchWithoutQuery() }}" method="GET" class="search__form form-search">
+            <form id="search" name="search" action="{{ \App\Helpers\UrlGen::searchWithoutQuery() }}" method="GET"
+                  class="search__form form-search">
                 <input name="q" placeholder="{{ t('what') }}" type="text" value="" class="input-reset input input--search">
-<input name="l" value="{{session()->has('l') ? session()->get('l') : ''}}" type="text" hidden>
+                <input name="l" value="{{session()->has('l') ? session()->get('l') : ''}}" type="text" hidden>
                 <button class="btn-reset form-search__btn">
                     <span class="form-search__btn-text">{{ t('find') }}</span>
                     <svg class="icon icon--search">
@@ -44,17 +45,36 @@
                 <div class="lk__content">
                     <button class="menu-nav__btn-open btn btn--form btn-reset">Открыть меню</button>
                     <div class="lk-product">
-                        <h2 class="lk__title title title--medium">{{ $pageTitles[$pagePath]['title'] ?? 'Сертификация' }}</h2>
-                        @if(\App\Helpers\SuperUser::status() === 1)
-                            <span class="search__link link link--btn link--accent" style="padding: 10px;"><i class="fa fa-check-circle"></i> Сертифицирован</span>
-                        @else
-                            @if(\App\Helpers\SuperUser::status() === null)
-                                <button data-url="{{route('super-user.send-request')}}" id="super_user_send_request" class="btn-reset search__link link link--btn link--accent" style="padding: 10px;">Пройти сертификацию</button>
-                            @elseif(\App\Helpers\SuperUser::status() === 0)
-                                <span class="search__link link link--btn link--accent" style="padding: 10px;"><i class="fa fa-clock"></i> Завявка в обработке</span>
-                            @elseif(\App\Helpers\SuperUser::status() === 2)
-                                <span class="search__link link link--btn link--accent" style="padding: 10px;"><i class="fa fa-times-circle"></i> Завявка отклонена</span>
-                            @endif
+                    @if(\App\Helpers\SuperUser::status() === null)
+                            <h2 class="lk__title title title--medium">Сертификация</h2>
+                        @elseif(\App\Helpers\SuperUser::status() === 0)
+                            <h2 class="lk__title title title--medium">Ваша заявка в обработке. Пожалуйста, ожидайте решения</h2>
+                        @elseif(\App\Helpers\SuperUser::status() === 2)
+                            <h2 class="lk__title title title--medium">Завявка отклонена</h2>
+                        @elseif(\App\Helpers\SuperUser::status() === 1)
+                            <h2 class="lk__title title title--medium"><img src="/images/logo-2.png"> Вы сертифицированный пользователь AUTOMOST</h2>
+                        @endif
+                        <h3 class="mb-3 title">Сертифицированный пользователь</h3>
+                        <p class="mb-3">Отметку «Сертифицированный пользователь» могут получить только профессиональные пользователи
+                            AUTOMOST, которые подтвердят права на что-то.</p>
+                        @if(\App\Helpers\SuperUser::status() !== 1)
+                            <h3 class="mb-3 title">Как получить сертификацию?</h3>
+                            <p class="mb-3">Отметку «Сертифицированный пользователь» могут получить только профессиональные пользователи
+                                AUTOMOST, которые подтвердят права на что-то.</p>
+                        @endif
+                        <h3 class="mb-3 title">Что доступно сертифицированному пользователю?</h3>
+                        <ul class="mb-3">
+                            <li style="list-style-type: disc">Отметку «Сертифицированный пользователь» могут получить только профессиональные пользователи AUTOMOST,
+                                которые подтвердят права на что-то.
+                            </li>
+                            <li style="list-style-type: disc">Отметку «Сертифицированный пользователь» могут получить только профессиональные пользователи AUTOMOST,
+                                которые подтвердят права на что-то.
+                            </li>
+                        </ul>
+                        @if(\App\Helpers\SuperUser::status() === null)
+                            <button data-url="{{route('super-user.send-request')}}" id="super_user_send_request"
+                                    class="btn-reset search__link link link--btn link--accent" style="padding: 10px;">Подать заявку на сертификацию
+                            </button>
                         @endif
                     </div>
                 </div>

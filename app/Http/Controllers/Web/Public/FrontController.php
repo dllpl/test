@@ -201,15 +201,15 @@ class FrontController extends Controller
 				'inDropdown' => true,
 				'isActive'   => (request()->segment(1) == 'account' && request()->segment(2) == null),
 			],
-            [
-                'name'       => 'Сертификация',
-                'url'        => route('user.cert.index'),
-                'icon'       => 'fa fa-spinner',
-                'group'      => t('My Account'),
-                'countVar'   => null,
-                'inDropdown' => true,
-                'isActive'   => (request()->segment(2) == 'cert'),
-            ],
+//            [
+//                'name'       => 'Сертификация',
+//                'url'        => route('user.cert.index'),
+//                'icon'       => 'fa fa-spinner',
+//                'group'      => t('My Account'),
+//                'countVar'   => null,
+//                'inDropdown' => true,
+//                'isActive'   => (request()->segment(2) == 'cert'),
+//            ],
 		];
 		
 		if (app('impersonate')->isImpersonating()) {

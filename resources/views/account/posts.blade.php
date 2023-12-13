@@ -142,7 +142,7 @@
 													&& data_get($post, 'user_id') == $user->id
 													&& empty(data_get($post, 'archived_at'))
 												)
-													<a class="lk-product__link link link--dark" href="{{ \App\Helpers\UrlGen::editPost($post) }}">
+													<a class="lk-product__link link" style="background-color: var(--heart-new); color:white" href="{{ \App\Helpers\UrlGen::editPost($post) }}">
 														{{ t('Edit') }}
 													</a>
 												@endif

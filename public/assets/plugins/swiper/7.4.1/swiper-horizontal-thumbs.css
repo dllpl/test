@@ -10,7 +10,6 @@
 	height: 100%;
 	margin-left: auto;
 	margin-right: auto;
-	border-radius: 6px;
 }
 
 /* Apply shadow for the main gallery */
@@ -20,7 +19,6 @@
 	box-shadow: 0 0 5px #ccc;
 	/*border: 5px solid #fff;*/
 	background: #fff;
-	border-radius: 6px;
 }
 .main-gallery {
 	margin-bottom: 10px;
@@ -90,7 +88,6 @@
 }
 
 .main-gallery .swiper-slide img {
-	border-radius: 6px;
 	cursor: pointer;
 }
 

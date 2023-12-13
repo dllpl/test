@@ -20,7 +20,7 @@
 									@continue
 								@endif
 								<a href="{{ $value['url'] }}" class="link link--grey {!! (isset($value['isActive']) && $value['isActive']) ? 'active' : '' !!}">
-									<i class="{{ $value['icon'] }}" style="color: #79B285"></i>&nbsp; {{ $value['name'] }}
+									<i class="{{ $value['icon'] }}" style="color: var(--accent)"></i>&nbsp; {{ $value['name'] }}
 									@if (isset($value['countVar']) && !empty($value['countVar']))
 										<span class="{{ !empty($value['countCustomClass']) ? $value['countCustomClass'] . ' hide' : '' }}">
 													({{ \App\Helpers\Number::short(data_get($stats, $value['countVar']) ?? 0) }})
@@ -33,6 +33,9 @@
 				</li>
 			@endforeach
 		@endif
+		<a class="link link--accent mt-5" href="{{route('user.cert.index')}}" style="padding: 10px 32px;">
+			Сертификация
+		</a>
 	</div>
 </div>
 

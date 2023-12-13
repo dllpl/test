@@ -122,7 +122,7 @@
 								Нажимая на кнопку, вы даете согласие на обработку<br>
 								<span style="text-decoration: underline;"><b>Персональных данных</b></span>
 							</a>
-							<button type="submit" class="form__btn btn btn--accent btn-reset">{{ t('submit') }}</button>
+							<button type="submit" class="form__btn btn btn--accent btn-reset" style="border-radius: 0">{{ t('submit') }}</button>
 						</div>
 					</form>
 
