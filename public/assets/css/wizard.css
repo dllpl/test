@@ -37,7 +37,7 @@
     line-height: 46px;
 }
 #stepWizard ul.nav-wizard li a {
-    color: #79B285;
+    color: var(--accent);
     padding: 0;
 }
 #stepWizard ul.nav-wizard li a:hover {

@@ -10,9 +10,9 @@ $panel-default-border: $laravel-border-color;
 $panel-inner-border: $laravel-border-color;
 
 // Brands
-$brand-primary: #79B285;
+$brand-primary: var(--accent);
 $brand-info: #686868;
-$brand-success: #79B285;
+$brand-success: var(--accent);
 $brand-warning: #C29D0B;
 $brand-danger: #C9302C;
 

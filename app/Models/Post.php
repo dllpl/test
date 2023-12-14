@@ -40,14 +40,14 @@ use Spatie\Feed\FeedItem;
 class Post extends BaseModel implements Feedable
 {
 	use Crud, CountryTrait, Notifiable, HasFactory, SimilarByCategory, SimilarByLocation, ReviewsPlugin;
-	
+
 	/**
 	 * The table associated with the model.
 	 *
 	 * @var string
 	 */
 	protected $table = 'posts';
-	
+
 	/**
 	 * The primary key for the model.
 	 *
@@ -70,21 +70,21 @@ class Post extends BaseModel implements Feedable
 		'price_label',
 		'price_formatted',
 	];
-	
+
 	/**
 	 * Indicates if the model should be timestamped.
 	 *
 	 * @var boolean
 	 */
 	public $timestamps = true;
-	
+
 	/**
 	 * The attributes that aren't mass assignable.
 	 *
 	 * @var array
 	 */
 	protected $guarded = ['id'];
-	
+
 	/**
 	 * The attributes that are mass assignable.
 	 *
@@ -132,14 +132,14 @@ class Post extends BaseModel implements Feedable
 		'created_at',
 		'updated_at',
 	];
-	
+
 	/**
 	 * The attributes that should be hidden for arrays
 	 *
 	 * @var array
 	 */
 	// protected $hidden = [];
-	
+
 	/**
 	 * The attributes that should be cast to native types.
 	 *
@@ -154,7 +154,7 @@ class Post extends BaseModel implements Feedable
 		'reviewed_at'       => 'datetime',
 		'archived_at'       => 'datetime',
 	];
-	
+
 	/*
 	|--------------------------------------------------------------------------
 	| FUNCTIONS
@@ -163,33 +163,33 @@ class Post extends BaseModel implements Feedable
 	protected static function boot()
 	{
 		parent::boot();
-		
+
 		Post::observe(PostObserver::class);
-		
+
 		static::addGlobalScope(new VerifiedScope());
 		static::addGlobalScope(new ReviewedScope());
 		static::addGlobalScope(new LocalizedScope());
 	}
-	
+
 	public function routeNotificationForMail()
 	{
 		return $this->email;
 	}
-	
+
 	public function routeNotificationForVonage()
 	{
 		$phone = phoneE164($this->phone, $this->phone_country);
-		
+
 		return setPhoneSign($phone, 'vonage');
 	}
-	
+
 	public function routeNotificationForTwilio()
 	{
 		$phone = phoneE164($this->phone, $this->phone_country);
-		
+
 		return setPhoneSign($phone, 'twilio');
 	}
-	
+
 	/**
 	 * @throws \Psr\Container\ContainerExceptionInterface
 	 * @throws \Psr\Container\NotFoundExceptionInterface
@@ -197,9 +197,9 @@ class Post extends BaseModel implements Feedable
 	public static function getFeedItems()
 	{
 		$postsPerPage = (int)config('settings.list.items_per_page', 50);
-		
+
 		$posts = Post::reviewed()->unarchived();
-		
+
 		if (request()->filled('country') || config('plugins.domainmapping.installed')) {
 			$countryCode = config('country.code');
 			if (!config('plugins.domainmapping.installed')) {
@@ -209,10 +209,10 @@ class Post extends BaseModel implements Feedable
 			}
 			$posts = $posts->where('country_code', $countryCode);
 		}
-		
+
 		return $posts->take($postsPerPage)->orderByDesc('id')->get();
 	}
-	
+
 	public function toFeedItem(): FeedItem
 	{
 		$title = $this->title;
@@ -221,7 +221,7 @@ class Post extends BaseModel implements Feedable
 		// $summary = str_limit(str_strip(strip_tags($this->description)), 5000);
 		$summary = transformDescription($this->description);
 		$link = UrlGen::postUri($this, true);
-		
+
 		return FeedItem::create()
 			->id($link)
 			->title($title)
@@ -231,11 +231,11 @@ class Post extends BaseModel implements Feedable
 			->link($link)
 			->authorName($this->contact_name);
 	}
-	
+
 	public function getTitleHtml(): string
 	{
 		$out = '';
-		
+
 		// $post = self::find($this->id);
 		$out .= getPostUrl($this);
 		$out .= '<br>';
@@ -248,15 +248,15 @@ class Post extends BaseModel implements Feedable
 			$out .= trans('admin.Archived');
 			$out .= '</span>';
 		}
-		
+
 		return $out;
 	}
-	
+
 	public function getPictureHtml(): string
 	{
 		// Get listing URL
 		$url = url(UrlGen::postUri($this));
-		
+
 		$style = ' style="width:auto; max-height:90px;"';
 		// Get first picture
 		$out = '';
@@ -270,23 +270,23 @@ class Post extends BaseModel implements Feedable
 			// Default picture
 			$out .= '<img src="' . imgUrl(config('larapen.core.picture.default'), 'small') . '" data-bs-toggle="tooltip" title="' . $this->title . '"' . $style . ' class="img-rounded">';
 		}
-		
+
 		// Add link to the Ad
 		return '<a href="' . $url . '" target="_blank">' . $out . '</a>';
 	}
-	
+
 	public function getUserNameHtml()
 	{
 		if (isset($this->user) and !empty($this->user)) {
 			$url = admin_url('users/' . $this->user->getKey() . '/edit');
 			$tooltip = ' data-bs-toggle="tooltip" title="' . $this->user->name . '"';
-			
+
 			return '<a href="' . $url . '"' . $tooltip . '>' . $this->contact_name . '</a>';
 		} else {
 			return $this->contact_name;
 		}
 	}
-	
+
 	public function getCityHtml()
 	{
 		$out = $this->getCountryHtml();
@@ -296,15 +296,15 @@ class Post extends BaseModel implements Feedable
 		} else {
 			$out .= $this->city_id;
 		}
-		
+
 		return $out;
 	}
-	
+
 	public function getReviewedHtml(): string
 	{
 		return ajaxCheckboxDisplay($this->{$this->primaryKey}, $this->getTable(), 'reviewed_at', $this->reviewed_at);
 	}
-	
+
 	public function getFeaturedHtml()
 	{
 		$out = '-';
@@ -314,16 +314,16 @@ class Post extends BaseModel implements Feedable
 				$out = $opTool::featuredCheckboxDisplay($this->{$this->primaryKey}, $this->getTable(), 'featured', $this->featured);
 			}
 		}
-		
+
 		return $out;
 	}
-	
+
 	/*
 	|--------------------------------------------------------------------------
 	| QUERIES
 	|--------------------------------------------------------------------------
 	*/
-	
+
 	/*
 	|--------------------------------------------------------------------------
 	| RELATIONS
@@ -333,55 +333,55 @@ class Post extends BaseModel implements Feedable
 	{
 		return $this->belongsTo(PostType::class, 'post_type_id', 'id');
 	}
-	
+
 	public function category()
 	{
 		return $this->belongsTo(Category::class, 'category_id', 'id');
 	}
-	
+
 	public function city()
 	{
 		return $this->belongsTo(City::class, 'city_id');
 	}
-	
+
 	public function currency()
 	{
 		return $this->belongsTo(Currency::class, 'currency_code', 'code');
 	}
-	
+
 	public function latestPayment()
 	{
 		return $this->hasOne(Payment::class, 'post_id')->orderByDesc('id');
 	}
-	
+
 	public function payments()
 	{
 		return $this->hasMany(Payment::class, 'post_id');
 	}
-	
+
 	public function pictures()
 	{
 		return $this->hasMany(Picture::class, 'post_id')->orderBy('position')->orderByDesc('id');
 	}
-	
+
 	public function savedByLoggedUser()
 	{
 		$guard = isFromApi() ? 'sanctum' : null;
 		$userId = (auth($guard)->check()) ? auth($guard)->user()->id : '-1';
-		
+
 		return $this->hasMany(SavedPost::class, 'post_id')->where('user_id', $userId);
 	}
-	
+
 	public function user()
 	{
 		return $this->belongsTo(User::class, 'user_id');
 	}
-	
+
 	public function postValues()
 	{
 		return $this->hasMany(PostValue::class, 'post_id');
 	}
-	
+
 	/*
 	|--------------------------------------------------------------------------
 	| SCOPES
@@ -392,37 +392,37 @@ class Post extends BaseModel implements Feedable
 		$builder->where(function ($query) {
 			$query->whereNotNull('email_verified_at')->whereNotNull('phone_verified_at');
 		});
-		
+
 		if (config('settings.single.listings_review_activation')) {
 			$builder->whereNotNull('reviewed_at');
 		}
-		
+
 		return $builder;
 	}
-	
+
 	public function scopeUnverified($builder)
 	{
 		$builder->where(function ($query) {
 			$query->whereNull('email_verified_at')->orWhereNull('phone_verified_at');
 		});
-		
+
 		if (config('settings.single.listings_review_activation')) {
 			$builder->orWhereNull('reviewed_at');
 		}
-		
+
 		return $builder;
 	}
-	
+
 	public function scopeArchived($builder)
 	{
 		return $builder->whereNotNull('archived_at');
 	}
-	
+
 	public function scopeUnarchived($builder)
 	{
 		return $builder->whereNull('archived_at');
 	}
-	
+
 	public function scopeReviewed($builder)
 	{
 		if (config('settings.single.listings_review_activation')) {
@@ -431,7 +431,7 @@ class Post extends BaseModel implements Feedable
 			return $builder;
 		}
 	}
-	
+
 	public function scopeUnreviewed($builder)
 	{
 		if (config('settings.single.listings_review_activation')) {
@@ -440,7 +440,7 @@ class Post extends BaseModel implements Feedable
 			return $builder;
 		}
 	}
-	
+
 	public function scopeWithCountryFix($builder)
 	{
 		// Check the Domain Mapping Plugin
@@ -450,7 +450,7 @@ class Post extends BaseModel implements Feedable
 			return $builder;
 		}
 	}
-	
+
 	/*
 	|--------------------------------------------------------------------------
 	| ACCESSORS | MUTATORS
@@ -462,24 +462,24 @@ class Post extends BaseModel implements Feedable
 			get: function ($value) {
 				$value = new Carbon($value);
 				$value->timezone(Date::getAppTimeZone());
-				
+
 				return $value;
 			},
 		);
 	}
-	
+
 	protected function updatedAt(): Attribute
 	{
 		return Attribute::make(
 			get: function ($value) {
 				$value = new Carbon($value);
 				$value->timezone(Date::getAppTimeZone());
-				
+
 				return $value;
 			},
 		);
 	}
-	
+
 	protected function deletedAt(): Attribute
 	{
 		return Attribute::make(
@@ -487,15 +487,15 @@ class Post extends BaseModel implements Feedable
 				if (empty($value)) {
 					return null;
 				}
-				
+
 				$value = new Carbon($value);
 				$value->timezone(Date::getAppTimeZone());
-				
+
 				return $value;
 			},
 		);
 	}
-	
+
 	protected function createdAtFormatted(): Attribute
 	{
 		return Attribute::make(
@@ -504,15 +504,15 @@ class Post extends BaseModel implements Feedable
 				if (empty($createdAt)) {
 					return null;
 				}
-				
+
 				$value = new Carbon($createdAt);
 				$value->timezone(Date::getAppTimeZone());
-				
+
 				return Date::formatFormNow($value);
 			},
 		);
 	}
-	
+
 	/*
 	protected function archivedAt(): Attribute
 	{
@@ -521,16 +521,16 @@ class Post extends BaseModel implements Feedable
 				if (empty($value)) {
 					return null;
 				}
-				
+
 				$value = new Carbon($value);
 				$value->timezone(Date::getAppTimeZone());
-				
+
 				return $value;
 			},
 		);
 	}
 	*/
-	
+
 	protected function deletionMailSentAt(): Attribute
 	{
 		return Attribute::make(
@@ -538,38 +538,38 @@ class Post extends BaseModel implements Feedable
 				if (empty($value)) {
 					return null;
 				}
-				
+
 				$value = new Carbon($value);
 				$value->timezone(Date::getAppTimeZone());
-				
+
 				return $value;
 			},
 		);
 	}
-	
+
 	protected function userPhotoUrl(): Attribute
 	{
 		return Attribute::make(
 			get: function ($value) {
 				// Default Photo
 				$defaultPhotoUrl = imgUrl(config('larapen.core.avatar.default'));
-				
+
 				// If the relation is not loaded through the Eloquent 'with()' method,
 				// then don't make additional query. So the default value is returned.
 				if (!$this->relationLoaded('user')) {
 					return $defaultPhotoUrl;
 				}
-				
+
 				// Photo from User's account
 				$userPhotoUrl = $this->user?->photo_url ?? null;
-				
+
 				return (!empty($userPhotoUrl) && $userPhotoUrl != $defaultPhotoUrl)
 					? $userPhotoUrl
 					: $defaultPhotoUrl;
 			},
 		);
 	}
-	
+
 	protected function email(): Attribute
 	{
 		return Attribute::make(
@@ -577,7 +577,7 @@ class Post extends BaseModel implements Feedable
 				if (!$this->relationLoaded('user')) {
 					return $value;
 				}
-				
+
 				if (isAdminPanel()) {
 					if (
 						isDemoDomain()
@@ -595,23 +595,23 @@ class Post extends BaseModel implements Feedable
 						}
 					}
 				}
-				
+
 				return $value;
 			},
 		);
 	}
-	
+
 	protected function phoneCountry(): Attribute
 	{
 		return Attribute::make(
 			get: function ($value) {
 				$countryCode = $this->country_code ?? config('country.code');
-				
+
 				return !empty($value) ? $value : $countryCode;
 			},
 		);
 	}
-	
+
 	protected function phone(): Attribute
 	{
 		return Attribute::make(
@@ -620,18 +620,18 @@ class Post extends BaseModel implements Feedable
 			},
 		);
 	}
-	
+
 	protected function phoneNational(): Attribute
 	{
 		return Attribute::make(
 			get: function ($value) {
 				$value = !empty($value) ? $value : $this->phone;
-				
+
 				return phoneNational($value, $this->phone_country);
 			},
 		);
 	}
-	
+
 	protected function phoneIntl(): Attribute
 	{
 		return Attribute::make(
@@ -639,16 +639,16 @@ class Post extends BaseModel implements Feedable
 				$value = (isset($this->phone_national) && !empty($this->phone_national))
 					? $this->phone_national
 					: $this->phone;
-				
+
 				if ($this->phone_country == config('country.code')) {
 					return phoneNational($value, $this->phone_country);
 				}
-				
+
 				return phoneIntl($value, $this->phone_country);
 			},
 		);
 	}
-	
+
 	protected function title(): Attribute
 	{
         if($this->category_id === 138 || $this->category_id === 139) {
@@ -673,16 +673,16 @@ class Post extends BaseModel implements Feedable
 
                     $customFields = CategoryField::getFields($this->category_id, $this->id)->all();
 
-                    if(isset($customFields[0], $customFields[1]->default_value) && !empty($customFields[1]->default_value) && is_string($customFields[1]->default_value))
-                        $value = $customFields[1]->default_value . ' ';
-                    if(isset($customFields[1], $customFields[2]->default_value) && !empty($customFields[2]->default_value) && is_string($customFields[2]->default_value))
-                        $value .= $customFields[2]->default_value;
-                    if(isset($customFields[8], $customFields[8]->default_value) && !empty($customFields[8]->default_value) && is_string($customFields[8]->default_value)) {
-                        $filed = FieldOption::where('id', $customFields[8]->default_value)->select('value')->first()->value;
+                    if(isset($customFields[3], $customFields[3]->default_value) && !empty($customFields[3]->default_value) && is_string($customFields[3]->default_value))
+                        $value = $customFields[3]->default_value . ' ';
+                    if(isset($customFields[4], $customFields[4]->default_value) && !empty($customFields[4]->default_value) && is_string($customFields[4]->default_value))
+                        $value .= $customFields[4]->default_value;
+                    if(isset($customFields[10], $customFields[10]->default_value) && !empty($customFields[10]->default_value) && is_string($customFields[10]->default_value)) {
+                        $filed = FieldOption::where('id', $customFields[10]->default_value)->select('value')->first()->value;
                         $value .= ' '. $filed . ' л.';
                     }
-                    if(isset($customFields[13], $customFields[13]->default_value) && !empty($customFields[13]->default_value) && is_string($customFields[13]->default_value))
-                        $value .= ' '. $customFields[13]->default_value . ' г.';
+                    if(isset($customFields[29], $customFields[29]->default_value) && !empty($customFields[29]->default_value) && is_string($customFields[29]->default_value))
+                        $value .= ' '. $customFields[29]->default_value . ' г.';
 
                     return $value;
                 },
@@ -712,18 +712,18 @@ class Post extends BaseModel implements Feedable
             );
         }
 	}
-	
+
 	protected function slug(): Attribute
 	{
 		return Attribute::make(
 			get: function ($value) {
 				$value = (is_null($value) && isset($this->title)) ? $this->title : $value;
-				
+
 				$value = stripNonUtf($value);
 				$value = slugify($value);
 
                 $value = Translit::make($value);
-				
+
 				// To prevent 404 error when the slug starts by a banned slug/prefix,
 				// Add a tilde (~) as prefix to it.
 				$bannedSlugs = regexSimilarRoutesPrefixes();
@@ -733,7 +733,7 @@ class Post extends BaseModel implements Feedable
 						break;
 					}
 				}
-				
+
 				return $value;
 			},
 		);
@@ -755,25 +755,25 @@ class Post extends BaseModel implements Feedable
 				} else {
 					$path = '#';
 				}
-				
+
 				if (config('plugins.domainmapping.installed')) {
 					$url = dmUrl($this->country_code, $path);
 				} else {
 					$url = url($path);
 				}
-				
+
 				return $url;
 			},
 		);
 	}
-	
+
 	protected function contactName(): Attribute
 	{
 		return Attribute::make(
 			get: fn($value) => mb_ucwords($value),
 		);
 	}
-	
+
 	protected function description(): Attribute
 	{
 		return Attribute::make(
@@ -781,9 +781,9 @@ class Post extends BaseModel implements Feedable
 				if (isAdminPanel()) {
 					return $value;
 				}
-				
+
 				$cleanedValue = RemoveFromString::contactInfo($value, false, true);
-				
+
 				if (!$this->relationLoaded('user')) {
 					$value = $cleanedValue;
 				} else {
@@ -795,14 +795,14 @@ class Post extends BaseModel implements Feedable
 						$value = $cleanedValue;
 					}
 				}
-				
+
 				$apiValue = (isFromTheAppsWebEnvironment()) ? transformDescription($value) : str_strip(strip_tags($value));
-				
+
 				return isFromApi() ? $apiValue : $value;
 			},
 		);
 	}
-	
+
 	protected function tags(): Attribute
 	{
 		return Attribute::make(
@@ -811,28 +811,28 @@ class Post extends BaseModel implements Feedable
 				if (is_array($value)) {
 					$value = implode(',', $value);
 				}
-				
+
 				return (!empty($value)) ? mb_strtolower($value) : $value;
 			},
 		);
 	}
-	
+
 	protected function countryFlagUrl(): Attribute
 	{
 		return Attribute::make(
 			get: function ($value) {
 				$flagUrl = null;
-				
+
 				$flagPath = 'images/flags/16/' . strtolower($this->country_code) . '.png';
 				if (file_exists(public_path($flagPath))) {
 					$flagUrl = url($flagPath);
 				}
-				
+
 				return $flagUrl;
 			},
 		);
 	}
-	
+
 	protected function countPictures(): Attribute
 	{
 		return Attribute::make(
@@ -840,7 +840,7 @@ class Post extends BaseModel implements Feedable
 				if (!$this->relationLoaded('pictures')) {
 					return 0;
 				}
-				
+
 				try {
 					return $this->pictures->count();
 				} catch (\Throwable $e) {
@@ -849,7 +849,7 @@ class Post extends BaseModel implements Feedable
 			},
 		);
 	}
-	
+
 	protected function picture(): Attribute
 	{
 		return Attribute::make(
@@ -857,7 +857,7 @@ class Post extends BaseModel implements Feedable
 				if (!$this->relationLoaded('pictures')) {
 					return $this->getDefaultImg();
 				}
-				
+
 				try {
 					return $this->pictures->get(0)->filename;
 				} catch (\Throwable $e) {
@@ -866,81 +866,81 @@ class Post extends BaseModel implements Feedable
 			},
 		);
 	}
-	
+
 	protected function pictureUrl(): Attribute
 	{
 		return Attribute::make(
 			get: fn() => $this->getMainPictureUrl(),
 		);
 	}
-	
+
 	protected function pictureUrlSmall(): Attribute
 	{
 		return Attribute::make(
 			get: fn() => $this->getMainPictureUrl('small'),
 		);
 	}
-	
+
 	protected function pictureUrlMedium(): Attribute
 	{
 		return Attribute::make(
 			get: fn() => $this->getMainPictureUrl('medium'),
 		);
 	}
-	
+
 	protected function pictureUrlBig(): Attribute
 	{
 		return Attribute::make(
 			get: fn() => $this->getMainPictureUrl('big'),
 		);
 	}
-	
+
 	protected function priceLabel(): Attribute
 	{
 		return Attribute::make(
 			get: function ($value) {
 				$defaultLabel = t('price') . ':';
-				
+
 				if (!$this->relationLoaded('category')) {
 					return $defaultLabel;
 				}
-				
+
 				$categoryType = $this->category?->type;
-				
+
 				$isJob = (in_array($categoryType, ['job-offer', 'job-search']));
 				$isRent = ($categoryType == 'rent');
 				$isNotSalable = ($categoryType == 'not-salable');
-				
+
 				$result = match (true) {
 					$isJob => t('Salary') . ':',
 					$isRent => t('Rent') . ':',
 					$isNotSalable => null,
 					default => $defaultLabel,
 				};
-				
+
 				return (string)$result;
 			},
 		);
 	}
-	
+
 	protected function priceFormatted(): Attribute
 	{
 		return Attribute::make(
 			get: function ($value) {
 				$defaultValue = t('Contact us');
-				
+
 				// Relation with Category
 				if (!$this->relationLoaded('category')) {
 					return $defaultValue;
 				}
-				
+
 				$categoryType = $this->category?->type;
 				$price = $this?->price;
-				
+
 				$isNotSalable = ($categoryType == 'not-salable');
 				$isNotFree = (is_numeric($price) && $price > 0);
 				$isFree = (is_numeric($price) && $price == 0);
-				
+
 				// Relation with Currency
 				$currency = [];
 				if ($this->relationLoaded('currency')) {
@@ -948,7 +948,7 @@ class Post extends BaseModel implements Feedable
 						$currency = $this->currency->toArray();
 					}
 				}
-				
+
 				$result = match (true) {
 					$isNotSalable => null,
 					default => match (true) {
@@ -957,12 +957,12 @@ class Post extends BaseModel implements Feedable
 						default => $defaultValue,
 					},
 				};
-				
+
 				return (string)$result;
 			},
 		);
 	}
-	
+
 	protected function negotiable(): Attribute
 	{
 		return Attribute::make(
@@ -970,15 +970,15 @@ class Post extends BaseModel implements Feedable
 				if (!$this->relationLoaded('category')) {
 					return 0;
 				}
-				
+
 				$categoryType = $this->category?->type;
 				$isNotSalable = ($categoryType == 'not-salable');
-				
+
 				return $isNotSalable ? 0 : $value;
 			},
 		);
 	}
-	
+
 	/*
 	|--------------------------------------------------------------------------
 	| OTHER PRIVATE METHODS
@@ -989,24 +989,24 @@ class Post extends BaseModel implements Feedable
 		if (!$this->relationLoaded('pictures')) {
 			return $this->getDefaultImgUrl();
 		}
-		
+
 		try {
 			$size = !empty($size) ? '_' . $size : '';
 			$pictureUrl = $this->pictures->get(0)->{'filename_url' . $size};
-			
+
 			return is_string($pictureUrl) ? $pictureUrl : null;
 		} catch (\Throwable $e) {
 			return $this->getDefaultImgUrl();
 		}
 	}
-	
+
 	private function getDefaultImg(): ?string
 	{
 		$defaultImg = config('larapen.core.picture.default');
-		
+
 		return (is_string($defaultImg)) ? $defaultImg : null;
 	}
-	
+
 	private function getDefaultImgUrl(): string
 	{
 		return imgUrl($this->getDefaultImg());
