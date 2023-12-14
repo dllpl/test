@@ -59,7 +59,7 @@
                                 <div class="position-absolute badge__available--accent" style=""><p>в наличии</p></div>
                             @endif
                             @if((time() - strtotime($post['created_at']) <= $hour_to_public * 60 * 60))
-                                <span class="position-absolute badge__available--heart" style="bottom:5%">Осталось {{$time_lost}}</span>
+                                <span class="position-absolute badge__available--heart">Осталось {{$time_lost}}</span>
                             @endif
 
                         </a>
