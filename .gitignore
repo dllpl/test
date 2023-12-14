@@ -3,10 +3,9 @@
 /node_modules
 .idea
 .vscode
-/public/css/*
+/public/css/admin.css
 !/public/css/custom.css
 /public/js/app.js
-/public/css/app.css
 /public/storage
 /public/mix-manifest.json
 /dump.zip
