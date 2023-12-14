@@ -673,10 +673,10 @@ class Post extends BaseModel implements Feedable
 
                     $customFields = CategoryField::getFields($this->category_id, $this->id)->all();
 
-                    if(isset($customFields[3], $customFields[3]->default_value) && !empty($customFields[3]->default_value) && is_string($customFields[3]->default_value))
-                        $value = $customFields[3]->default_value . ' ';
                     if(isset($customFields[4], $customFields[4]->default_value) && !empty($customFields[4]->default_value) && is_string($customFields[4]->default_value))
-                        $value .= $customFields[4]->default_value;
+                        $value = $customFields[4]->default_value . ' ';
+                    if(isset($customFields[3], $customFields[3]->default_value) && !empty($customFields[3]->default_value) && is_string($customFields[3]->default_value))
+                        $value .= $customFields[3]->default_value;
                     if(isset($customFields[10], $customFields[10]->default_value) && !empty($customFields[10]->default_value) && is_string($customFields[10]->default_value)) {
                         $filed = FieldOption::where('id', $customFields[10]->default_value)->select('value')->first()->value;
                         $value .= ' '. $filed . ' л.';
