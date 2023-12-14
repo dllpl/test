@@ -53,7 +53,7 @@
                 <li class="preview">
                     <div class="preview__img-wrapp">
                         <a href="{{ \App\Helpers\UrlGen::post($post) }}" class="position-relative">
-                            {!! imgTag(data_get($post, 'picture.filename'), 'medium', ['class' => 'preview__img img img--preview', 'alt' => data_get($post, 'title')]) !!}
+                            {!! imgTag(data_get($post, 'picture.filename'), 'medium', ['class' => 'lazyload thumbnail preview__img img img--preview', 'alt' => data_get($post, 'title')]) !!}
                             {{-- Плашка в наличии --}}
                             @if($post['available_field'] && $post['available_field']->value == 177)
                                 <div class="position-absolute badge__available--accent" style=""><p>в наличии</p></div>
