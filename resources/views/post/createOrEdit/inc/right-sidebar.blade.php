@@ -59,12 +59,12 @@
 		@endif
 	@endif
 
-	<div class="card sidebar-card" style=" border-color:#79b285 ">
+	<div class="card sidebar-card" style=" border-color: var(--accent) ">
 		<div class="card-header text-white uppercase" style="background-color: var(--accent); border-color:var(--accent) ">
 			<strong>{{ t('how_to_sell_quickly') }}</strong>
 		</div>
 		<div class="card-content">
-			<div class="card-body text-start">
+			<div class="card-body text-start" style="">
 				<ul class="list-check">
 					<li> {{ t('sell_quickly_advice_1') }} </li>
 					<li> {{ t('sell_quickly_advice_2') }}</li>
