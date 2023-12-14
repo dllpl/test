@@ -855,6 +855,7 @@ p {
     background-color: var(--main-dark);
     padding: 20px;
     z-index: 999;
+    margin-bottom: 20px;
 }
 @media (max-width: 1024px) {
     .menu-nav {

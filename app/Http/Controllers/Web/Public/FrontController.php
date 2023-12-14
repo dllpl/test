@@ -27,10 +27,10 @@ use App\Models\Permission;
 class FrontController extends Controller
 {
 	use SettingsTrait, EnvFileTrait, RobotsTxtTrait, CommonTrait;
-	
+
 	public $request;
 	public $data = [];
-	
+
 	/**
 	 * FrontController constructor.
 	 */
@@ -38,43 +38,43 @@ class FrontController extends Controller
 	{
 		// Set the storage disk
 		$this->setStorageDisk();
-		
+
 		// Check & Change the App Key (If needed)
 		$this->checkAndGenerateAppKey();
-		
+
 		// Load the Plugins
 		$this->loadPlugins();
-		
+
 		// Check & Update the '/.env' file
 		$this->checkDotEnvEntries();
-		
+
 		// Check & Update the '/public/robots.txt' file
 		$this->checkRobotsTxtFile();
-		
+
 		// From Laravel 5.3.4+ (for sessions usage in Controllers)
 		$this->middleware(function ($request, $next) {
 			// Load Localization Data first
 			// Check out the SetCountryLocale Middleware
 			$this->applyFrontSettings();
-			
+
 			// Get & Share Users Menu
 			$userMenu = $this->getUserMenu();
 			view()->share('userMenu', $userMenu);
-			
+
 			return $next($request);
 		});
-		
+
 		// Check the 'Currency Exchange' plugin
 		if (config('plugins.currencyexchange.installed')) {
 			$this->middleware(['currencies', 'currencyExchange']);
 		}
-		
+
 		// Check the 'Domain Mapping' plugin
 		if (config('plugins.domainmapping.installed')) {
 			$this->middleware(['domain.verification']);
 		}
 	}
-	
+
 	/*
 	 * Handle HTTP error for GET requests
 	 */
@@ -82,19 +82,19 @@ class FrontController extends Controller
 	{
 		// Parsing the API response
 		$message = !empty(data_get($data, 'message')) ? data_get($data, 'message') : null;
-		
+
 		// HTTP Error Found
 		if (!data_get($data, 'isSuccessful')) {
 			$message = !empty($message) ? $message : 'Unknown Error.';
 			$errorCode = (int)data_get($data, 'status');
 			$errorCode = (strlen($errorCode) == 3) ? $errorCode : 400;
-			
+
 			abort($errorCode, $message);
 		}
-		
+
 		return $message;
 	}
-	
+
 	/*
 	 * Handle HTTP error for non GET requests
 	 * @todo: Check the redirect can be done externally
@@ -103,21 +103,21 @@ class FrontController extends Controller
 	{
 		// Parsing the API response
 		$message = !empty(data_get($data, 'message')) ? data_get($data, 'message') : 'Unknown Error.';
-		
+
 		// HTTP Error Found
 		if (!data_get($data, 'isSuccessful')) {
 			flash($message)->error();
-			
+
 			if (!empty($withInput)) {
 				return redirect()->back()->withInput($withInput);
 			} else {
 				return redirect()->back();
 			}
 		}
-		
+
 		return $message;
 	}
-	
+
 	/**
 	 * @return \Illuminate\Support\Collection
 	 */
@@ -126,7 +126,7 @@ class FrontController extends Controller
 		if (!auth()->check()) {
 			return collect();
 		}
-		
+
 		$menuArray = [
 			[
 				'name'       => t('my_listings'),
@@ -201,17 +201,17 @@ class FrontController extends Controller
 				'inDropdown' => true,
 				'isActive'   => (request()->segment(1) == 'account' && request()->segment(2) == null),
 			],
-//            [
-//                'name'       => 'Сертификация',
-//                'url'        => route('user.cert.index'),
-//                'icon'       => 'fa fa-spinner',
-//                'group'      => t('My Account'),
-//                'countVar'   => null,
-//                'inDropdown' => true,
-//                'isActive'   => (request()->segment(2) == 'cert'),
-//            ],
+            [
+                'name'       => 'Сертификация',
+                'url'        => route('user.cert.index'),
+                'icon'       => 'fa fa-spinner',
+                'group'      => t('My Account'),
+                'countVar'   => null,
+                'inDropdown' => true,
+                'isActive'   => (request()->segment(2) == 'cert'),
+            ],
 		];
-		
+
 		if (app('impersonate')->isImpersonating()) {
 			$logOut = [
 				'name'       => t('Leave'),
@@ -233,7 +233,7 @@ class FrontController extends Controller
 				'isActive'   => false,
 			];
 		}
-		
+
 		$closeAccount = [
 			'name'       => t('Close account'),
 			'url'        => url('account/close'),
@@ -243,7 +243,7 @@ class FrontController extends Controller
 			'inDropdown' => false,
 			'isActive'   => (request()->segment(2) == 'close'),
 		];
-		
+
 		if (auth()->user()->can(Permission::getStaffPermissions())) {
 			$adminPanel = [
 				'name'       => t('admin_panel'),
@@ -255,24 +255,24 @@ class FrontController extends Controller
 				'isActive'   => false,
 			];
 		}
-		
+
 		if (isset($adminPanel) && !empty($adminPanel)) {
 			array_push($menuArray, $logOut, $closeAccount, $adminPanel);
 		} else {
 			array_push($menuArray, $logOut, $closeAccount);
 		}
-		
+
 		// Set missed information
 		return collect($menuArray)->map(function ($item, $key) {
 			// countCustomClass
 			$item['countCustomClass'] = (isset($item['countCustomClass'])) ? $item['countCustomClass'] : '';
-			
+
 			// path
 			$tmp = [];
 			preg_match('|(account.*)|ui', $item['url'], $tmp);
 			$item['path'] = (isset($tmp[1])) ? $tmp[1] : '-1';
 			$item['path'] = str_replace(['account', '/'], '', $item['path']);
-			
+
 			return $item;
 		});
 	}

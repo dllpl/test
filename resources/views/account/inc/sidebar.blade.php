@@ -33,9 +33,9 @@
 				</li>
 			@endforeach
 		@endif
-		<a class="link link--accent mt-5" href="{{route('user.cert.index')}}" style="padding: 10px 32px;">
-			Сертификация
-		</a>
+{{--		<a class="link link--accent mt-5" href="{{route('user.cert.index')}}" style="padding: 10px 32px;">--}}
+{{--			Сертификация--}}
+{{--		</a>--}}
 	</div>
 </div>
 
