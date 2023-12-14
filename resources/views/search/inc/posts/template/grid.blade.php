@@ -22,6 +22,7 @@
         /** Берем поле наличия для каждого **/
         $posts[$key]['available_field'] = \DB::table('post_values')->where('post_id', $posts[$key]['id'])->where('field_id', 28)->first();
     }
+
 @endphp
 @if (!empty($posts) && $totalPosts > 0)
     <ul class="grid grid--coll-3 list-reset">
@@ -62,6 +63,55 @@
                                 <span class="position-absolute badge__available--heart" style="bottom:5%">До публикации {{$time_lost}}</span>
                             @endif
 
+                        </a>
+                    </div>
+                    <h4 class="preview__title title title--large title--accent">
+                        <a href="{{ \App\Helpers\UrlGen::post($post) }}">{{ str(data_get($post, 'title'))->limit(70) }}</a>
+                    </h4>
+                    <span class="preview__price price">{!! data_get($post, 'price_formatted') !!}</span>
+                    <div class="preview__wrapp">
+                        <div class="preview__geo">
+							<span class="preview__city">
+								<a href="{!! \App\Helpers\UrlGen::city(data_get($post, 'city'), null, $cat ?? null) !!}"
+                                   class="info-link">
+									{{ data_get($post, 'city.name') }}
+								</a>
+							</span>
+                            @if (!config('settings.list.hide_dates'))
+                                <span class="preview__time">{!! data_get($post, 'created_at_formatted') !!}</span>
+                            @endif
+                        </div>
+                        @if (!empty(data_get($post, 'savedByLoggedUser')))
+                            <a class="preview__btn btn-reset make-favorite" id="{{ data_get($post, 'id') }}"
+                               title="{{ t('Saved') }}">
+                                <svg class="preview__like">
+                                    <path
+                                            d="M13.1961 24.5476L13.1946 24.5462C9.40345 21.1084 6.33722 18.3222 4.20709 15.7161C2.08795 13.1235 1.00003 10.8316 1.00003 8.3995C1.00003 4.42718 4.0956 1.34387 8.05566 1.34387C10.3019 1.34387 12.4743 2.39471 13.8878 4.04165L14.6466 4.9258L15.4055 4.04165C16.819 2.39471 18.9914 1.34387 21.2376 1.34387C25.1977 1.34387 28.2932 4.42718 28.2932 8.3995C28.2932 10.8316 27.2053 13.1235 25.0862 15.7161C22.956 18.3222 19.8898 21.1084 16.0986 24.5462L16.0972 24.5476L14.6466 25.8681L13.1961 24.5476Z"
+                                            fill="#FF4848" stroke="#FF4848" stroke-width="2"/>
+                                </svg>
+                            </a>
+                        @else
+                            <a class="preview__btn btn-reset make-favorite" id="{{ data_get($post, 'id') }}"
+                               title="{{ t('Save') }}">
+                                <svg class="preview__like">
+                                    <path
+                                            d="M13.1961 24.5476L13.1946 24.5462C9.40345 21.1084 6.33722 18.3222 4.20709 15.7161C2.08795 13.1235 1.00003 10.8316 1.00003 8.3995C1.00003 4.42718 4.0956 1.34387 8.05566 1.34387C10.3019 1.34387 12.4743 2.39471 13.8878 4.04165L14.6466 4.9258L15.4055 4.04165C16.819 2.39471 18.9914 1.34387 21.2376 1.34387C25.1977 1.34387 28.2932 4.42718 28.2932 8.3995C28.2932 10.8316 27.2053 13.1235 25.0862 15.7161C22.956 18.3222 19.8898 21.1084 16.0986 24.5462L16.0972 24.5476L14.6466 25.8681L13.1961 24.5476Z"
+                                            stroke="#FF4848" stroke-width="2"/>
+                                </svg>
+                            </a>
+                        @endif
+                    </div>
+                </li>
+
+            @else
+                <li class="preview">
+                    <div class="preview__img-wrapp">
+                        <a href="{{ \App\Helpers\UrlGen::post($post) }}" class="position-relative">
+                            {!! imgTag(data_get($post, 'picture.filename'), 'medium', ['class' => 'preview__img img img--preview', 'alt' => data_get($post, 'title')]) !!}
+                            {{-- Плашка в наличии --}}
+                            @if($post['available_field'] && $post['available_field']->value == 177)
+                                <div class="position-absolute badge__available--accent" style=""><p>в наличии</p></div>
+                            @endif
                         </a>
                     </div>
                     <h4 class="preview__title title title--large title--accent">
