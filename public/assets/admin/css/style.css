@@ -5036,7 +5036,7 @@ textarea.form-control-lg {
 .page-link {
   position: relative;
   display: block;
-  color: #186dde;
+  color: var(--accent);
   text-decoration: none;
   background-color: #fff;
   border: 1px solid #dee2e6;

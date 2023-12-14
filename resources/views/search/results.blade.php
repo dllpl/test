@@ -86,7 +86,7 @@
 					<div class="catalog__products">
 						{{-- Nav tabs --}}
 						<button class="menu-nav__btn-open btn btn--form btn-reset">Открыть меню</button>
-						<div class="d-flex justify-content-between">
+						<div class="d-lg-flex justify-content-between d-sm-block mb-1">
 							<ul class="catalog__info list-reset" id="postType" role="tablist">
 								@php
 									$aClass = '';
