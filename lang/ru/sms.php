@@ -7,14 +7,14 @@ return [
     'post_activated_content' => ':appName
 Ваше объявление ":title" было активировано',
     'post_reviewed_content' => ':appName
-Ваш товар ":title" сейчас пупбликуется в сети',
+Ваш товар ":title" опубликован',
     'post_republished_content' => ':appName
 Ваше объявление ":title" успешно переопубликовано',
     'post_deleted_content' => ':appName
 Ваше объявление ":title" было удалено',
     'post_seller_contacted_content' => 'Новое сообщение в :appName. Перейдите в свой личный кабинет, чтобы прочитать его.',
     'user_deleted_content' => ':appName - Ваша учетная запись удалена.',
-    'user_activated_content' => 'Добро пожаловать :userName! Ваша учетная запись активирована.',
+    'user_activated_content' => 'Добро пожаловать, :userName! Ваша учетная запись активирована.',
     'reset_password_content' => 'Сброс пароля. Код сброса: :token. 
 Срок действия этого кода истекает через :expireTimeString минут.',
     'post_archived_content' => 'Ваше объявление ":title" заархивировано, и будет удалено в :dateDel.',
