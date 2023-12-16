@@ -184,11 +184,15 @@
 
             (function () {
                 const burger = document?.querySelector('[data-burger]');
+                const burger__icon = document?.querySelector('.burger__icon');
+                const mobile_icons_block = document?.querySelector('.mobile-icons-block')
                 const menu = document?.querySelector('[data-menu]');
                 const menuItems = document?.querySelectorAll('[data-menu-item]');
                 const overlay = document?.querySelector('[data-menu-overlay]');
                 burger?.addEventListener('click', e => {
                     burger?.classList.toggle('burger--active');
+                    burger__icon?.classList.toggle('arrow__icon')
+                    mobile_icons_block?.classList.toggle('v__hidden')
                     menu?.classList.toggle('menu--active');
                     if (menu?.classList.contains('menu--active')) {
                         burger?.setAttribute('aria-expanded', 'true');
@@ -687,3 +691,19 @@
     /******/ })()
 ;
 //# sourceMappingURL=main.js.map
+
+
+var acc = document.getElementsByClassName("accordion");
+var i;
+
+for (i = 0; i < acc.length; i++) {
+    acc[i].addEventListener("click", function() {
+        this.classList.toggle("active");
+        var panel = this.nextElementSibling;
+        if (panel.style.maxHeight) {
+            panel.style.maxHeight = null;
+        } else {
+            panel.style.maxHeight = panel.scrollHeight + "px";
+        }
+    });
+}

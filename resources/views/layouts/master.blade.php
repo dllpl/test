@@ -273,7 +273,7 @@
 
 <script src="{{ url('common/js/intl-tel-input/countries.js') . getPictureVersion() }}"></script>
 <script src="{{ url(mix('js/app.js')) }}"></script>
-<script src="{{ url('js/custom.js') }}"></script>
+
 @if (config('settings.optimization.lazy_loading_activation') == 1)
 	<script src="{{ url()->asset('assets/plugins/lazysizes/lazysizes.min.js') }}" async=""></script>
 @endif
@@ -319,6 +319,23 @@
 				openLoginModal();
 			@endif
 		@endif
+	});
+
+</script>
+<script src="{{ url('js/custom.js') }}"></script>
+
+<script>
+	$(function() {
+		let header = $('.header');
+		let mobile_icons_logo = $('.mobile-icons-logo img')
+		$(window).scroll(function() {
+			if($(this).scrollTop() > 50) {
+				console.log(1)
+				mobile_icons_logo.attr('src','/images/logo-2.svg');
+			} else {
+				mobile_icons_logo.attr('src','/images/logo-full.svg');
+			}
+		});
 	});
 </script>
 

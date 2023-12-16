@@ -31,13 +31,11 @@ if ($multiCountriesIsEnabled) {
 		</a>
 
 		<button class="burger btn-reset" aria-label="Открыть меню" aria-expanded="false" data-burger>
-		  <span class="burger__icon">
-			  <img src="/images/burger.svg" width="80%" alt="burger">
-		  </span>
+		  <span class="burger__icon"></span>
 		</button>
 
-		<a href="{{ url('/') }}" class="mobile-icons-block">
-			<img src="/images/logo-2.svg"
+		<a href="{{ url('/') }}" class="mobile-icons-logo">
+			<img src="/images/logo-full.svg"
 				 alt="logo-2" data-bs-placement="bottom"
 				 data-bs-toggle="tooltip" style="height: 22px"/>
 		</a>
@@ -57,8 +55,90 @@ if ($multiCountriesIsEnabled) {
 
 		<div class="header__menu menu" data-menu>
 			<ul class="list-reset header__list">
+				<li class="header__item header__accordion">
+					<div class="accordion">О системе Automost</div>
+					<div class="accordion__panel">
+						<ul>
+							<li>
+								<a href="/page/faq"> Часто задаваемые вопросы </a>
+							</li>
+							<li>
+								<a href="/page/anti-scam"> Анти-мошенничество </a>
+							</li>
+							<li>
+								<a href="/page/terms"> Правила использования </a>
+							</li>
+							<li>
+								<a href="/page/privacy"> Политика конфиденциальности </a>
+							</li>
+						</ul>
+					</div>
+
+					<div class="accordion">Информация</div>
+					<div class="accordion__panel">
+						<ul>
+							<li><a href="{{ \App\Helpers\UrlGen::contact() }}"> {{ t('Contact') }} </a></li>
+							<li><a href="{{ \App\Helpers\UrlGen::sitemap() }}"> {{ t('sitemap') }} </a></li>
+							@if (isset($countries) && $countries->count() > 1)
+								<li><a href="{{ \App\Helpers\UrlGen::countries() }}"> {{ t('countries') }} </a></li>
+							@endif
+						</ul>
+					</div>
+
+					<div class="accordion">Аккаунт</div>
+					<div class="accordion__panel">
+						@if (!auth()->check())
+							<ul>
+								@if (config('settings.security.login_open_in_modal'))
+									<li><a href="#quickLogin" class="link" data-bs-toggle="modal"><i class="fas fa-user"></i> {{ t('log_in') }}</a></li>
+								@else
+									<li><a href="{{ \App\Helpers\UrlGen::login() }}" class="link"><i class="fas fa-user"></i> {{ t('log_in') }}</a></li>
+								@endif
+									<li><a href="{{ \App\Helpers\UrlGen::register() }}" class="link"><i class="far fa-user"></i> {{ t('sign_up') }}</a></li>
+							</ul>
+						@else
+							<ul>
+								<li>
+									<a href="#">
+										<svg class="header__svg">
+											<use xlink:href="/images/sprite.svg#user"></use>
+										</svg>
+										<span>{{ auth()->user()->name }}</span>
+									</a>
+								</li>
+								@if (isset($userMenu) && !empty($userMenu))
+									@php
+										$menuGroup = '';
+                                        $dividerNeeded = false;
+									@endphp
+									@foreach($userMenu as $key => $value)
+										@continue(!$value['inDropdown'])
+										@php
+											if ($menuGroup != $value['group']) {
+                                                $menuGroup = $value['group'];
+                                                if (!empty($menuGroup) && !$loop->first) {
+                                                    $dividerNeeded = true;
+                                                }
+                                            } else {
+                                                $dividerNeeded = false;
+                                            }
+										@endphp
+										<li class="{{ (isset($value['isActive']) && $value['isActive']) ? ' active' : '' }}">
+											<a href="{{ $value['url'] }}">
+												<i class="{{ $value['icon'] }}"></i> {{ $value['name'] }}
+												@if (isset($value['countVar'], $value['countCustomClass']) && !empty($value['countVar']) && !empty($value['countCustomClass']))
+													<span class="badge badge-pill badge-important{{ $value['countCustomClass'] }}">0</span>
+												@endif
+											</a>
+										</li>
+									@endforeach
+								@endif
+							</ul>
+					@endif
+					</div>
+				</li>
 				@if (!auth()->check())
-					<li class="header__item dropdown no-arrow open-on-hover">
+					<li class="dropdown no-arrow open-on-hover hide__mobile">
 						<a href="#" class="link link--flex dropdown-toggle" data-bs-toggle="dropdown">
 							<svg class="header__svg">
 								<use xlink:href="/images/sprite.svg#user"></use>
@@ -78,18 +158,8 @@ if ($multiCountriesIsEnabled) {
 							</li>
 						</ul>
 					</li>
-{{--					<li class="header__item d-md-none d-sm-block d-block">--}}
-{{--						@if (config('settings.security.login_open_in_modal'))--}}
-{{--							<a href="#quickLogin" class="link" data-bs-toggle="modal"><i class="fas fa-user"></i> {{ t('log_in') }}</a>--}}
-{{--						@else--}}
-{{--							<a href="{{ \App\Helpers\UrlGen::login() }}" class="link"><i class="fas fa-user"></i> {{ t('log_in') }}</a>--}}
-{{--						@endif--}}
-{{--					</li>--}}
-{{--					<li class="header__item d-md-none d-sm-block d-block">--}}
-{{--						<a href="{{ \App\Helpers\UrlGen::register() }}" class="nav-link"><i class="far fa-user"></i> {{ t('sign_up') }}</a>--}}
-{{--					</li>--}}
 				@else
-					<li class="header__item">
+					<li class="header__item hide__mobile">
 						<a href="/account/posts/favourite" class="link">
 							<svg class="header__svg">
 								<use xlink:href="/images/sprite.svg#heart"></use>
@@ -97,7 +167,7 @@ if ($multiCountriesIsEnabled) {
 							<span class="header__content-adaptive">Избранное</span>
 						</a>
 					</li>
-					<li class="header__item">
+					<li class="header__item hide__mobile">
 						<a href="/account/saved-searches" class=" link">
 							<svg class="header__svg">
 								<use xlink:href="/images/sprite.svg#bell"></use>
@@ -105,7 +175,7 @@ if ($multiCountriesIsEnabled) {
 							<span class="header__content-adaptive">Уведомления</span>
 						</a>
 					</li>
-					<li class="header__item">
+					<li class="header__item hide__mobile">
 						<a href="/account/messages" class="link">
 							<svg class="header__svg">
 								<use xlink:href="/images/sprite.svg#chat"></use>
@@ -115,7 +185,7 @@ if ($multiCountriesIsEnabled) {
 						<span class="badge badge-pill link--accent count-threads-with-new-messages d-lg-inline-block d-md-none">0</span>
 					</li>
 
-					<li class="header__item dropdown no-arrow open-on-hover">
+					<li class="header__item dropdown no-arrow open-on-hover hide__mobile">
 						<a href="#" class="dropdown-toggle link" data-bs-toggle="dropdown">
 							<svg class="header__svg">
 								<use xlink:href="/images/sprite.svg#user"></use>
@@ -168,6 +238,34 @@ if ($multiCountriesIsEnabled) {
 						</a>
 					</li>
 				@endif
+
+				<li class="header__item header__accordion">
+					<span style="font-size: 16px; font-weight: 500; padding: 10px 0">Контакты</span>
+					<ul>
+						<li>
+							<a href="#" class="link link--flex">
+								<svg class="header__svg">
+									<use xlink:href="/images/sprite.svg#phone"></use>
+								</svg>
+								<div class="footer__info-wrapp">
+									<span class="footer__info">8 800 500-05-15 </span>
+									<span class="footer__info">Бесплатно по России</span>
+								</div>
+							</a>
+						</li>
+						<li>
+							<a href="#" class="link link--flex">
+								<svg class="header__svg">
+									<use xlink:href="/images/sprite.svg#mail"></use>
+								</svg>
+								<div class="footer__info-wrapp">
+									<span class="footer__info">info@barsovoz.ru </span>
+									<span class="footer__info">Служба поддержки</span>
+								</div>
+							</a>
+						</li>
+					</ul>
+				</li>
 
 				<?php
 				$addListingUrl = \App\Helpers\UrlGen::addPost();
