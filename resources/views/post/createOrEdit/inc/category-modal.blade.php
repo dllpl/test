@@ -17,7 +17,7 @@
 				
 				<button type="button" class="close" data-bs-dismiss="modal">
 					<span aria-hidden="true">&times;</span>
-					<span class="sr-only">{{ t('Close') }}</span>
+{{--					<span class="sr-only">{{ t('Close') }}</span>--}}
 				</button>
 			</div>
 			

@@ -23,7 +23,7 @@ if ($multiCountriesIsEnabled) {
 
 <header class="header">
 	<div class="header__container container-fluid">
-		<a href="{{ url('/') }}">
+		<a href="{{ url('/') }}" class="main-logo">
 			<img src="{{ config('settings.app.logo_url') }}"
 				 alt="{{ strtolower(config('settings.app.name')) }}" class="main-logo" data-bs-placement="bottom"
 				 data-bs-toggle="tooltip"
@@ -32,11 +32,28 @@ if ($multiCountriesIsEnabled) {
 
 		<button class="burger btn-reset" aria-label="Открыть меню" aria-expanded="false" data-burger>
 		  <span class="burger__icon">
-			<span class="line"></span>
-			<span class="line"></span>
-			<span class="line"></span>
+			  <img src="/images/burger.svg" width="80%" alt="burger">
 		  </span>
 		</button>
+
+		<a href="{{ url('/') }}" class="mobile-icons-block">
+			<img src="/images/logo-2.svg"
+				 alt="logo-2" data-bs-placement="bottom"
+				 data-bs-toggle="tooltip" style="height: 22px"/>
+		</a>
+
+		<div class="mobile-icons-block align-items-baseline">
+			<a href="/account/posts/favourite" class="link">
+				<svg class="header__svg">
+					<use xlink:href="/images/sprite.svg#heart--old"></use>
+				</svg>
+			</a>
+			<a href="#browseLocations" data-bs-toggle="modal" data-admin-code="0" data-city-id="0">
+				<svg class="icon icon--geo">
+					<use xlink:href="images/sprite.svg#geo--old"></use>
+				</svg>
+			</a>
+		</div>
 
 		<div class="header__menu menu" data-menu>
 			<ul class="list-reset header__list">

@@ -51,7 +51,7 @@
 	@endif
 	
 	@if (!empty($categories))
-		<div class="col-xl-12 content-box layout-section">
+		<div class="col-xl-12">
 			<div class="row row-featured row-featured-category">
 				@if ($catDisplayType == 'c_picture_list')
 					
@@ -61,17 +61,18 @@
 							$_parentId = data_get($cat, 'parent.id', 0);
 							$_hasLink = (data_get($cat, 'id') != $catId || $_hasChildren == 1);
 						@endphp
-						<div class="col-lg-2 col-md-3 col-sm-4 col-6 f-category">
+						<div class="col-lg-2 col-md-3 col-sm-4 col-6">
 							@if ($_hasLink)
-								<a href="#" class="cat-link"
+								<a href="#" class="cat-link d-flex flex-column align-items-center justify-content-around h-100"
 								   data-id="{{ data_get($cat, 'id') }}"
 								   data-parent-id="{{ $_parentId }}"
 								   data-has-children="{{ $_hasChildren }}"
 								   data-type="{{ data_get($cat, 'type') }}"
+								   style="background-color: #FBFBFB"
 								>
 							@endif
-								<img src="{{ data_get($cat, 'picture_url') }}" class="lazyload img-fluid" alt="{{ data_get($cat, 'name') }}">
-								<h6 class="{{ !$_hasLink ? 'text-secondary' : '' }}">
+								<img src="{{ data_get($cat, 'picture_url') }}" class="lazyload img-fluid h-75" alt="{{ data_get($cat, 'name') }}" style="object-fit: contain; background: linear-gradient(to right, #1A1449, #E94B5A); padding: 5px; width: 100%">
+								<h6 class="{{ !$_hasLink ? 'text-secondary' : '' }}" style="font-weight: bold; color: var(--accent)">
 									{{ data_get($cat, 'name') }}
 								</h6>
 							@if ($_hasLink)
