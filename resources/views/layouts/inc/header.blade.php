@@ -30,7 +30,7 @@ if ($multiCountriesIsEnabled) {
 				 title="{!! $logoLabel !!}" style="height: 22px"/>
 		</a>
 
-		<button class="burger btn-reset" aria-label="Открыть меню" aria-expanded="false" data-burger>
+		<button class="burger btn-reset" aria-label="Открыть меню" aria-expanded="false" data-burger style="width: 62px">
 		  <span class="burger__icon"></span>
 		</button>
 

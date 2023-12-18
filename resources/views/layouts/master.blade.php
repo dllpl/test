@@ -325,18 +325,33 @@
 <script src="{{ url('js/custom.js') }}"></script>
 
 <script>
+
+	/** Смена лого при скролле */
 	$(function() {
-		let header = $('.header');
 		let mobile_icons_logo = $('.mobile-icons-logo img')
 		$(window).scroll(function() {
 			if($(this).scrollTop() > 50) {
-				console.log(1)
 				mobile_icons_logo.attr('src','/images/logo-2.svg');
 			} else {
 				mobile_icons_logo.attr('src','/images/logo-full.svg');
 			}
 		});
 	});
+
+	/** Аккордеон для хедера */
+	var acc = document.getElementsByClassName("accordion");
+	var i;
+	for (i = 0; i < acc.length; i++) {
+		acc[i].addEventListener("click", function() {
+			this.classList.toggle("active");
+			var panel = this.nextElementSibling;
+			if (panel.style.maxHeight) {
+				panel.style.maxHeight = null;
+			} else {
+				panel.style.maxHeight = panel.scrollHeight + "px";
+			}
+		});
+	}
 </script>
 
 @stack('after_scripts_stack')
