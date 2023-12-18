@@ -37,7 +37,7 @@ if ($multiCountriesIsEnabled) {
 		<a href="{{ url('/') }}" class="mobile-icons-logo">
 			<img src="/images/logo-full.svg"
 				 alt="logo-2" data-bs-placement="bottom"
-				 data-bs-toggle="tooltip" style="height: 22px"/>
+				 data-bs-toggle="tooltip" style="height: 18px"/>
 		</a>
 
 		<div class="mobile-icons-block align-items-baseline">
