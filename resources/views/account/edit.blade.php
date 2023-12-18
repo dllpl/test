@@ -42,7 +42,7 @@
 
 			<a class="search__city link link--flex" href="#browseLocations" data-bs-toggle="modal" data-admin-code="0" data-city-id="0">
 				<svg class="icon icon--geo">
-					<use xlink:href="images/sprite.svg#geo"></use>
+					<use xlink:href="/images/sprite.svg#geo"></use>
 				</svg>
 				<span>{{ session()->has('location') ? session()->get('location') : 'Выберите свой город' }}</span>
 			</a>

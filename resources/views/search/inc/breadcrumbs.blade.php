@@ -20,7 +20,7 @@
 		<ol class="breadcrumb"><i class=""></i>
 			<li class="breadcrumb-item"><a href="{{ url('/') }}">
 					<svg class="icon icon--geo">
-						<use xlink:href="images/sprite.svg#geo"></use>
+						<use xlink:href="/images/sprite.svg#geo"></use>
 					</svg></a></li>
 			<li class="breadcrumb-item">
 				<a href="{{ $searchWithoutQuery }}">
