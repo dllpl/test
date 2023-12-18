@@ -48,7 +48,7 @@ if ($multiCountriesIsEnabled) {
 			</a>
 			<a href="#browseLocations" data-bs-toggle="modal" data-admin-code="0" data-city-id="0">
 				<svg class="icon icon--geo">
-					<use xlink:href="images/sprite.svg#geo--old"></use>
+					<use xlink:href="/images/sprite.svg#geo--old"></use>
 				</svg>
 			</a>
 		</div>
