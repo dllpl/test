@@ -146,13 +146,13 @@
 														{{ t('Edit') }}
 													</a>
 												@endif
-												@if ($pagePath == 'list' && isVerifiedPost($post) && empty(data_get($post, 'archived_at')))
-													<a class="lk-product__link link link--accent"
-													   href="{{ url('account/posts/'.$pagePath.'/'.data_get($post, 'id').'/offline') }}"
-													>
-														В архив
-													</a>
-												@endif
+{{--												@if ($pagePath == 'list' && isVerifiedPost($post) && empty(data_get($post, 'archived_at')))--}}
+{{--													<a class="lk-product__link link link--accent"--}}
+{{--													   href="{{ url('account/posts/'.$pagePath.'/'.data_get($post, 'id').'/offline') }}"--}}
+{{--													>--}}
+{{--														В архив--}}
+{{--													</a>--}}
+{{--												@endif--}}
 												@if ($pagePath == 'archived' && data_get($post, 'user_id') == $user->id && !empty(data_get($post, 'archived_at')))
 													<a class="lk-product__link link link--accent"
 													   href="{{ url('account/posts/' . $pagePath . '/' . data_get($post, 'id') . '/repost') }}"
@@ -160,12 +160,10 @@
 														Опубликовать снова
 													</a>
 												@endif
-												<a class="link"
+												<a class="lk-product__link link link--accent"
 												   href="{{ url('account/posts/' . $pagePath . '/' . data_get($post, 'id') . '/delete') }}"
 												>
-													<svg class="icon icon--trash">
-														<use xlink:href="/images/sprite.svg#trash"></use>
-													</svg>
+													Удалить
 												</a>
 											</div>
 										</div>
