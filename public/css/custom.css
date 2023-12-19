@@ -1515,9 +1515,9 @@ p {
     height: 150px;
     background: linear-gradient(to right, #1A1449, #E94B5A);
 }
-@media (max-width: 576px) {
+@media (max-width: 768px) {
     .catalog-promo__img-wrapp {
-        height: 65px;
+        height: 100px;
     }
 }
 .catalog-promo__img {
