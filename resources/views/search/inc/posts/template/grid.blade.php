@@ -46,7 +46,7 @@
                         $d1 = new DateTime($date_to_public);
                         $d2 = new DateTime();
                         $interval= $d1->diff($d2);
-                        $time_lost = $interval->h . ' ч. ' . $interval->i . ' мин. ';
+                        $time_lost = $interval->h . ' ч.' . $interval->i . ' мин.';
                     }
 
                 @endphp
@@ -58,9 +58,12 @@
                             @if($post['available_field'] && $post['available_field']->value == 177)
                                 <div class="position-absolute badge__available--accent" style=""><p>в наличии</p></div>
                             @endif
-                            @if((time() - strtotime($post['created_at']) <= $hour_to_public * 60 * 60))
-                                <span class="position-absolute badge__available--heart" style="bottom:0%">Осталось {{$time_lost}}</span>
-                            @endif
+{{--                            @if((time() - strtotime($post['created_at']) <= $hour_to_public * 60 * 60))--}}
+{{--                                <span class="position-absolute badge__available--heart" style="bottom:0%">Осталось {{$time_lost}}</span>--}}
+{{--                            @endif--}}
+{{--                            @if((time() - strtotime($post['created_at']) <= $hour_to_public * 60 * 60))--}}
+                                <span class="position-absolute badge__available--heart" style="bottom:0%">Осталось 12 ч. 30 мин. </span>
+{{--                            @endif--}}
 
                         </a>
                     </div>
