@@ -901,7 +901,7 @@ p {
     margin-bottom: 15px;
 }
 .menu-nav__categories-item:not(:last-child) {
-    margin-bottom: 50px;
+    margin-bottom: 20px;
 }
 .menu-nav__categories-title {
     margin-bottom: 20px;

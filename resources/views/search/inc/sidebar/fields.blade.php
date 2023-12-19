@@ -445,6 +445,89 @@
 			$('#cfForm .cf-date_range').on('apply.daterangepicker', function(ev, picker) {
 				$(this).val(picker.startDate.format('{{ t('datepicker_format') }}') + ' - ' + picker.endDate.format('{{ t('datepicker_format') }}'));
 			});
+
+			let mark_field = $('select[id="cf.50"]')
+			let model_field = $('select[id="cf.51"]')
+
+			if(mark_field && model_field) {
+				mark_field.select2({
+					ajax: {
+						url: '{{route('base.marks')}}',
+						dataType: 'json',
+						delay: 250,
+						data: (params) => {
+							return {
+								search: params.term,
+								page: params.page || 1
+							}
+						},
+						processResults: ({data}, params) => {
+							params.page = params.page || 1
+							return {
+								results: data.data,
+								pagination: {
+									more: (params.page * 30) < data.total
+								}
+							};
+						},
+						cache: true,
+						minimumInputLength: 1,
+					},
+					placeholder: 'Поиск марки',
+				});
+
+				model_field.select2({
+					ajax: {
+						url: '{{route('base.models')}}',
+						dataType: 'json',
+						delay: 250,
+						data: (params) => {
+							return {
+								mark_id: sessionStorage.getItem('mark_id'),
+								search: params.term,
+								page: params.page || 1
+							}
+						},
+						processResults: ({data}, params) => {
+							params.page = params.page || 1
+							return {
+								results: data.data,
+								pagination: {
+									more: (params.page * 30) < data.total
+								}
+							};
+						},
+						cache: true,
+						minimumInputLength: 1,
+					},
+					placeholder: 'Поиск модели',
+				});
+
+				mark_field.on("select2:selecting", function(e) {
+					model_field.val(null).trigger('change')
+					sessionStorage.setItem('mark_id', e.params.args.data.mark_id)
+					model_field.prop('disabled', false)
+				});
+
+				if(!sessionStorage.getItem('mark_id')) {
+					model_field.prop('disabled', true)
+				}
+
+				const urlParams = new URLSearchParams(window.location.search);
+
+				let old_mark_field = urlParams.get('cf[50]') ?? '';
+
+				let old_model_field = urlParams.get('cf[51]') ?? '';
+
+				if(old_mark_field?.length) {
+					let markFieldOption = new Option(old_mark_field, old_mark_field, true, true)
+					mark_field.append(markFieldOption)
+				}
+				if(old_model_field?.length) {
+					let modelFieldOption = new Option(old_model_field, old_model_field, true, true)
+					model_field.append(modelFieldOption)
+				}
+			}
 		});
 	</script>
 @endsection
