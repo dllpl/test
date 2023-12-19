@@ -1517,7 +1517,7 @@ p {
 }
 @media (max-width: 768px) {
     .catalog-promo__img-wrapp {
-        height: 100px;
+        height: 125px;
     }
 }
 .catalog-promo__img {
