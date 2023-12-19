@@ -3079,12 +3079,12 @@ url("/assets/fonts/bootstrapicons/1.9.1/fonts/bootstrap-icons.woff?8d200481aa7f0
 
 .no-csspointerevents .nice-select.open .list {
   display: block; }
-/*
- * Scroller v3.1.2 - 2014-12-08
- * A jQuery plugin for replacing default browser scrollbars. Part of the Formstone Library.
- * http://formstone.it/scroller/
- *
- * Copyright 2014 Ben Plum; MIT Licensed
+/* 
+ * Scroller v3.1.2 - 2014-12-08 
+ * A jQuery plugin for replacing default browser scrollbars. Part of the Formstone Library. 
+ * http://formstone.it/scroller/ 
+ * 
+ * Copyright 2014 Ben Plum; MIT Licensed 
  */
 
 
@@ -3185,12 +3185,12 @@ url("/assets/fonts/bootstrapicons/1.9.1/fonts/bootstrap-icons.woff?8d200481aa7f0
 .scroller-active .scroller-bar {
   display: block;
 }
-/*
- * Selecter v3.2.3 - 2014-11-25
- * A jQuery plugin for replacing default select elements. Part of the Formstone Library.
- * http://formstone.it/selecter/
- *
- * Copyright 2014 Ben Plum; MIT Licensed
+/* 
+ * Selecter v3.2.3 - 2014-11-25 
+ * A jQuery plugin for replacing default select elements. Part of the Formstone Library. 
+ * http://formstone.it/selecter/ 
+ * 
+ * Copyright 2014 Ben Plum; MIT Licensed 
  */
 
 
@@ -6355,7 +6355,7 @@ textarea.form-control-lg {
   }
 }
 .btn:hover {
-  color: #212529;
+  /*color: #212529;*/
 }
 .btn-check:focus + .btn, .btn:focus {
   outline: 0;
@@ -24890,7 +24890,7 @@ h1.intro-title {
 
 /* List Gap */
 ul li, ol li {
-	padding: 2px 0 2px 0;
+	/*padding: 2px 0 2px 0;*/
 }
 .footer-nav li {
 	padding: 3px 0 3px 0;
@@ -26593,8 +26593,8 @@ pre {
 /* .btn-primary */
 .btn-primary {
 	color: #fff;
-	background-color: var (--accent);
-	border-color: var (--accent);
+	background-color: var(--accent);
+	border-color: var(--accent);
 }
 .btn-primary:hover,
 .btn-primary:focus,
@@ -26638,9 +26638,9 @@ pre {
 
 /* .btn-outline-primary */
 .btn-outline-primary {
-	color: var (--accent);
+	color: var(--accent);
 	background-color: #fff;
-	border-color: var (--accent);
+	border-color: var(--accent);
 }
 .btn-outline-primary:hover,
 .btn-outline-primary:focus,
@@ -26651,8 +26651,8 @@ pre {
 .show > .btn-outline-primary.dropdown-toggle,
 .open .dropdown-toggle.btn-outline-primary {
 	color: #fff;
-	background-color: var (--accent);
-	border-color: var (--accent);
+	background-color: var(--accent);
+	border-color: var(--accent);
 	background-image: none;
 }
 .btn-check:focus+.btn-outline-primary, .btn-outline-primary:focus, .btn-outline-primary.focus {
@@ -26681,8 +26681,8 @@ pre {
 .show > .btn-primary.btn-gradient.dropdown-toggle,
 .open .dropdown-toggle.btn-primary.btn-gradient {
 	color: #fff;
-	background-color: var (--accent);
-	border-color: var (--accent);
+	background-color: var(--accent);
+	border-color: var(--accent);
 	background-image: none;
 }
 .btn-check:focus+.btn-primary.btn-gradient, .btn-primary.btn-gradient:focus, .btn-primary.btn-gradient.focus {
@@ -27224,12 +27224,12 @@ a:not(.btn):focus {
 
 ::selection {
 	color: #fff;
-	background: var (--accent);
+	background: var(--accent);
 }
 
 ::-moz-selection {
 	color: #fff;
-	background: var (--accent);
+	background: var(--accent);
 }
 
 .pace .pace-progress {
@@ -27257,7 +27257,7 @@ a:not(.btn):focus {
 }
 
 .badge-primary {
-	background-color: var (--accent);
+	background-color: var(--accent);
 	color: #fff;
 }
 .badge-primary[href]:focus, .badge-primary[href]:hover {
@@ -27271,19 +27271,19 @@ a:not(.btn):focus {
 }
 .form-control:focus,
 .select2-container--default.select2-container--focus .select2-selection--multiple {
-	border-color: var (--accent);
-	box-shadow: 0 1px 0 #4682b4, 0 -1px 0 #4682b4, -1px 0 0 #4682b4, 1px 0 0 var (--accent);
+	border-color: var(--accent);
+	box-shadow: 0 1px 0 #4682b4, 0 -1px 0 #4682b4, -1px 0 0 #4682b4, 1px 0 0 var(--accent);
 	outline: 0 none;
 }
 
 .logo,
 .logo-title {
-	color: var (--accent);
+	color: var(--accent);
 }
 
 .cat-list h3 a,
 .cat-list h3 {
-	color: var (--accent);
+	color: var(--accent);
 }
 .cat-list h3 a:hover,
 .cat-list h3 a:focus {
@@ -27317,12 +27317,12 @@ ul.list-link li a:not(.btn):hover {
 }
 
 .page-bottom-info {
-	background: var (--accent);
+	background: var(--accent);
 }
 
 button.btn-search {
-	text-shadow: 0 2px 2px var (--accent);
-	-webkit-text-shadow: 0 2px 2px var (--accent);
+	text-shadow: 0 2px 2px var(--accent);
+	-webkit-text-shadow: 0 2px 2px var(--accent);
 }
 
 .nav-pills > li.active > a:not(.btn),
@@ -27350,33 +27350,33 @@ button.btn-search {
 
 /* SHODOW */
 .ln-shadow {
-	background-color: var (--accent);
+	background-color: var(--accent);
 	color: #fff;
-	text-shadow: 1px 1px #426998, 2px 2px #426998, 3px 3px #426998, 4px 4px #426998, 5px 5px #426998, 6px 6px #426998, 7px 7px #426998, 8px 8px #426998, 9px 9px #426998, 10px 10px #426998, 11px 11px #426998, 12px 12px #426998, 13px 13px #4682b4, 14px 14px #4682b4, 15px 15px #4682b4, 16px 16px #4682b4, 17px 17px #4682b4, 18px 18px #4682b4, 19px 19px #4682b4, 20px 20px #4682b4, 21px 21px #4682b4, 22px 22px #4682b4, 23px 23px #4682b4, 24px 24px #4682b4, 25px 25px #4682b4, 26px 26px #4682b4, 27px 27px #4682b4, 28px 28px var (--accent);
-	-webkit-text-shadow: 1px 1px #426998, 2px 2px #426998, 3px 3px #426998, 4px 4px #426998, 5px 5px #426998, 6px 6px #426998, 7px 7px #426998, 8px 8px #426998, 9px 9px #426998, 10px 10px #426998, 11px 11px #426998, 12px 12px #426998, 13px 13px #4682b4, 14px 14px #4682b4, 15px 15px #4682b4, 16px 16px #4682b4, 17px 17px #4682b4, 18px 18px #4682b4, 19px 19px #4682b4, 20px 20px #4682b4, 21px 21px #4682b4, 22px 22px #4682b4, 23px 23px #4682b4, 24px 24px #4682b4, 25px 25px #4682b4, 26px 26px #4682b4, 27px 27px #4682b4, 28px 28px var (--accent);
-	-moz-text-shadow: 1px 1px #426998, 2px 2px #426998, 3px 3px #426998, 4px 4px #426998, 5px 5px #426998, 6px 6px #426998, 7px 7px #426998, 8px 8px #426998, 9px 9px #426998, 10px 10px #426998, 11px 11px #426998, 12px 12px #426998, 13px 13px #4682b4, 14px 14px #4682b4, 15px 15px #4682b4, 16px 16px #4682b4, 17px 17px #4682b4, 18px 18px #4682b4, 19px 19px #4682b4, 20px 20px #4682b4, 21px 21px #4682b4, 22px 22px #4682b4, 23px 23px #4682b4, 24px 24px #4682b4, 25px 25px #4682b4, 26px 26px #4682b4, 27px 27px #4682b4, 28px 28px var (--accent);
+	text-shadow: 1px 1px #426998, 2px 2px #426998, 3px 3px #426998, 4px 4px #426998, 5px 5px #426998, 6px 6px #426998, 7px 7px #426998, 8px 8px #426998, 9px 9px #426998, 10px 10px #426998, 11px 11px #426998, 12px 12px #426998, 13px 13px #4682b4, 14px 14px #4682b4, 15px 15px #4682b4, 16px 16px #4682b4, 17px 17px #4682b4, 18px 18px #4682b4, 19px 19px #4682b4, 20px 20px #4682b4, 21px 21px #4682b4, 22px 22px #4682b4, 23px 23px #4682b4, 24px 24px #4682b4, 25px 25px #4682b4, 26px 26px #4682b4, 27px 27px #4682b4, 28px 28px var(--accent);
+	-webkit-text-shadow: 1px 1px #426998, 2px 2px #426998, 3px 3px #426998, 4px 4px #426998, 5px 5px #426998, 6px 6px #426998, 7px 7px #426998, 8px 8px #426998, 9px 9px #426998, 10px 10px #426998, 11px 11px #426998, 12px 12px #426998, 13px 13px #4682b4, 14px 14px #4682b4, 15px 15px #4682b4, 16px 16px #4682b4, 17px 17px #4682b4, 18px 18px #4682b4, 19px 19px #4682b4, 20px 20px #4682b4, 21px 21px #4682b4, 22px 22px #4682b4, 23px 23px #4682b4, 24px 24px #4682b4, 25px 25px #4682b4, 26px 26px #4682b4, 27px 27px #4682b4, 28px 28px var(--accent);
+	-moz-text-shadow: 1px 1px #426998, 2px 2px #426998, 3px 3px #426998, 4px 4px #426998, 5px 5px #426998, 6px 6px #426998, 7px 7px #426998, 8px 8px #426998, 9px 9px #426998, 10px 10px #426998, 11px 11px #426998, 12px 12px #426998, 13px 13px #4682b4, 14px 14px #4682b4, 15px 15px #4682b4, 16px 16px #4682b4, 17px 17px #4682b4, 18px 18px #4682b4, 19px 19px #4682b4, 20px 20px #4682b4, 21px 21px #4682b4, 22px 22px #4682b4, 23px 23px #4682b4, 24px 24px #4682b4, 25px 25px #4682b4, 26px 26px #4682b4, 27px 27px #4682b4, 28px 28px var(--accent);
 }
 
 .shape-0 {
-	text-shadow: 1px 1px #4682b4, 2px 2px #4682b4, 3px 3px #4682b4, 4px 4px #4682b4, 5px 5px #4682b4, 6px 6px #4682b4, 7px 7px #4682b4, 8px 8px #4682b4, 9px 9px #4682b4, 10px 10px #4682b4, 11px 11px #4682b4, 12px 12px #4682b4, 13px 13px #4682b4, 14px 14px #4682b4, 15px 15px #4682b4, 16px 16px #4682b4, 17px 17px #4682b4, 18px 18px #4682b4, 19px 19px #4682b4, 20px 20px #4682b4, 21px 21px #4682b4, 22px 22px #4682b4, 23px 23px #4682b4, 24px 24px #4682b4, 25px 25px #4682b4, 26px 26px #4682b4, 27px 27px #4682b4, 28px 28px var (--accent);
-	-moz-text-shadow: 1px 1px #4682b4, 2px 2px #4682b4, 3px 3px #4682b4, 4px 4px #4682b4, 5px 5px #4682b4, 6px 6px #4682b4, 7px 7px #4682b4, 8px 8px #4682b4, 9px 9px #4682b4, 10px 10px #4682b4, 11px 11px #4682b4, 12px 12px #4682b4, 13px 13px #4682b4, 14px 14px #4682b4, 15px 15px #4682b4, 16px 16px #4682b4, 17px 17px #4682b4, 18px 18px #4682b4, 19px 19px #4682b4, 20px 20px #4682b4, 21px 21px #4682b4, 22px 22px #4682b4, 23px 23px #4682b4, 24px 24px #4682b4, 25px 25px #4682b4, 26px 26px #4682b4, 27px 27px #4682b4, 28px 28px var (--accent);
+	text-shadow: 1px 1px #4682b4, 2px 2px #4682b4, 3px 3px #4682b4, 4px 4px #4682b4, 5px 5px #4682b4, 6px 6px #4682b4, 7px 7px #4682b4, 8px 8px #4682b4, 9px 9px #4682b4, 10px 10px #4682b4, 11px 11px #4682b4, 12px 12px #4682b4, 13px 13px #4682b4, 14px 14px #4682b4, 15px 15px #4682b4, 16px 16px #4682b4, 17px 17px #4682b4, 18px 18px #4682b4, 19px 19px #4682b4, 20px 20px #4682b4, 21px 21px #4682b4, 22px 22px #4682b4, 23px 23px #4682b4, 24px 24px #4682b4, 25px 25px #4682b4, 26px 26px #4682b4, 27px 27px #4682b4, 28px 28px var(--accent);
+	-moz-text-shadow: 1px 1px #4682b4, 2px 2px #4682b4, 3px 3px #4682b4, 4px 4px #4682b4, 5px 5px #4682b4, 6px 6px #4682b4, 7px 7px #4682b4, 8px 8px #4682b4, 9px 9px #4682b4, 10px 10px #4682b4, 11px 11px #4682b4, 12px 12px #4682b4, 13px 13px #4682b4, 14px 14px #4682b4, 15px 15px #4682b4, 16px 16px #4682b4, 17px 17px #4682b4, 18px 18px #4682b4, 19px 19px #4682b4, 20px 20px #4682b4, 21px 21px #4682b4, 22px 22px #4682b4, 23px 23px #4682b4, 24px 24px #4682b4, 25px 25px #4682b4, 26px 26px #4682b4, 27px 27px #4682b4, 28px 28px var(--accent);
 
-	-webkit-text-shadow: 1px 1px #4682b4, 2px 2px #4682b4, 3px 3px #4682b4, 4px 4px #4682b4, 5px 5px #4682b4, 6px 6px #4682b4, 7px 7px #4682b4, 8px 8px #4682b4, 9px 9px #4682b4, 10px 10px #4682b4, 11px 11px #4682b4, 12px 12px #4682b4, 13px 13px #4682b4, 14px 14px #4682b4, 15px 15px #4682b4, 16px 16px #4682b4, 17px 17px #4682b4, 18px 18px #4682b4, 19px 19px #4682b4, 20px 20px #4682b4, 21px 21px #4682b4, 22px 22px #4682b4, 23px 23px #4682b4, 24px 24px #4682b4, 25px 25px #4682b4, 26px 26px #4682b4, 27px 27px #4682b4, 28px 28px var (--accent);
+	-webkit-text-shadow: 1px 1px #4682b4, 2px 2px #4682b4, 3px 3px #4682b4, 4px 4px #4682b4, 5px 5px #4682b4, 6px 6px #4682b4, 7px 7px #4682b4, 8px 8px #4682b4, 9px 9px #4682b4, 10px 10px #4682b4, 11px 11px #4682b4, 12px 12px #4682b4, 13px 13px #4682b4, 14px 14px #4682b4, 15px 15px #4682b4, 16px 16px #4682b4, 17px 17px #4682b4, 18px 18px #4682b4, 19px 19px #4682b4, 20px 20px #4682b4, 21px 21px #4682b4, 22px 22px #4682b4, 23px 23px #4682b4, 24px 24px #4682b4, 25px 25px #4682b4, 26px 26px #4682b4, 27px 27px #4682b4, 28px 28px var(--accent);
 
-	background-color: var (--accent);
+	background-color: var(--accent);
 }
 
 .shape-0-shadow {
-	text-shadow: 1px 1px #426998, 2px 2px #426998, 3px 3px #426998, 4px 4px #426998, 5px 5px #426998, 6px 6px #426998, 7px 7px #426998, 8px 8px #426998, 9px 9px #426998, 10px 10px #426998, 11px 11px #426998, 12px 12px #426998, 13px 13px #4682b4, 14px 14px #4682b4, 15px 15px #4682b4, 16px 16px #4682b4, 17px 17px #4682b4, 18px 18px #4682b4, 19px 19px #4682b4, 20px 20px #4682b4, 21px 21px #4682b4, 22px 22px #4682b4, 23px 23px #4682b4, 24px 24px #4682b4, 25px 25px #4682b4, 26px 26px #4682b4, 27px 27px #4682b4, 28px 28px var (--accent);
-	-moz-text-shadow: 1px 1px #426998, 2px 2px #426998, 3px 3px #426998, 4px 4px #426998, 5px 5px #426998, 6px 6px #426998, 7px 7px #426998, 8px 8px #426998, 9px 9px #426998, 10px 10px #426998, 11px 11px #426998, 12px 12px #426998, 13px 13px #4682b4, 14px 14px #4682b4, 15px 15px #4682b4, 16px 16px #4682b4, 17px 17px #4682b4, 18px 18px #4682b4, 19px 19px #4682b4, 20px 20px #4682b4, 21px 21px #4682b4, 22px 22px #4682b4, 23px 23px #4682b4, 24px 24px #4682b4, 25px 25px #4682b4, 26px 26px #4682b4, 27px 27px #4682b4, 28px 28px var (--accent);
+	text-shadow: 1px 1px #426998, 2px 2px #426998, 3px 3px #426998, 4px 4px #426998, 5px 5px #426998, 6px 6px #426998, 7px 7px #426998, 8px 8px #426998, 9px 9px #426998, 10px 10px #426998, 11px 11px #426998, 12px 12px #426998, 13px 13px #4682b4, 14px 14px #4682b4, 15px 15px #4682b4, 16px 16px #4682b4, 17px 17px #4682b4, 18px 18px #4682b4, 19px 19px #4682b4, 20px 20px #4682b4, 21px 21px #4682b4, 22px 22px #4682b4, 23px 23px #4682b4, 24px 24px #4682b4, 25px 25px #4682b4, 26px 26px #4682b4, 27px 27px #4682b4, 28px 28px var(--accent);
+	-moz-text-shadow: 1px 1px #426998, 2px 2px #426998, 3px 3px #426998, 4px 4px #426998, 5px 5px #426998, 6px 6px #426998, 7px 7px #426998, 8px 8px #426998, 9px 9px #426998, 10px 10px #426998, 11px 11px #426998, 12px 12px #426998, 13px 13px #4682b4, 14px 14px #4682b4, 15px 15px #4682b4, 16px 16px #4682b4, 17px 17px #4682b4, 18px 18px #4682b4, 19px 19px #4682b4, 20px 20px #4682b4, 21px 21px #4682b4, 22px 22px #4682b4, 23px 23px #4682b4, 24px 24px #4682b4, 25px 25px #4682b4, 26px 26px #4682b4, 27px 27px #4682b4, 28px 28px var(--accent);
 
-	-webkit-text-shadow: 1px 1px #426998, 2px 2px #426998, 3px 3px #426998, 4px 4px #426998, 5px 5px #426998, 6px 6px #426998, 7px 7px #426998, 8px 8px #426998, 9px 9px #426998, 10px 10px #426998, 11px 11px #426998, 12px 12px #426998, 13px 13px #4682b4, 14px 14px #4682b4, 15px 15px #4682b4, 16px 16px #4682b4, 17px 17px #4682b4, 18px 18px #4682b4, 19px 19px #4682b4, 20px 20px #4682b4, 21px 21px #4682b4, 22px 22px #4682b4, 23px 23px #4682b4, 24px 24px #4682b4, 25px 25px #4682b4, 26px 26px #4682b4, 27px 27px #4682b4, 28px 28px var (--accent);
+	-webkit-text-shadow: 1px 1px #426998, 2px 2px #426998, 3px 3px #426998, 4px 4px #426998, 5px 5px #426998, 6px 6px #426998, 7px 7px #426998, 8px 8px #426998, 9px 9px #426998, 10px 10px #426998, 11px 11px #426998, 12px 12px #426998, 13px 13px #4682b4, 14px 14px #4682b4, 15px 15px #4682b4, 16px 16px #4682b4, 17px 17px #4682b4, 18px 18px #4682b4, 19px 19px #4682b4, 20px 20px #4682b4, 21px 21px #4682b4, 22px 22px #4682b4, 23px 23px #4682b4, 24px 24px #4682b4, 25px 25px #4682b4, 26px 26px #4682b4, 27px 27px #4682b4, 28px 28px var(--accent);
 
-	background-color: var (--accent);
+	background-color: var(--accent);
 }
 
 ul.installation li i {
-	color: var (--accent);
+	color: var(--accent);
 }
 .installation .text-success {
 	color: #3c763d;
@@ -27388,7 +27388,7 @@ ul.installation li i {
 /* Bootstrap Pagination Color */
 .pagination > li > a,
 .pagination > li > span {
-	color: var (--accent);
+	color: var(--accent);
 }
 .pagination > li > a:hover,
 .pagination > li > span:hover,
@@ -27403,14 +27403,14 @@ ul.installation li i {
 .pagination > .active > span:hover,
 .pagination > .active > a:focus,
 .pagination > .active > span:focus {
-	background-color: var (--accent);
-	border-color: var (--accent);
+	background-color: var(--accent);
+	border-color: var(--accent);
 	color: #fff;
 }
 
 /* Cookie Consent */
 .cookie-consent__agree {
-	background-color: var (--accent);
+	background-color: var(--accent);
 	box-shadow: 0 2px 5px rgba(70, 130, 180, 0.15);
 }
 .cookie-consent__agree:hover {

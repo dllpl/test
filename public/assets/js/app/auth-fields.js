@@ -74,6 +74,7 @@ function applyIntlTelInput(inputEl, countries, phoneCountry = null)
 	let params = {
 		/* hiddenInput: 'phone_intl', */
 		initialCountry: 'ru',
+		onlyCountries: ["ru", "kz", 'uz', "kg"],
 		separateDialCode: true,
 		preferredCountries: [],
 	};

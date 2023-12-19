@@ -98,7 +98,7 @@
             // don't insert international dial codes
             nationalMode: true,
             // display only these countries
-            onlyCountries: [],
+            onlyCountries: ["ru", "kz", 'uz', "kg"],
             // number type to use for placeholders
             placeholderNumberType: "MOBILE",
             // the countries at the top of the list. defaults to united states and united kingdom

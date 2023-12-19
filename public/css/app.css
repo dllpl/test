@@ -3079,12 +3079,12 @@ url("/assets/fonts/bootstrapicons/1.9.1/fonts/bootstrap-icons.woff?8d200481aa7f0
 
 .no-csspointerevents .nice-select.open .list {
   display: block; }
-/*
- * Scroller v3.1.2 - 2014-12-08
- * A jQuery plugin for replacing default browser scrollbars. Part of the Formstone Library.
- * http://formstone.it/scroller/
- *
- * Copyright 2014 Ben Plum; MIT Licensed
+/* 
+ * Scroller v3.1.2 - 2014-12-08 
+ * A jQuery plugin for replacing default browser scrollbars. Part of the Formstone Library. 
+ * http://formstone.it/scroller/ 
+ * 
+ * Copyright 2014 Ben Plum; MIT Licensed 
  */
 
 
@@ -3185,12 +3185,12 @@ url("/assets/fonts/bootstrapicons/1.9.1/fonts/bootstrap-icons.woff?8d200481aa7f0
 .scroller-active .scroller-bar {
   display: block;
 }
-/*
- * Selecter v3.2.3 - 2014-11-25
- * A jQuery plugin for replacing default select elements. Part of the Formstone Library.
- * http://formstone.it/selecter/
- *
- * Copyright 2014 Ben Plum; MIT Licensed
+/* 
+ * Selecter v3.2.3 - 2014-11-25 
+ * A jQuery plugin for replacing default select elements. Part of the Formstone Library. 
+ * http://formstone.it/selecter/ 
+ * 
+ * Copyright 2014 Ben Plum; MIT Licensed 
  */
 
 
@@ -14093,7 +14093,7 @@ h1.intro-title {
 
 /* List Gap */
 ul li, ol li {
-	padding: 2px 0 2px 0;
+	/*padding: 2px 0 2px 0;*/
 }
 .footer-nav li {
 	padding: 3px 0 3px 0;
@@ -14294,8 +14294,8 @@ button.btn-search {
 	font-size: 18px;
 	height: 48px;
 	letter-spacing: -0.5px;
-	text-shadow: 0 2px 2px var (--accent);;
-	-webkit-text-shadow: 0 2px 2px var (--accent);;
+	text-shadow: 0 2px 2px var(--accent);;
+	-webkit-text-shadow: 0 2px 2px var(--accent);;
 	text-transform: uppercase;
 }
 
@@ -14484,7 +14484,7 @@ button.btn-search {
 
 /* SHODOW */
 .ln-shadow {
-	background-color: var (--accent);;
+	background-color: var(--accent);;
 	border-radius: 3px;
 	color: #fff;
 	display: inline-block;
@@ -14495,17 +14495,17 @@ button.btn-search {
 	text-align: center;
 	vertical-align: middle;
 	width: 42px;
-	text-shadow: 1px 1px #426998, 2px 2px #426998, 3px 3px #426998, 4px 4px #426998, 5px 5px #426998, 6px 6px #426998, 7px 7px #426998, 8px 8px #426998, 9px 9px #426998, 10px 10px #426998, 11px 11px #426998, 12px 12px #426998, 13px 13px var (--accent);, 14px 14px var (--accent);, 15px 15px var (--accent);, 16px 16px var (--accent);, 17px 17px var (--accent);, 18px 18px var (--accent);, 19px 19px var (--accent);, 20px 20px var (--accent);, 21px 21px var (--accent);, 22px 22px var (--accent);, 23px 23px var (--accent);, 24px 24px var (--accent);, 25px 25px var (--accent);, 26px 26px var (--accent);, 27px 27px var (--accent);, 28px 28px var (--accent);;
-	-webkit-text-shadow: 1px 1px #426998, 2px 2px #426998, 3px 3px #426998, 4px 4px #426998, 5px 5px #426998, 6px 6px #426998, 7px 7px #426998, 8px 8px #426998, 9px 9px #426998, 10px 10px #426998, 11px 11px #426998, 12px 12px #426998, 13px 13px var (--accent);, 14px 14px var (--accent);, 15px 15px var (--accent);, 16px 16px var (--accent);, 17px 17px var (--accent);, 18px 18px var (--accent);, 19px 19px var (--accent);, 20px 20px var (--accent);, 21px 21px var (--accent);, 22px 22px var (--accent);, 23px 23px var (--accent);, 24px 24px var (--accent);, 25px 25px var (--accent);, 26px 26px var (--accent);, 27px 27px var (--accent);, 28px 28px var (--accent);;
-	-moz-text-shadow: 1px 1px #426998, 2px 2px #426998, 3px 3px #426998, 4px 4px #426998, 5px 5px #426998, 6px 6px #426998, 7px 7px #426998, 8px 8px #426998, 9px 9px #426998, 10px 10px #426998, 11px 11px #426998, 12px 12px #426998, 13px 13px var (--accent);, 14px 14px var (--accent);, 15px 15px var (--accent);, 16px 16px var (--accent);, 17px 17px var (--accent);, 18px 18px var (--accent);, 19px 19px var (--accent);, 20px 20px var (--accent);, 21px 21px var (--accent);, 22px 22px var (--accent);, 23px 23px var (--accent);, 24px 24px var (--accent);, 25px 25px var (--accent);, 26px 26px var (--accent);, 27px 27px var (--accent);, 28px 28px var (--accent);;
+	text-shadow: 1px 1px #426998, 2px 2px #426998, 3px 3px #426998, 4px 4px #426998, 5px 5px #426998, 6px 6px #426998, 7px 7px #426998, 8px 8px #426998, 9px 9px #426998, 10px 10px #426998, 11px 11px #426998, 12px 12px #426998, 13px 13px var(--accent);, 14px 14px var(--accent);, 15px 15px var(--accent);, 16px 16px var(--accent);, 17px 17px var(--accent);, 18px 18px var(--accent);, 19px 19px var(--accent);, 20px 20px var(--accent);, 21px 21px var(--accent);, 22px 22px var(--accent);, 23px 23px var(--accent);, 24px 24px var(--accent);, 25px 25px var(--accent);, 26px 26px var(--accent);, 27px 27px var(--accent);, 28px 28px var(--accent);;
+	-webkit-text-shadow: 1px 1px #426998, 2px 2px #426998, 3px 3px #426998, 4px 4px #426998, 5px 5px #426998, 6px 6px #426998, 7px 7px #426998, 8px 8px #426998, 9px 9px #426998, 10px 10px #426998, 11px 11px #426998, 12px 12px #426998, 13px 13px var(--accent);, 14px 14px var(--accent);, 15px 15px var(--accent);, 16px 16px var(--accent);, 17px 17px var(--accent);, 18px 18px var(--accent);, 19px 19px var(--accent);, 20px 20px var(--accent);, 21px 21px var(--accent);, 22px 22px var(--accent);, 23px 23px var(--accent);, 24px 24px var(--accent);, 25px 25px var(--accent);, 26px 26px var(--accent);, 27px 27px var(--accent);, 28px 28px var(--accent);;
+	-moz-text-shadow: 1px 1px #426998, 2px 2px #426998, 3px 3px #426998, 4px 4px #426998, 5px 5px #426998, 6px 6px #426998, 7px 7px #426998, 8px 8px #426998, 9px 9px #426998, 10px 10px #426998, 11px 11px #426998, 12px 12px #426998, 13px 13px var(--accent);, 14px 14px var(--accent);, 15px 15px var(--accent);, 16px 16px var(--accent);, 17px 17px var(--accent);, 18px 18px var(--accent);, 19px 19px var(--accent);, 20px 20px var(--accent);, 21px 21px var(--accent);, 22px 22px var(--accent);, 23px 23px var(--accent);, 24px 24px var(--accent);, 25px 25px var(--accent);, 26px 26px var(--accent);, 27px 27px var(--accent);, 28px 28px var(--accent);;
 
 }
 
 .shape-0 {
-	text-shadow: 1px 1px var (--accent);, 2px 2px var (--accent);, 3px 3px var (--accent);, 4px 4px var (--accent);, 5px 5px var (--accent);, 6px 6px var (--accent);, 7px 7px var (--accent);, 8px 8px var (--accent);, 9px 9px var (--accent);, 10px 10px var (--accent);, 11px 11px var (--accent);, 12px 12px var (--accent);, 13px 13px var (--accent);, 14px 14px var (--accent);, 15px 15px var (--accent);, 16px 16px var (--accent);, 17px 17px var (--accent);, 18px 18px var (--accent);, 19px 19px var (--accent);, 20px 20px var (--accent);, 21px 21px var (--accent);, 22px 22px var (--accent);, 23px 23px var (--accent);, 24px 24px var (--accent);, 25px 25px var (--accent);, 26px 26px var (--accent);, 27px 27px var (--accent);, 28px 28px var (--accent);;
-	-moz-text-shadow: 1px 1px var (--accent);, 2px 2px var (--accent);, 3px 3px var (--accent);, 4px 4px var (--accent);, 5px 5px var (--accent);, 6px 6px var (--accent);, 7px 7px var (--accent);, 8px 8px var (--accent);, 9px 9px var (--accent);, 10px 10px var (--accent);, 11px 11px var (--accent);, 12px 12px var (--accent);, 13px 13px var (--accent);, 14px 14px var (--accent);, 15px 15px var (--accent);, 16px 16px var (--accent);, 17px 17px var (--accent);, 18px 18px var (--accent);, 19px 19px var (--accent);, 20px 20px var (--accent);, 21px 21px var (--accent);, 22px 22px var (--accent);, 23px 23px var (--accent);, 24px 24px var (--accent);, 25px 25px var (--accent);, 26px 26px var (--accent);, 27px 27px var (--accent);, 28px 28px var (--accent);;
+	text-shadow: 1px 1px var(--accent);, 2px 2px var(--accent);, 3px 3px var(--accent);, 4px 4px var(--accent);, 5px 5px var(--accent);, 6px 6px var(--accent);, 7px 7px var(--accent);, 8px 8px var(--accent);, 9px 9px var(--accent);, 10px 10px var(--accent);, 11px 11px var(--accent);, 12px 12px var(--accent);, 13px 13px var(--accent);, 14px 14px var(--accent);, 15px 15px var(--accent);, 16px 16px var(--accent);, 17px 17px var(--accent);, 18px 18px var(--accent);, 19px 19px var(--accent);, 20px 20px var(--accent);, 21px 21px var(--accent);, 22px 22px var(--accent);, 23px 23px var(--accent);, 24px 24px var(--accent);, 25px 25px var(--accent);, 26px 26px var(--accent);, 27px 27px var(--accent);, 28px 28px var(--accent);;
+	-moz-text-shadow: 1px 1px var(--accent);, 2px 2px var(--accent);, 3px 3px var(--accent);, 4px 4px var(--accent);, 5px 5px var(--accent);, 6px 6px var(--accent);, 7px 7px var(--accent);, 8px 8px var(--accent);, 9px 9px var(--accent);, 10px 10px var(--accent);, 11px 11px var(--accent);, 12px 12px var(--accent);, 13px 13px var(--accent);, 14px 14px var(--accent);, 15px 15px var(--accent);, 16px 16px var(--accent);, 17px 17px var(--accent);, 18px 18px var(--accent);, 19px 19px var(--accent);, 20px 20px var(--accent);, 21px 21px var(--accent);, 22px 22px var(--accent);, 23px 23px var(--accent);, 24px 24px var(--accent);, 25px 25px var(--accent);, 26px 26px var(--accent);, 27px 27px var(--accent);, 28px 28px var(--accent);;
 
-	-webkit-text-shadow: 1px 1px var (--accent);, 2px 2px var (--accent);, 3px 3px var (--accent);, 4px 4px var(--accent);, 5px 5px var(--accent);, 6px 6px var(--accent);, 7px 7px var(--accent);, 8px 8px var(--accent);, 9px 9px var(--accent);, 10px 10px var(--accent);, 11px 11px var(--accent);, 12px 12px var(--accent);, 13px 13px var(--accent);, 14px 14px var(--accent);, 15px 15px var(--accent);, 16px 16px var(--accent);, 17px 17px var(--accent);, 18px 18px var(--accent);, 19px 19px var(--accent);, 20px 20px var(--accent);, 21px 21px var(--accent);, 22px 22px var(--accent);, 23px 23px var(--accent);, 24px 24px var(--accent);, 25px 25px var(--accent);, 26px 26px var(--accent);, 27px 27px var(--accent);, 28px 28px var(--accent);;
+	-webkit-text-shadow: 1px 1px var(--accent);, 2px 2px var(--accent);, 3px 3px var(--accent);, 4px 4px var(--accent);, 5px 5px var(--accent);, 6px 6px var(--accent);, 7px 7px var(--accent);, 8px 8px var(--accent);, 9px 9px var(--accent);, 10px 10px var(--accent);, 11px 11px var(--accent);, 12px 12px var(--accent);, 13px 13px var(--accent);, 14px 14px var(--accent);, 15px 15px var(--accent);, 16px 16px var(--accent);, 17px 17px var(--accent);, 18px 18px var(--accent);, 19px 19px var(--accent);, 20px 20px var(--accent);, 21px 21px var(--accent);, 22px 22px var(--accent);, 23px 23px var(--accent);, 24px 24px var(--accent);, 25px 25px var(--accent);, 26px 26px var(--accent);, 27px 27px var(--accent);, 28px 28px var(--accent);;
 
 	background-color: var(--accent);;
 }
