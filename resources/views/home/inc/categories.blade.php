@@ -43,6 +43,37 @@ $maxSubCats = (int)data_get($sectionOptions, 'max_sub_cats');
             </ul>
         </div>
     </section>
+
+    <section class="d-block d-md-none">
+        <div class="container">
+            <div class="swiper catalog-promo__slider">
+                <div class="swiper-wrapper">
+                    @if (!empty($categories))
+                        @foreach($categories as $key => $cat)
+                            <div class="swiper-slide">
+                                <a href="{{ \App\Helpers\UrlGen::category($cat) }}" class="catalog-promo__link link">
+                                    <div class="catalog-promo__img-wrapp">
+                                        <img class="catalog-promo__img img" src="{{ data_get($cat, 'picture_url') }}"
+                                             alt="{{ data_get($cat, 'name') }}">
+                                    </div>
+                                    <div class="catalog-promo__content-wrapp">
+                                        <div class="catalog-promo__content-desc">
+                                            <h4 class="catalog-promo__title title">{{ data_get($cat, 'name') }}</h4>
+                                            <p class="catalog-promo__subtitle">{{ strip_tags(data_get($cat, 'description')) }}</p>
+                                        </div>
+                                        <svg class="catalog-promo__icon">
+                                            <use xlink:href="images/sprite.svg#arrow-green"></use>
+                                        </svg>
+                                    </div>
+                                </a>
+                            </div>
+                        @endforeach
+                    @endif
+                </div>
+            </div>
+        </div>
+    </section>
+
 @endif
 
 {{--<div class="container{{ $hideOnMobile }}">--}}
@@ -213,4 +244,20 @@ $maxSubCats = (int)data_get($sectionOptions, 'max_sub_cats');
             var maxSubCats = {{ $maxSubCats }};
         </script>
     @endif
+@endsection
+
+@section('after_styles')
+    @parent
+    <link href="{{ url('assets/plugins/swiper/7.4.1/swiper-bundle.min.css') }}" rel="stylesheet"/>
+@endsection
+
+@section('after_scripts')
+    @parent
+    <script src="{{ url('assets/plugins/swiper/7.4.1/swiper-bundle.min.js') }}"></script>
+    <script>
+        const swiper_catalog = new Swiper(".catalog-promo__slider", {
+            slidesPerView: 1.5,
+            spaceBetween: 10,
+        });
+    </script>
 @endsection
