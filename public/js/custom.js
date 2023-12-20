@@ -158,15 +158,14 @@
 
             const navOpen = document.querySelector('.menu-nav__btn-open');
             const nav = document.querySelector('.menu-nav');
-            if(nav) {
-                document.addEventListener('click', function (event) {
-                    if (event.target.closest('.menu-nav__btn-open')) {
-                        nav.classList.add('menu-nav-open-js');
-                    } else {
-                        nav.classList.remove('menu-nav-open-js');
-                    }
-                });
-            }
+            document.addEventListener('click', function (event) {
+                console.log(event.target)
+                if (event.target.closest('.menu-nav') || event.target.closest('.menu-nav__btn-open') || event.target.closest('.select2-dropdown')) {
+                    nav.classList.add('menu-nav-open-js');
+                } else {
+                    nav.classList.remove('menu-nav-open-js');
+                }
+            });
 
             /***/ }),
 
