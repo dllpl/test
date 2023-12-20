@@ -102,20 +102,20 @@ Route::namespace('Auth')
 				Route::post(dynamicRoute('routes.register'), 'register');
 				Route::get('register/finish', 'finish');
 			});
-		
+
 		// Authentication Routes...
 		Route::controller(LoginController::class)
 			->group(function ($router) {
 				Route::get(dynamicRoute('routes.login'), 'showLoginForm');
 				Route::post(dynamicRoute('routes.login'), 'login');
 			});
-		
+
 		// Forgot Password Routes...
 		Route::controller(ForgotPasswordController::class)
 			->group(function ($router) {
 				Route::get('password/reset', 'showLinkRequestForm');
 				Route::post('password/email', 'sendResetLink');
-				
+
 				// Email Address or Phone Number verification
 				$router->pattern('field', 'email|phone');
 				$router->pattern('token', '.*');
@@ -124,18 +124,18 @@ Route::namespace('Auth')
 				Route::get('password/verify/{field}/{token?}', 'verification');
 				Route::post('password/verify/{field}/{token?}', 'verification');
 			});
-		
+
 		Route::controller(ResetPasswordController::class)
 			->group(function ($router) {
 				// Reset Password using Token
 				Route::get('password/token', 'showTokenRequestForm');
 				Route::post('password/token', 'sendResetToken');
-				
+
 				// Reset Password using Link (Core Routes...)
 				Route::get('password/reset/{token}', 'showResetForm');
 				Route::post('password/reset', 'reset');
 			});
-		
+
 		// Social Authentication
 		Route::controller(SocialController::class)
 			->group(function ($router) {
@@ -156,7 +156,7 @@ Route::namespace('Auth')
 				Route::get('users/verify/{field}/{token?}', 'verification');
 				Route::post('users/verify/{field}/{token?}', 'verification');
 			});
-		
+
 		// User Logout
 		Route::get(dynamicRoute('routes.logout'), [LoginController::class, 'logout']);
 
@@ -169,14 +169,14 @@ Route::namespace('Auth')
 Route::namespace('Post')
 	->group(function ($router) {
 		$router->pattern('id', '[0-9]+');
-		
+
 		$hidPrefix = config('larapen.core.hashableIdPrefix');
 		if (is_string($hidPrefix) && !empty($hidPrefix)) {
 			$router->pattern('hashableId', '([0-9]+)?(' . $hidPrefix . '[a-z0-9A-Z]{11})?');
 		} else {
 			$router->pattern('hashableId', '([0-9]+)?([a-z0-9A-Z]{11})?');
 		}
-		
+
 		// $router->pattern('slug', '.*');
 		$bannedSlugs = regexSimilarRoutesPrefixes();
 		if (!empty($bannedSlugs)) {
@@ -190,7 +190,7 @@ Route::namespace('Post')
 		} else {
 			$router->pattern('slug', '^(?=.*)((?!\/).)*$');
 		}
-		
+
 		// SingleStep Listing creation
 		Route::namespace('CreateOrEdit\SingleStep')
 			->controller(SingleCreateController::class)
@@ -198,12 +198,12 @@ Route::namespace('Post')
 				Route::get('create', 'getForm');
 				Route::post('create', 'postForm');
 				Route::get('create/finish', 'finish');
-				
+
 				// Payment Gateway Success & Cancel
 				Route::get('create/payment/success', 'paymentConfirmation');
 				Route::get('create/payment/cancel', 'paymentCancel');
 				Route::post('create/payment/success', 'paymentConfirmation');
-				
+
 				// Email Address or Phone Number verification
 				$router->pattern('field', 'email|phone');
 				Route::get('posts/{id}/verify/resend/email', 'reSendEmailVerification');
@@ -211,7 +211,7 @@ Route::namespace('Post')
 				Route::get('posts/verify/{field}/{token?}', 'verification');
 				Route::post('posts/verify/{field}/{token?}', 'verification');
 			});
-		
+
 		// MultiSteps Listing creation
 		Route::namespace('CreateOrEdit\MultiSteps')
 			->controller(CreateController::class)
@@ -226,12 +226,12 @@ Route::namespace('Post')
 				Route::post('posts/create/payment', 'postPaymentStep');
 				Route::post('posts/create/finish', 'finish');
 				Route::get('posts/create/finish', 'finish');
-				
+
 				// Payment Gateway Success & Cancel
 				Route::get('posts/create/payment/success', 'paymentConfirmation');
 				Route::post('posts/create/payment/success', 'paymentConfirmation');
 				Route::get('posts/create/payment/cancel', 'paymentCancel');
-				
+
 				// Email Address or Phone Number verification
 				$router->pattern('field', 'email|phone');
 				Route::get('posts/{id}/verify/resend/email', 'reSendEmailVerification');
@@ -239,24 +239,24 @@ Route::namespace('Post')
 				Route::get('posts/verify/{field}/{token?}', 'verification');
 				Route::post('posts/verify/{field}/{token?}', 'verification');
 			});
-		
+
 		Route::middleware(['auth'])
 			->group(function ($router) {
 				$router->pattern('id', '[0-9]+');
-				
+
 				// SingleStep Listing edition
 				Route::namespace('CreateOrEdit\SingleStep')
 					->controller(SingleEditController::class)
 					->group(function ($router) {
 						Route::get('edit/{id}', 'getForm');
 						Route::put('edit/{id}', 'postForm');
-						
+
 						// Payment Gateway Success & Cancel
 						Route::get('edit/{id}/payment/success', 'paymentConfirmation');
 						Route::get('edit/{id}/payment/cancel', 'paymentCancel');
 						Route::post('edit/{id}/payment/success', 'paymentConfirmation');
 					});
-				
+
 				// MultiSteps Listing Edition
 				Route::namespace('CreateOrEdit\MultiSteps')
 					->group(function ($router) {
@@ -276,7 +276,7 @@ Route::namespace('Post')
 							->group(function ($router) {
 								Route::get('posts/{id}/payment', 'getForm');
 								Route::post('posts/{id}/payment', 'postForm');
-								
+
 								// Payment Gateway Success & Cancel
 								Route::get('posts/{id}/payment/success', 'paymentConfirmation');
 								Route::post('posts/{id}/payment/success', 'paymentConfirmation');
@@ -284,10 +284,10 @@ Route::namespace('Post')
 							});
 					});
 			});
-		
+
 		// Post's Details
 		Route::get(dynamicRoute('routes.post'), [ShowController::class, 'index']);
-		
+
 		// Send report abuse
 		Route::controller(ReportController::class)
 			->group(function ($router) {
@@ -305,11 +305,11 @@ Route::namespace('Account')
 		// Messenger
 		// Contact Post's Author
 		Route::post('messages/posts/{id}', [MessagesController::class, 'store']);
-		
+
 		Route::middleware(['auth', 'banned.user', 'no.http.cache'])
 			->group(function ($router) {
 				$router->pattern('id', '[0-9]+');
-				
+
 				// Users
 				Route::controller(AccountEditController::class)
 					->group(function ($router) {
@@ -330,7 +330,7 @@ Route::namespace('Account')
 								Route::post('close', 'submit');
 							});
 					});
-				
+
 				// Posts
 				Route::controller(PostsController::class)
 					->prefix('posts')
@@ -339,11 +339,11 @@ Route::namespace('Account')
 						Route::get('{pagePath}', 'getPage');
 						Route::get('{pagePath}/{id}/delete', 'destroy');
 						Route::post('{pagePath}/delete', 'destroy');
-						
+
 						Route::get('list/{id}/offline', 'index');
 						Route::get('archived/{id}/repost', 'archivedPosts');
 					});
-				
+
 				// Saved Searches
 				Route::controller(SavedSearchesController::class)
 					->prefix('saved-searches')
@@ -354,7 +354,7 @@ Route::namespace('Account')
 						Route::get('{id}/delete', 'destroy');
 						Route::post('delete', 'destroy');
 					});
-				
+
 				// Messenger
 				Route::controller(MessagesController::class)
 					->prefix('messages')
@@ -370,7 +370,7 @@ Route::namespace('Account')
 						Route::get('{id}/delete', 'destroy');
 						Route::post('delete', 'destroy');
 					});
-				
+
 				// Transactions
 				Route::get('transactions', [TransactionsController::class, 'index']);
 
@@ -462,7 +462,7 @@ Route::namespace('Search')
 	});
 
 
-Route::group(['middleware' => 'auth', 'as' => 'base.', 'prefix' => 'base'], function () {
+Route::group(['as' => 'base.', 'prefix' => 'base'], function () {
     Route::get('models', [ModelAndMarkController::class, 'getModelsByMark'])->name('models');
     Route::get('marks', [ModelAndMarkController::class, 'getMarks'])->name('marks');
 });
