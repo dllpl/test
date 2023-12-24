@@ -109,6 +109,8 @@ class User extends BaseUser
 		'blocked',
 		'closed',
 		'last_activity',
+        'face_type',
+        'user_type',
 	];
 	
 	/**

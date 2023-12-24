@@ -18,6 +18,10 @@
     color: var(--accent);
 }
 
+#close_menu_nav {
+    display: none;
+}
+
 .header__accordion {
     display: none;
     width: 100%;
@@ -373,6 +377,9 @@ p {
     --contrast: #4A85F6;
 }
 @media (max-width: 768px) {
+    #close_menu_nav {
+        display: block;
+    }
     :root {
         --container-offset: 30px;
     }

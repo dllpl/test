@@ -12,6 +12,13 @@
  * of the above copyright notice. If you Purchased from CodeCanyon,
  * Please read the full License from here - https://codecanyon.net/licenses/standard
 --}}
+
+@php
+	$face_type_list = \DB::table('face_type_list')
+	->where('active', true)
+	->get();
+@endphp
+
 @extends('layouts.master')
 @section('content')
 	<section class="search">
@@ -77,6 +84,31 @@
 													<?php $nameError = (isset($errors) && $errors->has('name')) ? ' is-invalid' : ''; ?>
 													<input name="name" placeholder="{{ t('Name') }}"  type="text" class="form-control input input--default {{ $nameError }}" value="{{ old('name') }}">
 												</li>
+												@php
+													$authFieldError = (isset($errors) && $errors->has('auth_field')) ? ' is-invalid' : '';
+												@endphp
+												<div class="row mb-3 required">
+													<label class="col-md-3 col-form-label" for="auth_field"> Тип лица <sup>*</sup></label>
+													<div class="col-md-9">
+														@foreach($face_type_list as $item)
+															<div class="form-check form-check-inline pt-2">
+																<input name="face_type"
+																	   value="{{$item->id}}"
+																	   class="form-check-input auth-field-input{{ $authFieldError }}"
+																	   type="radio"
+																	   @checked($item->checked_by_default)
+																>
+																<label class="form-check-label mb-0">
+																	{{$item->name_short}}
+																</label>
+															</div>
+														@endforeach
+														<div class="form-text text-muted">
+															Выберит Ваш вариант
+														</div>
+													</div>
+												</div>
+
 												{{-- country_code --}}
 												@if (empty(config('country.code')))
 													@php
@@ -102,38 +134,6 @@
 													</div>
 												@else
 													<input id="countryCode" name="country_code" type="hidden" value="{{ config('country.code') }}">
-												@endif
-												{{-- auth_field (as notification channel) --}}
-												@php
-													$authFields = getAuthFields(true);
-                                                    $authFieldError = (isset($errors) && $errors->has('auth_field')) ? ' is-invalid' : '';
-                                                    $usersCanChooseNotifyChannel = isUsersCanChooseNotifyChannel();
-                                                    $authFieldValue = ($usersCanChooseNotifyChannel) ? (old('auth_field', getAuthField())) : getAuthField();
-												@endphp
-												@if ($usersCanChooseNotifyChannel)
-													<div class="row mb-3 required">
-														<label class="col-md-3 col-form-label" for="auth_field">{{ t('notifications_channel') }} <sup>*</sup></label>
-														<div class="col-md-9">
-															@foreach ($authFields as $iAuthField => $notificationType)
-																<div class="form-check form-check-inline pt-2">
-																	<input name="auth_field"
-																		   id="{{ $iAuthField }}AuthField"
-																		   value="{{ $iAuthField }}"
-																		   class="form-check-input auth-field-input{{ $authFieldError }}"
-																		   type="radio" @checked($authFieldValue == $iAuthField)
-																	>
-																	<label class="form-check-label mb-0" for="{{ $iAuthField }}AuthField">
-																		{{ $notificationType }}
-																	</label>
-																</div>
-															@endforeach
-															<div class="form-text text-muted">
-																{{ t('notifications_channel_hint') }}
-															</div>
-														</div>
-													</div>
-												@else
-													<input id="{{ $authFieldValue }}AuthField" name="auth_field" type="hidden" value="{{ $authFieldValue }}">
 												@endif
 
 												@php
@@ -169,6 +169,38 @@
 														>
 														<input name="phone_country" type="hidden" value="{{ old('phone_country', $phoneCountryValue) }}">
 												</li>
+												{{-- auth_field (as notification channel) --}}
+												@php
+													$authFields = getAuthFields(true);
+                                                    $authFieldError = (isset($errors) && $errors->has('auth_field')) ? ' is-invalid' : '';
+                                                    $usersCanChooseNotifyChannel = isUsersCanChooseNotifyChannel();
+                                                    $authFieldValue = ($usersCanChooseNotifyChannel) ? (old('auth_field', getAuthField())) : getAuthField();
+												@endphp
+												@if ($usersCanChooseNotifyChannel)
+													<div class="row mb-3 required">
+														<label class="col-md-3 col-form-label" for="auth_field">{{ t('notifications_channel') }} <sup>*</sup></label>
+														<div class="col-md-9">
+															@foreach ($authFields as $iAuthField => $notificationType)
+																<div class="form-check form-check-inline pt-2">
+																	<input name="auth_field"
+																		   id="{{ $iAuthField }}AuthField"
+																		   value="{{ $iAuthField }}"
+																		   class="form-check-input auth-field-input{{ $authFieldError }}"
+																		   type="radio" @checked($authFieldValue == $iAuthField)
+																	>
+																	<label class="form-check-label mb-0" for="{{ $iAuthField }}AuthField">
+																		{{ $notificationType }}
+																	</label>
+																</div>
+															@endforeach
+															<div class="form-text text-muted">
+																{{ t('notifications_channel_hint') }}
+															</div>
+														</div>
+													</div>
+												@else
+													<input id="{{ $authFieldValue }}AuthField" name="auth_field" type="hidden" value="{{ $authFieldValue }}">
+												@endif
 												{{-- username --}}
 												@php
 													$usernameIsEnabled = !config('larapen.core.disable.username');
@@ -186,6 +218,27 @@
 														>
 													</li>
 												@endif
+
+												@php
+													$user_type_list = \DB::table('user_type_list')
+                                                    ->where('active', true)
+                                                    ->get();
+												@endphp
+
+												<div class="row mb-3 required">
+													<label class="col-md-3 col-form-label">
+														Кто вы <sup>*</sup>
+													</label>
+													<div class="col-md-9 col-lg-9">
+														<select name="user_type" class="form-control large-data-selecter">
+															@foreach ($user_type_list as $key => $item)
+																<option value="{{ $key }}">
+																	{{ $item->name }}
+																</option>
+															@endforeach
+														</select>
+													</div>
+												</div>
 
 												{{-- password --}}
 												<?php $passwordError = (isset($errors) && $errors->has('password')) ? ' is-invalid' : ''; ?>

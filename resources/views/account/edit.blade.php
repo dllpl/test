@@ -145,6 +145,35 @@
 										<label class="form__label{{ $nameError }}" for="name">{{ t('Name') }}</label>
 										<input name="name" type="text" class="input input--default form-control{{ $nameError }}" placeholder="" value="{{ old('name', $user->name) }}">
 									</li>
+									@php
+										$authFieldError = (isset($errors) && $errors->has('auth_field')) ? ' is-invalid' : '';
+									@endphp
+									@php
+										$face_type_list = \DB::table('face_type_list')
+                                        ->where('active', true)
+                                        ->get();
+									@endphp
+									<div class="row mb-3 required">
+										<label class="col-md-3 col-form-label" for="auth_field"> Тип лица <sup>*</sup></label>
+										<div class="col-md-9">
+											@foreach($face_type_list as $item)
+												<div class="form-check form-check-inline pt-2">
+													<input name="face_type"
+														   value="{{$item->id}}"
+														   class="form-check-input auth-field-input{{ $authFieldError }}"
+														   type="radio"
+															@checked($item->id == $user->face_type)
+													>
+													<label class="form-check-label mb-0">
+														{{$item->name_short}}
+													</label>
+												</div>
+											@endforeach
+											<div class="form-text text-muted">
+												Выберит Ваш вариант
+											</div>
+										</div>
+									</div>
 									{{-- username --}}
 									<?php $usernameError = (isset($errors) && $errors->has('username')) ? ' is-invalid' : ''; ?>
 									<li class="form__item">
@@ -157,39 +186,26 @@
 										>
 									</li>
 
-									{{-- auth_field (as notification channel) --}}
 									@php
-										$authFields = getAuthFields(true);
-                                        $authFieldError = (isset($errors) && $errors->has('auth_field')) ? ' is-invalid' : '';
-                                        $usersCanChooseNotifyChannel = isUsersCanChooseNotifyChannel(true);
-                                        $authFieldValue = $user->auth_field ?? getAuthField();
-                                        $authFieldValue = ($usersCanChooseNotifyChannel) ? old('auth_field', $authFieldValue) : $authFieldValue;
+										$user_type_list = \DB::table('user_type_list')
+                                        ->where('active', true)
+                                        ->get();
 									@endphp
-									@if ($usersCanChooseNotifyChannel)
-										<div class="row mb-3 required">
-											<label class="col-md-3 col-form-label" for="auth_field">{{ t('notifications_channel') }} <sup>*</sup></label>
-											<div class="col-md-9">
-												@foreach ($authFields as $iAuthField => $notificationType)
-													<div class="form-check form-check-inline pt-2">
-														<input name="auth_field"
-															   id="{{ $iAuthField }}AuthField"
-															   value="{{ $iAuthField }}"
-															   class="form-check-input auth-field-input{{ $authFieldError }}"
-															   type="radio" @checked($authFieldValue == $iAuthField)
-														>
-														<label class="form-check-label mb-0" for="{{ $iAuthField }}AuthField">
-															{{ $notificationType }}
-														</label>
-													</div>
+
+									<div class="row mb-3 required">
+										<label class="col-md-3 col-form-label">
+											Кто вы <sup>*</sup>
+										</label>
+										<div class="col-md-9 col-lg-9">
+											<select name="user_type" class="form-control large-data-selecter">
+												@foreach ($user_type_list as $item)
+													<option value="{{ $item->id }}" @selected($item->id == $user->user_type)>
+														{{ $item->name }}
+													</option>
 												@endforeach
-												<div class="form-text text-muted">
-													{{ t('notifications_channel_hint') }}
-												</div>
-											</div>
+											</select>
 										</div>
-									@else
-										<input id="{{ $authFieldValue }}AuthField" name="auth_field" type="hidden" value="{{ $authFieldValue }}">
-									@endif
+									</div>
 
 									@php
 										$forceToDisplay = isBothAuthFieldsCanBeDisplayed() ? ' force-to-display' : '';
@@ -244,6 +260,40 @@
 
 									{{-- country_code --}}
 									<input name="country_code" type="hidden" value="{{ $user->country_code }}">
+
+									{{-- auth_field (as notification channel) --}}
+									@php
+										$authFields = getAuthFields(true);
+                                        $authFieldError = (isset($errors) && $errors->has('auth_field')) ? ' is-invalid' : '';
+                                        $usersCanChooseNotifyChannel = isUsersCanChooseNotifyChannel(true);
+                                        $authFieldValue = $user->auth_field ?? getAuthField();
+                                        $authFieldValue = ($usersCanChooseNotifyChannel) ? old('auth_field', $authFieldValue) : $authFieldValue;
+									@endphp
+									@if ($usersCanChooseNotifyChannel)
+										<div class="row mb-3 required">
+											<label class="col-md-3 col-form-label" for="auth_field">{{ t('notifications_channel') }} <sup>*</sup></label>
+											<div class="col-md-9">
+												@foreach ($authFields as $iAuthField => $notificationType)
+													<div class="form-check form-check-inline pt-2">
+														<input name="auth_field"
+															   id="{{ $iAuthField }}AuthField"
+															   value="{{ $iAuthField }}"
+															   class="form-check-input auth-field-input{{ $authFieldError }}"
+															   type="radio" @checked($authFieldValue == $iAuthField)
+														>
+														<label class="form-check-label mb-0" for="{{ $iAuthField }}AuthField">
+															{{ $notificationType }}
+														</label>
+													</div>
+												@endforeach
+												<div class="form-text text-muted">
+													{{ t('notifications_channel_hint') }}
+												</div>
+											</div>
+										</div>
+									@else
+										<input id="{{ $authFieldValue }}AuthField" name="auth_field" type="hidden" value="{{ $authFieldValue }}">
+									@endif
 
 								</ul>
 								<button type="submit" class="form__btn btn btn-reset">{{ t('Update') }}</button>
