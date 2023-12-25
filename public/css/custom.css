@@ -22,6 +22,16 @@
     display: none;
 }
 
+.form-control {
+    border: 2px solid var(--accent)
+}
+
+.select2-container--default .select2-selection--single {
+    border: 2px solid var(--accent);
+    border-radius: 0;
+    background: transparent;
+}
+
 .header__accordion {
     display: none;
     width: 100%;

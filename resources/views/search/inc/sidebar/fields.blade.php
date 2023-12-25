@@ -36,7 +36,7 @@
 					</h5>
 				</div>
 				<div class="block-content list-filter">
-					<div class="filter-content row px-1 gx-1 gy-1">
+					<div class="filter-content row gx-1 gy-1">
 						<div class="col-lg-9 col-md-12 col-sm-12">
 							<input id="{{ $fieldId }}"
 								   name="{{ $fieldName }}"
@@ -242,7 +242,7 @@
 					}
 				@endphp
 				<div class="block-content list-filter">
-					<div class="filter-content row px-1 gx-1 gy-1">
+					<div class="filter-content row gx-1 gy-1">
 						<div class="col-lg-9 col-md-12 col-sm-12">
 							<input id="{{ $fieldId }}"
 								   name="{{ $fieldName }}"
@@ -254,7 +254,7 @@
 							>
 						</div>
 						<div class="col-lg-3 col-md-12 col-sm-12">
-							<button class="btn btn-default btn-block" type="submit">{{ t('go') }}</button>
+							<button class="btn btn-default btn-block" type="submit"><i class="fa fa-search"></i></button>
 						</div>
 					</div>
 				</div>
@@ -275,6 +275,7 @@
 	@parent
 	<script src="{{ url('assets/plugins/momentjs/moment.min.js') }}" type="text/javascript"></script>
 	<script src="{{ url('assets/plugins/bootstrap-daterangepicker/daterangepicker.js') }}" type="text/javascript"></script>
+
 	<script>
 		$(document).ready(function ()
 		{
@@ -446,6 +447,15 @@
 				$(this).val(picker.startDate.format('{{ t('datepicker_format') }}') + ' - ' + picker.endDate.format('{{ t('datepicker_format') }}'));
 			});
 
+			$("[id='cf.41']").suggestions({
+				token: "{{env('DADATA_API_TOKEN', '8122273c27d35ba75910a900bfc2e4a9b3925e1a')}}",
+				type: "ADDRESS"
+			})
+			$("[id='cf.42']").suggestions({
+				token: "{{env('DADATA_API_TOKEN', '8122273c27d35ba75910a900bfc2e4a9b3925e1a')}}",
+				type: "ADDRESS"
+			})
+
 			let mark_field = $('select[id="cf.50"]')
 			let model_field = $('select[id="cf.51"]')
 
@@ -502,6 +512,7 @@
 					},
 					placeholder: 'Поиск модели',
 				});
+
 
 				mark_field.on("select2:selecting", function(e) {
 					model_field.val(null).trigger('change')

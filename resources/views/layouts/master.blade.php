@@ -323,6 +323,10 @@
 
 </script>
 <script src="{{ url('js/custom.js') }}"></script>
+<script src="{{ url('js/plugins/jquery.mask.min.js') }}"></script>
+
+<link href="https://cdn.jsdelivr.net/npm/suggestions-jquery@21.12.0/dist/css/suggestions.min.css" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/suggestions-jquery@21.12.0/dist/js/jquery.suggestions.min.js"></script>
 
 <script>
 
@@ -352,6 +356,18 @@
 			}
 		});
 	}
+
+	$("[name='inn']").mask('0000000000')
+
+	$("[id='cf.41']").suggestions({
+		token: "{{env('DADATA_API_TOKEN', '8122273c27d35ba75910a900bfc2e4a9b3925e1a')}}",
+		type: "ADDRESS"
+	})
+	$("[id='cf.42']").suggestions({
+		token: "{{env('DADATA_API_TOKEN', '8122273c27d35ba75910a900bfc2e4a9b3925e1a')}}",
+		type: "ADDRESS"
+	})
+
 </script>
 
 @stack('after_scripts_stack')

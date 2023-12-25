@@ -528,9 +528,6 @@
 @endsection
 
 @section('after_scripts')
-	<link href="https://cdn.jsdelivr.net/npm/suggestions-jquery@21.12.0/dist/css/suggestions.min.css" rel="stylesheet" />
-	<script src="https://cdn.jsdelivr.net/npm/suggestions-jquery@21.12.0/dist/js/jquery.suggestions.min.js"></script>
-
 	<script>
 		$(function() {
 			$('#cityId').on('change', (e)=> {

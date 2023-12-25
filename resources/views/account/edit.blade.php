@@ -139,15 +139,8 @@
 {{--											@endif--}}
 {{--										</select>--}}
 {{--									</li>--}}
-									{{-- name --}}
-									<?php $nameError = (isset($errors) && $errors->has('name')) ? ' is-invalid' : ''; ?>
-									<li class="form__item required">
-										<label class="form__label{{ $nameError }}" for="name">{{ t('Name') }}</label>
-										<input name="name" type="text" class="input input--default form-control{{ $nameError }}" placeholder="" value="{{ old('name', $user->name) }}">
-									</li>
-									@php
-										$authFieldError = (isset($errors) && $errors->has('auth_field')) ? ' is-invalid' : '';
-									@endphp
+
+
 									@php
 										$face_type_list = \DB::table('face_type_list')
                                         ->where('active', true)
@@ -160,9 +153,9 @@
 												<div class="form-check form-check-inline pt-2">
 													<input name="face_type"
 														   value="{{$item->id}}"
-														   class="form-check-input auth-field-input{{ $authFieldError }}"
+														   class="form-check-input auth-field-input"
 														   type="radio"
-															@checked($item->id == $user->face_type)
+															@checked(old('face_type') ? old('face_type') : $item->id == $user->face_type)
 													>
 													<label class="form-check-label mb-0">
 														{{$item->name_short}}
@@ -174,6 +167,47 @@
 											</div>
 										</div>
 									</div>
+
+									<li class="form__item entity__block required" style="display: none">
+										{{-- inn --}}
+										<label class="form__label">ИНН <sup>*</sup></label>
+										<?php $nameError = (isset($errors) && $errors->has('inn')) ? ' is-invalid' : ''; ?>
+										<input name="inn" placeholder="Введите 10-цифр"  type="number" maxlength="12" class="form-control input input--default {{ $nameError }}" value="{{ old('inn') ? old('inn'): $user->inn }}">
+									</li>
+
+									@php
+										$user_type_list = \DB::table('user_type_list')
+                                        ->where('active', true)
+                                        ->get();
+									@endphp
+									<div class="row mb-3 required entity__block" style="display: none">
+										<label class="col-md-12 col-form-label">
+											Кто вы <sup>*</sup>
+										</label>
+										<div class="col-md-12 col-lg-12">
+											<select name="user_type" class="form-control large-data-selecter">
+												@foreach ($user_type_list as $key => $item)
+													<option value="{{ $key }}" @selected($key == $user->user_type)>
+														{{ $item->name }}
+													</option>
+												@endforeach
+											</select>
+										</div>
+									</div>
+
+									{{-- name --}}
+									<?php $nameError = (isset($errors) && $errors->has('name')) ? ' is-invalid' : ''; ?>
+									<li class="form__item required">
+										<label class="form__label{{ $nameError }}" for="name">ФИО</label>
+										<input name="name" type="text" class="input input--default form-control{{ $nameError }}" placeholder="" value="{{ old('name', $user->name) }}">
+									</li>
+
+									{{-- country_code --}}
+									<input name="country_code" type="hidden" value="{{ $user->country_code }}">
+
+									@php
+										$authFieldError = (isset($errors) && $errors->has('auth_field')) ? ' is-invalid' : '';
+									@endphp
 									{{-- username --}}
 									<?php $usernameError = (isset($errors) && $errors->has('username')) ? ' is-invalid' : ''; ?>
 									<li class="form__item">
@@ -185,27 +219,6 @@
 											   value="{{ old('username', $user->username) }}"
 										>
 									</li>
-
-									@php
-										$user_type_list = \DB::table('user_type_list')
-                                        ->where('active', true)
-                                        ->get();
-									@endphp
-
-									<div class="row mb-3 required">
-										<label class="col-md-3 col-form-label">
-											Кто вы <sup>*</sup>
-										</label>
-										<div class="col-md-9 col-lg-9">
-											<select name="user_type" class="form-control large-data-selecter">
-												@foreach ($user_type_list as $item)
-													<option value="{{ $item->id }}" @selected($item->id == $user->user_type)>
-														{{ $item->name }}
-													</option>
-												@endforeach
-											</select>
-										</div>
-									</div>
 
 									@php
 										$forceToDisplay = isBothAuthFieldsCanBeDisplayed() ? ' force-to-display' : '';
@@ -238,9 +251,9 @@
 									@endphp
 									<li class="form__item required{{ $forceToDisplay }}">
 										<label class="col-md-3 col-form-label{{ $phoneError }}" for="phone">{{ t('phone') }}
-{{--											@if (getAuthField() == 'phone')--}}
-{{--												<sup>*</sup>--}}
-{{--											@endif--}}
+											@if (getAuthField() == 'phone')
+												<sup>*</sup>
+											@endif
 										</label>
 										<div class="input-group">
 											<input id="phone" name="phone"
@@ -257,9 +270,6 @@
 										</div>
 										<input name="phone_country" type="hidden" value="{{ old('phone_country', $phoneCountryValue) }}">
 									</li>
-
-									{{-- country_code --}}
-									<input name="country_code" type="hidden" value="{{ $user->country_code }}">
 
 									{{-- auth_field (as notification channel) --}}
 									@php
@@ -1134,6 +1144,21 @@
 			$('#avatarUploadSuccess ul li').append(out);
 			$('#avatarUploadSuccess').fadeIn('slow');
 		});
+
+		let face_type_checked = $("input[type=radio][name='face_type']:checked")
+		if(face_type_checked.val() === '2') {
+			$('.entity__block').show()
+		} else {
+			$('.entity__block').hide()
+		}
+
+		$("input[type=radio][name='face_type']").on('change', function (){
+			if($(this).val() === '2') {
+				$('.entity__block').show()
+			} else {
+				$('.entity__block').hide()
+			}
+		})
 
 	</script>
 @endsection

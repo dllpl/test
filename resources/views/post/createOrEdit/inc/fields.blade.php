@@ -698,8 +698,16 @@
 						toggleDisabled(false)
 					})
 		}
-
 		// makeRequest()
 	}
+
+	$("[id='cf.41']").suggestions({
+		token: "{{env('DADATA_API_TOKEN', '8122273c27d35ba75910a900bfc2e4a9b3925e1a')}}",
+		type: "ADDRESS"
+	})
+	$("[id='cf.42']").suggestions({
+		token: "{{env('DADATA_API_TOKEN', '8122273c27d35ba75910a900bfc2e4a9b3925e1a')}}",
+		type: "ADDRESS"
+	})
 </script>
 
