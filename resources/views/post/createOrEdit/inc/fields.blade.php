@@ -703,11 +703,15 @@
 
 	$("[id='cf.41']").suggestions({
 		token: "{{env('DADATA_API_TOKEN', '8122273c27d35ba75910a900bfc2e4a9b3925e1a')}}",
-		type: "ADDRESS"
+		type: "ADDRESS",
+		hint: false,
+		bounds: "city-settlement"
 	})
 	$("[id='cf.42']").suggestions({
 		token: "{{env('DADATA_API_TOKEN', '8122273c27d35ba75910a900bfc2e4a9b3925e1a')}}",
-		type: "ADDRESS"
+		type: "ADDRESS",
+		hint: false,
+		bounds: "city-settlement"
 	})
 </script>
 
