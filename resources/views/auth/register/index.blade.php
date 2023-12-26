@@ -12,6 +12,13 @@
  * of the above copyright notice. If you Purchased from CodeCanyon,
  * Please read the full License from here - https://codecanyon.net/licenses/standard
 --}}
+
+@php
+	$face_type_list = \DB::table('face_type_list')
+	->where('active', true)
+	->get();
+@endphp
+
 @extends('layouts.master')
 @section('content')
 	<section class="search">
@@ -71,12 +78,65 @@
 									<div class="form form__container">
 										<form method="POST" class="form__registration" id="signupForm" action="{{ url()->current() }}">
 											<ul class="list-reset form__list">
+
+												<div class="row mb-3 required">
+													<label class="col-md-3 col-form-label" for="auth_field"> Тип лица <sup>*</sup></label>
+													<div class="col-md-9">
+														@foreach($face_type_list as $item)
+															<div class="form-check form-check-inline pt-2">
+																<input name="face_type"
+																	   value="{{$item->id}}"
+																	   class="form-check-input auth-field-input"
+																	   type="radio"
+																		@checked(old('face_type') ? old('face_type') : $item->checked_by_default)
+																>
+																<label class="form-check-label mb-0">
+																	{{$item->name_short}}
+																</label>
+															</div>
+														@endforeach
+														<div class="form-text text-muted">
+															Выберит Ваш вариант
+														</div>
+													</div>
+												</div>
+
+												<li class="form__item entity__block required" style="display: none">
+													{{-- inn --}}
+													<label class="form__label">ИНН <sup>*</sup></label>
+													<?php $nameError = (isset($errors) && $errors->has('inn')) ? ' is-invalid' : ''; ?>
+													<input name="inn" placeholder="Введите 10-цифр"  type="number" maxlength="12" class="form-control input input--default {{ $nameError }}" value="{{ old('inn') }}">
+												</li>
+
+												@php
+													$user_type_list = \DB::table('user_type_list')
+                                                    ->where('active', true)
+                                                    ->get();
+												@endphp
+												<div class="row mb-3 required entity__block" style="display: none">
+													<label class="col-md-12 col-form-label">
+														Кто вы <sup>*</sup>
+													</label>
+													<div class="col-md-12 col-lg-12">
+														<select name="user_type" class="form-control large-data-selecter">
+															@foreach ($user_type_list as $key => $item)
+																<option value="{{ $key }}">
+																	{{ $item->name }}
+																</option>
+															@endforeach
+														</select>
+													</div>
+												</div>
+
 												<li class="form__item required">
 													{{-- name --}}
-													<label class="form__label">Ваше имя</label>
+													<label class="form__label">ФИО</label>
 													<?php $nameError = (isset($errors) && $errors->has('name')) ? ' is-invalid' : ''; ?>
 													<input name="name" placeholder="{{ t('Name') }}"  type="text" class="form-control input input--default {{ $nameError }}" value="{{ old('name') }}">
 												</li>
+												@php
+													$authFieldError = (isset($errors) && $errors->has('auth_field')) ? ' is-invalid' : '';
+												@endphp
 												{{-- country_code --}}
 												@if (empty(config('country.code')))
 													@php
@@ -103,6 +163,60 @@
 												@else
 													<input id="countryCode" name="country_code" type="hidden" value="{{ config('country.code') }}">
 												@endif
+
+												@php
+													$forceToDisplay = isBothAuthFieldsCanBeDisplayed() ? ' force-to-display' : '';
+												@endphp
+
+												{{-- username --}}
+												@php
+													$usernameIsEnabled = !config('larapen.core.disable.username');
+												@endphp
+												@if ($usernameIsEnabled)
+														<?php $usernameError = (isset($errors) && $errors->has('username')) ? ' is-invalid' : ''; ?>
+													<li class="form__item">
+														<label class="form__label" for="username">{{ t('Username') }} (ник-нейм)</label>
+														<input id="username"
+															   name="username"
+															   type="text"
+															   placeholder="{{ t('Username') }}"
+															   value="{{ old('username') }}"
+															   class="form-control input input--default {{ $usernameError }}"
+														>
+													</li>
+												@endif
+
+												{{-- email --}}
+												@php
+													$emailError = (isset($errors) && $errors->has('email')) ? ' is-invalid' : '';
+												@endphp
+												<li class="form__item required{{ $forceToDisplay }}">
+													<label class="form__label" for="email">{{ t('email') }}</label>
+													<input id="email" name="email"
+														   type="email"
+														   class="form-control input input--default {{ $emailError }}"
+														   placeholder="{{ t('email_address') }}"
+														   value="{{ old('email') }}"
+													>
+												</li>
+
+												{{-- phone --}}
+												@php
+													$phoneError = (isset($errors) && $errors->has('phone')) ? ' is-invalid' : '';
+                                                    $phoneCountryValue = config('country.code');
+												@endphp
+												<li class="form__item required{{ $forceToDisplay }}">
+													<label class="form__label" for="phone">{{ t('phone_number') }}</label>
+													<input id="phone" name="phone"
+														   class="form-control input input--default{{ $phoneError }}"
+														   type="tel"
+														   value="{{ phoneE164(old('phone'), old('phone_country', $phoneCountryValue)) }}"
+														   autocomplete="off"
+														   style="width: 100%"
+													>
+													<input name="phone_country" type="hidden" value="{{ old('phone_country', $phoneCountryValue) }}">
+												</li>
+
 												{{-- auth_field (as notification channel) --}}
 												@php
 													$authFields = getAuthFields(true);
@@ -134,57 +248,6 @@
 													</div>
 												@else
 													<input id="{{ $authFieldValue }}AuthField" name="auth_field" type="hidden" value="{{ $authFieldValue }}">
-												@endif
-
-												@php
-													$forceToDisplay = isBothAuthFieldsCanBeDisplayed() ? ' force-to-display' : '';
-												@endphp
-
-												{{-- email --}}
-												@php
-													$emailError = (isset($errors) && $errors->has('email')) ? ' is-invalid' : '';
-												@endphp
-												<li class="form__item required{{ $forceToDisplay }}">
-													<label class="form__label" for="email">{{ t('email') }}</label>
-													<input id="email" name="email"
-														   type="email"
-														   class="form-control input input--default {{ $emailError }}"
-														   placeholder="{{ t('email_address') }}"
-														   value="{{ old('email') }}"
-													>
-												</li>
-												{{-- phone --}}
-												@php
-													$phoneError = (isset($errors) && $errors->has('phone')) ? ' is-invalid' : '';
-                                                    $phoneCountryValue = config('country.code');
-												@endphp
-												<li class="form__item required{{ $forceToDisplay }}">
-													<label class="form__label" for="phone">{{ t('phone_number') }}</label>
-														<input id="phone" name="phone"
-															   class="form-control input input--default{{ $phoneError }}"
-															   type="tel"
-															   value="{{ phoneE164(old('phone'), old('phone_country', $phoneCountryValue)) }}"
-															   autocomplete="off"
-															   style="width: 100%"
-														>
-														<input name="phone_country" type="hidden" value="{{ old('phone_country', $phoneCountryValue) }}">
-												</li>
-												{{-- username --}}
-												@php
-													$usernameIsEnabled = !config('larapen.core.disable.username');
-												@endphp
-												@if ($usernameIsEnabled)
-														<?php $usernameError = (isset($errors) && $errors->has('username')) ? ' is-invalid' : ''; ?>
-													<li class="form__item">
-														<label class="form__label" for="username">{{ t('Username') }}</label>
-														<input id="username"
-															   name="username"
-															   type="text"
-															   placeholder="{{ t('Username') }}"
-															   value="{{ old('username') }}"
-															   class="form-control input input--default {{ $usernameError }}"
-														>
-													</li>
 												@endif
 
 												{{-- password --}}
@@ -543,6 +606,22 @@
 
 				return false;
 			});
+
+			let face_type_checked = $("input[type=radio][name='face_type']:checked")
+			if(face_type_checked.val() === '2') {
+				$('.entity__block').show()
+			} else {
+				$('.entity__block').hide()
+			}
+
+			$("input[type=radio][name='face_type']").on('change', function (){
+				if($(this).val() === '2') {
+					$('.entity__block').show()
+				} else {
+					$('.entity__block').hide()
+				}
+			})
+
 		});
 	</script>
 @endsection

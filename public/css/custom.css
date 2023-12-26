@@ -18,6 +18,20 @@
     color: var(--accent);
 }
 
+#close_menu_nav {
+    display: none;
+}
+
+.form-control {
+    border: 2px solid var(--accent)
+}
+
+.select2-container--default .select2-selection--single {
+    border: 2px solid var(--accent);
+    border-radius: 0;
+    background: transparent;
+}
+
 .header__accordion {
     display: none;
     width: 100%;
@@ -373,6 +387,9 @@ p {
     --contrast: #4A85F6;
 }
 @media (max-width: 768px) {
+    #close_menu_nav {
+        display: block;
+    }
     :root {
         --container-offset: 30px;
     }

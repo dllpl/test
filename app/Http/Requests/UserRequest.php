@@ -124,6 +124,9 @@ class UserRequest extends Request
 			'phone_country' => ['required_with:phone'],
 			'password'      => ['required', 'confirmed'],
 			'accept_terms'  => ['accepted'],
+            'face_type' => 'required',
+            'inn' => ['required_if:face_type,2','min:10', 'max:10'],
+            'user_type' => ['required_if:face_type,2'],
 		];
 		
 		$phoneIsEnabledAsAuthField = (config('settings.sms.enable_phone_as_auth_field') == '1');
@@ -182,6 +185,9 @@ class UserRequest extends Request
 			'phone'         => ['max:30'],
 			'phone_country' => ['required_with:phone'],
 			'username'      => [new UsernameIsValidRule(), new UsernameIsAllowedRule()],
+            'face_type' => 'required',
+            'inn' => ['required_if:face_type,2','min:10', 'max:10'],
+            'user_type' => ['required_if:face_type,2'],
 		];
 		
 		// Check if these fields has changed

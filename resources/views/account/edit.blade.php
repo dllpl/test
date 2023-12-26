@@ -139,12 +139,75 @@
 {{--											@endif--}}
 {{--										</select>--}}
 {{--									</li>--}}
+
+
+									@php
+										$face_type_list = \DB::table('face_type_list')
+                                        ->where('active', true)
+                                        ->get();
+									@endphp
+									<div class="row mb-3 required">
+										<label class="col-md-3 col-form-label" for="auth_field"> Тип лица <sup>*</sup></label>
+										<div class="col-md-9">
+											@foreach($face_type_list as $item)
+												<div class="form-check form-check-inline pt-2">
+													<input name="face_type"
+														   value="{{$item->id}}"
+														   class="form-check-input auth-field-input"
+														   type="radio"
+															@checked(old('face_type') ? old('face_type') : $item->id == $user->face_type)
+													>
+													<label class="form-check-label mb-0">
+														{{$item->name_short}}
+													</label>
+												</div>
+											@endforeach
+											<div class="form-text text-muted">
+												Выберит Ваш вариант
+											</div>
+										</div>
+									</div>
+
+									<li class="form__item entity__block required" style="display: none">
+										{{-- inn --}}
+										<label class="form__label">ИНН <sup>*</sup></label>
+										<?php $nameError = (isset($errors) && $errors->has('inn')) ? ' is-invalid' : ''; ?>
+										<input name="inn" placeholder="Введите 10-цифр"  type="number" maxlength="12" class="form-control input input--default {{ $nameError }}" value="{{ old('inn') ? old('inn'): $user->inn }}">
+									</li>
+
+									@php
+										$user_type_list = \DB::table('user_type_list')
+                                        ->where('active', true)
+                                        ->get();
+									@endphp
+									<div class="row mb-3 required entity__block" style="display: none">
+										<label class="col-md-12 col-form-label">
+											Кто вы <sup>*</sup>
+										</label>
+										<div class="col-md-12 col-lg-12">
+											<select name="user_type" class="form-control large-data-selecter">
+												@foreach ($user_type_list as $key => $item)
+													<option value="{{ $key }}" @selected($key == $user->user_type)>
+														{{ $item->name }}
+													</option>
+												@endforeach
+											</select>
+										</div>
+									</div>
+
 									{{-- name --}}
 									<?php $nameError = (isset($errors) && $errors->has('name')) ? ' is-invalid' : ''; ?>
 									<li class="form__item required">
-										<label class="form__label{{ $nameError }}" for="name">{{ t('Name') }}</label>
+										<label class="form__label{{ $nameError }}" for="name">ФИО</label>
 										<input name="name" type="text" class="input input--default form-control{{ $nameError }}" placeholder="" value="{{ old('name', $user->name) }}">
 									</li>
+
+									{{-- country_code --}}
+									<input name="country_code" type="hidden" value="{{ $user->country_code }}">
+
+									@php
+										$authFieldError = (isset($errors) && $errors->has('auth_field')) ? ' is-invalid' : '';
+									@endphp
 									{{-- username --}}
 									<?php $usernameError = (isset($errors) && $errors->has('username')) ? ' is-invalid' : ''; ?>
 									<li class="form__item">
@@ -155,6 +218,57 @@
 											   placeholder="{{ t('Username') }}"
 											   value="{{ old('username', $user->username) }}"
 										>
+									</li>
+
+									@php
+										$forceToDisplay = isBothAuthFieldsCanBeDisplayed() ? ' force-to-display' : '';
+									@endphp
+
+									{{-- email --}}
+									@php
+										$emailError = (isset($errors) && $errors->has('email')) ? ' is-invalid' : '';
+									@endphp
+									<li class="form__item required{{ $forceToDisplay }}">
+										<label class="form__label{{ $emailError }}" for="email">{{ t('email') }}
+										</label>
+										<div class="input-group">
+											<input id="email" name="email"
+												   type="email"
+												   class="input input--default form-control{{ $emailError }}"
+												   placeholder="{{ t('email_address') }}"
+												   value="{{ old('email', $user->email) }}"
+											>
+										</div>
+									</li>
+
+									{{-- phone --}}
+									@php
+										$phoneError = (isset($errors) && $errors->has('phone')) ? ' is-invalid' : '';
+                                        $phoneValue = $user->phone ?? null;
+                                        $phoneCountryValue = $user->phone_country ?? config('country.code');
+                                        $phoneValue = phoneE164($phoneValue, $phoneCountryValue);
+                                        $phoneValueOld = phoneE164(old('phone', $phoneValue), old('phone_country', $phoneCountryValue));
+									@endphp
+									<li class="form__item required{{ $forceToDisplay }}">
+										<label class="col-md-3 col-form-label{{ $phoneError }}" for="phone">{{ t('phone') }}
+											@if (getAuthField() == 'phone')
+												<sup>*</sup>
+											@endif
+										</label>
+										<div class="input-group">
+											<input id="phone" name="phone"
+												   type="tel"
+												   class="input input--default form-control{{ $phoneError }}"
+												   value="{{ $phoneValueOld }}"
+
+											>
+											<span class="input-group-text iti-group-text">
+														<input name="phone_hidden" id="phoneHidden" type="checkbox" class="input input--default"
+															   value="1" @checked(old('phone_hidden', $user->phone_hidden) == '1')>&nbsp;
+														<small>{{ t('Hide') }}</small>
+													</span>
+										</div>
+										<input name="phone_country" type="hidden" value="{{ old('phone_country', $phoneCountryValue) }}">
 									</li>
 
 									{{-- auth_field (as notification channel) --}}
@@ -190,60 +304,6 @@
 									@else
 										<input id="{{ $authFieldValue }}AuthField" name="auth_field" type="hidden" value="{{ $authFieldValue }}">
 									@endif
-
-									@php
-										$forceToDisplay = isBothAuthFieldsCanBeDisplayed() ? ' force-to-display' : '';
-									@endphp
-
-									{{-- email --}}
-									@php
-										$emailError = (isset($errors) && $errors->has('email')) ? ' is-invalid' : '';
-									@endphp
-									<li class="form__item required{{ $forceToDisplay }}">
-										<label class="form__label{{ $emailError }}" for="email">{{ t('email') }}
-										</label>
-										<div class="input-group">
-											<input id="email" name="email"
-												   type="email"
-												   class="input input--default form-control{{ $emailError }}"
-												   placeholder="{{ t('email_address') }}"
-												   value="{{ old('email', $user->email) }}"
-											>
-										</div>
-									</li>
-
-									{{-- phone --}}
-									@php
-										$phoneError = (isset($errors) && $errors->has('phone')) ? ' is-invalid' : '';
-                                        $phoneValue = $user->phone ?? null;
-                                        $phoneCountryValue = $user->phone_country ?? config('country.code');
-                                        $phoneValue = phoneE164($phoneValue, $phoneCountryValue);
-                                        $phoneValueOld = phoneE164(old('phone', $phoneValue), old('phone_country', $phoneCountryValue));
-									@endphp
-									<li class="form__item required{{ $forceToDisplay }}">
-										<label class="col-md-3 col-form-label{{ $phoneError }}" for="phone">{{ t('phone') }}
-{{--											@if (getAuthField() == 'phone')--}}
-{{--												<sup>*</sup>--}}
-{{--											@endif--}}
-										</label>
-										<div class="input-group">
-											<input id="phone" name="phone"
-												   type="tel"
-												   class="input input--default form-control{{ $phoneError }}"
-												   value="{{ $phoneValueOld }}"
-
-											>
-											<span class="input-group-text iti-group-text">
-														<input name="phone_hidden" id="phoneHidden" type="checkbox" class="input input--default"
-															   value="1" @checked(old('phone_hidden', $user->phone_hidden) == '1')>&nbsp;
-														<small>{{ t('Hide') }}</small>
-													</span>
-										</div>
-										<input name="phone_country" type="hidden" value="{{ old('phone_country', $phoneCountryValue) }}">
-									</li>
-
-									{{-- country_code --}}
-									<input name="country_code" type="hidden" value="{{ $user->country_code }}">
 
 								</ul>
 								<button type="submit" class="form__btn btn btn-reset">{{ t('Update') }}</button>
@@ -1084,6 +1144,21 @@
 			$('#avatarUploadSuccess ul li').append(out);
 			$('#avatarUploadSuccess').fadeIn('slow');
 		});
+
+		let face_type_checked = $("input[type=radio][name='face_type']:checked")
+		if(face_type_checked.val() === '2') {
+			$('.entity__block').show()
+		} else {
+			$('.entity__block').hide()
+		}
+
+		$("input[type=radio][name='face_type']").on('change', function (){
+			if($(this).val() === '2') {
+				$('.entity__block').show()
+			} else {
+				$('.entity__block').hide()
+			}
+		})
 
 	</script>
 @endsection
