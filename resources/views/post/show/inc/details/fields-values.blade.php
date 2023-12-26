@@ -50,7 +50,24 @@
                                 <a href="{{ $fieldValue }}" target="_blank" rel="nofollow">{{ $fieldValue }}</a>
                             @else
                                 @if($fieldName === 'VIN')
-                                    {{ mb_substr($fieldValue, 0, 4) . '***********' }}
+                                    @php
+                                        function showFirstAndLastCharacters($inputString) {
+                                        $length = strlen($inputString);
+                                        $visibleCharacters = 4;
+
+                                        if ($length <= $visibleCharacters * 2) {
+                                            return $inputString;
+                                        }
+
+                                        $firstCharacters = substr($inputString, 0, $visibleCharacters);
+                                        $lastCharacters = substr($inputString, - $visibleCharacters);
+
+                                        $hiddenCharacters = str_repeat('*', $length - ($visibleCharacters * 2));
+
+                                        return $firstCharacters . $hiddenCharacters . $lastCharacters;
+                                    }
+                                    @endphp
+                                    {{ showFirstAndLastCharacters($input) }}
                                 @else
                                     {{ $fieldValue }}
                                 @endif
