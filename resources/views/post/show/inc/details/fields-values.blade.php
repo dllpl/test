@@ -63,7 +63,7 @@
                                             $fieldValue = $firstCharacters . $hiddenCharacters . $lastCharacters;
                                         }
                                     @endphp
-                                    {{ $fieldName  }}
+                                    {{ $fieldValue  }}
                                 @else
                                     {{ $fieldValue }}
                                 @endif
