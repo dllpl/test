@@ -51,16 +51,16 @@
                             @else
                                 @if($fieldName === 'VIN')
                                     @php
-                                        $length = strlen($fieldName);
+                                        $length = strlen($fieldValue);
                                         $visibleCharacters = 4;
 
                                         if ($length > $visibleCharacters * 2) {
-                                            $firstCharacters = substr($fieldName, 0, $visibleCharacters);
-                                            $lastCharacters = substr($fieldName, - $visibleCharacters);
+                                            $firstCharacters = substr($fieldValue, 0, $visibleCharacters);
+                                            $lastCharacters = substr($fieldValue, - $visibleCharacters);
 
                                             $hiddenCharacters = str_repeat('*', $length - ($visibleCharacters * 2));
 
-                                            $fieldName = $firstCharacters . $hiddenCharacters . $lastCharacters;
+                                            $fieldValue = $firstCharacters . $hiddenCharacters . $lastCharacters;
                                         }
                                     @endphp
                                     {{ $fieldName  }}
