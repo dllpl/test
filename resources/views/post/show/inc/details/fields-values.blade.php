@@ -51,7 +51,7 @@
                             @else
                                 @if($fieldName === 'VIN')
                                     @php
-
+                                        function showFirstAndLastCharacters($inputString) {
                                         $length = strlen($fieldName);
                                         $visibleCharacters = 4;
 
@@ -59,14 +59,15 @@
                                             return $fieldName;
                                         }
 
-                                        $firstCharacters = substr($fieldName, 0, $visibleCharacters);
-                                        $lastCharacters = substr($fieldName, - $visibleCharacters);
+                                        $firstCharacters = substr($inputString, 0, $visibleCharacters);
+                                        $lastCharacters = substr($inputString, - $visibleCharacters);
 
                                         $hiddenCharacters = str_repeat('*', $length - ($visibleCharacters * 2));
 
                                         $fieldName = $firstCharacters . $hiddenCharacters . $lastCharacters;
+                                    }
                                     @endphp
-                                    {{ $fieldValue  }}
+                                    {{ $fieldName  }}
                                 @else
                                     {{ $fieldValue }}
                                 @endif
