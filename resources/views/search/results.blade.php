@@ -83,7 +83,7 @@
 							@includeFirst([config('larapen.core.customizedViewPath') . 'search.inc.sidebar', 'search.inc.sidebar'])
 						@endif
 					</div>
-					<div class="catalog__products">
+					<div class="catalog__products @if(isset($cat["name"]) && $cat['name'] === 'Логистика') w-100 @endif">
 						{{-- Nav tabs --}}
 						<button class="menu-nav__btn-open btn btn--form btn-reset">Открыть меню</button>
 						<div class="d-lg-flex justify-content-between d-sm-block mb-1">
@@ -158,7 +158,11 @@
 							@elseif (config('settings.list.display_mode') == 'make-compact')
 								@includeFirst([config('larapen.core.customizedViewPath') . 'search.inc.posts.template.compact', 'search.inc.posts.template.compact'])
 							@else
-								@includeFirst([config('larapen.core.customizedViewPath') . 'search.inc.posts.template.grid', 'search.inc.posts.template.grid'])
+								@if(isset($cat['name']) && $cat['name'] === 'Логистика')
+									@includeFirst([config('larapen.core.customizedViewPath') . 'search.inc.posts.template.compact', 'search.inc.posts.template.compact'])
+								@else
+									@includeFirst([config('larapen.core.customizedViewPath') . 'search.inc.posts.template.grid', 'search.inc.posts.template.grid'])
+								@endif
 							@endif
 {{--						</ul>--}}
 

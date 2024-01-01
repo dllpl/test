@@ -41,11 +41,20 @@ if ($multiCountriesIsEnabled) {
 		</a>
 
 		<div class="mobile-icons-block align-items-baseline">
-			<a href="/account/posts/favourite" class="link">
-				<svg class="header__svg">
-					<use xlink:href="/images/sprite.svg#heart--old"></use>
-				</svg>
-			</a>
+			@if(!auth()->check())
+				<a href="#quickLogin">
+					<svg class="header__svg">
+						<use xlink:href="/images/sprite.svg#user"></use>
+					</svg>
+				</a>
+			@else
+				<a href="/account">
+					<svg class="header__svg">
+						<use xlink:href="/images/sprite.svg#user"></use>
+					</svg>
+				</a>
+			@endif
+
 			<a href="#browseLocations" data-bs-toggle="modal" data-admin-code="0" data-city-id="0">
 				<svg class="icon icon--geo">
 					<use xlink:href="/images/sprite.svg#geo--old"></use>
