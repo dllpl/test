@@ -17,6 +17,8 @@
 		"@pnotify/font-awesome5-fix": "^5.2.0",
 		"axios": "^0.19",
 		"bootstrap": "^4.0.0",
+		"browser-sync": "^2.29.3",
+		"browser-sync-webpack-plugin": "^2.3.0",
 		"cross-env": "^7.0",
 		"jquery": "^3.2",
 		"laravel-mix": "^5.0.1",
