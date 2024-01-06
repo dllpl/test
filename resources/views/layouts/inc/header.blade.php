@@ -42,7 +42,7 @@ if ($multiCountriesIsEnabled) {
 
 		<div class="mobile-icons-block align-items-baseline">
 			@if(!auth()->check())
-				<a href="#quickLogin">
+				<a href="#quickLogin" data-bs-toggle="modal">
 					<svg class="header__svg">
 						<use xlink:href="/images/sprite.svg#user"></use>
 					</svg>
