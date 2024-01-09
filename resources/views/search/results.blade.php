@@ -85,72 +85,110 @@
 					</div>
 					<div class="catalog__products @if(isset($cat["name"]) && $cat['name'] === 'Логистика') w-100 @endif">
 						{{-- Nav tabs --}}
-						<button class="menu-nav__btn-open btn btn--form btn-reset">Открыть меню</button>
-						<div class="d-lg-flex justify-content-between d-sm-block mb-1">
-							<ul class="catalog__info list-reset" id="postType" role="tablist">
-								@php
-									$aClass = '';
-                                    $spanClass = 'alert-danger';
-                                    if (config('settings.single.show_listing_types')) {
-                                        if (!request()->filled('type') || request()->get('type') == '') {
-                                            $aClass = ' active';
-                                            $spanClass = 'bg-danger';
-                                        }
-                                    } else {
-                                        $aClass = ' active';
-                                        $spanClass = 'bg-danger';
-                                    }
-								@endphp
-								<li>
-									<a href="{!! request()->fullUrlWithoutQuery(['page', 'type']) !!}" class="{{ $aClass }}">
-										{{ t('All Listings') }} <span class="counter">({{ data_get($count, '0') }})</span>
-									</a>
-								</li>
+
+						<div class="d-flex justify-content-lg-end justify-content-between mb-2">
+							<button class="menu-nav__btn-open btn btn--form btn-reset"><i class="fas fa-sliders-h"></i> Фильтры</button>
+
+							<div class="d-flex">
+
 								@if (config('settings.single.show_listing_types'))
 									@if (isset($postTypes) && !empty($postTypes))
-										@foreach ($postTypes as $postType)
-											@php
-												$postTypeUrl = request()->fullUrlWithQuery(['type' => data_get($postType, 'id'), 'page' => null]);
-                                                $postTypeCount = data_get($count, data_get($postType, 'id')) ?? 0;
-											@endphp
-											@if (request()->filled('type') && request()->get('type') == data_get($postType, 'id'))
-												<li>
-													<a href="{!! $postTypeUrl !!}" class="active">
-														{{ data_get($postType, 'name') }}
-														<span class="counter">
-														({{ $postTypeCount }})
-													</span>
-													</a>
-												</li>
-											@else
-												<li>
+										<select id="orderBy" title="sort by" class="niceselecter select-sort-by small" data-style="btn-select" data-width="auto">
+											<option value="{!! request()->fullUrlWithoutQuery(['page', 'type']) !!}">
+												<a href="{!! request()->fullUrlWithoutQuery(['page', 'type']) !!}">
+													{{ t('All Listings') }} <span class="counter">({{ data_get($count, '0') }})</span>
+												</a>
+											</option>
+											@foreach ($postTypes as $postType)
+												@php
+													$postTypeUrl = request()->fullUrlWithQuery(['type' => data_get($postType, 'id'), 'page' => null]);
+													$postTypeCount = data_get($count, data_get($postType, 'id')) ?? 0;
+													if(request()->filled('type') && request()->get('type') == data_get($postType, 'id')) {
+														$option['isSelected'] = true;
+													} else {
+														$option['isSelected'] = false;
+													}
+												@endphp
+												<option @selected(data_get($option, 'isSelected')) value="{!! $postTypeUrl !!}">
 													<a href="{!! $postTypeUrl !!}">
 														{{ data_get($postType, 'name') }}
 														<span class="counter">
-														({{ $postTypeCount }})
-													</span>
+															({{ $postTypeCount }})
+														</span>
 													</a>
-												</li>
+												</option>
+											@endforeach
+										</select>
+									@endif
+								@endif
+
+
+{{--							<ul class="catalog__info list-reset" id="postType" role="tablist">--}}
+{{--								@php--}}
+{{--									$aClass = '';--}}
+{{--                                    $spanClass = 'alert-danger';--}}
+{{--                                    if (config('settings.single.show_listing_types')) {--}}
+{{--                                        if (!request()->filled('type') || request()->get('type') == '') {--}}
+{{--                                            $aClass = ' active';--}}
+{{--                                            $spanClass = 'bg-danger';--}}
+{{--                                        }--}}
+{{--                                    } else {--}}
+{{--                                        $aClass = ' active';--}}
+{{--                                        $spanClass = 'bg-danger';--}}
+{{--                                    }--}}
+{{--								@endphp--}}
+{{--								<li>--}}
+{{--									<a href="{!! request()->fullUrlWithoutQuery(['page', 'type']) !!}" class="{{ $aClass }}">--}}
+{{--										{{ t('All Listings') }} <span class="counter">({{ data_get($count, '0') }})</span>--}}
+{{--									</a>--}}
+{{--								</li>--}}
+{{--								@if (config('settings.single.show_listing_types'))--}}
+{{--									@if (isset($postTypes) && !empty($postTypes))--}}
+{{--										@foreach ($postTypes as $postType)--}}
+{{--											@php--}}
+{{--												$postTypeUrl = request()->fullUrlWithQuery(['type' => data_get($postType, 'id'), 'page' => null]);--}}
+{{--                                                $postTypeCount = data_get($count, data_get($postType, 'id')) ?? 0;--}}
+{{--											@endphp--}}
+{{--											@if (request()->filled('type') && request()->get('type') == data_get($postType, 'id'))--}}
+{{--												<li>--}}
+{{--													<a href="{!! $postTypeUrl !!}" class="active">--}}
+{{--														{{ data_get($postType, 'name') }}--}}
+{{--														<span class="counter">--}}
+{{--														({{ $postTypeCount }})--}}
+{{--													</span>--}}
+{{--													</a>--}}
+{{--												</li>--}}
+{{--											@else--}}
+{{--												<li>--}}
+{{--													<a href="{!! $postTypeUrl !!}">--}}
+{{--														{{ data_get($postType, 'name') }}--}}
+{{--														<span class="counter">--}}
+{{--														({{ $postTypeCount }})--}}
+{{--													</span>--}}
+{{--													</a>--}}
+{{--												</li>--}}
+{{--											@endif--}}
+{{--										@endforeach--}}
+{{--									@endif--}}
+{{--								@endif--}}
+{{--							</ul>--}}
+							{{-- OrderBy Desktop --}}
+								<select id="orderBy" title="sort by" class="niceselecter select-sort-by small" data-style="btn-select" data-width="auto">
+									@if (isset($orderByOptions) && !empty($orderByOptions))
+										@foreach($orderByOptions as $option)
+											@if (data_get($option, 'condition'))
+												@php
+													$optionUrl = request()->fullUrlWithQuery((array)data_get($option, 'query'));
+												@endphp
+												<option @selected(data_get($option, 'isSelected')) value="{!! $optionUrl !!}">
+													{{ data_get($option, 'label') }}
+												</option>
 											@endif
 										@endforeach
 									@endif
-								@endif
-							</ul>
-							{{-- OrderBy Desktop --}}
-							<select id="orderBy" title="sort by" class="niceselecter select-sort-by small" data-style="btn-select" data-width="auto">
-								@if (isset($orderByOptions) && !empty($orderByOptions))
-									@foreach($orderByOptions as $option)
-										@if (data_get($option, 'condition'))
-											@php
-												$optionUrl = request()->fullUrlWithQuery((array)data_get($option, 'query'));
-											@endphp
-											<option @selected(data_get($option, 'isSelected')) value="{!! $optionUrl !!}">
-												{{ data_get($option, 'label') }}
-											</option>
-										@endif
-									@endforeach
-								@endif
-							</select>
+								</select>
+
+							</div>
 						</div>
 {{--						<ul class="catalog__preview list-reset grid grid--coll-3">--}}
 							@if (config('settings.list.display_mode') == 'make-list')

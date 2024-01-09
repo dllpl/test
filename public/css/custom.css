@@ -898,7 +898,6 @@ p {
     width: 255px;
     -ms-flex-negative: 0;
     flex-shrink: 0;
-    border-radius: 8px;
     background-color: var(--main-dark);
     padding: 20px;
     z-index: 999;
@@ -936,6 +935,11 @@ p {
     -ms-transform: translateX(calc(0% - var(--container-offset)));
     transform: translateX(calc(0% - var(--container-offset)));
 }
+
+.nice-select {
+    border-radius: 0;
+}
+
 .menu-nav__btn-open {
     padding: 5px;
     background-color: var(--accent);
@@ -945,7 +949,7 @@ p {
 @media (max-width: 768px) {
     .menu-nav__btn-open {
         display: block;
-        margin: 0 auto 10px 0;
+        /*margin: 0 auto 10px 0;*/
     }
 }
 .menu-nav__btn-close {
