@@ -1798,8 +1798,12 @@ p {
     background-color: var(--accent);
 }
 .path__list {
-    overflow: hidden;
-    display: -webkit-inline-box;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
 }
 .path__item {
     color: var(--dark-grey);
