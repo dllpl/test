@@ -2164,7 +2164,7 @@ html[dir="rtl"] body .intro h1, .intro html[dir="rtl"] body h1, html[dir="rtl"] 
 	}
 
 	.footer ul:last-child {
-		margin-top: 20px;
+		/*margin-top: 20px;*/
 	}
 }
 

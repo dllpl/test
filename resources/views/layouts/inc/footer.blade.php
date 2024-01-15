@@ -17,7 +17,7 @@ $socialAndAppsLinksAreEnabled = ($socialLinksAreEnabled || $appsLinksAreEnabled)
 <footer class="footer">
 	@if (!config('settings.footer.hide_links'))
 		<div class="footer__container container">
-			<div class="footer__content">
+			<div class="footer__content d-none d-sm-grid">
 				<div class="footer__menu">
 					<h2 class="footer__title title ">
 						О системе
@@ -81,12 +81,12 @@ $socialAndAppsLinksAreEnabled = ($socialLinksAreEnabled || $appsLinksAreEnabled)
 					</h2>
 					<ul class="list-reset">
 						<li class="footer__item">
-							<a href="#" class="link link--flex">
+							<a href="tel:89172888001" class="link link--flex">
 								<svg class="footer__svg">
 									<use xlink:href="/images/sprite.svg#phone"></use>
 								</svg>
 								<div class="footer__info-wrapp">
-									<span class="footer__info">8 800 500-05-15 </span>
+									<span class="footer__info">+7 (917) 288-80-01 </span>
 									<span class="footer__info">Бесплатно по России</span>
 								</div>
 							</a>
@@ -105,11 +105,122 @@ $socialAndAppsLinksAreEnabled = ($socialLinksAreEnabled || $appsLinksAreEnabled)
 					</ul>
 				</div>
 			</div>
+			<div class="d-sm-none">
+
+				<ul class="list-reset header__list">
+					<li class="header__item header__accordion">
+						<div class="accordion accordion__footer">О системе Automost</div>
+						<div class="accordion__panel" style="background-color: transparent; border-bottom-color: #686868">
+							<ul class="py-2">
+								<li>
+									<a href="/page/faq"> Часто задаваемые вопросы </a>
+								</li>
+								<li>
+									<a href="/page/anti-scam"> Анти-мошенничество </a>
+								</li>
+								<li>
+									<a href="/page/terms"> Правила использования </a>
+								</li>
+								<li>
+									<a href="/page/privacy"> Политика конфиденциальности </a>
+								</li>
+							</ul>
+						</div>
+
+						<div class="accordion accordion__footer">Информация</div>
+						<div class="accordion__panel" style="background-color: transparent; border-bottom-color: #686868">
+							<ul class="py-2">
+								<li><a href="http://127.0.0.1:8000/contact"> Связаться </a></li>
+								<li><a href="http://127.0.0.1:8000/sitemap"> Карта сайта </a></li>
+							</ul>
+						</div>
+
+						<div class="accordion accordion__footer">Аккаунт</div>
+						<div class="accordion__panel" style="background-color: transparent; border-bottom-color: #686868">
+							<ul class="py-2">
+								<li><a href="#quickLogin" class="link" data-bs-toggle="modal"><i class="fas fa-user"></i> Войти</a></li>
+								<li><a href="http://127.0.0.1:8000/register" class="link"><i class="far fa-user"></i> Зарегистрироваться</a></li>
+							</ul>
+						</div>
+					</li>
+					<li class="dropdown no-arrow open-on-hover hide__mobile">
+						<a href="#" class="link link--flex dropdown-toggle" data-bs-toggle="dropdown">
+							<svg class="header__svg">
+								<use xlink:href="/images/sprite.svg#user"></use>
+							</svg>
+							<span class="header__content-adaptive">Вход и регистрация</span>
+						</a>
+						<ul id="authDropdownMenu" class="dropdown-menu user-menu shadow-sm">
+							<li class="dropdown-item">
+								<a href="#quickLogin" class="link" data-bs-toggle="modal"><i class="fas fa-user"></i> Войти</a>
+							</li>
+							<li class="dropdown-item">
+								<a href="http://127.0.0.1:8000/register" class="link"><i class="far fa-user"></i> Зарегистрироваться</a>
+							</li>
+						</ul>
+					</li>
+
+
+
+					<li>
+						<span style="font-size: 16px; font-weight: 500; padding: 10px 0">Контакты</span>
+						<ul class="py-2">
+							<li class="mb-2">
+								<a href="tel:89172888001" class="link link--flex">
+									<i class="fa fa-phone-alt fa-2x"></i>
+									<div class="footer__info-wrapp">
+										<span class="footer__info">+7 (917) 288-80-01 </span>
+										<span class="footer__info">Бесплатно по России</span>
+									</div>
+								</a>
+							</li>
+							<li class="mb-2">
+								<a href="#" class="link link--flex">
+									<i class="fa fa-envelope fa-2x"></i>
+									<div class="footer__info-wrapp">
+										<span class="footer__info">info@barsovoz.ru </span>
+										<span class="footer__info">Служба поддержки</span>
+									</div>
+								</a>
+							</li>
+							<li class="mb-2">
+								<a href="https://vk.com/automost_pro" target="_blank" class="link link--flex">
+									<img src="/images/icon/VK.svg" alt="VK" width="24px">
+									<div class="footer__info-wrapp">
+										<span class="footer__info">vk.com/automost_pro</span>
+										<span class="footer__info">Сообщество в VK</span>
+									</div>
+								</a>
+							</li>
+						</ul>
+					</li>
+
+					<li class="header__item header__accordion">
+						<div class="accordion accordion__footer">Документы</div>
+						<div class="accordion__panel" style="background-color: transparent; border-bottom-color: #686868">
+							<ul class="py-2">
+								<li>
+									<a href="/page/faq">Политика конфиденциальности</a>
+								</li>
+								<li>
+									<a href="/page/anti-scam"> Анти-мошенничество </a>
+								</li>
+								<li>
+									<a href="/page/terms"> Правила использования </a>
+								</li>
+								<li>
+									<a href="/page/privacy"> Политика конфиденциальности </a>
+								</li>
+							</ul>
+						</div>
+					</li>
+				</ul>
+			</div>
 		</div>
 	@endif
 	<div class="footer__copyright copyright">
 		<div class="copyright__container container">
-			<ul class="list-reset copyright__list">
+			<ul class="list-reset copyright__list d-none d-sm-flex">
 				<li class="copyright__item">
 					<a href="#" class="">
 						Политика конфиденциальности
@@ -127,12 +238,7 @@ $socialAndAppsLinksAreEnabled = ($socialLinksAreEnabled || $appsLinksAreEnabled)
 				</li>
 			</ul>
 			<ul class="list-reset copyright__list">
-				<li class="copyright__item">
-					<a href="#" class="">
-						Разработка сайта — SOLUTION
-					</a>
-				</li>
-				<li class="copyright__item">
+				<li class="copyright__item text-end">
 					{{ config('settings.app.name') }}, {{ date('Y') }}
 				</li>
 			</ul>

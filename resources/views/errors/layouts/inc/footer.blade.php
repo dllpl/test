@@ -76,12 +76,12 @@ $socialAndAppsLinksAreEnabled = ($socialLinksAreEnabled || $appsLinksAreEnabled)
 					</h2>
 					<ul class="list-reset">
 						<li class="footer__item">
-							<a href="#" class="link link--flex">
+							<a href="tel:89172888001" class="link link--flex">
 								<svg class="footer__svg">
 									<use xlink:href="/images/sprite.svg#phone"></use>
 								</svg>
 								<div class="footer__info-wrapp">
-									<span class="footer__info">8 800 500-05-15 </span>
+									<span class="footer__info">+7 (917) 288-80-01 </span>
 									<span class="footer__info">Бесплатно по России</span>
 								</div>
 							</a>

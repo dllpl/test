@@ -252,12 +252,12 @@ if ($multiCountriesIsEnabled) {
 					<span style="font-size: 16px; font-weight: 500; padding: 10px 0">Контакты</span>
 					<ul>
 						<li>
-							<a href="#" class="link link--flex">
+							<a href="tel:89172888001" class="link link--flex">
 								<svg class="header__svg">
 									<use xlink:href="/images/sprite.svg#phone"></use>
 								</svg>
 								<div class="footer__info-wrapp">
-									<span class="footer__info">8 800 500-05-15 </span>
+									<span class="footer__info">+7 (917) 288-80-01 </span>
 									<span class="footer__info">Бесплатно по России</span>
 								</div>
 							</a>

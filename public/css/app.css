@@ -3079,12 +3079,12 @@ url("/assets/fonts/bootstrapicons/1.9.1/fonts/bootstrap-icons.woff?8d200481aa7f0
 
 .no-csspointerevents .nice-select.open .list {
   display: block; }
-/* 
- * Scroller v3.1.2 - 2014-12-08 
- * A jQuery plugin for replacing default browser scrollbars. Part of the Formstone Library. 
- * http://formstone.it/scroller/ 
- * 
- * Copyright 2014 Ben Plum; MIT Licensed 
+/*
+ * Scroller v3.1.2 - 2014-12-08
+ * A jQuery plugin for replacing default browser scrollbars. Part of the Formstone Library.
+ * http://formstone.it/scroller/
+ *
+ * Copyright 2014 Ben Plum; MIT Licensed
  */
 
 
@@ -3185,12 +3185,12 @@ url("/assets/fonts/bootstrapicons/1.9.1/fonts/bootstrap-icons.woff?8d200481aa7f0
 .scroller-active .scroller-bar {
   display: block;
 }
-/* 
- * Selecter v3.2.3 - 2014-11-25 
- * A jQuery plugin for replacing default select elements. Part of the Formstone Library. 
- * http://formstone.it/selecter/ 
- * 
- * Copyright 2014 Ben Plum; MIT Licensed 
+/*
+ * Selecter v3.2.3 - 2014-11-25
+ * A jQuery plugin for replacing default select elements. Part of the Formstone Library.
+ * http://formstone.it/selecter/
+ *
+ * Copyright 2014 Ben Plum; MIT Licensed
  */
 
 
@@ -5614,7 +5614,7 @@ html[dir="rtl"] body .intro h1, .intro html[dir="rtl"] body h1, html[dir="rtl"] 
 	}
 
 	.footer ul:last-child {
-		margin-top: 20px;
+		/*margin-top: 20px;*/
 	}
 }
 

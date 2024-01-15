@@ -2,9 +2,10 @@
     $posts ??= [];
     $totalPosts ??= 0;
 
+    $user = auth()->user();
+
     /** Проверяем серт ли пользователь */
     if(auth()->user()) {
-        $user = auth()->user();
         $user_cert = (bool)\DB::table('request_to_super')
             ->where('user_id', $user->id)
             ->where('status', 1)
@@ -13,6 +14,8 @@
     } else {
         $user_cert = false;
     }
+
+    $user ? $user_id = $user->id : $user_id = null;
 
     /** Тайминг для показа объяв 24 часа */
     $hour_to_public = env('CERT_HOUR', 24);
@@ -29,8 +32,11 @@
             @php
                 $time = (time() - strtotime($post['created_at']) >= $hour_to_public * 60 * 60);
             @endphp
-            @if((time() - strtotime($post['created_at']) >= $hour_to_public * 60 * 60) || $user_cert)
-
+            @if(((time() - strtotime($post['created_at']) >= $hour_to_public * 60 * 60))
+            || $user_cert
+            || $post['category_id'] != 138
+            || $post['user_id'] == $user_id
+            )
                 @if (data_get($post, 'featured') == 1)
                     @if (!empty(data_get($post, 'latestPayment.package')))
                         @if (data_get($post, 'latestPayment.package.ribbon') != '')
