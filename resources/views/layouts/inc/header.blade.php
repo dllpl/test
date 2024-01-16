@@ -268,7 +268,7 @@ if ($multiCountriesIsEnabled) {
 									<use xlink:href="/images/sprite.svg#mail"></use>
 								</svg>
 								<div class="footer__info-wrapp">
-									<span class="footer__info">info@barsovoz.ru </span>
+									<span class="footer__info">info@automost.pro </span>
 									<span class="footer__info">Служба поддержки</span>
 								</div>
 							</a>

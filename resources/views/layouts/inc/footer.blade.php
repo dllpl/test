@@ -97,7 +97,7 @@ $socialAndAppsLinksAreEnabled = ($socialLinksAreEnabled || $appsLinksAreEnabled)
 									<use xlink:href="/images/sprite.svg#mail"></use>
 								</svg>
 								<div class="footer__info-wrapp">
-									<span class="footer__info">info@barsovoz.ru </span>
+									<span class="footer__info">info@automost.pro </span>
 									<span class="footer__info">Служба поддержки</span>
 								</div>
 							</a>
@@ -178,7 +178,7 @@ $socialAndAppsLinksAreEnabled = ($socialLinksAreEnabled || $appsLinksAreEnabled)
 								<a href="#" class="link link--flex">
 									<i class="fa fa-envelope fa-2x"></i>
 									<div class="footer__info-wrapp">
-										<span class="footer__info">info@barsovoz.ru </span>
+										<span class="footer__info">info@automost.pro </span>
 										<span class="footer__info">Служба поддержки</span>
 									</div>
 								</a>

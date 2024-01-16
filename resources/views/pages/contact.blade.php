@@ -135,7 +135,7 @@
 						<p>Звонок по России бесплатный</p>
 					</div>
 					<div class="callback__description">
-						<a class="title title--xl" href="mailto:info@barsovoz.ru">info@barsovoz.ru</a>
+						<a class="title title--xl" href="mailto:info@automost.pro">info@automost.pro</a>
 						<p>Техподдержка</p>
 					</div>
 				</div>
