@@ -130,8 +130,8 @@ $socialAndAppsLinksAreEnabled = ($socialLinksAreEnabled || $appsLinksAreEnabled)
 						<div class="accordion accordion__footer">Информация</div>
 						<div class="accordion__panel" style="background-color: transparent; border-bottom-color: #686868">
 							<ul class="py-2">
-								<li><a href="http://127.0.0.1:8000/contact"> Связаться </a></li>
-								<li><a href="http://127.0.0.1:8000/sitemap"> Карта сайта </a></li>
+								<li><a href="/contact"> Связаться </a></li>
+								<li><a href="/sitemap"> Карта сайта </a></li>
 							</ul>
 						</div>
 
@@ -139,7 +139,7 @@ $socialAndAppsLinksAreEnabled = ($socialLinksAreEnabled || $appsLinksAreEnabled)
 						<div class="accordion__panel" style="background-color: transparent; border-bottom-color: #686868">
 							<ul class="py-2">
 								<li><a href="#quickLogin" class="link" data-bs-toggle="modal"><i class="fas fa-user"></i> Войти</a></li>
-								<li><a href="http://127.0.0.1:8000/register" class="link"><i class="far fa-user"></i> Зарегистрироваться</a></li>
+								<li><a href="/register" class="link"><i class="far fa-user"></i> Зарегистрироваться</a></li>
 							</ul>
 						</div>
 					</li>
@@ -155,7 +155,7 @@ $socialAndAppsLinksAreEnabled = ($socialLinksAreEnabled || $appsLinksAreEnabled)
 								<a href="#quickLogin" class="link" data-bs-toggle="modal"><i class="fas fa-user"></i> Войти</a>
 							</li>
 							<li class="dropdown-item">
-								<a href="http://127.0.0.1:8000/register" class="link"><i class="far fa-user"></i> Зарегистрироваться</a>
+								<a href="/register" class="link"><i class="far fa-user"></i> Зарегистрироваться</a>
 							</li>
 						</ul>
 					</li>
