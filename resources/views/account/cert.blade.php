@@ -58,7 +58,7 @@
                         <p class="mb-3">Отметку «Сертифицированный пользователь» могут получить только профессиональные пользователи
                             AUTOMOST, которые подтвердят права на что-то.</p>
                         @if(\App\Helpers\SuperUser::status() !== 1)
-                            <h3 class="mb-3 title">Как получить сертификацию?</h3>
+                            <h3 class="mb-3 title">Как получить аккредитацию?</h3>
                             <p class="mb-3">Отметку «Сертифицированный пользователь» могут получить только профессиональные пользователи
                                 AUTOMOST, которые подтвердят права на что-то.</p>
                         @endif
@@ -73,7 +73,7 @@
                         </ul>
                         @if(\App\Helpers\SuperUser::status() === null)
                             <button data-url="{{route('super-user.send-request')}}" id="super_user_send_request"
-                                    class="btn-reset search__link link link--btn link--accent" style="padding: 10px;">Подать заявку на сертификацию
+                                    class="btn-reset search__link link link--btn link--accent" style="padding: 10px;">Подать заявку на аккредитацию
                             </button>
                         @endif
                     </div>
@@ -86,7 +86,7 @@
 @section('after_scripts')
     <script>
         $('#super_user_send_request').on('click', function () {
-            jsAlert('Отправляем запрос на сертификацию', 'warning');
+            jsAlert('Отправляем запрос на аккредитацию', 'warning');
             $.ajax({
                 method: 'POST',
                 url: $(this).data('url'),

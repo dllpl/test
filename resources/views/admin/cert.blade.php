@@ -9,7 +9,7 @@
     <div class="row page-titles">
         <div class="col-md-6 col-12 align-self-center">
             <h3 class="mb-0">
-                Запросы на сертификацию
+                Запросы на аккредитацию
             </h3>
         </div>
         <div class="col-md-6 col-12 align-self-center d-none d-md-flex justify-content-end">
