@@ -202,7 +202,7 @@ class FrontController extends Controller
 				'isActive'   => (request()->segment(1) == 'account' && request()->segment(2) == null),
 			],
             [
-                'name'       => 'Сертификация',
+                'name'       => 'Аккредитация',
                 'url'        => route('user.cert.index'),
                 'icon'       => 'fa fa-spinner',
                 'group'      => t('My Account'),

@@ -46,7 +46,7 @@
                     <button class="menu-nav__btn-open btn btn--form btn-reset">Открыть меню</button>
                     <div class="lk-product">
                     @if(\App\Helpers\SuperUser::status() === null)
-                            <h2 class="lk__title title title--medium">Сертификация</h2>
+                            <h2 class="lk__title title title--medium">Аккредитация</h2>
                         @elseif(\App\Helpers\SuperUser::status() === 0)
                             <h2 class="lk__title title title--medium">Ваша заявка в обработке. Пожалуйста, ожидайте решения</h2>
                         @elseif(\App\Helpers\SuperUser::status() === 2)

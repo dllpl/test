@@ -374,7 +374,7 @@ Route::namespace('Account')
 				// Transactions
 				Route::get('transactions', [TransactionsController::class, 'index']);
 
-                // Сертификация
+                // Аккредитация
                 Route::get('cert', [CertController::class, 'index'])->name('cert.index');
 			});
 	});
