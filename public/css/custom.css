@@ -1567,6 +1567,7 @@ p {
     max-height: 100%;
     /*max-width: 100%;*/
     margin: auto;
+    height: 130px;
 }
 .catalog-promo__content-wrapp {
     display: -webkit-box;
