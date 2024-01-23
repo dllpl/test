@@ -16,6 +16,8 @@
 
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\Api\Docs\DocsController;
+
 /*
 |--------------------------------------------------------------------------
 | Application Routes
@@ -35,7 +37,11 @@ Route::middleware(['installed'])
 		// admin
 		$prefix = config('larapen.admin.route', 'admin');
 		Route::namespace('Admin')->prefix($prefix)->group(__DIR__ . '/web/admin.php');
-		
+
 		// public
 		Route::namespace('Public')->group(__DIR__ . '/web/public.php');
 	});
+
+Route::group(['prefix' => 'docs'], function () {
+    Route::post('dkp', [DocsController::class, 'makeDkp']);
+});

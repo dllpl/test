@@ -59,28 +59,28 @@ use Illuminate\Support\Facades\Route;
 // auth
 Route::namespace('Auth')
 	->group(function ($router) {
-		
+
 		Route::prefix('auth')
 			->group(function ($router) {
 				$router->pattern('userId', '[0-9]+');
-				
+
 				Route::controller(LoginController::class)
 					->group(function ($router) {
 						Route::post('login', 'login')->name('auth.login');
 						Route::get('logout/{userId}', 'logout')->name('auth.logout');
 					});
-				
+
 				Route::controller(ForgotPasswordController::class)
 					->group(function ($router) {
 						Route::post('password/email', 'sendResetLink')->name('auth.password.email');
 					});
-				
+
 				Route::controller(ResetPasswordController::class)
 					->group(function ($router) {
 						Route::post('password/token', 'sendResetToken')->name('auth.password.token');
 						Route::post('password/reset', 'reset')->name('auth.password.reset');
 					});
-				
+
 				Route::controller(SocialController::class)
 					->group(function ($router) {
 						$router->pattern('provider', 'facebook|linkedin|google');
@@ -88,7 +88,7 @@ Route::namespace('Auth')
 						Route::get('{provider}/callback', 'handleProviderCallback');
 					});
 			});
-		
+
 		Route::controller(ForgotPasswordController::class)
 			->group(function ($router) {
 				// password - Email Address or Phone Number verification
@@ -98,7 +98,7 @@ Route::namespace('Auth')
 				Route::get('password/{id}/verify/resend/sms', 'reSendPhoneVerification');   // Not implemented
 				Route::get('password/verify/{field}/{token?}', 'verification');
 			});
-		
+
 	});
 
 // genders
@@ -141,18 +141,18 @@ Route::prefix('userTypes')
 Route::prefix('categories')
 	->group(function ($router) {
 		$router->pattern('id', '[0-9]+');
-		
+
 		Route::controller(CategoryController::class)
 			->group(function ($router) {
 				$router->pattern('slugOrId', '[^/]+');
 				Route::get('/', 'index')->name('categories.index');
 				Route::get('{slugOrId}', 'show')->name('categories.show');
-				
+
 				// Get custom fields (to complete form fields)
 				Route::get('{id}/fields', 'getCustomFields')->name('categories.fields'); // Not used due to big JSON data sending
 				Route::post('{id}/fields', 'getCustomFields')->name('categories.fields.post');
 			});
-		
+
 		Route::controller(PostController::class)
 			->group(function ($router) {
 				// Get custom fields values related to a listing (to display fields data in the listing details)
@@ -170,7 +170,7 @@ Route::prefix('countries')
 				Route::get('/', 'index')->name('countries.index');
 				Route::get('{code}', 'show')->name('countries.show');
 			});
-		
+
 		$router->pattern('countryCode', '[a-zA-Z]{2}');
 		Route::get('{countryCode}/subAdmins1', [SubAdmin1Controller::class, 'index'])->name('subAdmins1.index');
 		Route::get('{countryCode}/subAdmins2', [SubAdmin2Controller::class, 'index'])->name('subAdmins2.index');
@@ -206,7 +206,7 @@ Route::prefix('users')
 	->controller(UserController::class)
 	->group(function ($router) {
 		$router->pattern('id', '[0-9]+');
-		
+
 		Route::get('/', 'index')->name('users.index');
 		Route::get('{id}', 'show')->name('users.show');
 		Route::post('/', 'store')->name('users.store');
@@ -216,7 +216,7 @@ Route::prefix('users')
 				Route::put('{id}', 'update')->name('users.update');
 			});
 		Route::delete('{id}', 'destroy')->name('users.destroy');
-		
+
 		// users - Email Address or Phone Number verification
 		$router->pattern('field', 'email|phone');
 		$router->pattern('token', '.*');
@@ -230,7 +230,7 @@ Route::prefix('posts')
 	->controller(PostController::class)
 	->group(function ($router) {
 		$router->pattern('id', '[0-9]+');
-		
+
 		Route::get('/', 'index')->name('posts.index');
 		Route::get('{id}', 'show')->name('posts.show');
 		Route::post('/', 'store')->name('posts.store');
@@ -242,7 +242,7 @@ Route::prefix('posts')
 				Route::put('{id}', 'update')->name('posts.update');
 				Route::delete('{ids}', 'destroy')->name('posts.destroy');
 			});
-		
+
 		// listings - Email Address or Phone Number verification
 		$router->pattern('field', 'email|phone');
 		$router->pattern('token', '.*');
@@ -284,7 +284,7 @@ Route::prefix('pictures')
 	->controller(PictureController::class)
 	->group(function ($router) {
 		$router->pattern('id', '[0-9]+');
-		
+
 		Route::get('{id}', 'show')->name('pictures.show');
 		Route::post('/', 'store')->name('pictures.store');
 		Route::delete('{id}', 'destroy')->name('pictures.destroy');
@@ -324,14 +324,14 @@ Route::prefix('payments')
 				$router->pattern('id', '[0-9]+');
 				Route::get('/', 'index')->name('payments.index');
 				Route::get('{id}', 'show')->name('payments.show');
-				
+
 				Route::prefix('posts')
 					->group(function ($router) {
 						$router->pattern('postId', '[0-9]+');
 						Route::get('{postId}/payments', 'index')->name('posts.payments');
 					});
 			});
-		
+
 		Route::post('/', 'store')->name('payments.store');
 	});
 
@@ -339,22 +339,22 @@ Route::prefix('payments')
 Route::prefix('threads')
 	->group(function ($router) {
 		Route::post('/', [ThreadController::class, 'store'])->name('threads.store');
-		
+
 		Route::middleware(['auth:sanctum'])
 			->group(function ($router) {
 				Route::controller(ThreadController::class)
 					->group(function ($router) {
 						$router->pattern('id', '[0-9]+');
 						$router->pattern('ids', '[0-9,]+');
-						
+
 						Route::get('/', 'index')->name('threads.index');
 						Route::get('{id}', 'show')->name('threads.show');
 						Route::put('{id}', 'update')->name('threads.update');
 						Route::delete('{ids}', 'destroy')->name('threads.destroy');
-						
+
 						Route::post('bulkUpdate/{ids?}', 'bulkUpdate')->name('threads.bulkUpdate'); // Bulk Update
 					});
-				
+
 				// threadMessages
 				Route::controller(ThreadMessageController::class)
 					->group(function ($router) {
@@ -431,3 +431,5 @@ Route::any('{any}', function () {
 		'message' => 'Page Not Found.',
 	], 404);
 })->where('any', '^(?!plugins).*$')->name('any.other');
+
+
