@@ -29,14 +29,14 @@ use NotificationChannels\Twilio\TwilioSmsMessage;
 class PostActivated extends Notification implements ShouldQueue
 {
 	use Queueable;
-	
+
 	protected $post;
-	
+
 	public function __construct(Post $post)
 	{
 		$this->post = $post;
 	}
-	
+
 	public function via($notifiable)
 	{
 		// Is email can be sent?
@@ -45,7 +45,7 @@ class PostActivated extends Notification implements ShouldQueue
 			&& !empty($this->post->email)
 			&& !empty($this->post->email_verified_at)
 		);
-		
+
 		// Is SMS can be sent in addition?
 		$smsNotificationCanBeSent = (
 			config('settings.sms.enable_phone_as_auth_field') == '1'
@@ -55,26 +55,26 @@ class PostActivated extends Notification implements ShouldQueue
 			&& !empty($this->post->phone_verified_at)
 			&& !isDemoDomain()
 		);
-		
+
 		if ($emailNotificationCanBeSent) {
 			return ['mail'];
 		}
-		
+
 		if ($smsNotificationCanBeSent) {
 			if (config('settings.sms.driver') == 'twilio') {
 				return [TwilioChannel::class];
 			}
-			
+
 			return ['vonage'];
 		}
-		
+
 		return [];
 	}
-	
+
 	public function toMail($notifiable)
 	{
 		$postUrl = UrlGen::post($this->post);
-		
+
 		return (new MailMessage)
 			->subject(trans('mail.post_activated_title', ['title' => str($this->post->title)->limit(50)]))
 			->greeting(trans('mail.post_activated_content_1'))
@@ -86,17 +86,17 @@ class PostActivated extends Notification implements ShouldQueue
 			->line(trans('mail.post_activated_content_4', ['appName' => config('app.name')]))
 			->salutation(trans('mail.footer_salutation', ['appName' => config('app.name')]));
 	}
-	
+
 	public function toVonage($notifiable)
 	{
 		return (new VonageMessage())->content($this->smsMessage())->unicode();
 	}
-	
+
 	public function toTwilio($notifiable)
 	{
 		return (new TwilioSmsMessage())->content($this->smsMessage());
 	}
-	
+
 	protected function smsMessage()
 	{
 		return trans('sms.post_activated_content', ['appName' => config('app.name'), 'title' => $this->post->title]);

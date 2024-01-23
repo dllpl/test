@@ -38,7 +38,7 @@ trait SubmitTrait
 		$postInput = (array)$request->session()->get('postInput');
 		$picturesInput = (array)$request->session()->get('picturesInput');
 		$paymentInput = (array)$request->session()->get('paymentInput');
-		
+
 		// Create the global input to send for database saving
 		$inputArray = $postInput;
 		if (isset($inputArray['category_id'], $inputArray['cf'])) {
@@ -53,7 +53,7 @@ trait SubmitTrait
 				}
 			}
 		}
-		
+
 		$inputArray['pictures'] = [];
 		if (!empty($picturesInput)) {
 			foreach ($picturesInput as $key => $filePath) {
@@ -64,54 +64,53 @@ trait SubmitTrait
 			}
 		}
 		$inputArray = array_merge($inputArray, $paymentInput);
-		
+
 		request()->merge($inputArray);
-		
+
 		if (!empty($inputArray['pictures'])) {
 			request()->files->set('pictures', $inputArray['pictures']);
 		}
-		
+
 		// Call API endpoint
 		$endpoint = '/posts';
+
 		$data = makeApiRequest('post', $endpoint, request()->all(), [], true);
-		
-		// dd($data);
-		
+
 		// Parsing the API response
 		$message = !empty(data_get($data, 'message')) ? data_get($data, 'message') : 'Unknown Error.';
-		
+
 		// HTTP Error Found
 		if (!data_get($data, 'isSuccessful')) {
 			flash($message)->error();
-			
+
 			if (data_get($data, 'extra.previousUrl')) {
 				return redirect(data_get($data, 'extra.previousUrl'))->withInput($request->except('pictures'));
 			} else {
 				return redirect()->back()->withInput($request->except('pictures'));
 			}
 		}
-		
+
 		// Notification Message
 		if (data_get($data, 'success')) {
 			session()->put('message', $message);
-			
+
 			// Save the post's ID in session
 			$postId = data_get($data, 'result.id');
 			if (!empty($postId)) {
 				$request->session()->put('postId', $postId);
 			}
-			
+
 			// Clear Temporary Inputs & Files
 			$this->clearTemporaryInput();
 		} else {
 			flash($message)->error();
-			
+
 			return redirect()->back()->withInput($request->except('pictures'));
 		}
-		
+
 		// Get the next URL
 		$nextUrl = url('posts/create/finish');
-		
+
 		if (!empty($paymentInput)) {
 			// Check if the payment process has been triggered
 			// NOTE: Payment bypass email or phone verification
@@ -137,28 +136,28 @@ trait SubmitTrait
 							// Get the next URL
 							$nextUrl = $this->apiUri['nextUrl'];
 							$previousUrl = $this->apiUri['previousUrl'];
-							
+
 							// Send the Payment
 							$paymentData = $this->sendPayment($request, $post);
-							
+
 							// Check if a Payment has been sent
 							if (data_get($paymentData, 'extra.payment')) {
 								$paymentMessage = data_get($paymentData, 'extra.payment.message');
 								if (data_get($paymentData, 'extra.payment.success')) {
 									flash($paymentMessage)->success();
-									
+
 									if (data_get($paymentData, 'extra.nextUrl')) {
 										$nextUrl = data_get($paymentData, 'extra.nextUrl');
 									}
-									
+
 									return redirect($nextUrl);
 								} else {
 									flash($paymentMessage)->error();
-									
+
 									if (data_get($paymentData, 'extra.previousUrl')) {
 										$previousUrl = data_get($paymentData, 'extra.previousUrl');
 									}
-									
+
 									return redirect($previousUrl)->withInput();
 								}
 							}
@@ -167,34 +166,34 @@ trait SubmitTrait
 				}
 			}
 		}
-		
+
 		// Get Listing Resource
 		$post = data_get($data, 'result');
-		
+
 		if (
 			data_get($data, 'extra.sendEmailVerification.emailVerificationSent')
 			|| data_get($data, 'extra.sendPhoneVerification.phoneVerificationSent')
 		) {
 			session()->put('itemNextUrl', $nextUrl);
-			
+
 			if (data_get($data, 'extra.sendEmailVerification.emailVerificationSent')) {
 				session()->put('emailVerificationSent', true);
-				
+
 				// Show the Re-send link
 				$this->showReSendVerificationEmailLink($post, 'posts');
 			}
-			
+
 			if (data_get($data, 'extra.sendPhoneVerification.phoneVerificationSent')) {
 				session()->put('phoneVerificationSent', true);
-				
+
 				// Show the Re-send link
 				$this->showReSendVerificationSmsLink($post, 'posts');
-				
+
 				// Go to Phone Number verification
 				$nextUrl = url('posts/verify/phone/');
 			}
 		}
-		
+
 		// Mail Notification Message
 		if (data_get($data, 'extra.mail.message')) {
 			$mailMessage = data_get($data, 'extra.mail.message');
@@ -204,7 +203,7 @@ trait SubmitTrait
 				flash($mailMessage)->error();
 			}
 		}
-		
+
 		return redirect($nextUrl);
 	}
 }

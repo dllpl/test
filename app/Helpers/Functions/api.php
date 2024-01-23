@@ -22,14 +22,14 @@
 function isFromApi(): bool
 {
 	$isFromApi = false;
-	
+
 	if (
 		request()->segment(1) == 'api'
 		|| (request()->hasHeader('X-API-CALLED') && request()->header('X-API-CALLED'))
 	) {
 		$isFromApi = true;
 	}
-	
+
 	return $isFromApi;
 }
 
@@ -62,10 +62,10 @@ function makeApiRequest(string $method, string $uri, array $data = [], array $he
 		 * i.e.The endpoint is a valid URL starting with 'http', except the website's URL
 		 */
 		$isRemoteEndpoint = (str_starts_with($uri, 'http') && !str_starts_with($uri, url('/')));
-		
+
 		if (!$isRemoteEndpoint) {
 			$nonCacheableRequestMethods = ['POST', 'PUT', 'DELETE', 'PATCH', 'CREATE', 'UPDATE'];
-			
+
 			// Apply persistent (required) inputs for API calls
 			$defaultData = [
 				'countryCode'  => config('country.code'),
@@ -80,7 +80,7 @@ function makeApiRequest(string $method, string $uri, array $data = [], array $he
 					: config('app.locale');
 			}
 			$data = array_merge($defaultData, $data);
-			
+
 			// HTTP Client default headers for API calls
 			$defaultHeaders = [
 				'Content-Language'  => $defaultData['languageCode'] ?? null,
@@ -96,7 +96,7 @@ function makeApiRequest(string $method, string $uri, array $data = [], array $he
 			if (session()->has('authToken')) {
 				$defaultHeaders['Authorization'] = 'Bearer ' . session()->get('authToken');
 			}
-			
+
 			// Prevent HTTP request caching for methods that can update the database
 			if (in_array(strtoupper($method), $nonCacheableRequestMethods)) {
 				$noCacheHeaders = config('larapen.core.noCacheHeaders');
@@ -108,7 +108,7 @@ function makeApiRequest(string $method, string $uri, array $data = [], array $he
 			}
 			$headers = array_merge($defaultHeaders, $headers);
 		}
-		
+
 		if (strtolower(config('larapen.core.api.client')) == 'curl' || $isRemoteEndpoint) {
 			$array = curlHttpRequest($method, $uri, $data, $headers, $asMultipart, $forInternalEndpoint);
 		} else {
@@ -127,7 +127,7 @@ function makeApiRequest(string $method, string $uri, array $data = [], array $he
 			'status'       => 500,
 		];
 	}
-	
+
 	return $array;
 }
 
@@ -149,49 +149,49 @@ function laravelSubRequest(string $method, string $uri, array $data = [], array 
 {
 	$baseUrl = '/api';
 	$endpoint = $forInternalEndpoint ? ($baseUrl . $uri) : $uri;
-	
+
 	// Store the original request headers and input data
 	config()->set('request.original.headers', request()->headers->all());
 	// $originalRequest = request()->all();
 	$originalRequest = request()->input();
 	request()->merge($data);
-	
+
 	try {
-		
+
 		// Request segments are not available when making sub requests,
 		// The 'X-API-CALLED' header is set for the function isFromApi()
 		$localHeaders = [
 			'X-API-CALLED' => true,
 		];
 		$headers = array_merge($headers, $localHeaders);
-		
+
 		// Create the request to the internal API
 		$cookies = [];
 		$request = request()->create($endpoint, strtoupper($method), $data, $cookies, request()->file());
-		
+
 		// Apply the available headers to the request
 		if (!empty($headers)) {
 			foreach ($headers as $key => $value) {
 				request()->headers->set($key, $value);
 			}
 		}
-		
+
 		// Dispatch the request instance with the router
 		// NOTE: If you're consuming your own API,
 		// use app()->handle() instead of \Route::dispatch()
 		// $response = app()->handle($request);
 		$response = \Route::dispatch($request);
-		
+
 		// Fetch the response
 		// dd($response->getData());
 		$json = $response->getContent();
-		
+
 		// dd($json); // Debug!
 		$array = json_decode($json, true);
-		
+
 		$array['isSuccessful'] = $response->isSuccessful();
 		$array['status'] = $response->status();
-		
+
 	} catch (\Throwable $e) {
 		$message = $e->getMessage();
 		if (empty($message)) {
@@ -205,13 +205,13 @@ function laravelSubRequest(string $method, string $uri, array $data = [], array 
 			'status'       => 500,
 		];
 	}
-	
+
 	// Restore the request headers & input back to the original state
 	if (config('request.original.headers')) {
 		request()->headers->replace(config('request.original.headers'));
 	}
 	request()->replace($originalRequest);
-	
+
 	return $array;
 }
 
@@ -233,14 +233,14 @@ function curlHttpRequest(string $method, string $uri, array $data = [], array $h
 		'debug'   => false,
 		'timeout' => config('larapen.core.api.timeout', 60),
 	];
-	
+
 	$baseUrl = url('api');
 	$endpoint = $forInternalEndpoint ? ($baseUrl . $uri) : $uri;
-	
+
 	try {
-		
+
 		$client = \Illuminate\Support\Facades\Http::withOptions($options);
-		
+
 		if (!empty($headers)) {
 			$client->withHeaders($headers);
 		}
@@ -265,10 +265,10 @@ function curlHttpRequest(string $method, string $uri, array $data = [], array $h
 			$response = $client->send($method, $endpoint, $options);
 		}
 		$array = $response->json();
-		
+
 		$array['isSuccessful'] = $response->successful();
 		$array['status'] = $response->status();
-		
+
 	} catch (\Throwable $e) {
 		$array = [
 			'success'      => false,
@@ -278,7 +278,7 @@ function curlHttpRequest(string $method, string $uri, array $data = [], array $h
 			'status'       => 500,
 		];
 	}
-	
+
 	return $array;
 }
 
@@ -291,9 +291,9 @@ function curlHttpRequest(string $method, string $uri, array $data = [], array $h
 function multipartFormData($inputs): array
 {
 	$formData = [];
-	
+
 	$inputs = \App\Helpers\Arr::flattenPost($inputs);
-	
+
 	if (is_array($inputs) && !empty($inputs)) {
 		foreach ($inputs as $key => $value) {
 			if ($value instanceof \Illuminate\Http\UploadedFile) {
@@ -310,7 +310,7 @@ function multipartFormData($inputs): array
 			}
 		}
 	}
-	
+
 	return $formData;
 }
 
@@ -320,14 +320,14 @@ function multipartFormData($inputs): array
 function getApiAuthToken()
 {
 	$token = null;
-	
+
 	if (request()->hasHeader('Authorization')) {
 		$authorization = request()->header('Authorization');
 		if (str_contains($authorization, 'Bearer')) {
 			$token = str_replace('Bearer ', '', $authorization);
 		}
 	}
-	
+
 	return $token;
 }
 
@@ -346,7 +346,7 @@ function setPaginationBaseUrl($paginatedCollection)
 			}
 		}
 	}
-	
+
 	return $paginatedCollection;
 }
 
@@ -368,13 +368,13 @@ function isPostCreationRequest(): bool
 				&& request()->segment(1) == 'create'
 			)
 		);
-		
+
 		$isPostCreationRequest = (
 			$isNewEntryUri
 			|| str_contains(\Illuminate\Support\Facades\Route::currentRouteAction(), 'Post\CreateOrEdit\MultiSteps\CreateController')
 			|| str_contains(\Illuminate\Support\Facades\Route::currentRouteAction(), 'Post\CreateOrEdit\SingleStep\CreateController')
 		);
 	}
-	
+
 	return $isPostCreationRequest;
 }
