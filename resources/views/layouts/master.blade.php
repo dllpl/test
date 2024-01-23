@@ -152,6 +152,45 @@
 <body class="skin">
 <div id="wrapper">
 
+	<?php
+	$addListingUrl = \App\Helpers\UrlGen::addPost();
+	$addListingAttr = '';
+	if (!auth()->check()) {
+		if (config('settings.single.guests_can_post_listings') != '1') {
+			$addListingUrl = '#quickLogin';
+			$addListingAttr = ' data-bs-toggle="modal"';
+		}
+	}
+	if (config('settings.single.pricing_page_enabled') == '1') {
+		$addListingUrl = \App\Helpers\UrlGen::pricing();
+		$addListingAttr = '';
+	}
+	?>
+	<div class="bottom__mobile__menu">
+		<a class="bottom__mobile__menu__plus" href="{{ $addListingUrl }}" {!! $addListingAttr !!}>
+			<img src="/images/icon/plus-circle.svg">
+		</a>
+
+		<div class="bottom__mobile__menu__container">
+			<a class="bottom__mobile__menu__item" href="/search">
+				<img src="/images/icon/search.svg">
+				<span>Поиск</span>
+			</a>
+			<a class="bottom__mobile__menu__item" @if(auth()->check()) href="/account/posts/favourite" @else href="#quickLogin" data-bs-toggle="modal" @endif>
+				<img src="/images/icon/heart.svg">
+				<span>Избранное</span>
+			</a>
+			<a class="bottom__mobile__menu__item" @if(auth()->check()) href="/account/messages" @else href="#quickLogin" data-bs-toggle="modal" @endif>
+				<img src="/images/icon/message.svg">
+				<span>Сообщения</span>
+			</a>
+			<a class="bottom__mobile__menu__item" @if(auth()->check()) href="/account" @else href="#quickLogin" data-bs-toggle="modal" @endif>
+				<img src="/images/icon/profile.svg">
+				<span>Профиль</span>
+			</a>
+		</div>
+	</div>
+
 	@section('header')
 		@includeFirst([config('larapen.core.customizedViewPath') . 'layouts.inc.header', 'layouts.inc.header'])
 	@show
@@ -197,7 +236,6 @@
 	@show
 
 </div>
-
 @section('modal_location')
 @show
 @section('modal_abuse')
