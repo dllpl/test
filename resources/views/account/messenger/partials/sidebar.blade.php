@@ -2,7 +2,7 @@
 	$stats ??= [];
 	$countThreadsWithNewMessage = (int)data_get($stats, 'threads.withNewMessage');
 @endphp
-<div class="col-md-3 col-lg-2">
+<div class="col-md-3 col-lg-2" >
 	<ul class="nav nav-pills inbox-nav">
 		<li class="nav-item{{ (!request()->has('filter') || request()->get('filter')=='') ? ' active' : '' }}">
 			<a class="nav-link" href="{{ url('account/messages') }}">

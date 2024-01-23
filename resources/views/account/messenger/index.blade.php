@@ -49,11 +49,11 @@
                         
                         <div class="inbox-wrapper">
                             <div class="row">
-                                <div class="col-md-3 col-lg-2">
+                                <div class="col-md-3 col-lg-2" style="display:none">
                                     <div class="btn-group hidden-sm"></div>
                                 </div>
                                 
-                                <div class="col-md-9 col-lg-10">
+                                <div class="col-md-9 col-lg-12">
                                     
                                     <div class="btn-group mobile-only-inline">
                                         <a href="#" class="btn btn-primary text-uppercase">
@@ -126,8 +126,8 @@
                             
                             <div class="row">
                                 @include('account.messenger.partials.sidebar')
-                                
-                                <div class="col-md-9 col-lg-10">
+                                <style>@media screen and (min-width: 769px) { .messengerpad {padding-left:20px!important;}}</style>
+                                <div class="col-md-9 col-lg-10 messengerpad">
                                     <div class="message-list">
                                         <div id="listThreads">
                                             @include('account.messenger.threads.threads')
