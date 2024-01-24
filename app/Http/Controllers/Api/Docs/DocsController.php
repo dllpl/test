@@ -32,7 +32,7 @@ class DocsController extends Controller
         $doc->setValue('last_name', $request->last_name);
         $doc->saveAs(storage_path("$path.docx"));
 
-        $cmd = $path_to_python . ' ' . storage_path('docs/word2pdf.py') . ' ' .
+        $cmd = 'sudo ' . $path_to_python . ' ' . storage_path('docs/word2pdf.py') . ' ' .
             storage_path("$path.docx") . ' ' .
             storage_path("$path.pdf") . ' 2>&1';
 
