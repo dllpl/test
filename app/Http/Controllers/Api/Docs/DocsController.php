@@ -27,8 +27,6 @@ class DocsController extends Controller
 
         $doc = new TemplateProcessor(storage_path('templates/dkp.docx'));
 
-//        dd($request->all());
-
         foreach ($request->all() as $key_1 => $value_1) {
             if (is_iterable($value_1)) {
                 foreach ($value_1 as $key_2 => $value_2) {
