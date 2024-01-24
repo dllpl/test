@@ -19,7 +19,7 @@ class DocsController extends Controller
     public function makeDkp(Request $request)
     {
 
-        $path_to_python = 'C:\Python311\python';
+        $path_to_python = env('PATH_TO_PYTHON');
 
         $file_name = Uuid::uuid4();
         $dir_name = 'docs/dkp/';
