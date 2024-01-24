@@ -46,7 +46,8 @@ class DocsController extends Controller
             ]);
         } else {
             return response()->json([
-                'msg' => 'Ошибка при создании pdf файла'
+                'msg' => 'Ошибка при создании pdf файла',
+                'cmd' => $cmd
             ], 400);
         }
     }
