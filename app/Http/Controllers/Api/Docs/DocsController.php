@@ -36,26 +36,18 @@ class DocsController extends Controller
                         foreach ($value_2 as $key_3 => $value_3) {
                             if(is_iterable($value_3)) {
                                 foreach ($value_3 as $key_4 => $value_4) {
-                                    if (!empty($value_4)) {
-                                        $doc->setValue("$key_1.$key_2.$key_3.$key_4", $value_4);
-                                    }
+                                    $doc->setValue("$key_1.$key_2.$key_3.$key_4", $value_4);
                                 }
                             } else {
-                                if (!empty($value_3)) {
-                                    $doc->setValue("$key_1.$key_2.$key_3", $value_3);
-                                }
+                                $doc->setValue("$key_1.$key_2.$key_3", $value_3);
                             }
                         }
                     } else {
-                        if (!empty($value_2)) {
-                            $doc->setValue("$key_1.$key_2", $value_2);
-                        }
+                        $doc->setValue("$key_1.$key_2", $value_2);
                     }
                 }
             } else {
-                if (!empty($value_1)) {
-                    $doc->setValue("$key_1", $value_1);
-                }
+                $doc->setValue("$key_1", $value_1);
             }
         }
 
