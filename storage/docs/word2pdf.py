@@ -1,5 +1,6 @@
 import sys
 import subprocess
+import os
 
 def docx_to_pdf(input_file, output_file):
     try:
