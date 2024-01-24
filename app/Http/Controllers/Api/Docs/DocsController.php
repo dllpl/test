@@ -3,10 +3,9 @@
 namespace App\Http\Controllers\Api\Docs;
 
 use App\Http\Controllers\Controller;
-use File;
 use Illuminate\Http\Request;
-use Ramsey\Uuid\Uuid;
 use PhpOffice\PhpWord\TemplateProcessor;
+use Ramsey\Uuid\Uuid;
 
 class DocsController extends Controller
 {
@@ -28,8 +27,38 @@ class DocsController extends Controller
 
         $doc = new TemplateProcessor(storage_path('templates/dkp.docx'));
 
-        $doc->setValue('name', $request->name);
-        $doc->setValue('last_name', $request->last_name);
+//        dd($request->all());
+
+        foreach ($request->all() as $key_1 => $value_1) {
+            if (is_iterable($value_1)) {
+                foreach ($value_1 as $key_2 => $value_2) {
+                    if (is_iterable($value_2)) {
+                        foreach ($value_2 as $key_3 => $value_3) {
+                            if(is_iterable($value_3)) {
+                                foreach ($value_3 as $key_4 => $value_4) {
+                                    if (!empty($value_4)) {
+                                        $doc->setValue("$key_1.$key_2.$key_3.$key_4", $value_4);
+                                    }
+                                }
+                            } else {
+                                if (!empty($value_3)) {
+                                    $doc->setValue("$key_1.$key_2.$key_3", $value_3);
+                                }
+                            }
+                        }
+                    } else {
+                        if (!empty($value_2)) {
+                            $doc->setValue("$key_1.$key_2", $value_2);
+                        }
+                    }
+                }
+            } else {
+                if (!empty($value_1)) {
+                    $doc->setValue("$key_1", $value_1);
+                }
+            }
+        }
+
         $doc->saveAs(storage_path("$path.docx"));
 
         $cmd = $path_to_python . ' ' . storage_path('docs/word2pdf.py') . ' ' .
@@ -39,7 +68,7 @@ class DocsController extends Controller
         exec($cmd, $output, $returnVar);
 
         if (!$returnVar) {
-            File::delete(storage_path("$path.docx"));
+//            File::delete(storage_path("$path.docx"));
 
             return response()->download(storage_path("$path.pdf"), 'Договор.pdf', [
                 'Content-Type' => 'application/pdf',

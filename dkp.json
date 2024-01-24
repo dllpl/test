@@ -1,0 +1,57 @@
+{
+  "auto": {
+    "mark_and_model": null,
+    "vin": null,
+    "type": null,
+    "year": null,
+    "mileage": null,
+    "power": null,
+    "volume": null,
+    "color": null,
+    "engine_model": null,
+    "engine_number": null,
+    "chassis_number": "Отсутствует",
+    "body_number": null,
+    "pts": {
+      "series_and_number": null,
+      "date": null,
+      "who_give": null
+    },
+    "gos_number": null,
+    "sts": {
+      "series": null,
+      "number": null,
+      "date": null,
+      "who_give": null
+    },
+    "price": null
+  },
+  "owner": {
+    "current": {
+      "fio": null,
+      "pass": {
+        "series_and_number": null,
+        "date": null,
+        "code": null,
+        "who_give": null
+      },
+      "birthdate": null,
+      "birthplace": null,
+      "reg_address": null
+    },
+    "new": {
+      "fio": null,
+      "pass": {
+        "series_and_number": null,
+        "date": null,
+        "code": null,
+        "who_give": null
+      },
+      "birthdate": null,
+      "birthplace": null,
+      "reg_address": null
+    }
+  },
+  "place": null,
+  "date": null
+}
