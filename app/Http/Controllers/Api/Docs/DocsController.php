@@ -38,10 +38,12 @@ class DocsController extends Controller
 
         exec($cmd, $output, $returnVar);
 
+        dd($cmd, $output, $returnVar);
+
         if (!$returnVar) {
 //            File::delete(storage_path("$path.docx"));
 
-            dd($cmd, $output, $returnVar);
+
 
             return response()->download(storage_path("$path.pdf"), 'Договор.pdf', [
                 'Content-Type' => 'application/pdf',
