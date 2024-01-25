@@ -31,8 +31,6 @@ class DocsController extends Controller
 
         $doc = new TemplateProcessor(storage_path('templates/dkp.docx'));
 
-        $data = $request->all();
-
         foreach ($request->all() as $key_1 => $value_1) {
             if (is_iterable($value_1)) {
                 foreach ($value_1 as $key_2 => $value_2) {
@@ -49,7 +47,11 @@ class DocsController extends Controller
                     } else {
                         if ($key_2 === 'price') {
                             $doc->setValue("$key_1.$key_2",  !empty($value_2) ? number_format($value_2, 2, ',', ' ') . ' руб.' : '');
-                            $doc->setValue("$key_1.price.bukov", '(' . $this->num2str($value_2) . ')');
+                            if(!empty($value_2)) {
+                                $doc->setValue("$key_1.price.bukov", '(' . $this->num2str($value_2) . ')');
+                            } else {
+                                $doc->setValue("$key_1.price.bukov", '');
+                            }
                         } else {
                             $doc->setValue("$key_1.$key_2", $value_2);
                         }
