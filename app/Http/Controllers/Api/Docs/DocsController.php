@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api\Docs;
 
+use App\Http\Controllers\Api\Docs\Traits\DocsTrait;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use PhpOffice\PhpWord\TemplateProcessor;
@@ -9,6 +10,9 @@ use Ramsey\Uuid\Uuid;
 
 class DocsController extends Controller
 {
+
+    use DocsTrait;
+
     /**
      * @param Request $request
      * @return \Illuminate\Http\JsonResponse|\Symfony\Component\HttpFoundation\BinaryFileResponse
@@ -27,12 +31,14 @@ class DocsController extends Controller
 
         $doc = new TemplateProcessor(storage_path('templates/dkp.docx'));
 
+        $data = $request->all();
+
         foreach ($request->all() as $key_1 => $value_1) {
             if (is_iterable($value_1)) {
                 foreach ($value_1 as $key_2 => $value_2) {
                     if (is_iterable($value_2)) {
                         foreach ($value_2 as $key_3 => $value_3) {
-                            if(is_iterable($value_3)) {
+                            if (is_iterable($value_3)) {
                                 foreach ($value_3 as $key_4 => $value_4) {
                                     $doc->setValue("$key_1.$key_2.$key_3.$key_4", $value_4);
                                 }
@@ -41,7 +47,11 @@ class DocsController extends Controller
                             }
                         }
                     } else {
-                        $doc->setValue("$key_1.$key_2", $value_2);
+                        if ($key_1 === 'price') {
+                            $doc->setValue("$key_1.$key_2", $value_2 . ' ₽ (' . $this->num2str((float)$value_2) . ')');
+                        } else {
+                            $doc->setValue("$key_1.$key_2", $value_2);
+                        }
                     }
                 }
             } else {
