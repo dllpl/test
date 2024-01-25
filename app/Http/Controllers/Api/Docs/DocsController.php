@@ -48,7 +48,7 @@ class DocsController extends Controller
                         }
                     } else {
                         if ($key_2 === 'price') {
-                            $doc->setValue("$key_1.$key_2", $value_2 . ' ₽ (' . $this->num2str((float)$value_2) . ')');
+                            $doc->setValue("$key_1.$key_2", $value_2 . ' ₽ (' . $this->num2str($value_2) . ')');
                         } else {
                             $doc->setValue("$key_1.$key_2", $value_2);
                         }

@@ -9,7 +9,7 @@ trait DocsTrait
      * @param $num
      * @return string
      */
-    public function num2str(float $num): string
+    public function num2str($num): string
     {
         $nul = 'ноль';
         $ten = [
