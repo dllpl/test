@@ -410,6 +410,10 @@
 		bounds: "city-settlement"
 	})
 
+	$(document).ready(function(){
+		$('[type="tel"]').mask('(000) 000-00-00')
+	})
+
 </script>
 
 @stack('after_scripts_stack')

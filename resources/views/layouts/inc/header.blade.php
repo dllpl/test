@@ -222,7 +222,7 @@ if ($multiCountriesIsEnabled) {
 									@if ($dividerNeeded)
 										<li class="dropdown-divider"></li>
 									@endif
-									<li class="dropdown-item{{ (isset($value['isActive']) && $value['isActive']) ? ' active' : '' }}">
+									<li class="dropdown-item{{ (isset($value['isActive']) && $value['isActive']) ? ' active__lk' : '' }}">
 										<a href="{{ $value['url'] }}">
 											<i class="{{ $value['icon'] }}"></i> {{ $value['name'] }}
 											@if (isset($value['countVar'], $value['countCustomClass']) && !empty($value['countVar']) && !empty($value['countCustomClass']))

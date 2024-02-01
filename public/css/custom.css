@@ -1257,6 +1257,14 @@ p {
 .link--grey {
     color: var(--dark-grey);
 }
+.active__lk {
+    color: var(--accent) !important;
+    font-weight: bold;
+}
+
+.btn:hover {
+    color: var(--light);
+}
 
 .btn--filter-open {
     display: -webkit-box;

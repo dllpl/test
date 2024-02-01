@@ -19,7 +19,7 @@
 								@if(strpos($value['url'], 'account/close'))
 									@continue
 								@endif
-								<a href="{{ $value['url'] }}" class="link link--grey {!! (isset($value['isActive']) && $value['isActive']) ? 'active' : '' !!}">
+								<a href="{{ $value['url'] }}" class="link link--grey {!! (isset($value['isActive']) && $value['isActive']) ? 'active__lk' : '' !!}">
 									<i class="{{ $value['icon'] }}" style="color: var(--accent)"></i>&nbsp; {{ $value['name'] }}
 									@if (isset($value['countVar']) && !empty($value['countVar']))
 										<span class="{{ !empty($value['countCustomClass']) ? $value['countCustomClass'] . ' hide' : '' }}">

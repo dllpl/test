@@ -164,9 +164,13 @@
                         nav.classList.add('menu-nav-open-js');
                     }
                 });
-                document.getElementById('close_menu_nav').onclick = () => {
-                    nav.classList.remove('menu-nav-open-js');
+                let menu_nav = document.getElementById('close_menu_nav');
+                if(menu_nav) {
+                    document.getElementById('close_menu_nav').onclick = () => {
+                        nav.classList.remove('menu-nav-open-js');
+                    }
                 }
+
             }
 
             /***/ }),
@@ -692,3 +696,5 @@
     /******/ })()
 ;
 //# sourceMappingURL=main.js.map
+
+

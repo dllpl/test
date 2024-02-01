@@ -92,7 +92,7 @@ $socialAndAppsLinksAreEnabled = ($socialLinksAreEnabled || $appsLinksAreEnabled)
 							</a>
 						</li>
 						<li class="footer__item">
-							<a href="#" class="link link--flex">
+							<a href="mailto:info@automost.pro" class="link link--flex">
 								<svg class="footer__svg">
 									<use xlink:href="/images/sprite.svg#mail"></use>
 								</svg>
