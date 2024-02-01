@@ -36,13 +36,16 @@
                     dump($post['fields']);
 				@endphp
 				<tr onclick="document.location = '{{ \App\Helpers\UrlGen::post($post) }}';" style="cursor: pointer">
-					<th scope="row">{{ \App\Helpers\Date::format($post['fields'][2]->value, 'datetime') }}</th>
-					<td>{{ isset($post['fields'][4]) ? $post['fields'][4]->value : '-'}}</td>
-					<td>{{$post['fields'][0]->value}}</td>
-					<td>{{$post['fields'][1]->value}}</td>
-					<td>{{$post['fields'][3]->value}}</td>
-					<td>{{$post['price']}}</td>
-					<td>{{$post['user']['name']}}</td>
+					@foreach($post['fields'] as $filed)
+						<td>{{$field->value}}</td>
+					@endforeach
+{{--					<th scope="row">{{ \App\Helpers\Date::format($post['fields'][2]->value, 'datetime') }}</th>--}}
+{{--					<td>{{ isset($post['fields'][4]) ? $post['fields'][4]->value : '-'}}</td>--}}
+{{--					<td>{{$post['fields'][0]->value}}</td>--}}
+{{--					<td>{{$post['fields'][1]->value}}</td>--}}
+{{--					<td>{{$post['fields'][3]->value}}</td>--}}
+{{--					<td>{{$post['price']}}</td>--}}
+{{--					<td>{{$post['user']['name']}}</td>--}}
 					<td>
 						@if (!empty(data_get($post, 'savedByLoggedUser')))
 							<a class="preview__btn btn-reset make-favorite" id="{{ data_get($post, 'id') }}"
