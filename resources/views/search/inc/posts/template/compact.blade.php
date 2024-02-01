@@ -1,7 +1,7 @@
 @php
 	$posts ??= [];
 	$totalPosts ??= 0;
-	
+
 	$colDescBox = (config('settings.list.display_mode') == 'make-compact')
 		? 'col-sm-9 col-12'
 		: 'col-sm-7 col-12';
@@ -29,12 +29,14 @@
 			@foreach($posts as $key => $post)
 				@php
 					$post['fields'] = \DB::table('post_values')->where('post_id', $post['id'])->get()->toArray();
-					$post['fields'][4]->value =  json_decode(\DB::table('fields_options')->where('id', $post['fields'][4]->value)
+                    if(isset($post['fields'][4])) {
+                        $post['fields'][4]->value =  json_decode(\DB::table('fields_options')->where('id', $post['fields'][4]->value)
 						->select('value')->first()->value)->ru;
+                    }
 				@endphp
 				<tr onclick="document.location = '{{ \App\Helpers\UrlGen::post($post) }}';" style="cursor: pointer">
 					<th scope="row">{{ \App\Helpers\Date::format($post['fields'][2]->value, 'datetime') }}</th>
-					<td>{{$post['fields'][4]->value}}</td>
+					<td>{{ isset($post['fields'][4]) ? $post['fields'][4]->value : '-'}}</td>
 					<td>{{$post['fields'][0]->value}}</td>
 					<td>{{$post['fields'][1]->value}}</td>
 					<td>{{$post['fields'][3]->value}}</td>
