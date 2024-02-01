@@ -118,7 +118,7 @@
 						</ul>
 
 						<div class="callback__bottom">
-							<a href="http://barsovoz/page/terms" target="_blank" class="callback__link link link--grey">
+							<a href="/page/terms" target="_blank" class="callback__link link link--grey">
 								Нажимая на кнопку, вы даете согласие на обработку<br>
 								<span style="text-decoration: underline;"><b>Персональных данных</b></span>
 							</a>
@@ -131,7 +131,7 @@
 				<div class="callback__right">
 					<h2 class="callback__title title title--medium">Контакты</h2>
 					<div class="callback__description">
-						<a class="title title--xl" href="tel:88002504567">8 800 250 45 67</a>
+						<a class="title title--xl" href="tel:89172888001">+7 (917) 288 80-01</a>
 						<p>Звонок по России бесплатный</p>
 					</div>
 					<div class="callback__description">
