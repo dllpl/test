@@ -33,7 +33,7 @@
                         $post['fields'][4]->value =  json_decode(\DB::table('fields_options')->where('id', $post['fields'][4]->value)
 						->select('value')->first()->value)->ru;
                     }
-                    dump($post['fields']);
+//                    dump($post['fields']);
 				@endphp
 				<tr onclick="document.location = '{{ \App\Helpers\UrlGen::post($post) }}';" style="cursor: pointer">
 					<th scope="row">{{ \App\Helpers\Date::format($post['fields'][2]->value, 'datetime') }}</th>
