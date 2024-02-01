@@ -131,7 +131,7 @@
 				<div class="callback__right">
 					<h2 class="callback__title title title--medium">Контакты</h2>
 					<div class="callback__description">
-						<a class="title title--xl" href="tel:89172888001">+7 (917) 288 80-01</a>
+						<a class="title title--xl" href="tel:89172888001">+7(917)288-80-01</a>
 						<p>Звонок по России бесплатный</p>
 					</div>
 					<div class="callback__description">
