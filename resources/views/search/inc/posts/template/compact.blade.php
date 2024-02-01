@@ -28,7 +28,7 @@
 		<tbody>
 			@foreach($posts as $key => $post)
 				@php
-					$post['fields'] = \DB::table('post_values')->where('post_id', $post['id'])->get()->toArray();
+					$post['fields'] = \DB::table('post_values')->where('post_id', $post['id'])->get()->orderBy('field_id', 'DESC')->toArray();
                     if(isset($post['fields'][4])) {
                         $post['fields'][4]->value =  json_decode(\DB::table('fields_options')->where('id', $post['fields'][4]->value)
 						->select('value')->first()->value)->ru;
