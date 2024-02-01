@@ -16,7 +16,7 @@
 		<thead>
 		<tr>
 			<th scope="col">Дата выезда</th>
-			<th scope="col">Тип транспорта</th>
+			<th scope="col">Тип</th>
 			<th scope="col">Отправка</th>
 			<th scope="col">Прибытие</th>
 			<th scope="col">Мест</th>
