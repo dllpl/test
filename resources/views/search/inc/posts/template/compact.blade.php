@@ -33,12 +33,15 @@
                         $post['fields'][4]->value =  json_decode(\DB::table('fields_options')->where('id', $post['fields'][4]->value)
 						->select('value')->first()->value)->ru;
                     }
-                    print_r($post['fields']);
 				@endphp
 				<tr onclick="document.location = '{{ \App\Helpers\UrlGen::post($post) }}';" style="cursor: pointer">
-					@foreach($post['fields'] as $field)
-						<td>{{$field->value}}</td>
-					@endforeach
+					<th scope="row">{{ \App\Helpers\Date::format($post['fields'][2]->value, 'datetime') }}</th>
+					<td>{{ isset($post['fields'][4]) ? $post['fields'][4]->value : '-'}}</td>
+					<td>{{$post['fields'][0]->value}}</td>
+					<td>{{$post['fields'][1]->value}}</td>
+					<td>{{$post['fields'][3]->value}}</td>
+					<td>{{$post['price']}}</td>
+					<td>{{$post['user']['name']}}</td>
 					<td>
 						@if (!empty(data_get($post, 'savedByLoggedUser')))
 							<a class="preview__btn btn-reset make-favorite" id="{{ data_get($post, 'id') }}"
