@@ -33,7 +33,7 @@
                         $post['fields'][4]->value =  json_decode(\DB::table('fields_options')->where('id', $post['fields'][4]->value)
 						->select('value')->first()->value)->ru;
                     }
-                    var_dump($post['fields']);
+                    print_r($post['fields']);
 				@endphp
 				<tr onclick="document.location = '{{ \App\Helpers\UrlGen::post($post) }}';" style="cursor: pointer">
 					@foreach($post['fields'] as $field)
