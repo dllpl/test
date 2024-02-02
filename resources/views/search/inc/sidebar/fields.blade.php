@@ -459,6 +459,8 @@
 			let mark_field = $('select[id="cf.50"]')
 			let model_field = $('select[id="cf.51"]')
 
+			console.log(mark_field,model_field )
+
 			if(mark_field && model_field) {
 				mark_field.select2({
 					ajax: {

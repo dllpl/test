@@ -176,12 +176,13 @@
                         if ($fieldName === 'cf[51]' || $fieldName === 'cf[50]') {
                             $select2Type = 'selecter-custom';
 
-                            if($fieldName === 'cf[51]') {
+                            if($fieldName === 'cf[50]') {
                                 $old_mark_field = $modelDefaultValue;
                             }
-                            if($fieldName === 'cf[50]') {
+                            if($fieldName === 'cf[51]') {
                                 $old_model_field = $modelDefaultValue;
                             }
+//                            dd($old_mark_field, $old_model_field);
                         }
 					@endphp
 					<select id="{{ $fieldId }}" name="{{ $fieldName }}" class="form-control {{ $select2Type . $errorClass }}">
@@ -593,7 +594,7 @@
 
 		model_field.prop('disabled', true)
 
-		let old_mark_field = "{{ $old_model_field ?? '' }}"
+		let old_mark_field = "{{ $old_mark_field ?? '' }}"
 		let old_model_field = "{{ $old_model_field ?? '' }}"
 
 		if(old_mark_field?.length) {
