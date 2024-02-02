@@ -12,7 +12,7 @@ class WhatsAppController extends Controller
 
         $array = [
             [
-                'chatId' => self::format_phone($phone) . "@c.us",
+                'chatId' => preg_replace('/\D/', '',$phone) . "@c.us",
                 'message' => $message,
             ]
         ];
