@@ -34,11 +34,11 @@ class UserRequest extends Request
 			return true;
 		} else {
 			$guard = isFromApi() ? 'sanctum' : null;
-			
+
 			return auth($guard)->check();
 		}
 	}
-	
+
 	/**
 	 * Prepare the data for validation.
 	 *
@@ -50,18 +50,18 @@ class UserRequest extends Request
 		if (isAdminPanel()) {
 			return;
 		}
-		
+
 		$input = $this->all();
-		
+
 		// name
 		if ($this->filled('name')) {
 			$input['name'] = strCleanerLite($this->input('name'));
 			$input['name'] = onlyNumCleaner($input['name']);
 		}
-		
+
 		// auth_field
 		$input['auth_field'] = getAuthField();
-		
+
 		// phone
 		if ($this->filled('phone')) {
 			$input['phone'] = phoneE164($this->input('phone'), getPhoneCountry());
@@ -70,11 +70,11 @@ class UserRequest extends Request
 			$input['phone'] = null;
 			$input['phone_national'] = null;
 		}
-		
+
 		request()->merge($input); // Required!
 		$this->merge($input);
 	}
-	
+
 	/**
 	 * Get the validation rules that apply to the request.
 	 *
@@ -83,19 +83,19 @@ class UserRequest extends Request
 	public function rules(): array
 	{
 		$rules = [];
-		
+
 		$authFields = array_keys(getAuthFields());
-		
+
 		// CREATE
 		if (in_array($this->method(), ['POST', 'CREATE'])) {
 			$rules = $this->storeRules($authFields);
 		}
-		
+
 		// UPDATE
 		if (in_array($this->method(), ['PUT', 'PATCH', 'UPDATE'])) {
 			$rules = $this->updateRules($authFields);
 		}
-		
+
 		// Require 'photo' if exists
 		if ($this->hasFile('photo')) {
 			$rules['photo'] = [
@@ -106,10 +106,10 @@ class UserRequest extends Request
 				'max:' . (int)config('settings.upload.max_image_size', 1000),
 			];
 		}
-		
+
 		return $rules;
 	}
-	
+
 	/**
 	 * @param array $authFields
 	 * @return array
@@ -124,14 +124,13 @@ class UserRequest extends Request
 			'phone_country' => ['required_with:phone'],
 			'password'      => ['required', 'confirmed'],
 			'accept_terms'  => ['accepted'],
-            'face_type' => 'required',
             'inn' => ['required_if:face_type,2','min:10', 'max:10'],
             'user_type' => ['required_if:face_type,2'],
 		];
-		
+
 		$phoneIsEnabledAsAuthField = (config('settings.sms.enable_phone_as_auth_field') == '1');
 		$phoneNumberIsRequired = ($phoneIsEnabledAsAuthField && $this->input('auth_field') == 'phone');
-		
+
 		// email
 		$emailIsRequired = (!$phoneNumberIsRequired);
 		if ($emailIsRequired) {
@@ -141,7 +140,7 @@ class UserRequest extends Request
 		if ($this->filled('email')) {
 			$rules['email'][] = 'unique:users,email';
 		}
-		
+
 		// phone
 		if ($phoneNumberIsRequired) {
 			$rules['phone'][] = 'required';
@@ -150,7 +149,7 @@ class UserRequest extends Request
 		if ($this->filled('phone')) {
 			$rules['phone'][] = 'unique:users,phone';
 		}
-		
+
 		// username
 		$usernameIsEnabled = !config('larapen.core.disable.username');
 		if ($usernameIsEnabled) {
@@ -163,13 +162,13 @@ class UserRequest extends Request
 				];
 			}
 		}
-		
+
 		// password
 		$rules = $this->validPasswordRules('password', $rules);
-		
+
 		return $this->captchaRules($rules);
 	}
-	
+
 	/**
 	 * @param array $authFields
 	 * @return array
@@ -178,7 +177,7 @@ class UserRequest extends Request
 	{
 		$guard = isFromApi() ? 'sanctum' : null;
 		$user = auth($guard)->user();
-		
+
 		$rules = [
 			'name'          => ['required', 'max:100'],
 			'auth_field'    => ['required', Rule::in($authFields)],
@@ -189,15 +188,15 @@ class UserRequest extends Request
             'inn' => ['required_if:face_type,2','min:10', 'max:10'],
             'user_type' => ['required_if:face_type,2'],
 		];
-		
+
 		// Check if these fields has changed
 		$emailChanged = ($this->filled('email') && $this->input('email') != $user->email);
 		$phoneChanged = ($this->filled('phone') && $this->input('phone') != $user->phone);
 		$usernameChanged = ($this->filled('username') && $this->input('username') != $user->username);
-		
+
 		$phoneIsEnabledAsAuthField = (config('settings.sms.enable_phone_as_auth_field') == '1');
 		$phoneNumberIsRequired = ($phoneIsEnabledAsAuthField && $this->input('auth_field') == 'phone');
-		
+
 		// email
 		$emailIsRequired = (!$phoneNumberIsRequired);
 		if ($emailIsRequired) {
@@ -207,7 +206,7 @@ class UserRequest extends Request
 		if ($emailChanged) {
 			$rules['email'][] = 'unique:users,email';
 		}
-		
+
 		// phone
 		if ($phoneNumberIsRequired) {
 			$rules['phone'][] = 'required';
@@ -216,7 +215,7 @@ class UserRequest extends Request
 		if ($phoneChanged) {
 			$rules['phone'][] = 'unique:users,phone';
 		}
-		
+
 		// username
 		if ($this->filled('username')) {
 			$rules['username'][] = 'between:3,50';
@@ -225,20 +224,20 @@ class UserRequest extends Request
 			$rules['username'][] = 'required';
 			$rules['username'][] = 'unique:users,username';
 		}
-		
+
 		// password
 		$rules = $this->validPasswordRules('password', $rules);
 		if ($this->filled('password')) {
 			$rules['password'][] = 'confirmed';
 		}
-		
+
 		if ($this->filled('user_accept_terms') && $this->input('user_accept_terms') != 1) {
 			$rules['accept_terms'] = ['accepted'];
 		}
-		
+
 		return $rules;
 	}
-	
+
 	/**
 	 * Get custom attributes for validator errors.
 	 *
@@ -247,14 +246,14 @@ class UserRequest extends Request
 	public function attributes(): array
 	{
 		$attributes = [];
-		
+
 		if ($this->hasFile('photo')) {
 			$attributes['photo'] = strtolower(t('Photo'));
 		}
-		
+
 		return $attributes;
 	}
-	
+
 	/**
 	 * Get custom messages for validator errors.
 	 *
@@ -263,7 +262,7 @@ class UserRequest extends Request
 	public function messages(): array
 	{
 		$messages = [];
-		
+
 		if ($this->hasFile('photo')) {
 			// uploaded
 			$maxSize = (int)config('settings.upload.max_image_size', 1000); // In KB
@@ -272,13 +271,13 @@ class UserRequest extends Request
 				'field'   => strtolower(t('Photo')),
 				'maxSize' => readableBytes($maxSize),
 			]);
-			
+
 			$uploadMaxFilesizeStr = @ini_get('upload_max_filesize');
 			$postMaxSizeStr = @ini_get('post_max_size');
 			if (!empty($uploadMaxFilesizeStr) && !empty($postMaxSizeStr)) {
 				$uploadMaxFilesize = (int)strToDigit($uploadMaxFilesizeStr);
 				$postMaxSize = (int)strToDigit($postMaxSizeStr);
-				
+
 				$serverMaxSize = min($uploadMaxFilesize, $postMaxSize);
 				$serverMaxSize = $serverMaxSize * 1024 * 1024; // Convert MB to KB to Bytes
 				if ($serverMaxSize < $maxSize) {
@@ -288,10 +287,10 @@ class UserRequest extends Request
 					]);
 				}
 			}
-			
+
 			$messages['photo.uploaded'] = $msg;
 		}
-		
+
 		return $messages;
 	}
 }
