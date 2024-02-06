@@ -184,7 +184,6 @@ class UserRequest extends Request
 			'phone'         => ['max:30'],
 			'phone_country' => ['required_with:phone'],
 			'username'      => [new UsernameIsValidRule(), new UsernameIsAllowedRule()],
-            'face_type' => 'required',
             'inn' => ['required_if:face_type,2','min:10', 'max:10'],
             'user_type' => ['required_if:face_type,2'],
 		];
