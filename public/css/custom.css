@@ -1340,7 +1340,7 @@ p {
 
 
 .active:after {
-    content: url("/images/icon/arrow-down.svg");
+    /*content: url("/images/icon/arrow-down.svg");*/
 }
 
 .accordion__panel {
