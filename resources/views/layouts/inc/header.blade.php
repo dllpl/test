@@ -296,10 +296,10 @@ if ($multiCountriesIsEnabled) {
 					</a>
 				</li>
 
-				<li class="header__item d-md-none d-sm-block d-block">
-					<a href="{{ \App\Helpers\UrlGen::register() }}" class="nav-link"><i class="far fa-user"></i> {{ t('sign_up') }}</a>
-				</li>
-				@includeFirst([config('larapen.core.customizedViewPath') . 'layouts.inc.menu.select-language', 'layouts.inc.menu.select-language'])
+{{--				<li class="header__item d-md-none d-sm-block d-block">--}}
+{{--					<a href="{{ \App\Helpers\UrlGen::register() }}" class="nav-link"><i class="far fa-user"></i> {{ t('sign_up') }}</a>--}}
+{{--				</li>--}}
+{{--				@includeFirst([config('larapen.core.customizedViewPath') . 'layouts.inc.menu.select-language', 'layouts.inc.menu.select-language'])--}}
 			</ul>
 		</div>
 	</div>
