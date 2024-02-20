@@ -89,7 +89,9 @@
 										<?php $photoError = (isset($errors) and $errors->has('photo')) ? ' is-invalid' : ''; ?>
 										<div class="photo-field">
 											<div class="file-loading">
+											    
 												<input id="photoField" name="photo" type="file" class="file {{ $photoError }}">
+													
 											</div>
 										</div>
 
