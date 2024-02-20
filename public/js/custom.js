@@ -196,7 +196,7 @@
                 const overlay = document?.querySelector('[data-menu-overlay]');
                 burger?.addEventListener('click', e => {
                     burger?.classList.toggle('burger--active');
-                    burger__icon?.classList.toggle('arrow__icon')
+                    burger__icon?.classList.toggle('arrow__icon_back')
                     mobile_icons_block?.classList.toggle('v__hidden')
                     menu?.classList.toggle('menu--active');
                     if (menu?.classList.contains('menu--active')) {

@@ -89,15 +89,15 @@
 										<?php $photoError = (isset($errors) and $errors->has('photo')) ? ' is-invalid' : ''; ?>
 										<div class="photo-field">
 											<div class="file-loading">
-											    
-												<input id="photoField" name="photo" type="file" class="file {{ $photoError }}">
-													
+
+												<input id="photoField" name="photo" type="file" class="file {{ $photoError }}" data-browse-on-zone-click="true">
+
 											</div>
 										</div>
 
 									</div>
 								</div>
-								<button class="form-foto__btn form__btn btn btn-reset">Сохранить</button>
+{{--								<button class="form-foto__btn form__btn btn btn-reset">Сохранить</button>--}}
 							</form>
 						</div>
 					</div>
@@ -1086,7 +1086,6 @@
 					@endif
 				}
 			],
-
 			showClose: false,
 			fileActionSettings: {
 				showDrag: false, /* Show/hide move (rearrange) icon */
@@ -1099,7 +1098,7 @@
 			elErrorContainer: '#avatarUploadError',
 			msgErrorClass: 'alert alert-block alert-danger',
 
-			layoutTemplates: {main2: '{preview} {remove} {browse}', footer: footerPreview}
+			layoutTemplates: {footer: footerPreview}
 		});
 
 		/* Auto-upload added file */

@@ -23,16 +23,63 @@ if ($multiCountriesIsEnabled) {
 
 <header class="header">
 	<div class="header__container container-fluid">
-		<a href="{{ url('/') }}" class="main-logo">
-			<img src="{{ config('settings.app.logo_url') }}"
-				 alt="{{ strtolower(config('settings.app.name')) }}" class="main-logo" data-bs-placement="bottom"
-				 data-bs-toggle="tooltip"
-				 title="{!! $logoLabel !!}" style="height: 22px"/>
-		</a>
+		<div class="d-md-flex d-sm-none d-none">
+			<a href="{{ url('/') }}" class="main-logo">
+				<img src="{{ config('settings.app.logo_url') }}"
+					 alt="{{ strtolower(config('settings.app.name')) }}" class="main-logo" data-bs-placement="bottom"
+					 data-bs-toggle="tooltip"
+					 title="{!! $logoLabel !!}" style="height: 22px"/>
+			</a>
+			@if (config('settings.geo_location.show_country_flag'))
+				@if (!empty(config('country.icode')))
+					@if (file_exists(public_path() . '/images/flags/32/' . config('country.icode') . '.png'))
+						<li class="flag-menu country-flag d-md-block d-sm-none d-none nav-item"
+							data-bs-toggle="tooltip"
+							data-bs-placement="{{ (config('lang.direction') == 'rtl') ? 'bottom' : 'right' }}" {!! $multiCountriesLabel !!}
+						>
+							@if ($multiCountriesIsEnabled)
+								<a class="nav-link p-0" data-bs-toggle="modal" data-bs-target="#selectCountry">
+									<img class="flag-icon mt-1"
+										 src="{{ url('images/flags/32/' . config('country.icode') . '.png') . getPictureVersion() }}"
+										 alt="{{ config('country.name') }}"
+									>
+									<span class="caret d-lg-block d-md-none d-sm-none d-none float-end mt-3 mx-1"></span>
+								</a>
+							@else
+								<a class="p-0" style="cursor: default;">
+									<img class="flag-icon"
+										 src="{{ url('images/flags/32/' . config('country.icode') . '.png') . getPictureVersion() }}"
+										 alt="{{ config('country.name') }}"
+									>
+								</a>
+							@endif
+						</li>
+					@endif
+				@endif
+			@endif
+		</div>
 
-		<button class="burger btn-reset" aria-label="Открыть меню" aria-expanded="false" data-burger style="width: 62px">
+		<div class="d-flex">
+		<button class="burger btn-reset" aria-label="Открыть меню" aria-expanded="false" data-burger>
 		  <span class="burger__icon"></span>
 		</button>
+			{{-- Country Flag (Mobile) --}}
+					@if ($multiCountriesIsEnabled)
+						@if (!empty(config('country.icode')))
+							@if (file_exists(public_path() . '/images/flags/24/' . config('country.icode') . '.png'))
+								<button class="flag-menu country-flag d-md-none d-sm-block  btn btn-default float-end" href="#selectCountry" data-bs-toggle="modal">
+									<img src="{{ url('images/flags/24/' . config('country.icode') . '.png') . getPictureVersion() }}"
+										 alt="{{ config('country.name') }}"
+										 style="float: left;"
+									>
+									<span class="caret d-none"></span>
+								</button>
+							@endif
+						@endif
+					@endif
+		</div>
+
+
 
 		<a href="{{ url('/') }}" class="mobile-icons-logo">
 			<img src="/images/logo-full.svg"

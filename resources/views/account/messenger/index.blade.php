@@ -22,20 +22,20 @@
 
 @section('content')
 	@includeFirst([config('larapen.core.customizedViewPath') . 'common.spacer', 'common.spacer'])
-    <div class="main-container">
+    <div class="main-container mb-5">
         <div class="container">
             <div class="row">
-                
+
                 <div class="col-md-3 page-sidebar">
                     @includeFirst([config('larapen.core.customizedViewPath') . 'account.inc.sidebar', 'account.inc.sidebar'])
                 </div>
-                
+
                 <div class="col-md-9 page-content">
                     <div class="inner-box">
                         <h2 class="title-2">
                             <i class="fas fa-envelope"></i> {{ t('inbox') }}
                         </h2>
-                        
+
                         @if (session()->has('flash_notification'))
                             <div class="row">
                                 <div class="col-xl-12">
@@ -43,18 +43,18 @@
                                 </div>
                             </div>
                         @endif
-                        
+
                         <div id="successMsg" class="alert alert-success hide" role="alert"></div>
                         <div id="errorMsg" class="alert alert-danger hide" role="alert"></div>
-                        
+
                         <div class="inbox-wrapper">
                             <div class="row">
                                 <div class="col-md-3 col-lg-2" style="display:none">
                                     <div class="btn-group hidden-sm"></div>
                                 </div>
-                                
+
                                 <div class="col-md-9 col-lg-12">
-                                    
+
                                     <div class="btn-group mobile-only-inline">
                                         <a href="#" class="btn btn-primary text-uppercase">
                                             <i class="fas fa-pen"></i>
@@ -66,11 +66,11 @@
                                                 <input type="checkbox" id="form-check-all">
                                             </div>
                                         </button>
-                                        
+
                                         <button type="button" class="btn btn-default dropdown-toggle" data-bs-toggle="dropdown">
                                             <span class="dropdown-menu-sort-selected">{{ t('action') }}</span>
                                         </button>
-    
+
                                         {!! csrf_field() !!}
                                         <ul id="groupedAction" class="dropdown-menu dropdown-menu-sort" role="menu">
                                             <li class="dropdown-item">
@@ -100,11 +100,11 @@
                                             </li>
                                         </ul>
                                     </div>
-                                    
+
                                     <button type="button" id="btnRefresh" class="btn btn-default hidden-sm" data-bs-toggle="tooltip" title="{{ t('refresh') }}">
                                         <span class="fas fa-sync-alt"></span>
                                     </button>
-                                    
+
                                     <div class="btn-group hidden-sm">
                                         <button type="button" class="btn btn-default dropdown-toggle" data-bs-toggle="dropdown">
                                             {{ t('more') }}
@@ -115,15 +115,15 @@
                                             </li>
                                         </ul>
                                     </div>
-                                    
+
                                     <div class="message-tool-bar-right float-end" id="linksThreads">
                                         @include('account.messenger.threads.links')
                                     </div>
                                 </div>
                             </div>
-                            
+
                             <hr class="border-0 bg-secondary">
-                            
+
                             <div class="row">
                                 @include('account.messenger.partials.sidebar')
                                 <style>@media screen and (min-width: 769px) { .messengerpad {padding-left:20px!important;}}</style>
@@ -136,10 +136,10 @@
                                 </div>
                             </div>
                         </div>
-                        
+
                     </div>
                 </div>
-                
+
             </div>
         </div>
     </div>
