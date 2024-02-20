@@ -172,7 +172,7 @@ a:is(.link--btn,.link--light):not(.link--dark):hover {
     transition: 0.3s ease-in-out;
 }
 
-.arrow__icon {
+.arrow__icon_back {
     background: url("/images/icon/arrow.svg") no-repeat center;
 }
 

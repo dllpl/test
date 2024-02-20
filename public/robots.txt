@@ -21,4 +21,7 @@ Disallow: /auth/twitter
 Disallow: /auth/google
 
 
+Sitemap: /kz/sitemaps.xml
+Sitemap: /kg/sitemaps.xml
 Sitemap: /ru/sitemaps.xml
+Sitemap: /uz/sitemaps.xml

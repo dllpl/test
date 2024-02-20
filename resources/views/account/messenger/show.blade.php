@@ -25,7 +25,7 @@
                 </div>
                 
                 <div class="col-md-9 page-content">
-                    <div class="inner-box">
+                    <div class="inner-box" style="border-radius:0px;margin-bottom:30px">
                         <h2 class="title-2">
                             <i class="fas fa-envelope"></i> {{ t('inbox') }}
                         </h2>
