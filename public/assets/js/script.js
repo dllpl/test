@@ -22,19 +22,19 @@ $(document).ready(function () {
 	$(function () {
 		$('[data-bs-toggle="tooltip"]').tooltip()
 	});
-	
+
 	$(window).on('load', function() {
 		$('[data-bs-toggle="popover"]').popover();
 	});
 	*/
-	
+
 	/* tooltips */
 	/* Enable tooltips everywhere (Default trigger: 'hover focus') */
 	let tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
 	let tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
 		return new bootstrap.Tooltip(tooltipTriggerEl);
 	});
-	
+
 	/* Enable tooltips everywhere (Default trigger: 'hover') */
 	let tooltipHoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltipHover"]'));
 	let tooltipHoverList = tooltipHoverTriggerList.map(function (tooltipTriggerEl) {
@@ -42,7 +42,7 @@ $(document).ready(function () {
 			trigger : 'hover'
 		});
 	});
-	
+
 	/* popper.js */
 	/* Enable popovers everywhere */
 	let popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'));
@@ -51,34 +51,34 @@ $(document).ready(function () {
 			html: true
 		});
 	});
-	
+
 	/* Change a tooltip size in Bootstrap 4.x */
 	$('#locSearch').on('mouseover mouseenter mouseleave mousemove', function () {
 		$('.tooltip-inner').css({"width": "300px", "max-width": "300px"});
 	});
-	
-	
+
+
 	var navbarSite = $('.navbar-site');
-	
-	
+
+
 	/* Check if RTL or LTR */
 	var rtlIsEnabled = false;
 	var dir = $('html').attr('dir');
 	if (dir === 'rtl') {
 		rtlIsEnabled = true;
 	}
-	
-	
+
+
 	/* SET HEADER HEIGHT AS PADDING-TOP to WRAPPER */
-	
+
 	function setWrapperHeight() {
 		wrapper.css('padding-top', headerHeight + 'px');
 	}
-	
+
 	setWrapperHeight();
-	
+
 	/* ON SCROLL FADE OUT */
-	
+
 	function fadeOnScroll(target) {
 		var target = $('' + target + ''),
 			targetHeight = target.outerHeight();
@@ -87,26 +87,26 @@ $(document).ready(function () {
 			scrollPercent >= 0 && (target.css("background-color", "rgba(0,0,0," + (1.1 - scrollPercent) + ")"))
 		});
 	}
-	
+
 	if (!isTouchDevice) {
 		fadeOnScroll('.layer-bg');
 	}
-	
-	
+
+
 	/*==================================
 	 Ajax Tab || CATEGORY PAGE
 	 ==================================*/
-	
+
 	$(".nav-tabs li > a").click(function () {
 		let thisEl = $(this);
 		thisEl.closest('ul').find('li').removeClass('active');
 		thisEl.parent('li').addClass('active');
 	});
-	
+
 	// Please do not use this example ajax tab as production. This code is demo purpose.
-	
+
 	$("#ajaxTabs li > a").click(function () {
-		
+
 		$("#allAds").empty().append("<div id='loading text-center'> <br> <img class='center-block' src='images/loading.gif' alt='Loading' /> <br> </div>");
 		$("#ajaxTabs li").removeClass('active');
 		$(this).parent('li').addClass('active');
@@ -119,37 +119,37 @@ $(document).ready(function () {
 		});
 		return false;
 	});
-	
+
 	urls = $('#ajaxTabs li:first-child a').attr("href");
-	
+
 	$("#allAds").empty().append("<div id='loading text-center'> <br> <img class='center-block' src='images/loading.gif' alt='Loading' /> <br>  </div>");
 	$.ajax({
 		url: urls,
 		success: function (html) {
 			$("#allAds").empty().append(html);
 			$('.tooltipHere').tooltip('hide');
-			
+
 			// default grid view class invoke into ajax content (product item)
 			$(function () {
 				$('.hasGridView').addClass('make-grid');
 			});
 		}
 	});
-	
-	
+
+
 	/*==================================
 	 List view clickable || CATEGORY
 	 ==================================*/
-	
+
 	// List view, Grid view and compact view
-	
+
 	// var selector doesn't work on ajax tab category.hhml. This variables elements disable for V1.6
 	// var listItem = $('.item-list');
 	// var addDescBox = $('.item-list .add-desc-box');
 	// var addsWrapper = $('.posts-wrapper');
 	// ...
-	
-	
+
+
 	if ($(this).width() < 767) {
 		$(".event-category-list .event-item-col").each(function (index, element) {
 			var eventFooter = $(this).find('.card-footer');
@@ -159,64 +159,64 @@ $(document).ready(function () {
 			eventFooter.clone().insertAfter(eventInfo);
 		});
 	}
-	
-	
+
+
 	/*==================================
 	 Global Plugins ||
 	 ==================================*/
-	
+
 	$('.long-list').hideMaxListItems({
 		'max': 8,
 		'speed': 500,
 		'moreText': langLayout.hideMaxListItems.moreText + ' ([COUNT])',
 		'lessText': langLayout.hideMaxListItems.lessText
 	});
-	
+
 	$('.long-list-user').hideMaxListItems({
 		'max': 12,
 		'speed': 500,
 		'moreText': langLayout.hideMaxListItems.moreText + ' ([COUNT])',
 		'lessText': langLayout.hideMaxListItems.lessText
 	});
-	
+
 	$('.long-list-home').hideMaxListItems({
 		'max': maxSubCats,
 		'speed': 500,
 		'moreText': langLayout.hideMaxListItems.moreText + ' ([COUNT])',
 		'lessText': langLayout.hideMaxListItems.lessText
 	});
-	
+
 	/* Bootstrap Collapse + jQuery hideMaxListItem fix on mobile */
 	$('.btn-cat-collapsed').click(function () {
 		var targetSelector = $(this).data('target');
 		var isExpanded = $(this).attr('aria-expanded');
-		
+
 		/*
 		console.log(targetSelector);
 		console.log(isExpanded);
 		*/
-		
+
 		if (typeof isExpanded === 'undefined') {
 			return false;
 		}
-		
+
 		$(targetSelector).toggle('slow');
-		
+
 		if (isExpanded == 'true') {
 			$('.cat-list ' + targetSelector).next('.maxlist-more').hide();
 		} else {
 			$('.cat-list ' + targetSelector).next('.maxlist-more').show();
 		}
 	});
-	
+
 	// $("select.selecter").niceSelect({ /* custom scroll select plugin */ });
-	
+
 	$(".niceselecter").niceSelect({ /* category list Short by */
 		// customClass: "select-sort-by"
 	});
-	
+
 	$(".scrollbar").niceScroll();  /* customs scroll plugin */
-	
+
 	// smooth scroll to the ID
 	$(document).on('click', 'a.scrollto', function (event) {
 		event.preventDefault();
@@ -224,41 +224,41 @@ $(document).ready(function () {
 			scrollTop: $($.attr(this, 'href')).offset().top
 		}, 500);
 	});
-	
-	
+
+
 	/*=======================================================================================
 	 cat-collapse Hmepage Category Responsive view
 	 =======================================================================================*/
-	
+
 	var catCollapse = $('.cat-collapse');
-	
+
 	$(window).bind('resize load', function () {
-		
+
 		if ($(this).width() < 767) {
 			catCollapse.collapse('hide');
 			catCollapse.on('show.bs.collapse', function () {
 				$(this).prev('.cat-title').find('.icon-down-open-big').addClass("active-panel");
 			});
-			
+
 			catCollapse.on('hide.bs.collapse', function () {
 				$(this).prev('.cat-title').find('.icon-down-open-big').removeClass("active-panel");
 			})
-			
+
 		} else {
 			$('#bd-docs-nav').collapse('show');
 			catCollapse.collapse('show');
 		}
-		
+
 	});
-	
+
 	/* DEMO PREVIEW */
-	
+
 	$(".tbtn").click(function () {
 		$('.themeControll').toggleClass('active')
 	});
-	
+
 	/* Jobs */
-	
+
 	$("input:radio").click(function () {
 		if ($('input:radio#job-seeker:checked').length > 0) {
 			$('.forJobSeeker').removeClass('hide');
@@ -268,13 +268,13 @@ $(document).ready(function () {
 			$('.forJobSeeker').addClass('hide')
 		}
 	});
-	
-	
+
+
 	/* Change Direction based on template dir="RTL"  or dir="LTR" */
-	
+
 	var sidebarDirection = {};
 	var sidebarDirectionClose = {};
-	
+
 	if (rtlIsEnabled) {
 		sidebarDirection = {right: '-251px'};
 		sidebarDirectionClose = {right: '0'};
@@ -282,7 +282,7 @@ $(document).ready(function () {
 		sidebarDirection = {left: '-251px'};
 		sidebarDirectionClose = {left: '0'};
 	}
-	
+
 	$(".filter-toggle").click(function () {
 		$('.mobile-filter-sidebar')
 			.prepend("<div class='closeFilter'>X</div>")
@@ -290,20 +290,20 @@ $(document).ready(function () {
 			});
 		$('.menu-overly-mask').addClass('is-visible');
 	});
-	
+
 	$(".menu-overly-mask").click(function () {
 		$(".mobile-filter-sidebar").animate(sidebarDirection, 250, "linear", function () {
 		});
 		$('.menu-overly-mask').removeClass('is-visible');
 	});
-	
-	
+
+
 	$(document).on('click', '.closeFilter', function () {
 		$(".mobile-filter-sidebar").animate(sidebarDirection, 250, "linear", function () {
 		});
 		$('.menu-overly-mask').removeClass('is-visible');
 	});
-	
+
 	/*
 	$(".filter-toggle").click(function () {
 		$('.mobile-filter-sidebar').prepend("<div class='closeFilter'>X</div>");
@@ -340,10 +340,10 @@ $(document).ready(function () {
 		$('.menu-overly-mask').removeClass('is-visible');
 	});
 	*/
-	
-	
+
+
 	/* cityName will replace with selected location/area from location modal */
-	
+
 	$('#browseLocations').on('shown.bs.modal', function (e) {
 		/* alert('Modal is successfully shown!'); */
 		$("ul.list-link li a").click(function () {
@@ -353,12 +353,12 @@ $(document).ready(function () {
 			$('#browseLocations').modal('hide');
 		});
 	});
-	
+
 	$("#checkAll").click(function () {
 		$('.add-img-selector input:checkbox').not(this).prop('checked', this.checked);
 	});
-	
-	
+
+
 	var stickyScroller = function () {
 		var intialscroll = 0;
 		$(window).scroll(function (event) {
@@ -377,26 +377,26 @@ $(document).ready(function () {
 			intialscroll = windowScroll;
 		});
 	};
-	
+
 	if (!isTouchDevice) {
 		stickyScroller();
 	}
-	
+
 	$('.dropdown-clear-filter').click(function (e) {
 		let thisEl = $(this);
 		thisEl.closest('.dropdown-menu').find('input[type="radio"]').prop('checked', false);
 		thisEl.closest('.dropdown-menu').find('input[type="checkbox"]').prop('checked', false);
 		e.stopPropagation();
 	});
-	
+
 	$('.dropdown-menu.stay').click(function (e) {
 		e.stopPropagation();
 	});
-	
-	
+
+
 	/* INBOX MESSAGE */
 	/* Check 'assets/js/app/messenger.js' */
-	
+
 	/* Check New Messages */
 	if (typeof timerNewMessagesChecking !== 'undefined') {
 		checkNewMessages();
@@ -407,12 +407,12 @@ $(document).ready(function () {
 			}, timerNewMessagesChecking);
 		}
 	}
-	
+
 	/* Show/hide password in forms */
 	$('.eyeOfPwd').click(function (e) {
 		showPwd();
 	});
-	
+
 	/* Data loading-mask pre-configuration */
 	$.busyLoadSetup({
 		background: 'rgba(0, 0, 0, 0.05)',
@@ -449,7 +449,7 @@ function createCustomSpinnerEl() {
 function setCountryPhoneCode(countryCode, countries) {
 	if (typeof countryCode == "undefined" || typeof countries == "undefined") return false;
 	if (typeof countries[countryCode] == "undefined") return false;
-	
+
 	$('#phoneCountry').html(countries[countryCode]['phone']);
 }
 
@@ -462,7 +462,7 @@ function setCountryPhoneCode(countryCode, countries) {
 function showAmount(packagePrice, packageCurrencySymbol, packageCurrencyInLeft) {
 	/* Show Amount */
 	$('.payable-amount').html(packagePrice);
-	
+
 	/* Show Amount Currency */
 	$('.amount-currency').html(packageCurrencySymbol);
 	if (packageCurrencyInLeft == 1) {
@@ -472,7 +472,7 @@ function showAmount(packagePrice, packageCurrencySymbol, packageCurrencyInLeft) 
 		$('.amount-currency.currency-in-left').hide();
 		$('.amount-currency.currency-in-right').show();
 	}
-	
+
 	/* If price <= 0 hide the Payment Method selection */
 	if (packagePrice <= 0) {
 		$('#packagesTable tbody tr:last').hide();
@@ -489,7 +489,7 @@ function showAmount(packagePrice, packageCurrencySymbol, packageCurrencyInLeft) 
 function getPackagePrice(selectedPackage) {
 	let price = $('#price-' + selectedPackage + ' .price-int').html();
 	price = parseFloat(price);
-	
+
 	return price;
 }
 
@@ -501,7 +501,7 @@ function checkNewMessages() {
 	if (typeof oldValue === 'undefined') {
 		return false;
 	}
-	
+
 	/* Make ajax call */
 	let ajax = $.ajax({
 		method: 'POST',
@@ -516,16 +516,16 @@ function checkNewMessages() {
 		if (typeof data.logged === 'undefined') {
 			return false;
 		}
-		
+
 		/* Guest Users - Need to Log In */
 		if (data.logged === 0 || data.logged === '0' || data.logged === '') {
 			return false;
 		}
-		
+
 		var counterBoxes = $('.count-threads-with-new-messages, .count-new-message');
 
 		/* Logged Users - Notification */
-		if (data.countThreadsWithNewMessages === 0) {
+		if (data.countThreadsWithNewMessages > 0) {
 			if (data.countThreadsWithNewMessages >= data.countLimit) {
 				counterBoxes.html(data.countLimit + '+');
 			} else {
@@ -535,7 +535,7 @@ function checkNewMessages() {
 		} else {
 			counterBoxes.html('0').hide();
 		}
-		
+
 		return false;
 	});
 }
@@ -545,7 +545,7 @@ function checkNewMessages() {
  */
 function showPwd() {
 	let el = $('.show-pwd-group #mPassword, .show-pwd-group #password');
-	
+
 	if (el.attr('type') === 'password') {
 		el.prop('type', 'text');
 		$(this).find('.eyeOfPwd').html('<i class="far fa-eye"></i>');
