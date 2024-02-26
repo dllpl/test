@@ -180,7 +180,10 @@
 				<img src="/images/icon/heart.svg">
 				<span>Избранное</span>
 			</a>
-			<a class="bottom__mobile__menu__item" @if(auth()->check()) href="/account/messages" @else href="#quickLogin" data-bs-toggle="modal" @endif>
+			<a class="bottom__mobile__menu__item position-relative" @if(auth()->check()) href="/account/messages" @else href="#quickLogin" data-bs-toggle="modal" @endif>
+				@if(auth()->check())
+					<div class="count-new-message position-absolute d-none"></div>
+				@endif
 				<img src="/images/icon/message.svg">
 				<span>Сообщения</span>
 			</a>

@@ -1312,6 +1312,22 @@ p {
     align-items: center;
 }
 
+.count-new-message {
+    top: 0;
+    right: 0;
+    background-color: #FF4848;
+    padding: 1px;
+    width: 15px;
+    height: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 100%;
+    color: white;
+    font-weight: bold;
+    font-size: 9px;
+}
+
 .accordion {
     background: transparent;
     color: var(--accent);

@@ -522,10 +522,10 @@ function checkNewMessages() {
 			return false;
 		}
 		
-		var counterBoxes = $('.count-threads-with-new-messages');
-		
+		var counterBoxes = $('.count-threads-with-new-messages, .count-new-message');
+
 		/* Logged Users - Notification */
-		if (data.countThreadsWithNewMessages > 0) {
+		if (data.countThreadsWithNewMessages === 0) {
 			if (data.countThreadsWithNewMessages >= data.countLimit) {
 				counterBoxes.html(data.countLimit + '+');
 			} else {
