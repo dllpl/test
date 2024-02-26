@@ -522,18 +522,24 @@ function checkNewMessages() {
 			return false;
 		}
 
-		var counterBoxes = $('.count-threads-with-new-messages, .count-new-message');
+		var counterBoxes = $('.count-threads-with-new-messages');
+
+		var counterMobile = $('.count-new-message');
 
 		/* Logged Users - Notification */
 		if (data.countThreadsWithNewMessages > 0) {
 			if (data.countThreadsWithNewMessages >= data.countLimit) {
 				counterBoxes.html(data.countLimit + '+');
+				counterMobile.html(data.countLimit + '+');
 			} else {
 				counterBoxes.html(data.countThreadsWithNewMessages);
+				counterMobile.html(data.countThreadsWithNewMessages)
 			}
 			counterBoxes.show();
+			counterMobile.css('display', 'flex')
 		} else {
 			counterBoxes.html('0').hide();
+			counterMobile.html('0').hide();
 		}
 
 		return false;
