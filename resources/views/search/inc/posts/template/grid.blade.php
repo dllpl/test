@@ -67,7 +67,7 @@
             @endphp
             <li class="preview">
                 <div class="preview__img-wrapp">
-                    <a href="{{ \App\Helpers\UrlGen::post($post) }}" class="position-relative">
+                    <a href="{{ \App\Helpers\UrlGen::post($post) }}" class="position-relative d-block" >
                         {!! imgTag(data_get($post, 'picture.filename'), 'medium', ['class' => 'lazyload thumbnail preview__img img img--preview', 'alt' => data_get($post, 'title')]) !!}
                         {{-- Плашка в наличии --}}
                         @if($post['available_field'] && $post['available_field']->value == 177)
