@@ -12,9 +12,9 @@ return [
     'before' => 'В :attribute должна быть дата до :date.',
     'before_or_equal' => 'В :attribute должна быть дата до или равна :date.',
     'between' => [
-        'numeric' => ':attribute должен находиться между :min и :max.',
-        'file' => 'В :attribute должен находиться между :min и :max КБ.',
-        'string' => 'Поле :attribute должно находиться между :min и :max символами.',
+        'numeric' => ':attribute должно содержать от :min и :max символов.',
+        'file' => ':attribute должен быть размером от :min и до :max КБ.',
+        'string' => 'Поле :attribute должно содержать от :min и до :max символов.',
         'array' => 'В :characters :min и :max товарами.',
     ],
     'boolean' => ':field должно быть да или нет',
