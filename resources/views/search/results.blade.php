@@ -207,7 +207,7 @@
 								</select>
 							</div>
 						</div>
-						<div class="d-md-none d-block border-bottom my-2 border-2">
+						<div class="d-md-none d-block border-bottom my-4 border-2">
 							<ul class="d-flex list-reset gap-3">
 								@foreach (data_get($cat, 'children') as $iSubCat)
 									<li>
