@@ -86,11 +86,29 @@
 					<div class="catalog__products @if(isset($cat["name"]) && $cat['name'] === 'Логистика') w-100 @endif">
 						{{-- Nav tabs --}}
 
-						<div class="d-flex justify-content-lg-end justify-content-between mb-2">
+						<div class="d-flex justify-content-between mb-2">
+
+							<div class="d-md-flex d-none align-center">
+								<ul class="d-flex list-reset gap-3">
+									@foreach (data_get($cat, 'children') as $iSubCat)
+										<li>
+											<a href="{{ \App\Helpers\UrlGen::category($iSubCat, null, $city ?? null) }}" title="{{ data_get($iSubCat, 'name') }}">
+												{{--											@if (in_array(config('settings.list.show_category_icon'), [4, 5, 6, 8]))--}}
+												{{--												<i class="{{ data_get($iSubCat, 'icon_class') ?? 'fas fa-folder' }}"></i>--}}
+												{{--											@endif--}}
+												{{ str(data_get($iSubCat, 'name'))->limit(100) }}
+												@if (config('settings.list.count_categories_listings'))
+													<span class="count">&nbsp;({{ $countPostsPerCat[data_get($iSubCat, 'id')]['total'] ?? 0 }})</span>
+												@endif
+											</a>
+										</li>
+									@endforeach
+								</ul>
+							</div>
+
 							<button class="menu-nav__btn-open btn btn--form btn-reset"><i class="fas fa-sliders-h"></i> Фильтры</button>
 
 							<div class="d-flex">
-
 								@if (config('settings.single.show_listing_types'))
 									@if (isset($postTypes) && !empty($postTypes))
 										<select id="orderBy" title="sort by" class="niceselecter select-sort-by small" data-style="btn-select" data-width="auto">
@@ -187,8 +205,24 @@
 										@endforeach
 									@endif
 								</select>
-
 							</div>
+						</div>
+						<div class="d-md-none d-block border-bottom my-2 border-2">
+							<ul class="d-flex list-reset gap-3">
+								@foreach (data_get($cat, 'children') as $iSubCat)
+									<li>
+										<a href="{{ \App\Helpers\UrlGen::category($iSubCat, null, $city ?? null) }}" title="{{ data_get($iSubCat, 'name') }}">
+{{--											@if (in_array(config('settings.list.show_category_icon'), [4, 5, 6, 8]))--}}
+{{--												<i class="{{ data_get($iSubCat, 'icon_class') ?? 'fas fa-folder' }}"></i>--}}
+{{--											@endif--}}
+											{{ str(data_get($iSubCat, 'name'))->limit(100) }}
+											@if (config('settings.list.count_categories_listings'))
+												<span class="count">&nbsp;({{ $countPostsPerCat[data_get($iSubCat, 'id')]['total'] ?? 0 }})</span>
+											@endif
+										</a>
+									</li>
+								@endforeach
+							</ul>
 						</div>
 {{--						<ul class="catalog__preview list-reset grid grid--coll-3">--}}
 							@if (config('settings.list.display_mode') == 'make-list')
