@@ -106,20 +106,22 @@
                                             </li>
                                         @endforeach
                                     @else
-                                        @foreach ($cat as $cat_)
-                                            <li>
-                                                <a href="{{ \App\Helpers\UrlGen::category($cat_, null, $city ?? null) }}"
-                                                   title="{{ data_get($cat_, 'name') }}">
-                                                    											@if (in_array(config('settings.list.show_category_icon'), [4, 5, 6, 8]))
-                                                    												<i class="{{ data_get($cat_, 'icon_class') ?? 'fas fa-folder' }}"></i>
-                                                    											@endif
-                                                    {{ str(data_get($cat_, 'name'))->limit(100) }}
-                                                    @if (config('settings.list.count_categories_listings'))
-                                                        <span class="count">&nbsp;({{ $countPostsPerCat[data_get($cat_, 'id')]['total'] ?? 0 }})</span>
-                                                    @endif
-                                                </a>
-                                            </li>
-                                        @endforeach
+                                        @if(is_array($cat))
+                                            @foreach ($cat as $cat_)
+                                                <li>
+                                                    <a href="{{ \App\Helpers\UrlGen::category($cat_, null, $city ?? null) }}"
+                                                       title="{{ data_get($cat_, 'name') }}">
+                                                        @if (in_array(config('settings.list.show_category_icon'), [4, 5, 6, 8]))
+                                                            <i class="{{ data_get($cat_, 'icon_class') ?? 'fas fa-folder' }}"></i>
+                                                        @endif
+                                                        {{ str(data_get($cat_, 'name'))->limit(100) }}
+                                                        @if (config('settings.list.count_categories_listings'))
+                                                            <span class="count">&nbsp;({{ $countPostsPerCat[data_get($cat_, 'id')]['total'] ?? 0 }})</span>
+                                                        @endif
+                                                    </a>
+                                                </li>
+                                            @endforeach
+                                        @endif
                                     @endif
                                 </ul>
                             </div>
@@ -247,20 +249,22 @@
                                         </li>
                                     @endforeach
                                 @else
-                                    @foreach ($cat as $cat_)
-                                        <li>
-                                            <a href="{{ \App\Helpers\UrlGen::category($cat_, null, $city ?? null) }}"
-                                               title="{{ data_get($cat_, 'name') }}">
-                                                											@if (in_array(config('settings.list.show_category_icon'), [4, 5, 6, 8]))
-                                                												<i class="{{ data_get($cat_, 'icon_class') ?? 'fas fa-folder' }}"></i>
-                                                											@endif
-                                                {{ str(data_get($cat_, 'name'))->limit(100) }}
-                                                @if (config('settings.list.count_categories_listings'))
-                                                    <span class="count">&nbsp;({{ $countPostsPerCat[data_get($cat_, 'id')]['total'] ?? 0 }})</span>
-                                                @endif
-                                            </a>
-                                        </li>
-                                    @endforeach
+                                    @if(is_array($cat))
+                                        @foreach ($cat as $cat_)
+                                            <li>
+                                                <a href="{{ \App\Helpers\UrlGen::category($cat_, null, $city ?? null) }}"
+                                                   title="{{ data_get($cat_, 'name') }}">
+                                                    @if (in_array(config('settings.list.show_category_icon'), [4, 5, 6, 8]))
+                                                        <i class="{{ data_get($cat_, 'icon_class') ?? 'fas fa-folder' }}"></i>
+                                                    @endif
+                                                    {{ str(data_get($cat_, 'name'))->limit(100) }}
+                                                    @if (config('settings.list.count_categories_listings'))
+                                                        <span class="count">&nbsp;({{ $countPostsPerCat[data_get($cat_, 'id')]['total'] ?? 0 }})</span>
+                                                    @endif
+                                                </a>
+                                            </li>
+                                        @endforeach
+                                    @endif
                                 @endif
                             </ul>
                         </div>
