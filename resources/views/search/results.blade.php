@@ -112,7 +112,7 @@
                                                     <a href="{{ \App\Helpers\UrlGen::category($iCat, null, $city ?? null) }}"
                                                        title="{{ data_get($iCat, 'name') }}">
                                                         @if (in_array(config('settings.list.show_category_icon'), [4, 5, 6, 8]))
-                                                            <i class="{{ data_get($cat_, 'icon_class') ?? 'fas fa-folder' }}"></i>
+                                                            <i class="{{ data_get($iCat, 'icon_class') ?? 'fas fa-folder' }}"></i>
                                                         @endif
                                                         {{ str(data_get($iCat, 'name'))->limit(100) }}
                                                         @if (config('settings.list.count_categories_listings'))
@@ -255,7 +255,7 @@
                                                 <a href="{{ \App\Helpers\UrlGen::category($iCat, null, $city ?? null) }}"
                                                    title="{{ data_get($iCat, 'name') }}">
                                                     @if (in_array(config('settings.list.show_category_icon'), [4, 5, 6, 8]))
-                                                        <i class="{{ data_get($cat_, 'icon_class') ?? 'fas fa-folder' }}"></i>
+                                                        <i class="{{ data_get($iCat, 'icon_class') ?? 'fas fa-folder' }}"></i>
                                                     @endif
                                                     {{ str(data_get($iCat, 'name'))->limit(100) }}
                                                     @if (config('settings.list.count_categories_listings'))
