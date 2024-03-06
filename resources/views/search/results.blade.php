@@ -232,7 +232,7 @@
                             </div>
                         </div>
                         <div class="d-md-none d-block border-bottom my-4 border-2">
-                            <ul class="d-flex list-reset gap-3">
+                            <ul class="d-flex list-reset gap-3" style="overflow-y: auto">
                                 @if(is_array(data_get($cat, 'children')))
                                     @foreach (data_get($cat, 'children') as $iSubCat)
                                         <li>
