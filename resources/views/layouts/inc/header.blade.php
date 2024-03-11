@@ -67,7 +67,7 @@ if ($multiCountriesIsEnabled) {
 					@if ($multiCountriesIsEnabled)
 						@if (!empty(config('country.icode')))
 							@if (file_exists(public_path() . '/images/flags/24/' . config('country.icode') . '.png'))
-								<button class="flag-menu country-flag d-md-none d-sm-block  btn btn-default float-end" href="#selectCountry" data-bs-toggle="modal">
+								<button class="flag-menu country-flag d-md-none d-sm-block  btn btn-default float-end" href="#selectCountry" data-bs-toggle="modal" style="border: none; padding: 0">
 									<img src="{{ url('images/flags/24/' . config('country.icode') . '.png') . getPictureVersion() }}"
 										 alt="{{ config('country.name') }}"
 										 style="float: left;"
