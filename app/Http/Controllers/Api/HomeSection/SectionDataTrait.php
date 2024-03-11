@@ -243,10 +243,10 @@ trait SectionDataTrait
 		} else {
 			
 			$categories = cache()->remember($cacheId, $cacheExpiration, function () use ($maxItems) {
-				$categories = Category::query()->root();
-				if (!empty($maxItems)) {
-					$categories = $categories->take($maxItems);
-				}
+				$categories = Category::query();
+//				if (!empty($maxItems)) {
+//					$categories = $categories->take($maxItems);
+//				}
 				
 				return $categories->orderBy('lft')->get();
 			});
@@ -258,9 +258,15 @@ trait SectionDataTrait
 				$maxRowsPerCol = ($maxRowsPerCol > 0) ? $maxRowsPerCol : 1; // Fix array_chunk with 0
 				$categories = $categories->chunk($maxRowsPerCol);
 			}
-			
+
+            foreach ($categories as $key => $value) {
+                if(!empty($value->parent_id)) {
+                    $data['subCategories']['items'][] = $value;
+                    unset($categories[$key]);
+                }
+            }
+
 			$data['categories'] = $categories;
-			
 		}
 		
 		// Count Posts by category (if the option is enabled)

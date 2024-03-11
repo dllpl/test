@@ -10,40 +10,14 @@ $hideOnMobile = (data_get($sectionOptions, 'hide_on_mobile') == '1') ? ' hidden-
 
 $catDisplayType = data_get($sectionOptions, 'cat_display_type');
 $maxSubCats = (int)data_get($sectionOptions, 'max_sub_cats');
+
+$counter = 0;
 ?>
 @includeFirst([config('larapen.core.customizedViewPath') . 'home.inc.spacer', 'home.inc.spacer'], ['hideOnMobile' => $hideOnMobile])
 
 {{--Новое--}}
 
 @if ($catDisplayType == 'c_picture_list')
-    <section class="catalog-promo">
-        <div class="catalog-promo__container container">
-            <ul class="catalog-promo__list list-reset">
-                @if (!empty($categories))
-                    @foreach($categories as $key => $cat)
-                        <li class="catalog-promo__item">
-                            <a href="{{ \App\Helpers\UrlGen::category($cat) }}" class="catalog-promo__link link">
-                                <div class="catalog-promo__img-wrapp">
-                                    <img class="catalog-promo__img img" src="{{ data_get($cat, 'picture_url') }}"
-                                         alt="{{ data_get($cat, 'name') }}">
-                                </div>
-                                <div class="catalog-promo__content-wrapp">
-                                    <div class="catalog-promo__content-desc">
-                                        <h4 class="catalog-promo__title title">{{ data_get($cat, 'name') }}</h4>
-                                        <p class="catalog-promo__subtitle">{{ strip_tags(data_get($cat, 'description')) }}</p>
-                                    </div>
-                                    <svg class="catalog-promo__icon">
-                                        <use xlink:href="images/sprite.svg#arrow-green"></use>
-                                    </svg>
-                                </div>
-                            </a>
-                        </li>
-                    @endforeach
-                @endif
-            </ul>
-        </div>
-    </section>
-
     <section class="d-block d-md-none">
         <div class="container">
             <div class="swiper catalog-promo__slider">
@@ -73,6 +47,73 @@ $maxSubCats = (int)data_get($sectionOptions, 'max_sub_cats');
             </div>
         </div>
     </section>
+
+    @if (!empty($categories))
+        @php
+            if(count($categories) >= 4) {
+                $last_cat = last($categories);
+                array_pop($categories);
+            }
+        @endphp
+        <section class="catalog-promo">
+            <div class="catalog-promo__container container">
+                <ul class="catalog-promo__list list-reset">
+                    @foreach($categories as $key => $cat)
+                        <li class="catalog-promo__item">
+                            <a href="{{ \App\Helpers\UrlGen::category($cat) }}" class="catalog-promo__link link">
+                                <div class="catalog-promo__img-wrapp">
+                                    <img class="catalog-promo__img img" src="{{ data_get($cat, 'picture_url') }}"
+                                         alt="{{ data_get($cat, 'name') }}">
+                                </div>
+                                <div class="catalog-promo__content-wrapp">
+                                    <div class="catalog-promo__content-desc">
+                                        <h4 class="catalog-promo__title title">{{ data_get($cat, 'name') }}</h4>
+                                        <p class="catalog-promo__subtitle">{{ strip_tags(data_get($cat, 'description')) }}</p>
+                                    </div>
+                                    <svg class="catalog-promo__icon">
+                                        <use xlink:href="images/sprite.svg#arrow-green"></use>
+                                    </svg>
+                                </div>
+                            </a>
+                        </li>
+                    @endforeach
+                </ul>
+                @if(isset($last_cat))
+                    @php
+                        foreach ($subCategories['items'] as $key => $value) {
+                            if ($value["parent_id"] == $last_cat['id']) {
+                                $subCategory[] = $value;
+                            }
+                        }
+                    @endphp
+                    <div class="d-flex mt-3 bg-white" style="box-shadow: 0px 0px 20px 5px rgba(146, 159, 169, 0.15)">
+
+                        <div class="col-3 p-0">
+                            <img class="catalog-promo__img img" src="{{ data_get($last_cat, 'picture_url') }}"
+                                 alt="{{ data_get($last_cat, 'name') }}">
+                        </div>
+                        <div class="col-9 p-0 ml-4">
+                            <div class="d-flex flex-column justify-content-around p-2 h-100">
+                                <a href="{{ \App\Helpers\UrlGen::category($last_cat) }}">
+                                    <h4 class="catalog-promo__title title">{{ data_get($last_cat, 'name') }}</h4>
+                                </a>
+                                <ul class="d-flex">
+                                    @foreach($subCategory as $sub)
+                                        <li style="margin-right: 0.5rem">
+                                            <a href="{{ \App\Helpers\UrlGen::category($sub) }}">
+                                                {{$sub['name']}}
+                                            </a>
+                                        </li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        </div>
+
+                    </div>
+                @endif
+            </div>
+        </section>
+    @endif
 
 @endif
 
