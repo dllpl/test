@@ -93,7 +93,7 @@ $counter = 0;
                                  alt="{{ data_get($last_cat, 'name') }}">
                         </div>
                         <div class="col-9 p-0 ml-4">
-                            <div class="d-flex flex-column justify-content-around p-2 h-100">
+                            <div class="d-flex flex-column justify-content-around p-3 h-100">
                                 <a href="{{ \App\Helpers\UrlGen::category($last_cat) }}">
                                     <h4 class="catalog-promo__title title">{{ data_get($last_cat, 'name') }}</h4>
                                 </a>
