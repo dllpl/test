@@ -86,7 +86,7 @@ $counter = 0;
                             }
                         }
                     @endphp
-                    <div class="d-flex mt-3 bg-white" style="box-shadow: 0px 0px 20px 5px rgba(146, 159, 169, 0.15); gap: 15px">
+                    <div class="d-flex mt-3 bg-white" style="box-shadow: 0px 0px 20px 5px rgba(146, 159, 169, 0.15)">
 
                         <div class="catalog-promo__img-wrapp" style="width: 24%">
                             <img class="catalog-promo__img img" src="{{ data_get($last_cat, 'picture_url') }}"
