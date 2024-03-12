@@ -101,7 +101,7 @@ class RegisterController extends FrontController
 		$user = data_get($data, 'result');
 		
 		// Get the next URL
-		$nextUrl = url('register/finish');
+		$nextUrl = url('/login');
 		
 		if (
 			data_get($data, 'extra.sendEmailVerification.emailVerificationSent')
