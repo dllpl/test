@@ -82,7 +82,6 @@
 												<div class="row mb-3 required">
 													<label class="col-md-3 col-form-label" for="auth_field"> Тип лица <sup>*</sup></label>
 													<div class="col-md-9">
-														@dump(old('face_type'))
 														@foreach($face_type_list as $item)
 															<div class="form-check form-check-inline pt-2">
 																<input name="face_type"
