@@ -25,7 +25,7 @@
 			<div class="modal-body" style="padding: 0 2.3em 2.3em 2.3em">
 				<div class="row">
 					<div class="col-12">
-						<h3 class="text-center mb-3 font-weight-bold">Выберите город поиска</h3>
+						<h3 class="text-center mb-3 font-weight-bold">{{t('choose_your_city')}}</h3>
 {{--						<div id="locationsTitle" style="height: 40px;" class="align-middle">--}}
 {{--							{!! t('locations_in_country', ['country' => config('country.name')]) !!}--}}
 {{--						</div>--}}
