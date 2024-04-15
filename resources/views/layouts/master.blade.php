@@ -174,18 +174,18 @@
 		<div class="bottom__mobile__menu__container">
 			<a class="bottom__mobile__menu__item" href="/search">
 				<img src="/images/icon/search.svg">
-				<span>Поиск</span>
+				<span>{{t('search')}}</span>
 			</a>
 			<a class="bottom__mobile__menu__item" @if(auth()->check()) href="/account/posts/favourite" @else href="#quickLogin" data-bs-toggle="modal" @endif>
 				<img src="/images/icon/heart.svg">
-				<span>Избранное</span>
+				<span>{{t('Saved')}}</span>
 			</a>
 			<a class="bottom__mobile__menu__item position-relative" @if(auth()->check()) href="/account/messages" @else href="#quickLogin" data-bs-toggle="modal" @endif>
 				@if(auth()->check())
 					<div class="count-new-message position-absolute" style="display: none"></div>
 				@endif
 				<img src="/images/icon/message.svg">
-				<span>Сообщения</span>
+				<span>{{t('Messagess')}}</span>
 			</a>
 			<a class="bottom__mobile__menu__item" @if(auth()->check()) href="/account" @else href="#quickLogin" data-bs-toggle="modal" @endif>
 				<img src="/images/icon/profile.svg">
