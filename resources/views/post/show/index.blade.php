@@ -402,7 +402,7 @@
 					@if(!empty($valueItem))
 						<div class="product__options">
 								<h2 class="product__title title title--xl">
-									Дополнительные опции
+									{{t('Additional Details')}}
 								</h2>
 								@foreach($valueItem as $item)
 									<li class="product__item">
