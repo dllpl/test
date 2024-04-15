@@ -28,7 +28,7 @@
 		$d1 = new DateTime($date_to_public);
 		$d2 = new DateTime();
 		$interval= $d1->diff($d2);
-		$time_lost = $interval->h . ' ч. ' . $interval->i . ' мин. ';
+		$time_lost = $interval->h . ' h. ' . $interval->i . ' min. ';
 	}
 
 @endphp
@@ -39,7 +39,7 @@
 
 	<section class="search">
 		<div class="search__container container">
-			<a href="{{ \App\Helpers\UrlGen::searchWithoutQuery() }}" class="search__link link link--btn link--accent">Все объявления</a>
+			<a href="{{ \App\Helpers\UrlGen::searchWithoutQuery() }}" class="search__link link link--btn link--accent">{{ t('all_ads') }}</a>
 
 			<form id="search" name="search" action="{{ \App\Helpers\UrlGen::searchWithoutQuery() }}" method="GET" class="search__form form-search">
 				<input name="q" placeholder="{{ t('what') }}" type="text" value="" class="input-reset input input--search">
@@ -56,7 +56,7 @@
 				<svg class="icon icon--geo">
 					<use xlink:href="/images/sprite.svg#geo"></use>
 				</svg>
-				<span>{{ session()->has('location') ? session()->get('location') : 'Выберите свой город' }}</span>
+				<span>{{ session()->has('location') ? session()->get('location') : t('choose_your_city') }}</span>
 			</a>
 		</div>
 	</section>
@@ -189,7 +189,7 @@
 						@endif
 					</div>
 					@if((time() - strtotime($post['created_at']) <= $hour_to_public * 60 * 60))
-						<div style="color: var(--heart-new); font-weight: bold; margin-bottom: 10px">До публикации в общий доступ отсталось {{$time_lost}} </div>
+						<div style="color: var(--heart-new); font-weight: bold; margin-bottom: 10px">{{ t('time_to_public_lost') }} {{$time_lost}} </div>
 					@endif
 					<div class="product__header-bottom">
 						@if (!config('settings.single.hide_dates'))
@@ -228,17 +228,13 @@
 							<div class="product__price-wrapp">
 								<span class="product__price">{!! data_get($post, 'price_formatted') !!}</span>
 								@if (auth()->check())
-									<a href="#contactUser" class="link link--underline" data-bs-toggle="modal">
-										Предложить свою цену
-									</a>
+									<a href="#contactUser" class="link link--underline" data-bs-toggle="modal">{{ t('offer_your_price') }}</a>
 								@else
-									<a href="#quickLogin" class="link link--underline" data-bs-toggle="modal">
-										Предложить свою цену
-									</a>
+									<a href="#quickLogin" class="link link--underline" data-bs-toggle="modal">{{ t('offer_your_price') }}</a>
 								@endif
 							</div>
 							<div class="product__like">
-								<p class="product__like-content">Добавить объявление в избранное</p>
+								<p class="product__like-content">{{ t('add_to_favorites') }}</p>
 								@if (auth()->check())
 									@if (!empty(data_get($post, 'savedByLoggedUser')))
 										<a class="product__like-content make-favorite" id="{{ data_get($post, 'id') }}" title="{{ t('Remove favorite') }}">
@@ -276,7 +272,7 @@
 									</div>
 									<ul class="saler__list list-reset">
 										<li class="saler__item">
-											<span class="saler__desc">Объявление размещено от</span>
+											<span class="saler__desc">{{ t('advertisement_posted_from') }}</span>
 										</li>
 										@if (!empty($user))
 											<li class="saler__item">
@@ -299,7 +295,7 @@
 								<div class="saler__right">
 									@if (!empty($user))
 										<a href="{{ \App\Helpers\UrlGen::user($user) }}" class="saler__link link link--underline">
-											Все объявления
+											{{ t('all_ads') }}
 										</a>
 									@else
 										{{ data_get($post, 'contact_name') }}
@@ -382,7 +378,7 @@
 					<div class="product__specific">
 						@if(!empty($customFields))
 							<h2 class="product__title title title--xl">
-								Характеристики
+								{{ t('сharacteristics') }}
 							</h2>
 							<ul class="product__list list-reset">
 								{{-- Custom Fields --}}
@@ -418,7 +414,7 @@
 						</div>
 					@endif
 					<div class="product__description">
-						<h2 class="product__title title title--xl">Описание</h2>
+						<h2 class="product__title title title--xl">{{ t('Description') }}</h2>
 						<div class="title">
 							{!! data_get($post, 'description') !!}
 						</div>
@@ -427,7 +423,7 @@
 					<div class="product__map">
 						@if (config('settings.single.show_listing_on_googlemap') && isset($post['lat'], $post['lon']))
 							<h2 class="product__title title title--xl">
-								Адрес
+								{{ t('Address') }}
 							</h2>
 							<div class="title mb-2">
 								{{ data_get($post, 'address') }}
@@ -548,22 +544,22 @@
 				<div class="accent-block-add__content">
 					<h3 class="title title--light title--xl">
 						{{--						{{ t('do_you_have_anything') }}--}}
-						Разместите объявление
+						{{ t('Create Listing') }}
 					</h3>
 					<p class="accent-block-add__subtitle">
 						{{--						{{ t('sell_products_and_services_online_for_free') }}--}}
-						И начните продавать или продвигать свои услуги вместе с AUTOMOST
+						{{ t('get_started_sale') }} {{ config('settings.app.name') }}
 					</p>
 				</div>
 				@if (!auth()->check() && config('settings.single.guests_can_post_listings') != '1')
 					<a href="#quickLogin" class="accent-block-add__link link link--btn-big link--dark" data-bs-toggle="modal">
 						{{--						{{ t('start_now') }}--}}
-						Разместить объявление
+						{{ t('Create Listing') }}
 					</a>
 				@else
 					<a href="{{ \App\Helpers\UrlGen::addPost() }}" class="accent-block-add__link link link--btn-big link--dark">
 						{{--						{{ t('start_now') }}--}}
-						Разместить объявление
+						{{ t('Create Listing') }}
 					</a>
 				@endif
 			</div>

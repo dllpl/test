@@ -499,24 +499,24 @@
                 <div class="accent-block-add__content">
                     <h3 class="title title--light title--xl">
                         {{--						{{ t('do_you_have_anything') }}--}}
-                        Разместите объявление
+                        {{ t('Create Listing') }}
                     </h3>
                     <p class="accent-block-add__subtitle">
                         {{--						{{ t('sell_products_and_services_online_for_free') }}--}}
-                        И начните продавать или продвигать свои услуги вместе с AUTOMOST
+                        {{ t('get_started_sale') }} {{ config('settings.app.name') }}
                     </p>
                 </div>
                 @if (!auth()->check() && config('settings.single.guests_can_post_listings') != '1')
                     <a href="#quickLogin" class="accent-block-add__link link link--btn-big link--dark"
                        data-bs-toggle="modal">
                         {{--						{{ t('start_now') }}--}}
-                        Разместить объявление
+                        {{ t('Create Listing') }}
                     </a>
                 @else
                     <a href="{{ \App\Helpers\UrlGen::addPost() }}"
                        class="accent-block-add__link link link--btn-big link--dark">
                         {{--						{{ t('start_now') }}--}}
-                        Разместить объявление
+                        {{ t('Create Listing') }}
                     </a>
                 @endif
             </div>

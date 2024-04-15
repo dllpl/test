@@ -44,7 +44,7 @@
 
 	<section class="search">
 		<div class="search__container container">
-			<a href="{{ \App\Helpers\UrlGen::searchWithoutQuery() }}" class="search__link link link--btn link--accent">Все объявления</a>
+			<a href="{{ \App\Helpers\UrlGen::searchWithoutQuery() }}" class="search__link link link--btn link--accent">{{ t('all_ads') }}</a>
 
 			<form id="search" name="search" action="{{ \App\Helpers\UrlGen::searchWithoutQuery() }}" method="GET" class="search__form form-search">
 				<input name="q" placeholder="{{ t('what') }}" type="text" value="" class="input-reset input input--search">
@@ -61,7 +61,7 @@
 				<svg class="icon icon--geo">
 					<use xlink:href="/images/sprite.svg#geo"></use>
 				</svg>
-				<span>{{ session()->has('location') ? session()->get('location') : 'Выберите свой город' }}</span>
+				<span>{{ session()->has('location') ? session()->get('location') : t('choose_your_city') }}</span>
 			</a>
 		</div>
 	</section>
@@ -83,7 +83,7 @@
 				@includeFirst([config('larapen.core.customizedViewPath') . 'account.inc.sidebar', 'account.inc.sidebar'])
 
 				<div class="lk__content">
-					<button class="menu-nav__btn-open btn btn--form btn-reset">Открыть меню</button>
+					<button class="menu-nav__btn-open btn btn--form btn-reset">{{t('open_mobile_menu')}}</button>
 					<div class="lk-product">
 						<h2 class="lk__title title title--medium">{{ $pageTitles[$pagePath]['title'] ?? t('posts') }}</h2>
 
@@ -132,7 +132,7 @@
 													<svg class="icon">
 														<use xlink:href="/images/sprite.svg#eye"></use>
 													</svg>
-													{{ data_get($post, 'visits') ?? 0 }} просмотров
+													{{ data_get($post, 'visits') ?? 0 }} {{t('views')}}
 												</li>
 											</ul>
 
@@ -157,13 +157,13 @@
 													<a class="lk-product__link link link--accent"
 													   href="{{ url('account/posts/' . $pagePath . '/' . data_get($post, 'id') . '/repost') }}"
 													>
-														Опубликовать снова
+														{{t('public_again')}}
 													</a>
 												@endif
 												<a class="lk-product__link link link--accent"
 												   href="{{ url('account/posts/' . $pagePath . '/' . data_get($post, 'id') . '/delete') }}"
 												>
-													Удалить
+													{{t('Delete')}}
 												</a>
 											</div>
 										</div>

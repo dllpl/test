@@ -3768,7 +3768,7 @@ function genPhoneNumberBtn($post, bool $btnBlock = false): string
 
 	// Generate the Phone Number button
 	$out .= '<a href="' . $btnLink . '" ' . $btnAttr . ' class="saler__phone link link--flex' . $btnClass . '">';
-    $out .= '<p>Показать номер <span class="saler__number">'. $phone .'</span></p>';
+    $out .= '<p>'. t("show_phone")  .'<span class="saler__number">'. $phone .'</span></p>';
 	$out .= '<svg class="saler__icon"><use xlink:href="/images/sprite.svg#phone"></use></svg>';
 	$out .= '</a>';
 

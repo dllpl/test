@@ -9,7 +9,7 @@ class CertController extends AccountBaseController
     public function index()
     {
         // Meta Tags
-        MetaTag::set('title', 'Аккредитация');
+        MetaTag::set('title', t('accreditation'));
 
         return appView('account.cert');
     }

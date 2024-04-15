@@ -232,9 +232,9 @@
 											</div>
 										</div>
 										<div id="geo" class="row mb-3 required">
-											<label class="col-md-3 col-form-label{{ $cityIdError }}" for="full_address">Адрес<sup>*</sup></label>
+											<label class="col-md-3 col-form-label{{ $cityIdError }}" for="full_address">{{ t('Address') }}<sup>*</sup></label>
 											<div class="col-md-8">
-												<input id="full_address" name="full_address" placeholder="Укажите полный адрес" class="form-control input-md{{ $titleError }}"
+												<input id="full_address" name="full_address" placeholder="" class="form-control input-md{{ $titleError }}"
 													   type="text" value="{{ old('address', data_get($post, 'address')) }}">
 
 												<input type="hidden" id="geo_lat" name="geo_lat" value="{{ old('lat',  data_get($post, 'lat')) }}">

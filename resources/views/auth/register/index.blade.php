@@ -14,16 +14,16 @@
 --}}
 
 @php
-	$face_type_list = \DB::table('face_type_list')
-	->where('active', true)
-	->get();
+//	$face_type_list = \DB::table('face_type_list')
+//	->where('active', true)
+//	->get();
 @endphp
 
 @extends('layouts.master')
 @section('content')
 	<section class="search">
 		<div class="search__container container">
-			<a href="{{ \App\Helpers\UrlGen::searchWithoutQuery() }}" class="search__link link link--btn link--accent">Все объявления</a>
+			<a href="{{ \App\Helpers\UrlGen::searchWithoutQuery() }}" class="search__link link link--btn link--accent">{{ t('all_ads') }}</a>
 
 			<form id="search" name="search" action="{{ \App\Helpers\UrlGen::searchWithoutQuery() }}" method="GET" class="search__form form-search">
 				<input name="q" placeholder="{{ t('what') }}" type="text" value="" class="input-reset input input--search">
@@ -40,7 +40,7 @@
 				<svg class="icon icon--geo">
 					<use xlink:href="/images/sprite.svg#geo"></use>
 				</svg>
-				<span>{{ session()->has('location') ? session()->get('location') : 'Выберите свой город' }}</span>
+				<span>{{ session()->has('location') ? session()->get('location') : t('choose_your_city') }}</span>
 			</a>
 		</div>
 	</section>
@@ -70,8 +70,7 @@
 
 					<section class="registration">
 						<div class="registration__container">
-							<h1 class="registration__title title title--medium">Зарегистируйтесь на&nbsp;сайте, чтобы начать покупать и&nbsp;продавать
-								вместе с&nbsp;Автомост</h1>
+							<h1 class="registration__title title title--medium">{{ t('register_on_the_site') }} {{ config('settings.app.name') }}</h1>
 
 							<div class="registration__grid grid grid--coll-2">
 								<div class="registration__left">
@@ -80,24 +79,23 @@
 											<ul class="list-reset form__list">
 
 												<div class="row mb-3 required">
-													<label class="col-md-3 col-form-label" for="auth_field"> Тип лица <sup>*</sup></label>
+													<label class="col-md-3 col-form-label" for="auth_field"> {{ t('face_type') }} <sup>*</sup></label>
 													<div class="col-md-9">
-														@foreach($face_type_list as $item)
-															<div class="form-check form-check-inline pt-2">
-																<input name="face_type"
-																	   value="{{$item->id}}"
-																	   class="form-check-input auth-field-input"
-																	   type="radio"
-																		@checked(old('face_type') == $item->id)
-																>
-																<label class="form-check-label mb-0">
-																	{{$item->name_short}}
-																</label>
-															</div>
-														@endforeach
+{{--														@foreach($face_type_list as $item)--}}
+{{--															<div class="form-check form-check-inline pt-2">--}}
+{{--																<input name="face_type"--}}
+{{--																	   value="{{$item->id}}"--}}
+{{--																	   class="form-check-input auth-field-input"--}}
+{{--																	   type="radio"--}}
+{{--																		@checked(old('face_type') == $item->id)--}}
+{{--																>--}}
+{{--																<label class="form-check-label mb-0">--}}
+{{--																	{{$item->name_short}}--}}
+{{--																</label>--}}
+{{--															</div>--}}
+{{--														@endforeach--}}
 														<div class="form-text text-muted">
-															Выберит Ваш вариант
-														</div>
+															{{ t('choice_your_variant') }}
 													</div>
 												</div>
 
@@ -109,9 +107,9 @@
 												</li>
 
 												@php
-													$user_type_list = \DB::table('user_type_list')
-                                                    ->where('active', true)
-                                                    ->get();
+//													$user_type_list = \DB::table('user_type_list')
+//                                                    ->where('active', true)
+//                                                    ->get();
 												@endphp
 												<div class="row mb-3 required entity__block" style="display: none">
 													<label class="col-md-12 col-form-label">
@@ -119,18 +117,18 @@
 													</label>
 													<div class="col-md-12 col-lg-12">
 														<select name="user_type" class="form-control large-data-selecter">
-															@foreach ($user_type_list as $key => $item)
-																<option value="{{ $key }}">
-																	{{ $item->name }}
-																</option>
-															@endforeach
+{{--															@foreach ($user_type_list as $key => $item)--}}
+{{--																<option value="{{ $key }}">--}}
+{{--																	{{ $item->name }}--}}
+{{--																</option>--}}
+{{--															@endforeach--}}
 														</select>
 													</div>
 												</div>
 
 												<li class="form__item required">
 													{{-- name --}}
-													<label class="form__label">ФИО</label>
+													<label class="form__label">{{t('full_name')}}</label>
 													<?php $nameError = (isset($errors) && $errors->has('name')) ? ' is-invalid' : ''; ?>
 													<input name="name" placeholder="{{ t('Name') }}"  type="text" class="form-control input input--default {{ $nameError }}" value="{{ old('name') }}">
 												</li>
@@ -175,7 +173,7 @@
 												@if ($usernameIsEnabled)
 														<?php $usernameError = (isset($errors) && $errors->has('username')) ? ' is-invalid' : ''; ?>
 													<li class="form__item">
-														<label class="form__label" for="username">{{ t('Username') }} (ник-нейм)</label>
+														<label class="form__label" for="username">{{ t('Username') }}</label>
 														<input id="username"
 															   name="username"
 															   type="text"
@@ -278,9 +276,8 @@
 													>
 												</li>
 												<li class="form__item">
-													<p style="color: #686868">Нажимая на&nbsp;кнопку, вы&nbsp;даете согласие на&nbsp;обработку
-														<a href="http://barsovoz/page/terms" target="_blank" class="text-decoration-underline">Персональных данных</a> и&nbsp;ознакомлены с&nbsp;<a href="http://barsovoz/page/terms" target="_blank" class="text-decoration-underline">Политикой
-														конфиденциальности</a> </p>
+													<p style="color: #686868">{{ t('click_the_button_agree') }}
+														<a href="http://barsovoz/page/terms" target="_blank" class="text-decoration-underline">{{ t('privacy') }}</a> {{t('and_familiarized')}} <a href="http://barsovoz/page/terms" target="_blank" class="text-decoration-underline">{{ t('terms') }}</a> </p>
 												</li>
 											</ul>
 
@@ -301,22 +298,15 @@
 										<svg class="registration__icon icon icon--registration">
 											<use xlink:href="/images/sprite.svg#burger"></use>
 										</svg>
-										<p class="registration__title title title--medium">Размещайте бесплатные объявления</p>
-										<p>
-											Имеете&nbsp;ли вы&nbsp;что-нибудь для продажи, аренды или предоставляете услуги, работу? Публикуйте ваши объявления
-											на&nbsp;Автомост&nbsp;—
-											это бесплатно и&nbsp;просто в&nbsp;использовании
-										</p>
+										<p class="registration__title title title--medium">{{ t('post_free_ads') }}</p>
+										<p>{{ t('post_free_ads_desc') }}</p>
 									</div>
 									<div class="registration__description">
 										<svg class="registration__icon icon icon--registration">
 											<use xlink:href="/images/sprite.svg#basket"></use>
 										</svg>
-										<p class="registration__title title title--medium">Совершайте покупки</p>
-										<p>
-											У&nbsp;нас представлено более 1000 продавцов со&nbsp;всей России и&nbsp;стран СНГ&nbsp;— здесь вы&nbsp;найдете то, что давно искали.
-											Добавляйте объявления в&nbsp;избранное, чтобы не&nbsp;потерять
-										</p>
+										<p class="registration__title title title--medium">{{ t('make_your_purchases') }}</p>
+										<p>{{ t('make_your_purchases_desc') }}</p>
 									</div>
 								</div>
 							</div>

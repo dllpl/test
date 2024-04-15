@@ -21,11 +21,11 @@
         {{-- Previous Page Link --}}
         @if (!data_get($paginator, 'prev'))
             <li class="disabled" aria-disabled="true" aria-label="@lang('pagination.previous')">
-                <span aria-hidden="true">Назад</span>
+                <span aria-hidden="true">{{ t('Previous') }}</span>
             </li>
         @else
             <li>
-                <a class="page-link__custom" href="{{ data_get($paginator, 'prev') }}" rel="prev" data-url="{{ data_get($paginator, 'prev') }}" aria-label="@lang('pagination.previous')">Назад</a>
+                <a class="page-link__custom" href="{{ data_get($paginator, 'prev') }}" rel="prev" data-url="{{ data_get($paginator, 'prev') }}" aria-label="@lang('pagination.previous')">{{ t('Previous') }}</a>
             </li>
         @endif
         {{-- Pagination Elements --}}
@@ -48,11 +48,11 @@
         {{-- Next Page Link --}}
         @if (data_get($paginator, 'next'))
             <li>
-                <a data-url="{{ data_get($paginator, 'next') }}" rel="next" aria-label="@lang('pagination.next')" class="page-link__custom">Вперед</a>
+                <a data-url="{{ data_get($paginator, 'next') }}" rel="next" aria-label="@lang('pagination.next')" class="page-link__custom">{{ t('Next') }}</a>
             </li>
         @else
             <li class="disabled" aria-disabled="true" aria-label="@lang('pagination.next')">
-                <span aria-hidden="true">Назад</span>
+                <span aria-hidden="true">{{ t('Previous') }}</span>
             </li>
         @endif
     </ul>

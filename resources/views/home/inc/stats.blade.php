@@ -43,7 +43,7 @@ $hideOnMobile = (data_get($sectionOptions, 'hide_on_mobile') == '1') ? ' hidden-
 					<span class="counter">{{ (int)data_get($stats, 'users') }}</span>
 					@if (isset($suffixUsers) && !empty($suffixUsers))<span>{{ $suffixUsers }}</span>@endif
 				</span>
-				<h5 class="counts__text">Клиентская база</h5>
+				<h5 class="counts__text">{{ t('client_base') }}</h5>
 			</li>
 		</ul>
 	</div>

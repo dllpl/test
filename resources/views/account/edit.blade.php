@@ -27,7 +27,7 @@
 @section('content')
 	<section class="search">
 		<div class="search__container container">
-			<a href="{{ \App\Helpers\UrlGen::searchWithoutQuery() }}" class="search__link link link--btn link--accent">Все объявления</a>
+			<a href="{{ \App\Helpers\UrlGen::searchWithoutQuery() }}" class="search__link link link--btn link--accent">{{ t('all_ads') }}</a>
 
 			<form id="search" name="search" action="{{ \App\Helpers\UrlGen::searchWithoutQuery() }}" method="GET" class="search__form form-search">
 				<input name="q" placeholder="{{ t('what') }}" type="text" value="" class="input-reset input input--search">
@@ -44,7 +44,7 @@
 				<svg class="icon icon--geo">
 					<use xlink:href="/images/sprite.svg#geo"></use>
 				</svg>
-				<span>{{ session()->has('location') ? session()->get('location') : 'Выберите свой город' }}</span>
+				<span>{{ session()->has('location') ? session()->get('location') : t('choose_your_city') }}</span>
 			</a>
 		</div>
 	</section>
@@ -73,7 +73,7 @@
 					<div id="avatarUploadError" class="center-block" style="width:100%; display:none"></div>
 					<div id="avatarUploadSuccess" class="alert alert-success fade show" style="display:none;"></div>
 
-					<button class="menu-nav__btn-open btn btn--form btn-reset">Открыть меню</button>
+					<button class="menu-nav__btn-open btn btn--form btn-reset">{{t('open_mobile_menu')}}</button>
 					<div class="lk__form">
 						<h2 class="lk__title title title--medium">{{ t('Photo or Avatar') }}</h2>
 						@php
@@ -149,7 +149,7 @@
                                         ->get();
 									@endphp
 									<div class="row mb-3 required">
-										<label class="col-md-3 col-form-label" for="auth_field"> Тип лица <sup>*</sup></label>
+										<label class="col-md-3 col-form-label" for="auth_field"> {{ t('face_type') }} <sup>*</sup></label>
 										<div class="col-md-9">
 											@foreach($face_type_list as $item)
 												<div class="form-check form-check-inline pt-2">
@@ -165,7 +165,7 @@
 												</div>
 											@endforeach
 											<div class="form-text text-muted">
-												Выберит Ваш вариант
+												{{ t('choice_your_variant') }}
 											</div>
 										</div>
 									</div>
@@ -200,7 +200,7 @@
 									{{-- name --}}
 									<?php $nameError = (isset($errors) && $errors->has('name')) ? ' is-invalid' : ''; ?>
 									<li class="form__item required">
-										<label class="form__label{{ $nameError }}" for="name">ФИО</label>
+										<label class="form__label{{ $nameError }}" for="name">{{t('full_name')}}</label>
 										<input name="name" type="text" class="input input--default form-control{{ $nameError }}" placeholder="" value="{{ old('name', $user->name) }}">
 									</li>
 

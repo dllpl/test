@@ -15,7 +15,7 @@
         <div class="col-md-6 col-12 align-self-center d-none d-md-flex justify-content-end">
             <ol class="breadcrumb mb-0 p-0 bg-transparent">
                 <li class="breadcrumb-item"><a href="{{ admin_url() }}">{{ trans('admin.dashboard') }}</a></li>
-                <li class="breadcrumb-item active d-flex align-items-center">Аккредитация</li>
+                <li class="breadcrumb-item active d-flex align-items-center">{{t('accreditation')}}</li>
             </ol>
         </div>
     </div>

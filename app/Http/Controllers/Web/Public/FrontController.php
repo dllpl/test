@@ -193,7 +193,7 @@ class FrontController extends Controller
 				'isActive'   => (request()->segment(2) == 'transactions'),
 			],
 			[
-				'name'       => 'Профиль',
+				'name'       => t('profile'),
 				'url'        => url('account'),
 				'icon'       => 'fas fa-cog',
 				'group'      => t('My Account'),
@@ -202,7 +202,7 @@ class FrontController extends Controller
 				'isActive'   => (request()->segment(1) == 'account' && request()->segment(2) == null),
 			],
             [
-                'name'       => 'Аккредитация',
+                'name'       => t('accreditation'),
                 'url'        => route('user.cert.index'),
                 'icon'       => 'fa fa-spinner',
                 'group'      => t('My Account'),

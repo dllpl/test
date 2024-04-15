@@ -22,11 +22,11 @@
         {{-- Previous Page Link --}}
         @if (!data_get($paginator, 'prev'))
             <li aria-disabled="true" aria-label="@lang('pagination.previous')">
-                <span aria-hidden="true" class="text-decoration-underline">Назад</span>
+                <span aria-hidden="true" class="text-decoration-underline">{{ t('Previous') }}</span>
             </li>
         @else
             <li>
-                <a class="page-link text-decoration-underline" href="{{ data_get($paginator, 'prev') }}" rel="prev" aria-label="@lang('pagination.previous')" >Назад</a>
+                <a class="page-link text-decoration-underline" href="{{ data_get($paginator, 'prev') }}" rel="prev" aria-label="@lang('pagination.previous')" >{{ t('Previous') }}</a>
             </li>
         @endif
         <div class="d-flex w-100 justify-content-around">
@@ -51,11 +51,11 @@
         {{-- Next Page Link --}}
         @if (data_get($paginator, 'next'))
             <li>
-                <a href="{{ data_get($paginator, 'next') }}" rel="next" aria-label="@lang('pagination.next')" class="text-decoration-underline">Вперед</a>
+                <a href="{{ data_get($paginator, 'next') }}" rel="next" aria-label="@lang('pagination.next')" class="text-decoration-underline">{{ t('Next') }}</a>
             </li>
         @else
             <li class="disabled" aria-disabled="true" aria-label="@lang('pagination.next')">
-                <span aria-hidden="true" class="text-decoration-underline">Вперед</span>
+                <span aria-hidden="true" class="text-decoration-underline">{{ t('Next') }}</span>
             </li>
         @endif
 {{--        <li>Назад</li>--}}

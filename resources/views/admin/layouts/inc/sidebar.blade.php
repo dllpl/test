@@ -155,7 +155,7 @@
 									<li class="sidebar-item">
 										<a href="{{ route('cert.index') }}" class="sidebar-link">
 											<i class="mdi mdi-adjust"></i>
-											<span class="hide-menu">Аккредитация&nbsp;</span>
+											<span class="hide-menu">{{t('accreditation')}}</span>
 											@if($cert_count)
 												<span class="bg-orange color-white" style="border-radius: 8px">{{$cert_count}} нов.</span>
 											@endif

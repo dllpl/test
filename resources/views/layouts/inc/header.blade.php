@@ -60,7 +60,7 @@ if ($multiCountriesIsEnabled) {
 		</div>
 
 		<div class="d-flex">
-		<button class="burger btn-reset" aria-label="Открыть меню" aria-expanded="false" data-burger>
+		<button class="burger btn-reset" aria-label="{{t('open_mobile_menu')}}" aria-expanded="false" data-burger>
 		  <span class="burger__icon"></span>
 		</button>
 			{{-- Country Flag (Mobile) --}}
@@ -112,7 +112,7 @@ if ($multiCountriesIsEnabled) {
 		<div class="header__menu menu" data-menu>
 			<ul class="list-reset header__list">
 				<li class="header__item header__accordion">
-					<div class="accordion">О системе Automost</div>
+					<div class="accordion">{{ t('about_system') }} {{ config('settings.app.name') }}</div>
 					<div class="accordion__panel">
 						<ul>
 							<li>
@@ -125,12 +125,12 @@ if ($multiCountriesIsEnabled) {
 								<a href="/page/terms"> Правила использования </a>
 							</li>
 							<li>
-								<a href="/page/privacy"> Политика конфиденциальности </a>
+								<a href="/page/privacy"> {{ t('privacy') }} </a>
 							</li>
 						</ul>
 					</div>
 
-					<div class="accordion">Информация</div>
+					<div class="accordion">{{ t('information') }}</div>
 					<div class="accordion__panel">
 						<ul>
 							<li><a href="{{ \App\Helpers\UrlGen::contact() }}"> {{ t('Contact') }} </a></li>
@@ -141,7 +141,7 @@ if ($multiCountriesIsEnabled) {
 						</ul>
 					</div>
 
-					<div class="accordion">Аккаунт</div>
+					<div class="accordion">{{ t('my_account') }}</div>
 					<div class="accordion__panel">
 						@if (!auth()->check())
 							<ul>
@@ -296,7 +296,7 @@ if ($multiCountriesIsEnabled) {
 				@endif
 
 				<li class="header__item header__accordion">
-					<span style="font-size: 16px; font-weight: 500; padding: 10px 0">Контакты</span>
+					<span style="font-size: 16px; font-weight: 500; padding: 10px 0">{{ t('Contact') }}</span>
 					<ul>
 						<li>
 							<a href="tel:89172888001" class="link link--flex">
@@ -305,7 +305,7 @@ if ($multiCountriesIsEnabled) {
 								</svg>
 								<div class="footer__info-wrapp">
 									<span class="footer__info">+7 (917) 288-80-01 </span>
-									<span class="footer__info">Бесплатно по России</span>
+									<span class="footer__info">{{ t('free_in_russia') }}</span>
 								</div>
 							</a>
 						</li>
@@ -316,7 +316,7 @@ if ($multiCountriesIsEnabled) {
 								</svg>
 								<div class="footer__info-wrapp">
 									<span class="footer__info">info@automost.pro </span>
-									<span class="footer__info">Служба поддержки</span>
+									<span class="footer__info">{{ t('support_service') }}</span>
 								</div>
 							</a>
 						</li>
@@ -339,14 +339,14 @@ if ($multiCountriesIsEnabled) {
 				?>
 				<li class="header__item postadd">
 					<a class="link link--btn link--dark" href="{{ $addListingUrl }}"{!! $addListingAttr !!} style="color: white">
-						Разместить объявление
+						{{ t('Create Listing') }}
 					</a>
 				</li>
 
 {{--				<li class="header__item d-md-none d-sm-block d-block">--}}
 {{--					<a href="{{ \App\Helpers\UrlGen::register() }}" class="nav-link"><i class="far fa-user"></i> {{ t('sign_up') }}</a>--}}
 {{--				</li>--}}
-{{--				@includeFirst([config('larapen.core.customizedViewPath') . 'layouts.inc.menu.select-language', 'layouts.inc.menu.select-language'])--}}
+				@includeFirst([config('larapen.core.customizedViewPath') . 'layouts.inc.menu.select-language', 'layouts.inc.menu.select-language'])
 			</ul>
 		</div>
 	</div>

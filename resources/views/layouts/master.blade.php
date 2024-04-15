@@ -189,7 +189,7 @@
 			</a>
 			<a class="bottom__mobile__menu__item" @if(auth()->check()) href="/account" @else href="#quickLogin" data-bs-toggle="modal" @endif>
 				<img src="/images/icon/profile.svg">
-				<span>Профиль</span>
+				<span>{{ t('profile') }}</span>
 			</a>
 		</div>
 	</div>

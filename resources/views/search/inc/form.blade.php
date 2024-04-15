@@ -56,7 +56,7 @@
 
 <section class="search">
 	<div class="search__container container">
-		<a href="{{ \App\Helpers\UrlGen::searchWithoutQuery() }}" class="search__link link link--btn link--accent">Все объявления</a>
+		<a href="{{ \App\Helpers\UrlGen::searchWithoutQuery() }}" class="search__link link link--btn link--accent">{{ t('all_ads') }}</a>
 
 		<form id="search" name="search" action="{{ \App\Helpers\UrlGen::searchWithoutQuery() }}" method="GET" class="search__form form-search">
 			@if (!empty($qFilterBy))
@@ -77,7 +77,7 @@
 			<svg class="icon icon--geo">
 				<use xlink:href="/images/sprite.svg#geo"></use>
 			</svg>
-			<span>{{ $qLocation ?? 'Выберите свой город' }}</span>
+			<span>{{ $qLocation ?? t('choose_your_city') }}</span>
 		</a>
 	</div>
 </section>

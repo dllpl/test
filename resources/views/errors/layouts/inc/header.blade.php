@@ -24,7 +24,7 @@ if (request()->segment(1) != 'countries') {
 				 title="{!! $logoLabel !!}" style="height: 40px"/>
 		</a>
 
-		<button class="burger btn-reset" aria-label="Открыть меню" aria-expanded="false" data-burger>
+		<button class="burger btn-reset" aria-label="{{t('open_mobile_menu')}}" aria-expanded="false" data-burger>
 		  <span class="burger__icon">
 			<span class="line"></span>
 			<span class="line"></span>
@@ -161,7 +161,7 @@ if (request()->segment(1) != 'countries') {
 				?>
 				<li class="header__item postadd">
 					<a class="link link--btn link--dark" href="{{ $addListingUrl }}"{!! $addListingAttr !!} style="color: white">
-						Разместить объявление
+						{{ t('Create Listing') }}
 					</a>
 				</li>
 

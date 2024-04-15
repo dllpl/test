@@ -15,8 +15,8 @@
 				<div class="modal-body" style="padding: 0 2.3rem">
 					<div class="row">
 						<div class="col-12">
-							<h4 class="font-weight-bold mb-3">Добро пожаловать в Автомост</h4>
-							<p>В первый раз здесь?
+							<h4 class="font-weight-bold mb-3">{{ t('welcome_to') }}</h4>
+							<p>{{ t('do_not_have_an_account') }}
 								<span class="text-decoration-underline">
 									<a href="{{ \App\Helpers\UrlGen::register() }}" style="color: #686868">
 										{{ t('register') }}</a>
@@ -120,7 +120,7 @@
 								<label class="checkbox form-check-label float-start mt-2" style="font-weight: normal;">
 									<input type="checkbox" value="1" name="remember_me" id="rememberMe2" class="{{ $rememberError }}">
 {{--									{{ t('keep_me_logged_in') }}--}}
-									Запомнить пароль
+									{{ t('keep_me_logged_in') }}
 								</label>
 								<p class="float-end mt-2">
 									<a href="{{ url('password/reset') }}" style="color: #686868" class="text-decoration-underline">

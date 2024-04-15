@@ -20,7 +20,7 @@ $socialAndAppsLinksAreEnabled = ($socialLinksAreEnabled || $appsLinksAreEnabled)
 			<div class="footer__content d-none d-sm-grid">
 				<div class="footer__menu">
 					<h2 class="footer__title title ">
-						О системе
+						{{ t('about_system') }}
 					</h2>
 					<ul class="list-reset">
 						@if (isset($pages) && $pages->count() > 0)
@@ -44,7 +44,7 @@ $socialAndAppsLinksAreEnabled = ($socialLinksAreEnabled || $appsLinksAreEnabled)
 				</div>
 				<div class="footer__menu">
 					<h2 class="footer__title title ">
-						Информация
+						{{ t('information') }}
 					</h2>
 					<ul class="list-reset">
 						<li class="footer__item"><a href="{{ \App\Helpers\UrlGen::contact() }}"> {{ t('Contact') }} </a></li>
@@ -56,7 +56,7 @@ $socialAndAppsLinksAreEnabled = ($socialLinksAreEnabled || $appsLinksAreEnabled)
 				</div>
 				<div class="footer__menu">
 					<h2 class="footer__title title">
-						Аккаунт
+						{{ t('my_account') }}
 					</h2>
 					<ul class="list-reset">
 						@if (!auth()->user())
@@ -77,7 +77,7 @@ $socialAndAppsLinksAreEnabled = ($socialLinksAreEnabled || $appsLinksAreEnabled)
 				</div>
 				<div class="footer__menu">
 					<h2 class="footer__title title">
-						Контакты
+						{{ t('Contact') }}
 					</h2>
 					<ul class="list-reset">
 						<li class="footer__item">
@@ -87,7 +87,7 @@ $socialAndAppsLinksAreEnabled = ($socialLinksAreEnabled || $appsLinksAreEnabled)
 								</svg>
 								<div class="footer__info-wrapp">
 									<span class="footer__info">+7 (917) 288-80-01 </span>
-									<span class="footer__info">Бесплатно по России</span>
+									<span class="footer__info">{{ t('free_in_russia') }}</span>
 								</div>
 							</a>
 						</li>
@@ -98,7 +98,7 @@ $socialAndAppsLinksAreEnabled = ($socialLinksAreEnabled || $appsLinksAreEnabled)
 								</svg>
 								<div class="footer__info-wrapp">
 									<span class="footer__info">info@automost.pro </span>
-									<span class="footer__info">Служба поддержки</span>
+									<span class="footer__info">{{ t('support_service') }}</span>
 								</div>
 							</a>
 						</li>
@@ -109,7 +109,7 @@ $socialAndAppsLinksAreEnabled = ($socialLinksAreEnabled || $appsLinksAreEnabled)
 
 				<ul class="list-reset header__list">
 					<li class="header__item header__accordion">
-						<div class="accordion accordion__footer">О системе Automost</div>
+						<div class="accordion accordion__footer">{{ t('about_system') }} {{ config('settings.app.name') }}</div>
 						<div class="accordion__panel" style="background-color: transparent; border-bottom-color: #686868">
 							<ul class="py-2">
 								<li>
@@ -122,12 +122,12 @@ $socialAndAppsLinksAreEnabled = ($socialLinksAreEnabled || $appsLinksAreEnabled)
 									<a href="/page/terms"> Правила использования </a>
 								</li>
 								<li>
-									<a href="/page/privacy"> Политика конфиденциальности </a>
+									<a href="/page/privacy"> {{ t('privacy') }} </a>
 								</li>
 							</ul>
 						</div>
 
-						<div class="accordion accordion__footer">Информация</div>
+						<div class="accordion accordion__footer">{{ t('information') }}</div>
 						<div class="accordion__panel" style="background-color: transparent; border-bottom-color: #686868">
 							<ul class="py-2">
 								<li><a href="/contact"> Связаться </a></li>
@@ -135,7 +135,7 @@ $socialAndAppsLinksAreEnabled = ($socialLinksAreEnabled || $appsLinksAreEnabled)
 							</ul>
 						</div>
 
-						<div class="accordion accordion__footer">Аккаунт</div>
+						<div class="accordion accordion__footer">{{ t('my_account') }}</div>
 						<div class="accordion__panel" style="background-color: transparent; border-bottom-color: #686868">
 							<ul class="py-2">
 								<li><a href="#quickLogin" class="link" data-bs-toggle="modal"><i class="fas fa-user"></i> Войти</a></li>
@@ -163,14 +163,14 @@ $socialAndAppsLinksAreEnabled = ($socialLinksAreEnabled || $appsLinksAreEnabled)
 
 
 					<li>
-						<span style="font-size: 16px; font-weight: 500; padding: 10px 0">Контакты</span>
+						<span style="font-size: 16px; font-weight: 500; padding: 10px 0">{{ t('Contact') }}</span>
 						<ul class="py-2">
 							<li class="mb-2">
 								<a href="tel:89172888001" class="link link--flex">
 									<i class="fa fa-phone-alt fa-2x"></i>
 									<div class="footer__info-wrapp">
 										<span class="footer__info">+7 (917) 288-80-01 </span>
-										<span class="footer__info">Бесплатно по России</span>
+										<span class="footer__info">{{ t('free_in_russia') }}</span>
 									</div>
 								</a>
 							</li>
@@ -179,7 +179,7 @@ $socialAndAppsLinksAreEnabled = ($socialLinksAreEnabled || $appsLinksAreEnabled)
 									<i class="fa fa-envelope fa-2x"></i>
 									<div class="footer__info-wrapp">
 										<span class="footer__info">info@automost.pro </span>
-										<span class="footer__info">Служба поддержки</span>
+										<span class="footer__info">{{ t('support_service') }}</span>
 									</div>
 								</a>
 							</li>
@@ -200,7 +200,7 @@ $socialAndAppsLinksAreEnabled = ($socialLinksAreEnabled || $appsLinksAreEnabled)
 						<div class="accordion__panel" style="background-color: transparent; border-bottom-color: #686868">
 							<ul class="py-2">
 								<li>
-									<a href="/page/faq">Политика конфиденциальности</a>
+									<a href="/page/faq">{{ t('privacy') }}</a>
 								</li>
 								<li>
 									<a href="/page/anti-scam"> Анти-мошенничество </a>
@@ -209,7 +209,7 @@ $socialAndAppsLinksAreEnabled = ($socialLinksAreEnabled || $appsLinksAreEnabled)
 									<a href="/page/terms"> Правила использования </a>
 								</li>
 								<li>
-									<a href="/page/privacy"> Политика конфиденциальности </a>
+									<a href="/page/privacy"> {{ t('privacy') }} </a>
 								</li>
 							</ul>
 						</div>
@@ -223,13 +223,11 @@ $socialAndAppsLinksAreEnabled = ($socialLinksAreEnabled || $appsLinksAreEnabled)
 			<ul class="list-reset copyright__list d-none d-sm-flex">
 				<li class="copyright__item">
 					<a href="#" class="">
-						Политика конфиденциальности
+						{{ t('privacy') }}
 					</a>
 				</li>
 				<li class="copyright__item">
-					<a href="#" class="">
-						Политика обработки данных
-					</a>
+					<a href="#" class="">{{ t('terms') }}</a>
 				</li>
 				<li class="copyright__item">
 					<a href="#" class="">
