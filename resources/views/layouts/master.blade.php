@@ -185,7 +185,7 @@
 					<div class="count-new-message position-absolute" style="display: none"></div>
 				@endif
 				<img src="/images/icon/message.svg">
-				<span>{{t('Messagess')}}</span>
+				<span>{{t('Messages')}}</span>
 			</a>
 			<a class="bottom__mobile__menu__item" @if(auth()->check()) href="/account" @else href="#quickLogin" data-bs-toggle="modal" @endif>
 				<img src="/images/icon/profile.svg">
