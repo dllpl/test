@@ -127,7 +127,7 @@
                             </div>
 
                             <button class="menu-nav__btn-open btn btn--form btn-reset"><i class="fas fa-sliders-h"></i>
-                                Фильтры
+                                {{t('Filters')}}
                             </button>
 
                             <div class="d-flex">

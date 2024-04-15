@@ -5,7 +5,7 @@
 {{--		<div class="sidebar-modern-inner enable-long-words">--}}
 
             <div class="menu-nav">
-                <div class="d-flex justify-content-end"><button class="btn-reset text-decoration-underline font-weight-bold" id="close_menu_nav" style="color: var(--accent);">закрыть</button></div>
+                <div class="d-flex justify-content-end"><button class="btn-reset text-decoration-underline font-weight-bold" id="close_menu_nav" style="color: var(--accent);">{{t('Close')}}</button></div>
                 <ul class="menu-nav__categories list-reset">
 
     			    @includeFirst([config('larapen.core.customizedViewPath') . 'search.inc.sidebar.fields', 'search.inc.sidebar.fields'])
