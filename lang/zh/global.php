@@ -303,7 +303,7 @@ return [
     'count_listings' => '{0} 广告|{1} 广告|[2,*] 广告',
     'count_visits' => '{0} 访问|{1} 访问|[2,*] 访问',
     'count_favorites' => '{0} 喜爱|{1} 喜爱|[2,*] 最爱',
-    'count_views' => '{0} view|{1} view|[2,*] views',
+    'count_views' => '{0} view|{1} view|[2,*] 意见',
     'count_mails' => '{0} 邮件|{1} 邮件|[2,*] 邮件',
     'count_messages' => '{0} 信息|{1} 信息|[2,*] 消息',
     'oops_an_error_has_occurred' => '哎呀！ 发生了错误。 请更正表单中的红色字段',
