@@ -313,7 +313,7 @@
 						</div>
 					</div>
 					<div class="lk__form">
-						<h2 class="lk__title title title--medium">Изменить пароль</h2>
+						<h2 class="lk__title title title--medium">{{ t('New Password') }}</h2>
 						@php
 							$settingsPanelClass = '';
                             $settingsPanelClass = request()->filled('panel')
