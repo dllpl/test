@@ -14,9 +14,10 @@
 --}}
 
 @php
-//	$face_type_list = \DB::table('face_type_list')
-//	->where('active', true)
-//	->get();
+$face_type_list = \DB::table('face_type_list')
+->where('active', true)
+->get();
+
 @endphp
 
 @extends('layouts.master')
