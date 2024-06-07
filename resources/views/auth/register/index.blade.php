@@ -14,9 +14,9 @@
 --}}
 
 @php
-//	$face_type_list = \DB::table('face_type_list')
-//	->where('active', true)
-//	->get();
+	$face_type_list = \DB::table('face_type_list')
+	->where('active', true)
+	->get();
 @endphp
 
 @extends('layouts.master')
@@ -81,19 +81,19 @@
 												<div class="row mb-3 required">
 													<label class="col-md-3 col-form-label" for="auth_field"> {{ t('face_type') }} <sup>*</sup></label>
 													<div class="col-md-9">
-{{--														@foreach($face_type_list as $item)--}}
-{{--															<div class="form-check form-check-inline pt-2">--}}
-{{--																<input name="face_type"--}}
-{{--																	   value="{{$item->id}}"--}}
-{{--																	   class="form-check-input auth-field-input"--}}
-{{--																	   type="radio"--}}
-{{--																		@checked(old('face_type') == $item->id)--}}
-{{--																>--}}
-{{--																<label class="form-check-label mb-0">--}}
-{{--																	{{$item->name_short}}--}}
-{{--																</label>--}}
-{{--															</div>--}}
-{{--														@endforeach--}}
+														@foreach($face_type_list as $item)
+															<div class="form-check form-check-inline pt-2">
+																<input name="face_type"
+																	   value="{{$item->id}}"
+																	   class="form-check-input auth-field-input"
+																	   type="radio"
+																		@checked(old('face_type') == $item->id)
+																>
+																<label class="form-check-label mb-0">
+																	{{$item->name_short}}
+																</label>
+															</div>
+														@endforeach
 														<div class="form-text text-muted">
 															{{ t('choice_your_variant') }}
 													</div>
@@ -107,9 +107,9 @@
 												</li>
 
 												@php
-//													$user_type_list = \DB::table('user_type_list')
-//                                                    ->where('active', true)
-//                                                    ->get();
+													$user_type_list = \DB::table('user_type_list')
+                                                    ->where('active', true)
+                                                    ->get();
 												@endphp
 												<div class="row mb-3 required entity__block" style="display: none">
 													<label class="col-md-12 col-form-label">
@@ -117,11 +117,11 @@
 													</label>
 													<div class="col-md-12 col-lg-12">
 														<select name="user_type" class="form-control large-data-selecter">
-{{--															@foreach ($user_type_list as $key => $item)--}}
-{{--																<option value="{{ $key }}">--}}
-{{--																	{{ $item->name }}--}}
-{{--																</option>--}}
-{{--															@endforeach--}}
+															@foreach ($user_type_list as $key => $item)
+																<option value="{{ $key }}">
+																	{{ $item->name }}
+																</option>
+															@endforeach
 														</select>
 													</div>
 												</div>
