@@ -27,7 +27,7 @@
             </style>
 
     <script>
-        var baseUrl = "http://185.221.214.35";
+        var baseUrl = "https://automost.pro";
         var useCsrf = Boolean();
         var csrfUrl = "/sanctum/csrf-cookie";
     </script>
