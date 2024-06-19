@@ -5,8 +5,6 @@ namespace extras\plugins\paypal;
 use App\Helpers\Number;
 use App\Models\Post;
 use App\Models\PaymentMethod;
-use GuzzleHttp\Client;
-use GuzzleHttp\Exception\GuzzleException;
 use Illuminate\Http\Request;
 use App\Helpers\Payment;
 use App\Models\Package;
@@ -46,30 +44,32 @@ class Paypal extends Payment
 
         \Log::info($amount);
 
-        $client = new Client([
-            'base_uri' => 'https://securepay.tinkoff.ru/v2/',
-            'headers' => [
-                'Content-Type' => 'application/json',
+        $data = [
+            "TerminalKey" => '1712219953971',
+            "Amount" => $amount,
+            "OrderId" => $post->id,
+            "SuccessURL" => env('APP_URL'),
+            "NotificationURL" => env('APP_URL') . '/tbank/callback',
+            "Description" => $package->name,
+            "DATA" => [
+                "post_id" => $post->id,
             ],
-        ]);
+        ];
 
-        try {
-            $res = $client->post('Init', [
-                "TerminalKey" => '1712219953971',
-                "Amount" => $amount,
-                "OrderId" => $post->id,
-                "SuccessURL" => env('APP_URL'),
-                "NotificationURL" => env('APP_URL') . '/tbank/callback',
-                "Description" => $package->name,
-                "DATA" => [
-                    "post_id" => $post->id,
-                ],
-            ]);
-        } catch (GuzzleException $exception) {
-            dd($exception);
-            \Log::error('Error during Tinkoff order creation: ' . $exception->getMessage());
-            return parent::paymentFailureActions($post, 'Error during Tinkoff order creation.');
-        }
+        $ch = curl_init('https://securepay.tinkoff.ru/v2/Init');
+        curl_setopt($ch, CURLOPT_HTTPHEADER, ['Content-Type: application/json']);
+        curl_setopt($ch, CURLOPT_POST, 1);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data, JSON_UNESCAPED_UNICODE));
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($ch, CURLOPT_HEADER, false);
+        $res = curl_exec($ch);
+        curl_close($ch);
+
+        $res = json_decode($res, true);
+
+        dd($res);
+
 
         \Log::info($res->getBody());
 
