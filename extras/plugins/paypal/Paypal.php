@@ -46,7 +46,8 @@ class Paypal extends Payment
             "TerminalKey" => '1712219953971',
             "Amount" => $amount * 100,
             "OrderId" => $post->id,
-            "SuccessURL" => env('APP_URL'),
+            "SuccessURL" => parent::$uri['paymentReturnUrl'],
+            "FailURL" => parent::$uri['paymentCancelUrl'],
             "NotificationURL" => env('APP_URL') . '/tbank/callback',
             "Description" => $package->name,
             "DATA" => [
@@ -85,6 +86,8 @@ class Paypal extends Payment
             session()->save();
 
             redirectUrl($res['PaymentURL']);
+        } else {
+            return parent::paymentFailureActions($post, 'Tbank approved link not proved.');
         }
 
 //		// API Parameters
@@ -197,39 +200,42 @@ class Paypal extends Payment
 		// Set form page URL
 		parent::$uri['previousUrl'] = str_replace(['#entryToken', '#entryId'], [$post->tmp_token, $post->id], parent::$uri['previousUrl']);
 		parent::$uri['nextUrl'] = str_replace(['#entryToken', '#entryId', '#entrySlug'], [$post->tmp_token, $post->id, $post->slug], parent::$uri['nextUrl']);
-		
+
+        return parent::paymentConfirmationActions($params, $post);
+
 		// Get Charge ID
 		$approvedOrderId = $params['transaction_id'] ?? null;
+
 		
 		// Try to make the Payment
 		try {
 			// Creating an environment
 			$clientId = config('payment.paypal.clientId');
 			$clientSecret = config('payment.paypal.clientSecret');
-			
+
 			if (config('payment.paypal.mode') == 'sandbox') {
 				$environment = new SandboxEnvironment($clientId, $clientSecret);
 			} else {
 				$environment = new ProductionEnvironment($clientId, $clientSecret);
 			}
 			$client = new PayPalHttpClient($environment);
-			
+
 			// Capturing an Order
 			// Before capture, Order should be approved by the buyer using the approval URL returned to the creation order response.
 			$request = new OrdersCaptureRequest($approvedOrderId);
 			$request->prefer('return=representation');
-			
+
 			// Make the payment
 			// Call API with your client and get a response for your call
 			$response = $client->execute($request);
-			
+
 			// Check the Payment
 			if (
 				isset($response->statusCode, $response->result, $response->result->status)
 				&& $response->statusCode == 201
 				&& $response->result->status == 'COMPLETED'
 			) {
-				
+
 				// Save the Transaction ID at the Provider
 				if (isset($response->result->id)) {
 					$params['transaction_id'] = $response->result->id;
