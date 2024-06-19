@@ -71,103 +71,103 @@ class Paypal extends Payment
             redirectUrl($res->PaymentURL);
         }
 
-		// API Parameters
-		$providerParams = [
-			'intent'              => 'CAPTURE',
-			'purchase_units'      => [
-				[
-					'reference_id' => md5($post->id . $package->id . uniqid('', true)), // Unique value
-					'description'  => str($package->name)->limit(122), // Maximum length: 127.
-					'amount'       => [
-						'value'         => $amount,
-						'currency_code' => $package->currency_code,
-					],
-				],
-			],
-			'application_context' => [
-				'cancel_url' => parent::$uri['paymentCancelUrl'],
-				'return_url' => parent::$uri['paymentReturnUrl'],
-				'brand_name' => config('app.name'),
-			],
-		];
-		
-		// Local Parameters
-		$localParams = [
-			'payment_method_id' => $request->input('payment_method_id'),
-			'post_id'           => $post->id,
-			'package_id'        => $package->id,
-			'amount'            => $amount,
-			'currency_code'     => $package->currency_code,
-		];
-		
-		// Try to make the Payment
-		try {
-			// Creating an environment
-			$clientId = config('payment.paypal.clientId');
-			$clientSecret = config('payment.paypal.clientSecret');
-			
-			if (config('payment.paypal.mode') == 'sandbox') {
-				$environment = new SandboxEnvironment($clientId, $clientSecret);
-			} else {
-				$environment = new ProductionEnvironment($clientId, $clientSecret);
-			}
-			$client = new PayPalHttpClient($environment);
-			
-			// Creating an Order
-			$request = new OrdersCreateRequest();
-			$request->prefer('return=representation');
-			$request->body = $providerParams;
-			
-			// Make the payment
-			// Call API with your client and get a response for your call
-			$response = $client->execute($request);
-			
-			// Payment by Credit Card when Card info are provided from the form.
-			if (
-				isset($response->statusCode, $response->result, $response->result->status)
-				&& $response->statusCode == 201
-				&& $response->result->status == 'CREATED'
-			) {
-				
-				// Save the Transaction ID at the Provider
-				if (isset($response->result->id)) {
-					$localParams['transaction_id'] = $response->result->id;
-				}
-				
-				// Save local parameters into session
-				session()->put('params', $localParams);
-				session()->save(); // If redirection to an external URL will be done using PHP header() function
-				
-				if (isset($response->result->links)) {
-					$link = null;
-					for ($i = 0; $i < count($response->result->links); ++$i) {
-						$link = $response->result->links[$i];
-						if ($link->rel == 'approve') {
-							break;
-						}
-					}
-					if (!is_null($link)) {
-						// Make the payment
-						// Redirect the client to the PayPal payment summary page
-						redirectUrl($link->href);
-					}
-				}
-				
-				// Apply actions when Payment failed
-				return parent::paymentFailureActions($post, 'PayPal approved link not proved.');
-				
-			} else {
-				
-				// Apply actions when Payment failed
-				return parent::paymentFailureActions($post, 'Error during PayPal order creation.');
-				
-			}
-		} catch (HttpException|\Throwable $e) {
-			
-			// Apply actions when API failed
-			return parent::paymentApiErrorActions($post, $e);
-			
-		}
+//		// API Parameters
+//		$providerParams = [
+//			'intent'              => 'CAPTURE',
+//			'purchase_units'      => [
+//				[
+//					'reference_id' => md5($post->id . $package->id . uniqid('', true)), // Unique value
+//					'description'  => str($package->name)->limit(122), // Maximum length: 127.
+//					'amount'       => [
+//						'value'         => $amount,
+//						'currency_code' => $package->currency_code,
+//					],
+//				],
+//			],
+//			'application_context' => [
+//				'cancel_url' => parent::$uri['paymentCancelUrl'],
+//				'return_url' => parent::$uri['paymentReturnUrl'],
+//				'brand_name' => config('app.name'),
+//			],
+//		];
+//
+//		// Local Parameters
+//		$localParams = [
+//			'payment_method_id' => $request->input('payment_method_id'),
+//			'post_id'           => $post->id,
+//			'package_id'        => $package->id,
+//			'amount'            => $amount,
+//			'currency_code'     => $package->currency_code,
+//		];
+//
+//		// Try to make the Payment
+//		try {
+//			// Creating an environment
+//			$clientId = config('payment.paypal.clientId');
+//			$clientSecret = config('payment.paypal.clientSecret');
+//
+//			if (config('payment.paypal.mode') == 'sandbox') {
+//				$environment = new SandboxEnvironment($clientId, $clientSecret);
+//			} else {
+//				$environment = new ProductionEnvironment($clientId, $clientSecret);
+//			}
+//			$client = new PayPalHttpClient($environment);
+//
+//			// Creating an Order
+//			$request = new OrdersCreateRequest();
+//			$request->prefer('return=representation');
+//			$request->body = $providerParams;
+//
+//			// Make the payment
+//			// Call API with your client and get a response for your call
+//			$response = $client->execute($request);
+//
+//			// Payment by Credit Card when Card info are provided from the form.
+//			if (
+//				isset($response->statusCode, $response->result, $response->result->status)
+//				&& $response->statusCode == 201
+//				&& $response->result->status == 'CREATED'
+//			) {
+//
+//				// Save the Transaction ID at the Provider
+//				if (isset($response->result->id)) {
+//					$localParams['transaction_id'] = $response->result->id;
+//				}
+//
+//				// Save local parameters into session
+//				session()->put('params', $localParams);
+//				session()->save(); // If redirection to an external URL will be done using PHP header() function
+//
+//				if (isset($response->result->links)) {
+//					$link = null;
+//					for ($i = 0; $i < count($response->result->links); ++$i) {
+//						$link = $response->result->links[$i];
+//						if ($link->rel == 'approve') {
+//							break;
+//						}
+//					}
+//					if (!is_null($link)) {
+//						// Make the payment
+//						// Redirect the client to the PayPal payment summary page
+//						redirectUrl($link->href);
+//					}
+//				}
+//
+//				// Apply actions when Payment failed
+//				return parent::paymentFailureActions($post, 'PayPal approved link not proved.');
+//
+//			} else {
+//
+//				// Apply actions when Payment failed
+//				return parent::paymentFailureActions($post, 'Error during PayPal order creation.');
+//
+//			}
+//		} catch (HttpException|\Throwable $e) {
+//
+//			// Apply actions when API failed
+//			return parent::paymentApiErrorActions($post, $e);
+//
+//		}
 	}
 	
 	/**
