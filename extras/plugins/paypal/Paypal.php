@@ -40,13 +40,11 @@ class Paypal extends Payment
 		}
 
         // Get the amount
-        $amount = Number::toFloat($package->price) * 100;
-
-        \Log::info($amount);
+        $amount = Number::toFloat($package->price);
 
         $data = [
             "TerminalKey" => '1712219953971',
-            "Amount" => $amount,
+            "Amount" => $amount * 100,
             "OrderId" => $post->id,
             "SuccessURL" => env('APP_URL'),
             "NotificationURL" => env('APP_URL') . '/tbank/callback',
@@ -55,6 +53,15 @@ class Paypal extends Payment
                 "post_id" => $post->id,
             ],
         ];
+
+        // Local Parameters
+		$localParams = [
+			'payment_method_id' => $request->input('payment_method_id'),
+			'post_id'           => $post->id,
+			'package_id'        => $package->id,
+			'amount'            => $amount,
+			'currency_code'     => $package->currency_code,
+		];
 
         $ch = curl_init('https://securepay.tinkoff.ru/v2/Init');
         curl_setopt($ch, CURLOPT_HTTPHEADER, ['Content-Type: application/json']);
@@ -69,6 +76,14 @@ class Paypal extends Payment
         $res = json_decode($res, true);
 
         if (!empty($res['PaymentURL'])) {
+
+            $localParams['transaction_id'] = $res['PaymentId'];
+
+            // Save local parameters into session
+
+            session()->put('params', $localParams);
+            session()->save();
+
             redirectUrl($res['PaymentURL']);
         }
 
