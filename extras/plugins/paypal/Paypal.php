@@ -5,12 +5,10 @@ namespace extras\plugins\paypal;
 use App\Helpers\Number;
 use App\Models\Post;
 use App\Models\PaymentMethod;
+use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 use App\Helpers\Payment;
 use App\Models\Package;
-use JustCommunication\TinkoffAcquiringAPIClient\API\InitRequest;
-use JustCommunication\TinkoffAcquiringAPIClient\Exception\TinkoffAPIException;
-use JustCommunication\TinkoffAcquiringAPIClient\TinkoffAcquiringAPIClient;
 use PayPalCheckoutSdk\Core\PayPalHttpClient;
 use PayPalCheckoutSdk\Core\ProductionEnvironment;
 use PayPalCheckoutSdk\Core\SandboxEnvironment;
@@ -45,35 +43,34 @@ class Paypal extends Payment
         // Get the amount
         $amount = Number::toFloat($package->price) * 100;
 
-        $client = new TinkoffAcquiringAPIClient('1712219953971', '9kkmekuulut0kzj6');
 
-        $initRequest = new InitRequest($amount, $post->id);
+        $client = new Client([
+            'base_uri' => 'https://securepay.tinkoff.ru/v2/',
+            'auth' => ['1712219953971', '9kkmekuulut0kzj6'],
+            'headers' => [
+                'Content-Type' => 'application/json',
+            ],
+        ]);
 
-        $initRequest
-            ->setSuccessURL(env('APP_URL'))
-            ->setNotificationURL(env('APP_URL') . '/tbank/callback')
-            ->setIP($request->ip())
-            ->setDescription($package->name)
-            ->setData([
-                'package' => $package->name,
-                'package_id' => $package->id,
-                'post_id' => $post->id,
-            ]);
+        $res = $client->post('Init', [
+            "TerminalKey" => '1712219953971',
+            "Amount" => $amount,
+            "OrderId" => $post->id,
+            "SuccessURL" => env('APP_URL'),
+            "NotificationURL" => env('APP_URL') . '/tbank/callback',
+            "Description" => $package->name,
+            "DATA" => [
+                "post_id" => $post->id,
+            ],
+        ]);
 
-        try {
-            $response = $client->sendInitRequest($initRequest);
-            //$response->getPaymentId() // идентификатор платежа
-
-            redirectUrl($response->getPaymentURL());
-
-        } catch (TinkoffAPIException $e) {
-            \Log::error('[Ошибка при опаплате тинькофф] ' . $e->getMessage());
+        if($res->getStatusCode() != 200){
             return parent::paymentFailureActions($post, 'Error during PayPal order creation.');
+        } else {
+            $res = json_decode($res->getBody());
+            redirectUrl($res->PaymentURL);
         }
 
-
-
-		
 		// API Parameters
 		$providerParams = [
 			'intent'              => 'CAPTURE',
