@@ -48,13 +48,12 @@ class Paypal extends Payment
 
         $client = new Client([
             'base_uri' => 'https://securepay.tinkoff.ru/v2/',
-            'auth' => ['1712219953971', '9kkmekuulut0kzj6'],
             'headers' => [
                 'Content-Type' => 'application/json',
             ],
         ]);
 
-        try {
+//        try {
             $res = $client->post('Init', [
                 "TerminalKey" => '1712219953971',
                 "Amount" => $amount,
@@ -66,10 +65,11 @@ class Paypal extends Payment
                     "post_id" => $post->id,
                 ],
             ]);
-        } catch (GuzzleException $exception) {
-            \Log::error('Error during Tinkoff order creation: ' . $exception->getMessage());
-            return parent::paymentFailureActions($post, 'Error during Tinkoff order creation.');
-        }
+            dd($res);
+//        } catch (GuzzleException $exception) {
+//            \Log::error('Error during Tinkoff order creation: ' . $exception->getMessage());
+//            return parent::paymentFailureActions($post, 'Error during Tinkoff order creation.');
+//        }
 
         \Log::info($res->getBody());
 
