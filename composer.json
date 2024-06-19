@@ -41,6 +41,7 @@
 		"jackiedo/dotenv-editor": "^2.1",
 		"jaybizzle/crawler-detect": "^1.2",
 		"jaybizzle/laravel-crawler-detect": "^1.2",
+		"justcommunication-ru/tinkoff-acquiring-api-client": "^1.0",
 		"lab404/laravel-impersonate": "^1.7",
 		"laracasts/flash": "^3.2",
 		"laravel-notification-channels/twilio": "^3.3.1",

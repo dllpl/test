@@ -466,3 +466,7 @@ Route::group(['as' => 'base.', 'prefix' => 'base'], function () {
     Route::get('models', [ModelAndMarkController::class, 'getModelsByMark'])->name('models');
     Route::get('marks', [ModelAndMarkController::class, 'getMarks'])->name('marks');
 });
+
+Route::group(['as' => 'tbank.', 'prefix' => 'tbank'], function () {
+    Route::post('callback', [\App\Http\Controllers\TbankPayController::class, 'callback'])->name('callback');
+});
