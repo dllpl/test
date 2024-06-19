@@ -68,16 +68,8 @@ class Paypal extends Payment
 
         $res = json_decode($res, true);
 
-        dd($res);
-
-
-        \Log::info($res->getBody());
-
-        if($res->getStatusCode() != 200){
-            return parent::paymentFailureActions($post, 'Error during PayPal order creation.');
-        } else {
-            $res = json_decode($res->getBody());
-            redirectUrl($res->PaymentURL);
+        if (!empty($res['PaymentURL'])) {
+            redirectUrl($res['PaymentURL']);
         }
 
 //		// API Parameters
