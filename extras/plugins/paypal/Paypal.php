@@ -6,6 +6,7 @@ use App\Helpers\Number;
 use App\Models\Post;
 use App\Models\PaymentMethod;
 use GuzzleHttp\Client;
+use GuzzleHttp\Exception\GuzzleException;
 use Illuminate\Http\Request;
 use App\Helpers\Payment;
 use App\Models\Package;
@@ -43,6 +44,7 @@ class Paypal extends Payment
         // Get the amount
         $amount = Number::toFloat($package->price) * 100;
 
+        \Log::info($amount);
 
         $client = new Client([
             'base_uri' => 'https://securepay.tinkoff.ru/v2/',
@@ -52,17 +54,24 @@ class Paypal extends Payment
             ],
         ]);
 
-        $res = $client->post('Init', [
-            "TerminalKey" => '1712219953971',
-            "Amount" => $amount,
-            "OrderId" => $post->id,
-            "SuccessURL" => env('APP_URL'),
-            "NotificationURL" => env('APP_URL') . '/tbank/callback',
-            "Description" => $package->name,
-            "DATA" => [
-                "post_id" => $post->id,
-            ],
-        ]);
+        try {
+            $res = $client->post('Init', [
+                "TerminalKey" => '1712219953971',
+                "Amount" => $amount,
+                "OrderId" => $post->id,
+                "SuccessURL" => env('APP_URL'),
+                "NotificationURL" => env('APP_URL') . '/tbank/callback',
+                "Description" => $package->name,
+                "DATA" => [
+                    "post_id" => $post->id,
+                ],
+            ]);
+        } catch (GuzzleException $exception) {
+            \Log::error('Error during Tinkoff order creation: ' . $exception->getMessage());
+            return parent::paymentFailureActions($post, 'Error during Tinkoff order creation.');
+        }
+
+        \Log::info($res->getBody());
 
         if($res->getStatusCode() != 200){
             return parent::paymentFailureActions($post, 'Error during PayPal order creation.');
