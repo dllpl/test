@@ -42,6 +42,8 @@ class Paypal extends Payment
         // Get the amount
         $amount = Number::toFloat($package->price);
 
+        dd(parent::$uri['paymentReturnUrl'], parent::$uri['paymentCancelUrl']);
+
         $data = [
             "TerminalKey" => '1712219953971',
             "Amount" => $amount * 100,
