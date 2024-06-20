@@ -69,6 +69,14 @@
                 <div class="preview__img-wrapp">
                     <a href="{{ \App\Helpers\UrlGen::post($post) }}" class="position-relative d-block" >
                         {!! imgTag(data_get($post, 'picture.filename'), 'medium', ['class' => 'lazyload thumbnail preview__img img img--preview', 'alt' => data_get($post, 'title')]) !!}
+
+                        {{--Плашка премиум--}}
+                        @if (data_get($post, 'featured') == 1)
+                            @if (!empty(data_get($post, 'latestPayment.package')))
+                                <div class="position-absolute badge__available--accent" style="background-color: var(--heart)"><p>{{ t('premium_badge') }}</p></div>
+                            @endif
+                        @endif
+
                         {{-- Плашка в наличии --}}
                         @if($post['available_field'] && $post['available_field']->value == 177)
                             <div class="position-absolute badge__available--accent" style=""><p>{{ t('in_stock') }}</p></div>

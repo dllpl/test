@@ -10,6 +10,7 @@ return [
     'about_system' => 'О системе',
     'information' => 'Информация',
     'in_stock'=> 'в наличии',
+    'premium_badge' => 'Популярное',
     'get_started_sale'=>'И начните продавать или продвигать свои услуги вместе с',
     'time_to_public_lost'=>'До публикации в общий доступ осталось',
     'offer_your_price'=>'Предложить свою цену',
