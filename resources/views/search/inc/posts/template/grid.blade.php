@@ -73,7 +73,7 @@
                         {{--Плашка премиум--}}
                         @if (data_get($post, 'featured') == 1)
                             @if (!empty(data_get($post, 'latestPayment.package')))
-                                <div class="position-absolute badge__available--accent" style="background-color: var(--heart)"><p>{{ t('premium_badge') }}</p></div>
+                                <div class="position-absolute badge__available--accent" style="background-color: var(--heart); width: 95px"><p>{{ t('premium_badge') }}</p></div>
                             @endif
                         @endif
 
