@@ -424,7 +424,7 @@ Route::prefix('captcha')
 
 Route::get('userTypeList', function () {
     return response()->json([
-        'data' => \DB::table('user_type_list')->where('active', 1)->get()
+        'data' => \DB::table('user_type_list')->select('name', 'id')->where('active', 1)->get()
     ]);
 });
 
