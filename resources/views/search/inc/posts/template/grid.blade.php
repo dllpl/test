@@ -40,15 +40,15 @@
 
             @endphp
             {{--            @if(!$time && ($user_cert || ($post['category_id'] != 138 && $post['category_id'] != 139) || $post['user_id'] == $user_id))--}}
-            @if (data_get($post, 'featured') == 1)
-                @if (!empty(data_get($post, 'latestPayment.package')))
-                    @if (data_get($post, 'latestPayment.package.ribbon') != '')
-                        <div class="ribbon-horizontal {{ data_get($post, 'latestPayment.package.ribbon') }}">
-                            <span>{{ data_get($post, 'latestPayment.package.short_name') }}</span>
-                        </div>
-                    @endif
-                @endif
-            @endif
+{{--            @if (data_get($post, 'featured') == 1)--}}
+{{--                @if (!empty(data_get($post, 'latestPayment.package')))--}}
+{{--                    @if (data_get($post, 'latestPayment.package.ribbon') != '')--}}
+{{--                        <div class="ribbon-horizontal {{ data_get($post, 'latestPayment.package.ribbon') }}">--}}
+{{--                            <span>{{ data_get($post, 'latestPayment.package.short_name') }}</span>--}}
+{{--                        </div>--}}
+{{--                    @endif--}}
+{{--                @endif--}}
+{{--            @endif--}}
             @php
                 $is_auto = $post['category_id'] == 138 || $post['category_id'] == 139;
 

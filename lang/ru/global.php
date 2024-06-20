@@ -563,7 +563,7 @@ return [
     'Send a report for' => 'Отправить отчет для ":title"',
     'Home - Latest Listings' => '<span style="font-weight: bold;">Новые</span> Объявления',
     'Home - Random Listings' => '<span style="font-weight: bold;">Случайно выбрано</span> Объявления',
-    'Home - Premium Listings' => '<span style="font-weight: bold;">Рекламные</span> Объявления',
+    'Home - Premium Listings' => '<span style="font-weight: bold;">Премиум</span> Объявления',
     'Photos' => 'Фотографии',
     'Images' => 'Картинки',
     'Preview' => 'предварительный просмотр',
