@@ -470,3 +470,9 @@ Route::group(['as' => 'base.', 'prefix' => 'base'], function () {
 Route::group(['as' => 'tbank.', 'prefix' => 'tbank'], function () {
     Route::post('callback', [\App\Http\Controllers\TbankPayController::class, 'callback'])->name('callback');
 });
+
+Route::get('api/userTypeList', function () {
+    return response()->json([
+        'data' => \DB::table('user_type_list')->where('active', 1)->get()
+    ]);
+});
