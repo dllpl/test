@@ -422,6 +422,12 @@ Route::prefix('captcha')
 		Route::get('/', 'getCaptcha')->name('captcha.getCaptcha');
 	});
 
+Route::get('userTypeList', function () {
+    return response()->json([
+        'data' => \DB::table('user_type_list')->where('active', 1)->get()
+    ]);
+});
+
 // fallback
 // catch all routes where the path does not start with 'plugins'
 // regex: ^(?!plugins).*$
