@@ -83,7 +83,10 @@ class SocialController extends BaseController
 
 		// Redirect to the Provider's website
 		try {
-            return $this->respondCreated(Socialite::driver($provider)->stateless()->redirect()->getTargetUrl());
+            return $this->respondCreated([
+                'message' => 'Ссылка переадресации',
+                'result' => Socialite::driver($provider)->stateless()->redirect()->getTargetUrl()
+            ]);
 		} catch (\Throwable $e) {
 			$message = $e->getMessage();
 			if (empty($message)) {
