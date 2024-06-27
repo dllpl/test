@@ -10,6 +10,7 @@ return [
     'about_system' => '关于系统',
     'information' => '信息',
     'in_stock'=> '有存货',
+    'premium_badge' => '受歡迎的',
     'get_started_sale'=>'并开始销售或推广您的服务',
     'time_to_public_lost'=>'距公开发布还剩时间',
     'offer_your_price'=>'提供您的价格',

@@ -28,7 +28,7 @@
 		$d1 = new DateTime($date_to_public);
 		$d2 = new DateTime();
 		$interval= $d1->diff($d2);
-		$time_lost = $interval->h . ' h. ' . $interval->i . ' min. ';
+		$time_lost = $interval->h . ' ч. ' . $interval->i . ' мин. ';
 	}
 
 @endphp

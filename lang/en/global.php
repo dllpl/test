@@ -10,6 +10,7 @@ return [
     'about_system' => 'About the system',
     'information' => 'Information',
     'in_stock'=> 'in stock',
+    'premium_badge' => 'Popular',
     'get_started_sale'=>'And start selling or promoting your services with',
     'time_to_public_lost'=>'Time left before public publication',
     'offer_your_price'=>'Offer your price',
