@@ -43,6 +43,7 @@ use App\Http\Controllers\Api\ThreadController;
 use App\Http\Controllers\Api\ThreadMessageController;
 use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\UserTypeController;
+use App\Http\Controllers\Web\Public\ModelAndMarkController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -426,6 +427,11 @@ Route::get('userTypeList', function () {
     return response()->json([
         'data' => \DB::table('user_type_list')->select('name', 'id')->where('active', 1)->get()
     ]);
+});
+
+Route::group(['as' => 'base.', 'prefix' => 'base'], function () {
+    Route::get('models', [ModelAndMarkController::class, 'getModelsByMark'])->name('models');
+    Route::get('marks', [ModelAndMarkController::class, 'getMarks'])->name('marks');
 });
 
 // fallback
