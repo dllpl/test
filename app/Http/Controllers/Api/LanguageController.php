@@ -85,6 +85,8 @@ class LanguageController extends BaseController
 
 //        dd($resource);
 		
-		return $this->apiResponse($language);
+		return $this->apiResponse([
+            'result' => $language
+        ]);
 	}
 }
