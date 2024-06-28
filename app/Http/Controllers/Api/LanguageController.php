@@ -74,7 +74,7 @@ class LanguageController extends BaseController
             }
         }
 
-        $language->language->add([
+        $language->add([
            'translations'=> $translations
         ]);
 		
