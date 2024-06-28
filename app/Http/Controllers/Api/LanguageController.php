@@ -76,14 +76,8 @@ class LanguageController extends BaseController
 
 		abort_if(empty($language), 404, t('language_not_found'));
 
-
         $language->toArray();
-
-        dd($language);
-
-        $language->add([
-            'translations'=> $translations
-        ]);
+        $language['translations'] = $translations;
 		
 		$resource = new LanguageResource($language);
 		
