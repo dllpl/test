@@ -79,11 +79,11 @@ class LanguageController extends BaseController
         $language->toArray();
         $language['translations'] = $translations;
 
-        dump($language);
+//        dump($language);
 		
 		$resource = new LanguageResource($language);
 
-        dd($resource);
+//        dd($resource);
 		
 		return $this->respondWithResource($resource);
 	}
