@@ -71,7 +71,9 @@ class LanguageController extends BaseController
             }
         }
 
-        $language->translations = $translations;
+        dd($translations);
+
+        $language->lang = $translations;
 		
 		abort_if(empty($language), 404, t('language_not_found'));
 		
