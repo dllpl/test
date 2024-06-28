@@ -67,13 +67,14 @@ class LanguageController extends BaseController
         foreach (File::files($translationDir) as $file) {
             if ($file->getExtension() === 'php') {
                 $key = $file->getFilenameWithoutExtension();
+                if($key === 'admin') {
+                    continue;
+                }
                 $translations[$key] = include $file->getPathname();
             }
         }
 
-        dd($translations);
-
-        $language->lang = $translations;
+        $language->translations = $translations;
 		
 		abort_if(empty($language), 404, t('language_not_found'));
 		
