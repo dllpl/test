@@ -78,6 +78,8 @@ class LanguageController extends BaseController
 
         $language->toArray();
         $language['translations'] = $translations;
+
+        dd($language);
 		
 		$resource = new LanguageResource($language);
 		
