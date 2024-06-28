@@ -86,6 +86,8 @@ class LanguageController extends BaseController
 //        dd($resource);
 		
 		return $this->apiResponse([
+            'message' => 'Параметры и переводы',
+            'success' => true,
             'result' => $language
         ]);
 	}
