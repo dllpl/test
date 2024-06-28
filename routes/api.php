@@ -395,7 +395,7 @@ Route::prefix('languages')
 	->group(function ($router) {
 		$router->pattern('code', '[^/]+');
 		Route::get('/', 'index')->name('languages.index');
-		Route::get('{code}', 'show')->name('languages.show');
+        Route::get('{code}', 'show')->name('languages.show');
 	});
 
 // settings

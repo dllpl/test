@@ -19,6 +19,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Resources\EntityCollection;
 use App\Http\Resources\LanguageResource;
 use App\Models\Language;
+use Illuminate\Support\Facades\File;
 
 /**
  * @group Languages
@@ -54,6 +55,23 @@ class LanguageController extends BaseController
 		$language = Language::query()->where('abbr', $code);
 		
 		$language = $language->first();
+
+        $translationDir = resource_path('lang/' . $code);
+
+        if (!File::exists($translationDir) || !File::isDirectory($translationDir)) {
+            $this->respondError('Translations not found');
+        }
+
+        $translations = [];
+
+        foreach (File::files($translationDir) as $file) {
+            if ($file->getExtension() === 'php') {
+                $key = $file->getFilenameWithoutExtension();
+                $translations[$key] = include $file->getPathname();
+            }
+        }
+
+        $language->translations = $translations;
 		
 		abort_if(empty($language), 404, t('language_not_found'));
 		
