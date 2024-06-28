@@ -56,7 +56,7 @@ class LanguageController extends BaseController
 		
 		$language = $language->first();
 
-        $translationDir = resource_path('lang/' . $code);
+        $translationDir = base_path('lang/' . $code);
 
         if (!File::exists($translationDir) || !File::isDirectory($translationDir)) {
             $this->respondError('Translations not found');
