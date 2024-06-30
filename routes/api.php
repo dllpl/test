@@ -88,7 +88,12 @@ Route::namespace('Auth')
 						Route::get('{provider}', 'getProviderTargetUrl');
 						Route::get('{provider}/callback', 'handleProviderCallback');
 					});
+
+                Route::post('user/super/sendRequest', [\App\Http\Controllers\Web\Public\Account\SuperUserController::class, 'sendRequest'])
+                    ->name('super-user.send-request');
 			});
+
+
 
 		Route::controller(ForgotPasswordController::class)
 			->group(function ($router) {
@@ -433,9 +438,6 @@ Route::group(['as' => 'base.', 'prefix' => 'base'], function () {
     Route::get('models', [ModelAndMarkController::class, 'getModelsByMark'])->name('models');
     Route::get('marks', [ModelAndMarkController::class, 'getMarks'])->name('marks');
 });
-
-Route::post('user/super/sendRequest', [\App\Http\Controllers\Web\Public\Account\SuperUserController::class, 'sendRequest'])
-    ->name('super-user.send-request');
 
 // fallback
 // catch all routes where the path does not start with 'plugins'
