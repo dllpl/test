@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers\Web\Public\Account;
 
+use App\Http\Controllers\Api\BaseController;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 
-class SuperUserController extends Controller
+class SuperUserController extends BaseController
 {
     public function sendRequest(Request $request)
     {
