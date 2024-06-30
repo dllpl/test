@@ -28,7 +28,7 @@ use App\Http\Resources\UserResource;
 class ResetPasswordController extends BaseController
 {
 	use ResetsPasswordsForEmail, ResetsPasswordsForPhone;
-	
+
 	/**
 	 * Reset password
 	 *
@@ -47,16 +47,16 @@ class ResetPasswordController extends BaseController
 	{
 		// Get the right auth field
 		$authField = getAuthField();
-		
+
 		// Go to the custom process (Phone)
 		if ($authField == 'phone') {
 			return $this->resetForPhone($request);
 		}
-		
+
 		// Go to the core process (Email)
 		return $this->resetForEmail($request);
 	}
-	
+
 	/**
 	 * Create an API token for the User
 	 *
@@ -68,12 +68,12 @@ class ResetPasswordController extends BaseController
 	protected function createUserApiToken($user, $deviceName = null, $message = null): \Illuminate\Http\JsonResponse
 	{
 		// Revoke previous tokens
-		$user->tokens()->delete();
-		
+		$user->tokens()->delete()->where('name', $deviceName ?? 'Desktop Web');
+
 		// Create the API access token
 		$deviceName = $deviceName ?? 'Desktop Web';
 		$token = $user->createToken($deviceName);
-		
+
 		$data = [
 			'success' => true,
 			'message' => $message,
@@ -83,7 +83,7 @@ class ResetPasswordController extends BaseController
 				'tokenType' => 'Bearer',
 			],
 		];
-		
+
 		return $this->apiResponse($data);
 	}
 }

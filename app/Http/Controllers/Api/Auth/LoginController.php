@@ -32,25 +32,25 @@ use Illuminate\Support\Facades\Event;
 class LoginController extends BaseController
 {
 	use AuthenticatesUsers, CheckIfAuthFieldIsVerified;
-	
+
 	// The maximum number of attempts to allow
 	protected int $maxAttempts = 5;
-	
+
 	// The number of minutes to throttle for
 	protected int $decayMinutes = 15;
-	
+
 	/**
 	 * LoginController constructor.
 	 */
 	public function __construct()
 	{
 		parent::__construct();
-		
+
 		// Get values from Config
 		$this->maxAttempts = (int)config('settings.security.login_max_attempts', $this->maxAttempts);
 		$this->decayMinutes = (int)config('settings.security.login_decay_minutes', $this->decayMinutes);
 	}
-	
+
 	/**
 	 * Log in
 	 *
@@ -67,26 +67,26 @@ class LoginController extends BaseController
 	public function login(LoginRequest $request)
 	{
 		$errorMessage = trans('auth.failed');
-		
+
 		try {
 			// If the class is using the ThrottlesLogins trait, we can automatically throttle
 			// the login attempts for this application. We'll key this by the username and
 			// the IP address of the client making these requests into this application.
 			if (method_exists($this, 'hasTooManyLoginAttempts') && $this->hasTooManyLoginAttempts($request)) {
 				$this->fireLockoutEvent($request);
-				
+
 				return $this->sendLockoutResponse($request);
 			}
-			
+
 			// Get the right auth field (email or phone)
 			$authField = getAuthField();
 			$fieldValue = $request->input($authField);
-			
+
 			// Check username is provided instead of email (in email field)
 			if ($authField == 'email') {
 				$dbField = getAuthFieldFromItsValue($fieldValue);
 			}
-			
+
 			// Get credentials values
 			$dbField = $dbField ?? $authField;
 			$credentials = [
@@ -94,18 +94,18 @@ class LoginController extends BaseController
 				'password' => $request->input('password'),
 				'blocked'  => 0,
 			];
-			
+
 			// Auth the User
 			if (auth()->attempt($credentials, $request->has('remember_me'))) {
 				$authUser = auth()->user();
-				
+
 				// Get the user as model object
 				$user = User::find($authUser->getAuthIdentifier());
-				
+
 				// Is user has verified login?
 				$tmpData = $this->userHasVerifiedLogin($authUser, $user, $authField);
 				$isSuccess = array_key_exists('success', $tmpData) && $tmpData['success'];
-				
+
 				// Send the right error message (with possibility to re-send verification code)
 				if (!$isSuccess) {
 					if (
@@ -115,23 +115,23 @@ class LoginController extends BaseController
 					) {
 						return $this->apiResponse($tmpData, 403);
 					}
-					
+
 					return $this->respondError($errorMessage);
 				}
-				
+
 				// Redirect admin users to the Admin panel
 				$isAdmin = false;
 				if ($user->hasAllPermissions(Permission::getStaffPermissions())) {
 					$isAdmin = true;
 				}
-				
+
 				// Revoke previous tokens
-				$user->tokens()->delete();
-				
+				$user->tokens()->delete()->where('name', $deviceName ?? 'Desktop Web');
+
 				// Create the API access token
 				$deviceName = $request->input('device_name', 'Desktop Web');
 				$token = $user->createToken($deviceName);
-				
+
 				$data = [
 					'success' => true,
 					'result'  => new UserResource($user),
@@ -141,21 +141,21 @@ class LoginController extends BaseController
 						'isAdmin'   => $isAdmin,
 					],
 				];
-				
+
 				return $this->apiResponse($data);
 			}
 		} catch (\Throwable $e) {
 			$errorMessage = $e->getMessage();
 		}
-		
+
 		// If the login attempt was unsuccessful we will increment the number of attempts
 		// to log in and redirect the user back to the login form. Of course, when this
 		// user surpasses their maximum number of attempts they will get locked out.
 		$this->incrementLoginAttempts($request);
-		
+
 		return $this->respondError($errorMessage);
 	}
-	
+
 	/**
 	 * Log out
 	 *
@@ -171,30 +171,30 @@ class LoginController extends BaseController
 	{
 		if (auth('sanctum')->check()) {
 			$authUser = request()->user() ?? auth('sanctum')->user();
-			
+
 			if (empty($authUser)) {
 				return $this->respondError(t('logout_failed'));
 			}
-			
+
 			// Get the User Personal Access Token Object
 			$personalAccess = $authUser->tokens()->where('id', getApiAuthToken())->first();
-			
+
 			// Revoke all user's tokens
 			if (!empty($personalAccess)) {
 				if ($personalAccess->tokenable_id == $userId) {
 					// Update last user logged Date
 					$user = User::find($userId);
 					Event::dispatch(new UserWasLogged($user));
-					
+
 					// Revoke a specific token
 					$personalAccess->delete();
-					
+
 					// Revoke all tokens
 					// $authUser->tokens()->delete();
 				}
 			}
 		}
-		
+
 		return $this->respondSuccess(t('logout_successful'));
 	}
 }
