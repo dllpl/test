@@ -68,7 +68,7 @@ class ResetPasswordController extends BaseController
 	protected function createUserApiToken($user, $deviceName = null, $message = null): \Illuminate\Http\JsonResponse
 	{
 		// Revoke previous tokens
-		$user->tokens()->delete()->where('name', $deviceName ?? 'Desktop Web');
+		$user->tokens()->where('name', $deviceName ?? 'Desktop Web')->delete();
 
 		// Create the API access token
 		$deviceName = $deviceName ?? 'Desktop Web';

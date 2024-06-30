@@ -126,7 +126,7 @@ class LoginController extends BaseController
 				}
 
 				// Revoke previous tokens
-				$user->tokens()->delete()->where('name', $deviceName ?? 'Desktop Web');
+				$user->tokens()->where('name', $deviceName ?? 'Desktop Web')->delete();
 
 				// Create the API access token
 				$deviceName = $request->input('device_name', 'Desktop Web');
