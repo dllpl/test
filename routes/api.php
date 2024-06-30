@@ -89,7 +89,7 @@ Route::namespace('Auth')
 						Route::get('{provider}/callback', 'handleProviderCallback');
 					});
 
-                Route::post('user/super/sendRequest', [\App\Http\Controllers\Web\Public\Account\SuperUserController::class, 'sendRequest'])
+                Route::post('accreditation/sendRequest', [\App\Http\Controllers\Web\Public\Account\SuperUserController::class, 'sendRequest'])
                     ->name('super-user.send-request');
 			});
 
