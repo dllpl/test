@@ -100,9 +100,13 @@ Route::namespace('Auth')
 				Route::get('password/verify/{field}/{token?}', 'verification');
 			});
 
-        Route::post('accreditation/sendRequest', [\App\Http\Controllers\Web\Public\Account\SuperUserController::class, 'sendRequest'])
-            ->name('super-user.send-request');
+
 	});
+
+Route::middleware(['auth'])->group(function () {
+    Route::post('accreditation/sendRequest', [\App\Http\Controllers\Web\Public\Account\SuperUserController::class, 'sendRequest'])
+        ->name('super-user.send-request-api');
+});
 
 // genders
 Route::prefix('genders')
