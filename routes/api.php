@@ -434,6 +434,9 @@ Route::group(['as' => 'base.', 'prefix' => 'base'], function () {
     Route::get('marks', [ModelAndMarkController::class, 'getMarks'])->name('marks');
 });
 
+Route::post('user/super/sendRequest', [\App\Http\Controllers\Web\Public\Account\SuperUserController::class, 'sendRequest'])
+    ->name('super-user.send-request');
+
 // fallback
 // catch all routes where the path does not start with 'plugins'
 // regex: ^(?!plugins).*$
