@@ -88,12 +88,7 @@ Route::namespace('Auth')
 						Route::get('{provider}', 'getProviderTargetUrl');
 						Route::get('{provider}/callback', 'handleProviderCallback');
 					});
-
-                Route::post('accreditation/sendRequest', [\App\Http\Controllers\Web\Public\Account\SuperUserController::class, 'sendRequest'])
-                    ->name('super-user.send-request');
 			});
-
-
 
 		Route::controller(ForgotPasswordController::class)
 			->group(function ($router) {
@@ -105,6 +100,8 @@ Route::namespace('Auth')
 				Route::get('password/verify/{field}/{token?}', 'verification');
 			});
 
+        Route::post('accreditation/sendRequest', [\App\Http\Controllers\Web\Public\Account\SuperUserController::class, 'sendRequest'])
+            ->name('super-user.send-request');
 	});
 
 // genders
