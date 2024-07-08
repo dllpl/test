@@ -29,7 +29,7 @@ class SuperUserController extends BaseController
                     ->where('user_id', $request->user()->id)
                     ->where('status', 1)
                     ->leftJoin('request_to_super_status_list as status', 'status.status_id', '=', 'request.status')
-                    ->select('request.status', 'status.name', 'status.desc', 'request.created_at')->first()
+                    ->select('request.status', 'status.name', 'status.desc', 'request.created_at', 'request.updated_at')->first()
         ]);
     }
 }
