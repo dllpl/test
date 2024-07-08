@@ -6,8 +6,10 @@ class SuperUser
 {
     public static function status()
     {
-        return \DB::table('request_to_super')
+        return \DB::table('request_to_super as request')
             ->where('user_id', auth()->user()->id)
-            ->select('status')->first()?->status ?? null;
+            ->where('status', 1)
+            ->leftJoin('request_to_super_status_list as status', 'status.status_id', '=', 'request.stats')
+            ->select('request.status', 'status.name', 'status.desc')->first()?->status ?? null;
     }
 }
