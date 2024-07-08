@@ -106,8 +106,8 @@ Route::namespace('Auth')
 Route::middleware(['auth:sanctum'])->group(function () {
     Route::post('accreditation/sendRequest', [\App\Http\Controllers\Web\Public\Account\SuperUserController::class, 'sendRequest'])
         ->name('super-user.send-request-api');
-
-
+    Route::get('accreditation/status', [\App\Http\Controllers\Web\Public\Account\SuperUserController::class, 'status'])
+        ->name('super-user.status-api');
 });
 
 // genders
