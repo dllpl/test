@@ -21,7 +21,7 @@ class SuperUserController extends BaseController
         return response()->json(['status' => true, 'msg' => "Ваша заявка принята и находится в обработке"]);
     }
 
-    public function getStatus(Request $request)
+    public function status(Request $request)
     {
         return response()->json([
             'status' => true,
