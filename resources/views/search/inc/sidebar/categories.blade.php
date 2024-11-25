@@ -26,7 +26,7 @@
 			<ul class="menu-nav__list list-reset">
 				@foreach (data_get($cat, 'children') as $iSubCat)
 					<li class="menu-nav__item">
-						<a href="{{ \App\Helpers\UrlGen::category($iSubCat, null, $city ?? null) }}" title="{{ data_get($iSubCat, 'name') }}" class="menu-nav__link link link--inline-flex">
+						<a href="{{ \App\Helpers\UrlGen::category($iSubCat, null, $city ?? null) }}" class="menu-nav__link link link--inline-flex">
 							@if (in_array(config('settings.list.show_category_icon'), [4, 5, 6, 8]))
 								<i class="{{ data_get($iSubCat, 'icon_class') ?? 'fas fa-folder' }}"></i>
 							@endif
@@ -60,7 +60,7 @@
 						<li class="filter__item">
 							@if (data_get($iSubCat, 'id') == data_get($cat, 'id'))
 								<strong>
-									<a href="{{ \App\Helpers\UrlGen::category($iSubCat, null, $city ?? null) }}" title="{{ data_get($iSubCat, 'name') }}">
+									<a href="{{ \App\Helpers\UrlGen::category($iSubCat, null, $city ?? null) }}" >
 										@if (in_array(config('settings.list.show_category_icon'), [4, 5, 6, 8]))
 											<i class="{{ data_get($iSubCat, 'icon_class') ?? 'fas fa-folder' }} icon"></i>
 										@endif
@@ -71,7 +71,7 @@
 									</a>
 								</strong>
 							@else
-								<a href="{{ \App\Helpers\UrlGen::category($iSubCat, null, $city ?? null) }}" title="{{ data_get($iSubCat, 'name') }}">
+								<a href="{{ \App\Helpers\UrlGen::category($iSubCat, null, $city ?? null) }}" >
 									@if (in_array(config('settings.list.show_category_icon'), [4, 5, 6, 8]))
 										<i class="{{ data_get($iSubCat, 'icon_class') ?? 'fas fa-folder' }} icon"></i>
 									@endif
@@ -129,7 +129,7 @@
 {{--						<ul class="list-unstyled long-list">--}}
 {{--							@foreach (data_get($cat, 'children') as $iSubCat)--}}
 {{--								<li>--}}
-{{--									<a href="{{ \App\Helpers\UrlGen::category($iSubCat, null, $city ?? null) }}" title="{{ data_get($iSubCat, 'name') }}">--}}
+{{--									<a href="{{ \App\Helpers\UrlGen::category($iSubCat, null, $city ?? null) }}">--}}
 {{--										@if (in_array(config('settings.list.show_category_icon'), [4, 5, 6, 8]))--}}
 {{--											<i class="{{ data_get($iSubCat, 'icon_class') ?? 'fas fa-folder' }}"></i>--}}
 {{--										@endif--}}
@@ -173,7 +173,7 @@
 {{--							<li>--}}
 {{--								@if (data_get($iSubCat, 'id') == data_get($cat, 'id'))--}}
 {{--									<strong>--}}
-{{--										<a href="{{ \App\Helpers\UrlGen::category($iSubCat, null, $city ?? null) }}" title="{{ data_get($iSubCat, 'name') }}">--}}
+{{--										<a href="{{ \App\Helpers\UrlGen::category($iSubCat, null, $city ?? null) }}" ">--}}
 {{--											@if (in_array(config('settings.list.show_category_icon'), [4, 5, 6, 8]))--}}
 {{--												<i class="{{ data_get($iSubCat, 'icon_class') ?? 'fas fa-folder' }}"></i>--}}
 {{--											@endif--}}
@@ -184,7 +184,7 @@
 {{--										</a>--}}
 {{--									</strong>--}}
 {{--								@else--}}
-{{--									<a href="{{ \App\Helpers\UrlGen::category($iSubCat, null, $city ?? null) }}" title="{{ data_get($iSubCat, 'name') }}">--}}
+{{--									<a href="{{ \App\Helpers\UrlGen::category($iSubCat, null, $city ?? null) }}" >--}}
 {{--										@if (in_array(config('settings.list.show_category_icon'), [4, 5, 6, 8]))--}}
 {{--											<i class="{{ data_get($iSubCat, 'icon_class') ?? 'fas fa-folder' }}"></i>--}}
 {{--										@endif--}}

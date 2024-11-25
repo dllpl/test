@@ -402,7 +402,7 @@
 											$phoneValueOld = phoneE164(old('phone', $phoneValue), old('phone_country', $phoneCountryValue));
 										@endphp
 										<div class="row mb-3 auth-field-item required{{ $forceToDisplay }}">
-											<label class="col-md-3 col-form-label{{ $phoneError }}" for="phone">{{ t('phone_number') }}
+											<label class="col-md-3 col-form-label{{ $phoneError }}" for="phone" >{{ t('phone_number') }}
 												@if (getAuthField() == 'phone')
 													<sup>*</sup>
 												@endif
@@ -417,7 +417,7 @@
 													<span class="input-group-text iti-group-text">
 														<input id="phoneHidden" name="phone_hidden" type="checkbox"
 															   value="1" @checked(old('phone_hidden') == '1')>&nbsp;
-														<small>{{ t('Hide') }}</small>
+														<small>{{ t('hide_on_the_listing') }}</small>
 													</span>
 												</div>
 												<input name="phone_country" type="hidden" value="{{ old('phone_country', $phoneCountryValue) }}">

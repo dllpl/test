@@ -72,7 +72,7 @@ return [
     'starts_with' => 'В :attribute must start with one of the following: :values',
     'string' => ':attribute должен быть строкой.',
     'timezone' => ':attribute должен быть действительной зоной.',
-    'unique' => ':attribute уже принят.',
+    'unique' => ':attribute уже занят.',
     'uploaded' => ':attribute не удалось загрузить.',
     'url' => ':недопустимый формат атрибута.',
     'required_package_id' => 'You have to select a premium listing option to continue.',

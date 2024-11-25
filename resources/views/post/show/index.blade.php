@@ -272,7 +272,7 @@
 									</div>
 									<ul class="saler__list list-reset">
 										<li class="saler__item">
-											<span class="saler__desc">{{ t('advertisement_posted_from') }}</span>
+											<!--<span class="saler__desc">{{ t('advertisement_posted_from') }}</span>-->
 										</li>
 										@if (!empty($user))
 											<li class="saler__item">

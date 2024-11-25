@@ -17,6 +17,7 @@
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\Api\Docs\DocsController;
+use App\Http\Controllers\TinkoffController;
 
 /*
 |--------------------------------------------------------------------------
@@ -45,3 +46,15 @@ Route::middleware(['installed'])
 Route::group(['prefix' => 'docs'], function () {
     Route::post('dkp', [DocsController::class, 'makeDkp']);
 });
+
+// Маршрут для отправки платежа
+Route::post('/tinkoff/payment', [TinkoffController::class, 'sendPayment'])->name('tinkoff.payment');
+
+// Маршрут для успешного платежа
+Route::get('/tinkoff/success', [TinkoffController::class, 'paymentSuccess'])->name('tinkoff.success');
+
+// Маршрут для неудачного платежа
+Route::get('/tinkoff/fail', [TinkoffController::class, 'paymentFail'])->name('tinkoff.fail');
+
+// Маршрут для callback (notification) от Тинькофф
+Route::post('/tinkoff/callback', [TinkoffController::class, 'handleCallback'])->name('tinkoff.callback');

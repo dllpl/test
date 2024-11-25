@@ -118,9 +118,8 @@
 						</ul>
 
 						<div class="callback__bottom">
-							<a href="/page/terms" target="_blank" class="callback__link link link--grey">
-								{{ t('click_the_button_agree') }}<br>
-								<span style="text-decoration: underline;"><b>{{ t('terms') }}</b></span>
+							<a href="/page/privacy" target="_blank" class="callback__link link link--grey">
+								{{ t('click_the_button_agree_obrabotka') }}<br>
 							</a>
 							<button type="submit" class="form__btn btn btn--accent btn-reset" style="border-radius: 0">{{ t('submit') }}</button>
 						</div>

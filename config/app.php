@@ -203,7 +203,7 @@ return [
 		Larapen\LaravelDistance\DistanceServiceProvider::class,
 		Larapen\Feed\FeedServiceProvider::class,
 		Larapen\Impersonate\ImpersonateServiceProvider::class,
-		
+		extras\plugins\balance\BalanceServiceProvider::class,
     ],
     
     /*

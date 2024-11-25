@@ -49,9 +49,9 @@ $socialAndAppsLinksAreEnabled = ($socialLinksAreEnabled || $appsLinksAreEnabled)
 					<ul class="list-reset">
 						<li class="footer__item"><a href="{{ \App\Helpers\UrlGen::contact() }}"> {{ t('Contact') }} </a></li>
 						<li class="footer__item"><a href="{{ \App\Helpers\UrlGen::sitemap() }}"> {{ t('sitemap') }} </a></li>
-						@if (isset($countries) && $countries->count() > 1)
+						<!-- @if (isset($countries) && $countries->count() > 1)
 							<li class="footer__item"><a href="{{ \App\Helpers\UrlGen::countries() }}"> {{ t('countries') }} </a></li>
-						@endif
+						@endif -->
 					</ul>
 				</div>
 				<div class="footer__menu">

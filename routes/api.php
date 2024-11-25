@@ -57,6 +57,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+use App\Http\Controllers\BalanceController;
+
+Route::get('/balance/{id}', [BalanceController::class, 'getBalance']); // Получить баланс по ID
+Route::post('/balance/{id}', [BalanceController::class, 'updateBalance']); // Пополнить баланс по ID
+
+
 // auth
 Route::namespace('Auth')
 	->group(function ($router) {

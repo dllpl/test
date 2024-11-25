@@ -161,7 +161,7 @@
 													</a>
 												@endif
 												<a class="lk-product__link link link--accent"
-												   href="{{ url('account/posts/' . $pagePath . '/' . data_get($post, 'id') . '/delete') }}"
+												   href="{{ url('account/posts/' . $pagePath . '/' . data_get($post, 'id') . '/offline') }}"
 												>
 													{{t('Delete')}}
 												</a>

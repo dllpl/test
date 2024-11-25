@@ -16,11 +16,11 @@ return [
     'user_deleted_content' => ':appName - Ваша учетная запись удалена.',
     'user_activated_content' => 'Добро пожаловать, :userName! Ваша учетная запись активирована.',
     'reset_password_content' => 'Сброс пароля. Код сброса: :token. 
-Срок действия этого кода истекает через :expireTimeString минут.',
-    'post_archived_content' => 'Ваше объявление ":title" заархивировано, и будет удалено в :dateDel.',
+Срок действия этого кода истекает через :expireTimeString минут.',
+    'post_archived_content' => 'Ваше объявление ":title" заархивировано, и будет удалено :dateDel.',
     'post_will_be_deleted_content' => 'Ваше объявление ":title" будет удалено через :days дней',
     'payment_sent_content' => 'Мы получили оплату за объявление":title". Спасибо!',
-    'payment_approved_content' => ':appName - Your payment for the listing ":title" has been approved. Thank you!',
+    'payment_approved_content' => 'Платеж по объявлению ":title" принят. Спасибо!',
     'reply_form_content' => ':appName - ":subject" - :message',
     'generated_password_content' => 'Ваша учетная запись создана. 
 Ваш пароль: :randomPassword. 

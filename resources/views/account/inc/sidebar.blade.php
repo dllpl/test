@@ -1,5 +1,20 @@
+
+
 <div class="lk__left">
 	<div class="menu-nav">
+	    {{-- Вывод баланса и ссылки на пополнение --}}
+        @auth
+            <li class="menu-nav__item">
+                <a href="#" class="menu-nav__link link link--flex">
+                    <h4 class="title title--small">Баланс - {{ auth()->user()->balance }} руб.</h4>
+                </a>
+                
+                <!-- Ссылка для открытия попапа -->
+                <a href="#balanceFormPopup " data-fancybox class="topup_balance_btn">
+                    Пополнить баланс
+                </a>
+            </li>
+        @endauth
 		@if (isset($userMenu) && !empty($userMenu))
 			@php
 				$userMenu = $userMenu->groupBy('group');
@@ -79,3 +94,8 @@
 {{--		</div>--}}
 {{--	</div>--}}
 {{--</aside>--}}
+
+
+
+
+

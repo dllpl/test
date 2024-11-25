@@ -2656,3 +2656,66 @@ p {
 }
 /*# sourceMappingURL=main.css.map */
 
+
+.form-label_balance {
+        margin-bottom: 8px;
+        font-weight: bold;
+        color: #333;
+    }
+
+    .form-input_balance {
+        margin-bottom: 12px;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        font-size: 16px;
+        width: 100%;
+        box-sizing: border-box; /* Чтобы padding не выходил за пределы ширины */
+    }
+
+    .custom-btn_balance {
+        width: 100%;
+        padding: 10px;
+        background-color: #007BFF;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 16px;
+        transition: background-color 0.3s;
+    }
+
+    .custom-btn_balance:hover {
+        background-color: #0056b3; /* Более темный оттенок при наведении */
+    }
+    
+    .headers_balance {
+        margin-bottom:20px;
+    }
+.topup_balance_btn {
+    display: inline-block;
+    background: var(--accent);
+    color: #fff;
+    margin-top: 10px;
+    padding: 5px 12px;
+    border:none;
+}
+
+.topup_balance_btn_form {
+    display: inline-block;
+    background: var(--accent);
+    color: #fff;
+    margin-top: 10px;
+    border:none;
+    width:100%;
+    padding: 10px;
+    transition:ease 0.1s all;
+}
+
+.topup_balance_btn_form:hover {
+    color: var(--heart-new);
+}
+
+.fancybox__backdrop {
+    opacity: 70% !important;
+}

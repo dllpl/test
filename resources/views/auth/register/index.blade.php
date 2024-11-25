@@ -277,8 +277,7 @@ $face_type_list = \DB::table('face_type_list')
 													>
 												</li>
 												<li class="form__item">
-													<p style="color: #686868">{{ t('click_the_button_agree') }}
-														<a href="http://barsovoz/page/terms" target="_blank" class="text-decoration-underline">{{ t('privacy') }}</a> {{t('and_familiarized')}} <a href="http://barsovoz/page/terms" target="_blank" class="text-decoration-underline">{{ t('terms') }}</a> </p>
+													<p style="color: #686868">{{ t('click_the_button_agree_obrabotka') }}</p>
 												</li>
 											</ul>
 

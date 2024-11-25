@@ -12,7 +12,7 @@ if (isset($cities, $city) && !collect($cities)->contains($city)) {
 	collect($cities)->push($city)->toArray();
 }
 ?>
-
+<br><br>
 <li class="menu-nav__categories-item">
 	<h3 class="menu-nav__categories-title title title--medium title--underline">
 		{{ t('locations') }} {!! $clearFilterBtn !!}
@@ -29,7 +29,7 @@ if (isset($cities, $city) && !collect($cities)->contains($city)) {
 						|| request()->input('l') == data_get($iCity, 'id')
 						)
 						<strong>
-							<a href="{!! \App\Helpers\UrlGen::city($iCity, null, $cat ?? null) !!}" title="{{ data_get($iCity, 'name') }} link">
+							<a href="{!! \App\Helpers\UrlGen::city($iCity, null, $cat ?? null) !!}">
 								{{ data_get($iCity, 'name') }}
 								@if (config('settings.list.count_cities_listings'))
 									<span class="count">&nbsp;{{ data_get($iCity, 'posts_count') ?? 0 }}</span>
@@ -37,7 +37,7 @@ if (isset($cities, $city) && !collect($cities)->contains($city)) {
 							</a>
 						</strong>
 					@else
-						<a href="{!! \App\Helpers\UrlGen::city($iCity, null, $cat ?? null) !!}" title="{{ data_get($iCity, 'name') }} link">
+						<a href="{!! \App\Helpers\UrlGen::city($iCity, null, $cat ?? null) !!}">
 							{{ data_get($iCity, 'name') }}
 							@if (config('settings.list.count_cities_listings'))
 								<span class="count">&nbsp;{{ data_get($iCity, 'posts_count') ?? 0 }}</span>
@@ -91,4 +91,5 @@ if (isset($cities, $city) && !collect($cities)->contains($city)) {
 {{--		@endif--}}
 {{--	</ul>--}}
 {{--</div>--}}
+<br><br>
 <div style="clear:both"></div>

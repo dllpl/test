@@ -111,7 +111,8 @@ class User extends BaseUser
 		'last_activity',
         'face_type',
         'user_type',
-        'inn'
+        'inn',
+        'balance', // Добавляем поле balance
 	];
 	
 	/**

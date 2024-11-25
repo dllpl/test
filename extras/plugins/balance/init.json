@@ -1,0 +1,10 @@
+{
+    "name": "balance",
+    "version": "1.0",
+    "display_name": "Balance mrthod",
+    "description": "Balance mrthod",
+    "author": "Nikita Mitusov (babin75)",
+    "category": "payment",
+    "has_installer": true,
+    "item_id": ""
+}

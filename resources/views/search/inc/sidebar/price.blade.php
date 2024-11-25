@@ -40,7 +40,7 @@ $clearFilterBtn = \App\Helpers\UrlGen::getPriceFilterClearLink($cat ?? null, $ci
 					<input type="number" min="0" id="maxPrice" name="maxPrice" class="form-control" placeholder="{{ t('Max') }}" value="{{ request()->get('maxPrice') }}">
 				</div>
 				<div class="col-lg-4 col-md-12 col-sm-12">
-					<button class="btn btn-default btn-block" type="submit">{{ t('go') }}</button>
+					<button class="btn btn-default btn-block" type="submit">{{ t('filgo') }}</button>
 				</div>
 			</div>
 		</form>

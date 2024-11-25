@@ -2,6 +2,7 @@
 // Search parameters
 $queryString = (request()->getQueryString() ? ('?' . request()->getQueryString()) : '');
 
+
 // Check if the Multi-Countries selection is enabled
 $multiCountriesIsEnabled = false;
 $multiCountriesLabel = '';
@@ -13,6 +14,7 @@ if (config('settings.geo_location.show_country_flag')) {
 		}
 	}
 }
+
 
 // Logo Label
 $logoLabel = '';
@@ -30,7 +32,7 @@ if ($multiCountriesIsEnabled) {
 					 data-bs-toggle="tooltip"
 					 title="{!! $logoLabel !!}" style="height: 22px"/>
 			</a>
-			@if (config('settings.geo_location.show_country_flag'))
+			<!--@if (config('settings.geo_location.show_country_flag'))
 				@if (!empty(config('country.icode')))
 					@if (file_exists(public_path() . '/images/flags/32/' . config('country.icode') . '.png'))
 						<li class="flag-menu country-flag d-md-block d-sm-none d-none nav-item"
@@ -56,14 +58,14 @@ if ($multiCountriesIsEnabled) {
 						</li>
 					@endif
 				@endif
-			@endif
+			@endif -->
 		</div>
 
 		<div class="d-flex">
 		<button class="burger btn-reset" aria-label="{{t('open_mobile_menu')}}" aria-expanded="false" data-burger>
 		  <span class="burger__icon"></span>
 		</button>
-			{{-- Country Flag (Mobile) --}}
+		<!--	{{-- Country Flag (Mobile) --}}
 					@if ($multiCountriesIsEnabled)
 						@if (!empty(config('country.icode')))
 							@if (file_exists(public_path() . '/images/flags/24/' . config('country.icode') . '.png'))
@@ -77,6 +79,7 @@ if ($multiCountriesIsEnabled) {
 							@endif
 						@endif
 					@endif
+		-->
 		</div>
 
 
@@ -250,6 +253,41 @@ if ($multiCountriesIsEnabled) {
 						</a>
 						<ul id="userMenuDropdown" class="dropdown-menu user-menu shadow-sm">
 							@if (isset($userMenu) && !empty($userMenu))
+							    <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js"></script>
+                                    <link
+                                      rel="stylesheet"
+                                      href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.css"
+                                    />
+                                    
+                                    <!-- Скрытая форма для пополнения баланса -->
+                                    <div style="display: none;" id="balanceFormPopup "  >
+                                        <h3 class="headers_balance">Пополнить баланс</h3>
+                                        <form action="{{ route('tinkoff.payment') }}" method="POST" style="width: 30rem;">
+                                            @csrf
+                                            <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
+                                            
+                                            <label calss="col-form-label" for="amount">Введите сумму пополнения:</label>
+                                            <input class="form-control input input--default" type="number" name="amount" required min="1">
+                                            
+                                            <button type="submit" class="topup_balance_btn_form">Пополнить</button>
+                                        </form>
+                                    </div>
+                                    
+                                    {{-- Вывод баланса и ссылки на пополнение --}}
+                                    @auth
+                                        <li class="dropdown-item{{ (isset($value['isActive']) && $value['isActive']) ? ' active__lk' : '' }}">
+                                            <a href="#balanceFormPopup " data-fancybox class="menu-nav__link link link--flex">
+                                                <h4 class="title title--small">Баланс - {{ auth()->user()->balance }} руб.</h4>
+                                            </a>
+                                        </li>
+                                        
+                                        <script>
+                                          // Инициализация Fancybox
+                                          Fancybox.bind("[data-fancybox]", {
+                                            // Дополнительные параметры, если нужны
+                                          });
+                                        </script>
+                                    @endauth
 								@php
 									$menuGroup = '';
                                     $dividerNeeded = false;
