@@ -1,6 +1,7 @@
-<?php 
+<?php
 
 return [
+    'drag_and_drop' => '拖放文件',
     'all_ads' => '所有公告',
     'choose_your_city'=>'选择您的城市',
     'client_base' => '客户群',

@@ -1,6 +1,7 @@
-<?php 
+<?php
 
 return [
+    'drag_and_drop' => 'Drag and drop',
     'all_ads' => 'All ads',
     'choose_your_city'=>'Choose your city',
     'client_base' => 'Client base',

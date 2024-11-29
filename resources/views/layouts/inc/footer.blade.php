@@ -1,247 +1,265 @@
 <?php
 $socialLinksAreEnabled = (
-	config('settings.social_link.facebook_page_url')
-	|| config('settings.social_link.twitter_url')
-	|| config('settings.social_link.tiktok_url')
-	|| config('settings.social_link.linkedin_url')
-	|| config('settings.social_link.pinterest_url')
-	|| config('settings.social_link.instagram_url')
+    config('settings.social_link.facebook_page_url')
+    || config('settings.social_link.twitter_url')
+    || config('settings.social_link.tiktok_url')
+    || config('settings.social_link.linkedin_url')
+    || config('settings.social_link.pinterest_url')
+    || config('settings.social_link.instagram_url')
 );
 $appsLinksAreEnabled = (
-	config('settings.other.ios_app_url')
-	|| config('settings.other.android_app_url')
+    config('settings.other.ios_app_url')
+    || config('settings.other.android_app_url')
 );
 $socialAndAppsLinksAreEnabled = ($socialLinksAreEnabled || $appsLinksAreEnabled);
 ?>
 
 <footer class="footer">
-	@if (!config('settings.footer.hide_links'))
-		<div class="footer__container container">
-			<div class="footer__content d-none d-sm-grid">
-				<div class="footer__menu">
-					<h2 class="footer__title title ">
-						{{ t('about_system') }}
-					</h2>
-					<ul class="list-reset">
-						@if (isset($pages) && $pages->count() > 0)
-							@foreach($pages as $page)
-								<li class="footer__item">
-										<?php
-										$linkTarget = '';
-										if ($page->target_blank == 1) {
-											$linkTarget = 'target="_blank"';
-										}
-										?>
-									@if (!empty($page->external_link))
-										<a href="{!! $page->external_link !!}" rel="nofollow" {!! $linkTarget !!}> {{ $page->name }} </a>
-									@else
-										<a href="{{ \App\Helpers\UrlGen::page($page) }}" {!! $linkTarget !!}> {{ $page->name }} </a>
-									@endif
-								</li>
-							@endforeach
-						@endif
-					</ul>
-				</div>
-				<div class="footer__menu">
-					<h2 class="footer__title title ">
-						{{ t('information') }}
-					</h2>
-					<ul class="list-reset">
-						<li class="footer__item"><a href="{{ \App\Helpers\UrlGen::contact() }}"> {{ t('Contact') }} </a></li>
-						<li class="footer__item"><a href="{{ \App\Helpers\UrlGen::sitemap() }}"> {{ t('sitemap') }} </a></li>
-						<!-- @if (isset($countries) && $countries->count() > 1)
-							<li class="footer__item"><a href="{{ \App\Helpers\UrlGen::countries() }}"> {{ t('countries') }} </a></li>
-						@endif -->
-					</ul>
-				</div>
-				<div class="footer__menu">
-					<h2 class="footer__title title">
-						{{ t('my_account') }}
-					</h2>
-					<ul class="list-reset">
-						@if (!auth()->user())
-							<li class="footer__item">
-								@if (config('settings.security.login_open_in_modal'))
-									<a href="#quickLogin" data-bs-toggle="modal"> {{ t('log_in') }} </a>
-								@else
-									<a href="{{ \App\Helpers\UrlGen::login() }}"> {{ t('log_in') }} </a>
-								@endif
-							</li>
-							<li class="footer__item"><a href="{{ \App\Helpers\UrlGen::register() }}"> {{ t('register') }} </a></li>
-						@else
-							<li class="footer__item"><a href="{{ url('account') }}"> {{ t('My Account') }} </a></li>
-							<li class="footer__item"><a href="{{ url('account/posts/list') }}"> {{ t('my_listings') }} </a></li>
-							<li class="footer__item"><a href="{{ url('account/posts/favourite') }}"> {{ t('favourite_listings') }} </a></li>
-						@endif
-					</ul>
-				</div>
-				<div class="footer__menu">
-					<h2 class="footer__title title">
-						{{ t('Contact') }}
-					</h2>
-					<ul class="list-reset">
-						<li class="footer__item">
-							<a href="tel:89172888001" class="link link--flex">
-								<svg class="footer__svg">
-									<use xlink:href="/images/sprite.svg#phone"></use>
-								</svg>
-								<div class="footer__info-wrapp">
-									<span class="footer__info">+7 (917) 288-80-01 </span>
-									<span class="footer__info">{{ t('free_in_russia') }}</span>
-								</div>
-							</a>
-						</li>
-						<li class="footer__item">
-							<a href="mailto:info@automost.pro" class="link link--flex">
-								<svg class="footer__svg">
-									<use xlink:href="/images/sprite.svg#mail"></use>
-								</svg>
-								<div class="footer__info-wrapp">
-									<span class="footer__info">info@automost.pro </span>
-									<span class="footer__info">{{ t('support_service') }}</span>
-								</div>
-							</a>
-						</li>
-					</ul>
-				</div>
-			</div>
-			<div class="d-sm-none">
+    @if (!config('settings.footer.hide_links'))
+        <div class="footer__container container">
+            <div class="footer__content d-none d-sm-grid">
+                <div class="footer__menu">
+                    <h2 class="footer__title title ">
+                        {{ t('about_system') }}
+                    </h2>
+                    <ul class="list-reset">
+                        <li class="footer__item"><a href="/category/automobiles">Автомобили</a></li>
+                        <li class="footer__item"><a href="/category/uslugi">Услуги</a></li>
+                        <li class="footer__item"><a href="/category/parts">Запчасти</a></li>
+                        <li class="footer__item"><a href="/category/logistika">Логистика</a></li>
+                    </ul>
+                </div>
+                <div class="footer__menu">
+                    <h2 class="footer__title title ">
+                        {{ t('information') }}
+                    </h2>
+                    <ul class="list-reset">
+                        @if (isset($pages) && $pages->count() > 0)
+                            @foreach($pages as $page)
+                                <li class="footer__item">
+                                        <?php
+                                        $linkTarget = '';
+                                        if ($page->target_blank == 1) {
+                                            $linkTarget = 'target="_blank"';
+                                        }
+                                        ?>
+                                    @if (!empty($page->external_link))
+                                        <a href="{!! $page->external_link !!}"
+                                           rel="nofollow" {!! $linkTarget !!}> {{ $page->name }} </a>
+                                    @else
+                                        <a href="{{ \App\Helpers\UrlGen::page($page) }}" {!! $linkTarget !!}> {{ $page->name }} </a>
+                                    @endif
+                                </li>
+                            @endforeach
+                        @endif
+                        <li class="footer__item"><a href="{{ \App\Helpers\UrlGen::contact() }}"> {{ t('Contact') }} </a>
+                        </li>
+                        <li class="footer__item"><a href="{{ \App\Helpers\UrlGen::sitemap() }}"> {{ t('sitemap') }} </a>
+                        </li>
+                        <!-- @if (isset($countries) && $countries->count() > 1)
+                            <li class="footer__item"><a href="{{ \App\Helpers\UrlGen::countries() }}"> {{ t('countries') }} </a></li>
 
-				<ul class="list-reset header__list">
-					<li class="header__item header__accordion">
-						<div class="accordion accordion__footer">{{ t('about_system') }} {{ config('settings.app.name') }}</div>
-						<div class="accordion__panel" style="background-color: transparent; border-bottom-color: #686868">
-							<ul class="py-2">
-								<li>
-									<a href="/page/faq"> Часто задаваемые вопросы </a>
-								</li>
-								<li>
-									<a href="/page/anti-scam"> Анти-мошенничество </a>
-								</li>
-								<li>
-									<a href="/page/terms"> Правила использования </a>
-								</li>
-								<li>
-									<a href="/page/privacy"> {{ t('privacy') }} </a>
-								</li>
-							</ul>
-						</div>
+                        @endif -->
+                    </ul>
+                </div>
+                <div class="footer__menu">
+                    <h2 class="footer__title title">
+                        {{ t('my_account') }}
+                    </h2>
+                    <ul class="list-reset">
+                        @if (!auth()->user())
+                            <li class="footer__item">
+                                @if (config('settings.security.login_open_in_modal'))
+                                    <a href="#quickLogin" data-bs-toggle="modal"> {{ t('log_in') }} </a>
+                                @else
+                                    <a href="{{ \App\Helpers\UrlGen::login() }}"> {{ t('log_in') }} </a>
+                                @endif
+                            </li>
+                            <li class="footer__item"><a
+                                        href="{{ \App\Helpers\UrlGen::register() }}"> {{ t('register') }} </a></li>
+                        @else
+                            <li class="footer__item"><a href="{{ url('account') }}"> {{ t('My Account') }} </a></li>
+                            <li class="footer__item"><a
+                                        href="{{ url('account/posts/list') }}"> {{ t('my_listings') }} </a></li>
+                            <li class="footer__item"><a
+                                        href="{{ url('account/posts/favourite') }}"> {{ t('favourite_listings') }} </a>
+                            </li>
+                        @endif
+                    </ul>
+                </div>
+                <div class="footer__menu">
+                    <h2 class="footer__title title">
+                        {{ t('Contact') }}
+                    </h2>
+                    <ul class="list-reset">
+                        <li class="footer__item">
+                            <a href="tel:89172888001" class="link link--flex">
+                                <svg class="footer__svg">
+                                    <use xlink:href="/images/sprite.svg#phone"></use>
+                                </svg>
+                                <div class="footer__info-wrapp">
+                                    <span class="footer__info">+7 (917) 288-80-01 </span>
+                                    <span class="footer__info">{{ t('free_in_russia') }}</span>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="footer__item">
+                            <a href="mailto:info@automost.pro" class="link link--flex">
+                                <svg class="footer__svg">
+                                    <use xlink:href="/images/sprite.svg#mail"></use>
+                                </svg>
+                                <div class="footer__info-wrapp">
+                                    <span class="footer__info">info@automost.pro </span>
+                                    <span class="footer__info">{{ t('support_service') }}</span>
+                                </div>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="d-sm-none">
 
-						<div class="accordion accordion__footer">{{ t('information') }}</div>
-						<div class="accordion__panel" style="background-color: transparent; border-bottom-color: #686868">
-							<ul class="py-2">
-								<li><a href="/contact"> Связаться </a></li>
-								<li><a href="/sitemap"> Карта сайта </a></li>
-							</ul>
-						</div>
+                <ul class="list-reset header__list">
+                    <li class="header__item header__accordion">
+                        <div class="accordion accordion__footer">{{ t('about_system') }} {{ config('settings.app.name') }}</div>
+                        <div class="accordion__panel"
+                             style="background-color: transparent; border-bottom-color: #686868">
+                            <ul class="py-2">
+                                <li>
+                                    <a href="/page/faq"> Часто задаваемые вопросы </a>
+                                </li>
+                                <li>
+                                    <a href="/page/anti-scam"> Анти-мошенничество </a>
+                                </li>
+                                <li>
+                                    <a href="/page/terms"> Правила использования </a>
+                                </li>
+                                <li>
+                                    <a href="/page/privacy"> {{ t('privacy') }} </a>
+                                </li>
+                            </ul>
+                        </div>
 
-						<div class="accordion accordion__footer">{{ t('my_account') }}</div>
-						<div class="accordion__panel" style="background-color: transparent; border-bottom-color: #686868">
-							<ul class="py-2">
-								<li><a href="#quickLogin" class="link" data-bs-toggle="modal"><i class="fas fa-user"></i> Войти</a></li>
-								<li><a href="/register" class="link"><i class="far fa-user"></i> Зарегистрироваться</a></li>
-							</ul>
-						</div>
-					</li>
-					<li class="dropdown no-arrow open-on-hover hide__mobile">
-						<a href="#" class="link link--flex dropdown-toggle" data-bs-toggle="dropdown">
-							<svg class="header__svg">
-								<use xlink:href="/images/sprite.svg#user"></use>
-							</svg>
-							<span class="header__content-adaptive">Вход и регистрация</span>
-						</a>
-						<ul id="authDropdownMenu" class="dropdown-menu user-menu shadow-sm">
-							<li class="dropdown-item">
-								<a href="#quickLogin" class="link" data-bs-toggle="modal"><i class="fas fa-user"></i> Войти</a>
-							</li>
-							<li class="dropdown-item">
-								<a href="/register" class="link"><i class="far fa-user"></i> Зарегистрироваться</a>
-							</li>
-						</ul>
-					</li>
+                        <div class="accordion accordion__footer">{{ t('information') }}</div>
+                        <div class="accordion__panel"
+                             style="background-color: transparent; border-bottom-color: #686868">
+                            <ul class="py-2">
+                                <li><a href="/contact"> Связаться </a></li>
+                                <li><a href="/sitemap"> Карта сайта </a></li>
+                            </ul>
+                        </div>
+
+                        <div class="accordion accordion__footer">{{ t('my_account') }}</div>
+                        <div class="accordion__panel"
+                             style="background-color: transparent; border-bottom-color: #686868">
+                            <ul class="py-2">
+                                <li><a href="#quickLogin" class="link" data-bs-toggle="modal"><i
+                                                class="fas fa-user"></i> Войти</a></li>
+                                <li><a href="/register" class="link"><i class="far fa-user"></i> Зарегистрироваться</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="dropdown no-arrow open-on-hover hide__mobile">
+                        <a href="#" class="link link--flex dropdown-toggle" data-bs-toggle="dropdown">
+                            <svg class="header__svg">
+                                <use xlink:href="/images/sprite.svg#user"></use>
+                            </svg>
+                            <span class="header__content-adaptive">Вход и регистрация</span>
+                        </a>
+                        <ul id="authDropdownMenu" class="dropdown-menu user-menu shadow-sm">
+                            <li class="dropdown-item">
+                                <a href="#quickLogin" class="link" data-bs-toggle="modal"><i class="fas fa-user"></i>
+                                    Войти</a>
+                            </li>
+                            <li class="dropdown-item">
+                                <a href="/register" class="link"><i class="far fa-user"></i> Зарегистрироваться</a>
+                            </li>
+                        </ul>
+                    </li>
 
 
+                    <li>
+                        <span style="font-size: 16px; font-weight: 500; padding: 10px 0">{{ t('Contact') }}</span>
+                        <ul class="py-2">
+                            <li class="mb-2">
+                                <a href="tel:89172888001" class="link link--flex">
+                                    <i class="fa fa-phone-alt fa-2x"></i>
+                                    <div class="footer__info-wrapp">
+                                        <span class="footer__info">+7 (917) 288-80-01 </span>
+                                        <span class="footer__info">{{ t('free_in_russia') }}</span>
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="mb-2">
+                                <a href="#" class="link link--flex">
+                                    <i class="fa fa-envelope fa-2x"></i>
+                                    <div class="footer__info-wrapp">
+                                        <span class="footer__info">info@automost.pro </span>
+                                        <span class="footer__info">{{ t('support_service') }}</span>
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="mb-2">
+                                <a href="https://vk.com/automost_pro" target="_blank" class="link link--flex">
+                                    <img src="/images/icon/VK.svg" alt="VK" width="24px">
+                                    <div class="footer__info-wrapp">
+                                        <span class="footer__info">vk.com/automost_pro</span>
+                                        <span class="footer__info">Сообщество в VK</span>
+                                    </div>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
 
-					<li>
-						<span style="font-size: 16px; font-weight: 500; padding: 10px 0">{{ t('Contact') }}</span>
-						<ul class="py-2">
-							<li class="mb-2">
-								<a href="tel:89172888001" class="link link--flex">
-									<i class="fa fa-phone-alt fa-2x"></i>
-									<div class="footer__info-wrapp">
-										<span class="footer__info">+7 (917) 288-80-01 </span>
-										<span class="footer__info">{{ t('free_in_russia') }}</span>
-									</div>
-								</a>
-							</li>
-							<li class="mb-2">
-								<a href="#" class="link link--flex">
-									<i class="fa fa-envelope fa-2x"></i>
-									<div class="footer__info-wrapp">
-										<span class="footer__info">info@automost.pro </span>
-										<span class="footer__info">{{ t('support_service') }}</span>
-									</div>
-								</a>
-							</li>
-							<li class="mb-2">
-								<a href="https://vk.com/automost_pro" target="_blank" class="link link--flex">
-									<img src="/images/icon/VK.svg" alt="VK" width="24px">
-									<div class="footer__info-wrapp">
-										<span class="footer__info">vk.com/automost_pro</span>
-										<span class="footer__info">Сообщество в VK</span>
-									</div>
-								</a>
-							</li>
-						</ul>
-					</li>
-
-					<li class="header__item header__accordion">
-						<div class="accordion accordion__footer">Документы</div>
-						<div class="accordion__panel" style="background-color: transparent; border-bottom-color: #686868">
-							<ul class="py-2">
-								<li>
-									<a href="/page/faq">{{ t('privacy') }}</a>
-								</li>
-								<li>
-									<a href="/page/anti-scam"> Анти-мошенничество </a>
-								</li>
-								<li>
-									<a href="/page/terms"> Правила использования </a>
-								</li>
-								<li>
-									<a href="/page/privacy"> {{ t('privacy') }} </a>
-								</li>
-							</ul>
-						</div>
-					</li>
-				</ul>
-			</div>
-		</div>
-	@endif
-	<div class="footer__copyright copyright">
-		<div class="copyright__container container">
-			<ul class="list-reset copyright__list d-none d-sm-flex">
-				<li class="copyright__item">
-					<a href="#" class="">
-						{{ t('privacy') }}
-					</a>
-				</li>
-				<li class="copyright__item">
-					<a href="#" class="">{{ t('terms') }}</a>
-				</li>
-				<li class="copyright__item">
-					<a href="#" class="">
-						Cookie
-					</a>
-				</li>
-			</ul>
-			<ul class="list-reset copyright__list">
-				<li class="copyright__item text-end">
-					{{ config('settings.app.name') }}, {{ date('Y') }}
-				</li>
-			</ul>
-		</div>
-	</div>
+                    <li class="header__item header__accordion">
+                        <div class="accordion accordion__footer">Документы</div>
+                        <div class="accordion__panel"
+                             style="background-color: transparent; border-bottom-color: #686868">
+                            <ul class="py-2">
+                                <li>
+                                    <a href="/page/faq">{{ t('privacy') }}</a>
+                                </li>
+                                <li>
+                                    <a href="/page/anti-scam"> Анти-мошенничество </a>
+                                </li>
+                                <li>
+                                    <a href="/page/terms"> Правила использования </a>
+                                </li>
+                                <li>
+                                    <a href="/page/privacy"> {{ t('privacy') }} </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    @endif
+    <div class="footer__copyright copyright">
+        <div class="copyright__container container">
+            <ul class="list-reset copyright__list d-none d-sm-flex">
+                <li class="copyright__item">
+                    <a href="#" class="">
+                        {{ t('privacy') }}
+                    </a>
+                </li>
+                <li class="copyright__item">
+                    <a href="#" class="">{{ t('terms') }}</a>
+                </li>
+                <li class="copyright__item">
+                    <a href="#" class="">
+                        Cookie
+                    </a>
+                </li>
+            </ul>
+            <ul class="list-reset copyright__list">
+                <li class="copyright__item text-end">
+                    {{ config('settings.app.name') }}, {{ date('Y') }}
+                </li>
+            </ul>
+        </div>
+    </div>
 </footer>
 
 

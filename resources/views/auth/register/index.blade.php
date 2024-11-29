@@ -289,7 +289,15 @@ $face_type_list = \DB::table('face_type_list')
 
 											@include('layouts.inc.tools.captcha')
 
-											<button id="signupBtn" class="form__btn btn btn--accent btn--center btn-reset"> {{ t('register') }} </button>
+
+                                            <div class="d-flex justify-content-between">
+                                                <button id="signupBtn" class="form__btn btn btn--accent btn-reset"> {{ t('register') }} </button>
+                                                @if (config('settings.social_auth.google_client_id') && config('settings.social_auth.google_client_secret'))
+                                                    <a class="btn btn-ggl" href="{{ url('auth/google') }}" title="{!! strip_tags(t('Login with Google')) !!}">
+                                                        <i class="fab fa-google"></i> {!! t('Login with Google') !!}
+                                                    </a>
+                                                @endif
+                                            </div>
 										</form>
 									</div>
 								</div>

@@ -754,7 +754,7 @@ function readableBytes($bytes, int $decimals = 2, string $system = 'binary')
 		'binary' => [
 			'B',
 			'KiB',
-			'MiB',
+			'МБ',
 			'GiB',
 			'TiB',
 			'PiB',
@@ -765,7 +765,7 @@ function readableBytes($bytes, int $decimals = 2, string $system = 'binary')
 		'metric' => [
 			'B',
 			'kB',
-			'MB',
+			'МБ',
 			'GB',
 			'TB',
 			'PB',
@@ -1489,18 +1489,21 @@ function hex2rgba($color, bool $opacity = false): string
  * @param string $encoding
  * @return string|null
  */
-function mb_ucfirst(?string $string, string $encoding = 'utf-8'): ?string
-{
-	if (empty($string)) {
-		return null;
-	}
+if (!function_exists('mb_ucfirst')) {
+    function mb_ucfirst(?string $string, string $encoding = 'utf-8'): ?string
+    {
+        if (empty($string)) {
+            return null;
+        }
 
-	$strLen = mb_strlen($string, $encoding);
-	$firstChar = mb_substr($string, 0, 1, $encoding);
-	$then = mb_substr($string, 1, $strLen - 1, $encoding);
+        $strLen = mb_strlen($string, $encoding);
+        $firstChar = mb_substr($string, 0, 1, $encoding);
+        $then = mb_substr($string, 1, $strLen - 1, $encoding);
 
-	return mb_strtoupper($firstChar, $encoding) . $then;
+        return mb_strtoupper($firstChar, $encoding) . $then;
+    }
 }
+
 
 /**
  * ucwords() function for multibyte character encodings
@@ -3768,7 +3771,7 @@ function genPhoneNumberBtn($post, bool $btnBlock = false): string
 
 	// Generate the Phone Number button
 	$out .= '<a href="' . $btnLink . '" ' . $btnAttr . ' class="saler__phone link link--flex' . $btnClass . '">';
-    $out .= '<p>'. t("show_phone")  .'<span class="saler__number">'. $phone .'</span></p>';
+    $out .= '<p>'. t("show_phone")  .'</p>';
 	$out .= '<svg class="saler__icon"><use xlink:href="/images/sprite.svg#phone"></use></svg>';
 	$out .= '</a>';
 

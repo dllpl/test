@@ -6077,7 +6077,7 @@
         msgFilePreviewAborted: 'File preview aborted for "{name}".',
         msgFilePreviewError: 'An error occurred while reading the file "{name}".',
         msgInvalidFileName: 'Invalid or unsupported characters in file name "{name}".',
-        msgInvalidFileType: 'Invalid type for file "{name}". Only "{types}" files are supported.',
+        msgInvalidFileType: 'Недопустимый тип файла "{name}". Поддерживаются только файлы "{types}".',
         msgInvalidFileExtension: 'Invalid extension for file "{name}". Only "{extensions}" files are supported.',
         msgFileTypes: {
             'image': 'image',

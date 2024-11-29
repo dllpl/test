@@ -1,6 +1,7 @@
-<?php 
+<?php
 
 return [
+    'drag_and_drop' => 'Перетащите сюда файлы',
     'all_ads' => 'Все объявления',
     'choose_your_city' => 'Выберите свой город',
     'client_base' => 'Клиентская база',
@@ -16,7 +17,7 @@ return [
     'offer_your_price'=>'Предложить свою цену',
     'add_to_favorites' => 'Добавить в избранное',
     'advertisement_posted_from'=>'Объявление размещено от',
-    'show_phone' => 'Показать телефон',
+    'show_phone' => 'Посмотреть телефон',
     'сharacteristics'=> 'Характеристики',
     'register_on_the_site'=> 'Зарегистрируйтесь на сайте, чтобы начать покупать и продавать вместе с',
     'face_type'=>'Тип лица',
@@ -581,8 +582,8 @@ return [
     'Upload Status' => 'Статус загрузки',
     'picture X' => 'Фото #:key',
     'tag X' => 'Тег #:key',
-    'large_file_uploaded_error' => 'Размер :field не должен быть больше :maxSize.',
-    'large_file_uploaded_error_system' => 'Размер :field не должен быть больше :maxSize.',
+    'large_file_uploaded_error' => 'Размер файла не должен быть больше :maxSize.',
+    'large_file_uploaded_error_system' => 'Размер файла не должен быть больше :maxSize.',
     'Uploaded file index successfully' => '\'<li>\' + \'Загружен файл # \' + (index + 1) + \' - \'  + fname + \' успешно.\' + \'</li>\'',
     'Uploaded file X successfully' => '\'<li>\' + \'Загружен файл # \' + (key + 1) + \' - \'  + fname + \' успешно.\' + \'</li>\'',
     'Do you want add more pictures' => 'Вы хотите добавить больше фотографий?',

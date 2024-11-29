@@ -8,7 +8,7 @@
             </svg></span>
 		</a>
 		<ul id="langDropdownItems"
-			class="dropdown-menu dropdown-menu-end user-menu shadow-sm"
+			class="dropdown-menu user-menu shadow-sm"
 			role="menu"
 			aria-labelledby="langDropdown"
 		>

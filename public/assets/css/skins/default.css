@@ -887,7 +887,8 @@ ul.installation li i {
 
 /* Swal Alert */
 .swal2-styled.swal2-confirm {
-	background-color: #4682b4 !important;
+    border-radius: 0 !important;
+	background-color: var(--accent) !important;
 	color: #fff !important;
 }
 .swal2-actions:not(.swal2-loading) .swal2-styled:active {

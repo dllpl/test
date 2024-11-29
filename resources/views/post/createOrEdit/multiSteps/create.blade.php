@@ -417,7 +417,7 @@
 													<span class="input-group-text iti-group-text">
 														<input id="phoneHidden" name="phone_hidden" type="checkbox"
 															   value="1" @checked(old('phone_hidden') == '1')>&nbsp;
-														<small>{{ t('hide_on_the_listing') }}</small>
+														<small>{{ t('Hide') }}</small>
 													</span>
 												</div>
 												<input name="phone_country" type="hidden" value="{{ old('phone_country', $phoneCountryValue) }}">

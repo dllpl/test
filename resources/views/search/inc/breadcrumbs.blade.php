@@ -19,9 +19,9 @@
 	<nav aria-label="breadcrumb" role="navigation" class="search-breadcrumb">
 		<ol class="breadcrumb"><i class=""></i>
 			<li class="breadcrumb-item"><a href="{{ url('/') }}">
-					<svg class="icon icon--geo">
-						<use xlink:href="/images/sprite.svg#geo"></use>
-					</svg></a></li>
+                    <i class="icon icon--geo fas fa-home" style="color: #E94B5A"></i>
+                </a>
+            </li>
 			<li class="breadcrumb-item">
 				<a href="{{ $searchWithoutQuery }}">
 					{{ config('country.name') }}

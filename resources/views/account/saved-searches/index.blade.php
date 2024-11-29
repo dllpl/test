@@ -42,7 +42,7 @@
 
 				<div class="col-md-9 page-content">
 					<div class="inner-box">
-						<h2 class="title-2"><i class="fas fa-bell"></i> {{ t('Saved searches') }} </h2>
+						<h2 class="title-2">        <i class="fa fa-search" aria-hidden="true"></i>{{ t('Saved searches') }} </h2>
 						<div class="row">
 							<div class="col-md-12">
 								@if (!empty($savedSearches) && $totalSavedSearches > 0)
@@ -71,9 +71,9 @@
 										{{ $apiMessage ?? t('You have no saved search') }}
 									</div>
 								@endif
-								
+
 								<div style="clear:both;"></div>
-								
+
 								<div class="pagination-bar text-center">
 									@include('vendor.pagination.api.bootstrap-4')
 								</div>
@@ -81,7 +81,7 @@
 						</div>
 					</div>
 				</div>
-				
+
 			</div>
 		</div>
 	</div>

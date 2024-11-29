@@ -169,7 +169,19 @@
 										</div>
 									</li>
 								@endforeach
-							@endif
+                            @else
+                                <div class="d-flex flex-column align-items-center justify-content-center gap-4">
+                                    <div>
+                                        <img src="/images/no_post.png" alt="У вас пока нет объявлений" width="250">
+                                        <h2 class="title title--medium text-center">
+                                            У вас пока нет объявлений
+                                        </h2>
+                                        <p class="text-center">Вы можете разместить своё объявление</p>
+                                    </div>
+
+                                    <a href="{{ \App\Helpers\UrlGen::addPost() }}" class="btn btn-primary">{{t('Create Listing')}}</a>
+                                </div>
+                            @endif
 						</ul>
 					</div>
 				</div>

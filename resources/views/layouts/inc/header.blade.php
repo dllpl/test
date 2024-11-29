@@ -32,6 +32,12 @@ if ($multiCountriesIsEnabled) {
 					 data-bs-toggle="tooltip"
 					 title="{!! $logoLabel !!}" style="height: 22px"/>
 			</a>
+            <div class="d-flex align-items-center gap-4">
+                <a href="/category/automobiles">Автомобили</a>
+                <a href="/category/uslugi">Услуги</a>
+                <a href="/category/parts">Запчасти</a>
+                <a href="/category/logistika">Логистика</a>
+            </div>
 			<!--@if (config('settings.geo_location.show_country_flag'))
 				@if (!empty(config('country.icode')))
 					@if (file_exists(public_path() . '/images/flags/32/' . config('country.icode') . '.png'))
@@ -228,9 +234,7 @@ if ($multiCountriesIsEnabled) {
 					</li>
 					<li class="header__item hide__mobile">
 						<a href="/account/saved-searches" class=" link">
-							<svg class="header__svg">
-								<use xlink:href="/images/sprite.svg#bell"></use>
-							</svg>
+                            <i class="fa fa-search" aria-hidden="true"></i>
 							<span class="header__content-adaptive">Уведомления</span>
 						</a>
 					</li>
@@ -258,21 +262,21 @@ if ($multiCountriesIsEnabled) {
                                       rel="stylesheet"
                                       href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.css"
                                     />
-                                    
+
                                     <!-- Скрытая форма для пополнения баланса -->
                                     <div style="display: none;" id="balanceFormPopup "  >
                                         <h3 class="headers_balance">Пополнить баланс</h3>
                                         <form action="{{ route('tinkoff.payment') }}" method="POST" style="width: 30rem;">
                                             @csrf
                                             <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
-                                            
+
                                             <label calss="col-form-label" for="amount">Введите сумму пополнения:</label>
                                             <input class="form-control input input--default" type="number" name="amount" required min="1">
-                                            
+
                                             <button type="submit" class="topup_balance_btn_form">Пополнить</button>
                                         </form>
                                     </div>
-                                    
+
                                     {{-- Вывод баланса и ссылки на пополнение --}}
                                     @auth
                                         <li class="dropdown-item{{ (isset($value['isActive']) && $value['isActive']) ? ' active__lk' : '' }}">
@@ -280,7 +284,7 @@ if ($multiCountriesIsEnabled) {
                                                 <h4 class="title title--small">Баланс - {{ auth()->user()->balance }} руб.</h4>
                                             </a>
                                         </li>
-                                        
+
                                         <script>
                                           // Инициализация Fancybox
                                           Fancybox.bind("[data-fancybox]", {

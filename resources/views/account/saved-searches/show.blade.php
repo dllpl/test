@@ -16,12 +16,12 @@
 
 @php
 	$savedSearch ??= [];
-	
+
 	$apiMessage = $apiMessagePosts ?? null;
 	$apiResult = $apiResultPosts ?? [];
 	$posts = (array)data_get($apiResult, 'data');
 	$totalPosts = (int)data_get($apiResult, 'meta.total');
-	
+
 	$apiExtraPosts ??= [];
 	$query = (array)data_get($apiExtraPosts, 'preSearch.query');
 @endphp
@@ -48,22 +48,22 @@
 
 				<div class="col-md-9 page-content">
 					<div class="inner-box">
-						<h2 class="title-2"><i class="fas fa-bell"></i> {{ t('Saved search') }} #{{ data_get($savedSearch, 'id') }} </h2>
-						
+						<h2 class="title-2"><i class="fa fa-search" aria-hidden="true"></i>{{ t('Saved search') }} #{{ data_get($savedSearch, 'id') }} </h2>
+
 						<div class="mb30" style="float: right; padding-right: 5px;">
 							&laquo; <a href="{{ url('account/saved-searches') }}">{{ t('Saved searches') }}</a>
 						</div>
 						<div style="clear: both;"></div>
-						
+
 						<div class="row">
-							
+
 							<div class="col-md-12 mb-3">
 								@php
 									$searchLink = \App\Helpers\UrlGen::search($query, ['page']);
 								@endphp
 								<strong>{{ t('search') }}:</strong> <a href="{{ $searchLink }}" target="_blank">{{ $searchLink }}</a>
 							</div>
-							
+
 							<div class="col-md-12">
 								<div class="posts-wrapper category-list">
 									@if (!empty($posts) && $totalPosts > 0)
@@ -81,13 +81,13 @@
 															</a>
 														</div>
 													</div>
-													
+
 													<div class="col-md-8 add-desc-box">
 														<div class="items-details">
 															<h5 class="add-title">
 																<a href="{{ \App\Helpers\UrlGen::post($post) }}">{{ data_get($post, 'title') }}</a>
 															</h5>
-															
+
 															<span class="info-row">
 																@if (!empty(data_get($post, 'postType')))
 																	<span class="add-type business-posts"
@@ -114,7 +114,7 @@
 															</span>
 														</div>
 													</div>
-													
+
 													<div class="col-md-2 text-end text-center-xs price-box">
 														<h4 class="item-price">
 															{!! data_get($post, 'price_formatted') !!}
@@ -129,14 +129,14 @@
 										</div>
 									@endif
 								</div>
-								
+
 								<div style="clear:both;"></div>
-								
+
 								<nav class="pagination-bar mb-4" aria-label="">
 									@include('vendor.pagination.api.bootstrap-4')
 								</nav>
 							</div>
-							
+
 						</div>
 					</div>
 				</div>

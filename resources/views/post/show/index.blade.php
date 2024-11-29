@@ -233,37 +233,39 @@
 									<a href="#quickLogin" class="link link--underline" data-bs-toggle="modal">{{ t('offer_your_price') }}</a>
 								@endif
 							</div>
-							<div class="product__like">
-								<p class="product__like-content">{{ t('add_to_favorites') }}</p>
+							<a class="product__like make-favorite" id="{{ data_get($post, 'id') }}">
 								@if (auth()->check())
 									@if (!empty(data_get($post, 'savedByLoggedUser')))
-										<a class="product__like-content make-favorite" id="{{ data_get($post, 'id') }}" title="{{ t('Remove favorite') }}">
-											<svg class="preview__like">
+                                        <p class="product__like-content">В избранном</p>
+										<div class="product__like-content" title="{{ t('Remove favorite') }}">
+											<svg class="preview__like" viewbox="0 0 30 30">
 												<path
 														d="M13.1961 24.5476L13.1946 24.5462C9.40345 21.1084 6.33722 18.3222 4.20709 15.7161C2.08795 13.1235 1.00003 10.8316 1.00003 8.3995C1.00003 4.42718 4.0956 1.34387 8.05566 1.34387C10.3019 1.34387 12.4743 2.39471 13.8878 4.04165L14.6466 4.9258L15.4055 4.04165C16.819 2.39471 18.9914 1.34387 21.2376 1.34387C25.1977 1.34387 28.2932 4.42718 28.2932 8.3995C28.2932 10.8316 27.2053 13.1235 25.0862 15.7161C22.956 18.3222 19.8898 21.1084 16.0986 24.5462L16.0972 24.5476L14.6466 25.8681L13.1961 24.5476Z"
 														fill="#FF4848" stroke-width="2" />
 											</svg>
-										</a>
+										</div>
 									@else
-										<a class="product__like-content make-favorite" id="{{ data_get($post, 'id') }}" title="{{ t('Save') }}">
-											<svg class="preview__like">
+                                        <p class="product__like-content">{{ t('add_to_favorites') }}</p>
+										<div class="product__like-content" title="{{ t('Save') }}">
+											<svg class="preview__like" viewbox="0 0 30 30">
 												<path
 														d="M13.1961 24.5476L13.1946 24.5462C9.40345 21.1084 6.33722 18.3222 4.20709 15.7161C2.08795 13.1235 1.00003 10.8316 1.00003 8.3995C1.00003 4.42718 4.0956 1.34387 8.05566 1.34387C10.3019 1.34387 12.4743 2.39471 13.8878 4.04165L14.6466 4.9258L15.4055 4.04165C16.819 2.39471 18.9914 1.34387 21.2376 1.34387C25.1977 1.34387 28.2932 4.42718 28.2932 8.3995C28.2932 10.8316 27.2053 13.1235 25.0862 15.7161C22.956 18.3222 19.8898 21.1084 16.0986 24.5462L16.0972 24.5476L14.6466 25.8681L13.1961 24.5476Z"
 														stroke-width="2" />
 											</svg>
-										</a>
+										</div>
 									@endif
 								@else
-									<a class="preview__btn btn-reset make-favorite" id="{{ data_get($post, 'id') }}" title="{{ t('Save') }}">
-										<svg class="preview__like">
+                                    <p class="product__like-content">{{ t('add_to_favorites') }}</p>
+									<div class="preview__btn btn-reset" title="{{ t('Save') }}">
+										<svg class="preview__like" viewbox="0 0 30 30">
 											<path
 													d="M13.1961 24.5476L13.1946 24.5462C9.40345 21.1084 6.33722 18.3222 4.20709 15.7161C2.08795 13.1235 1.00003 10.8316 1.00003 8.3995C1.00003 4.42718 4.0956 1.34387 8.05566 1.34387C10.3019 1.34387 12.4743 2.39471 13.8878 4.04165L14.6466 4.9258L15.4055 4.04165C16.819 2.39471 18.9914 1.34387 21.2376 1.34387C25.1977 1.34387 28.2932 4.42718 28.2932 8.3995C28.2932 10.8316 27.2053 13.1235 25.0862 15.7161C22.956 18.3222 19.8898 21.1084 16.0986 24.5462L16.0972 24.5476L14.6466 25.8681L13.1961 24.5476Z"
 													stroke-width="2" />
 										</svg>
-									</a>
+									</div>
 								@endif
-							</div>
-						</div>
+                            </a>
+                        </div>
 						<div class="product__saler saler">
 							<div class="saler__top">
 								<div class="saler__left">

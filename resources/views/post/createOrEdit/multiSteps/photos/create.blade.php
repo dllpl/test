@@ -114,6 +114,8 @@
 				@if (config('lang.direction') == 'rtl')
 					rtl: true,
 				@endif
+                browseLabel: '{{ t('Select') }}',
+                dropZoneTitle: '{{ t('drag_and_drop') }}',
 				overwriteInitial: false,
 				showCaption: false,
 				showPreview: true,

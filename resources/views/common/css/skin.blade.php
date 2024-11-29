@@ -26,7 +26,7 @@
 	.skin .btn-primary.focus {
 		box-shadow: none;
 	}
-	
+
 	{{-- .btn-primary-dark --}}
 	.skin .btn-primary-dark {
 		color: {{ $primaryDarkColor }};
@@ -51,7 +51,7 @@
 	.skin .btn-primary-dark.focus {
 		box-shadow: none;
 	}
-	
+
 	{{-- .btn-outline-primary --}}
 	.skin .btn-outline-primary {
 		color: {{ $primaryBgColor }};
@@ -76,7 +76,7 @@
 	.skin .btn-outline-primary.focus {
 		box-shadow: none;
 	}
-	
+
 	{{-- .btn-primary.btn-gradient --}}
 	.skin .btn-primary.btn-gradient {
 		color: {{ $primaryColor }};
@@ -108,7 +108,7 @@
 	.skin .btn-primary.btn-gradient.focus {
 		box-shadow: 0 0 0 2px {{ $primaryBgColor50 }};
 	}
-	
+
 	{{-- .btn-success --}}
 	.skin .btn-success {
 		color: #fff;
@@ -133,7 +133,7 @@
 	.skin .btn-success.focus {
 		box-shadow: none;
 	}
-	
+
 	{{-- .btn-outline-success --}}
 	.skin .btn-outline-success {
 		color: #2ecc71;
@@ -158,7 +158,7 @@
 	.skin .btn-outline-success.focus {
 		box-shadow: none;
 	}
-	
+
 	{{-- .btn-danger --}}
 	.skin .btn-danger {
 		color: #fff;
@@ -183,7 +183,7 @@
 	.skin .btn-danger.focus {
 		box-shadow: 0 0 0 2px rgba(201, 48, 44, 0.5);
 	}
-	
+
 	{{-- .btn-outline-danger --}}
 	.skin .btn-outline-danger {
 		color: #d9534f;
@@ -208,7 +208,7 @@
 	.skin .btn-outline-danger.focus {
 		box-shadow: 0 0 0 2px rgba(201, 48, 44, 0.5);
 	}
-	
+
 	{{-- .btn-info --}}
 	.skin .btn-info {
 		color: #fff;
@@ -233,7 +233,7 @@
 	.skin .btn-info.focus {
 		box-shadow: 0 0 0 2px rgba(24, 109, 222, 0.5);
 	}
-	
+
 	{{-- .btn-outline-info --}}
 	.skin .btn-outline-info {
 		color: #186dde;
@@ -258,7 +258,7 @@
 	.skin .btn-outline-info.focus {
 		box-shadow: 0 0 0 2px rgba(24, 109, 222, 0.5);
 	}
-	
+
 	{{-- .btn-warning --}}
 	.skin .btn-warning {
 		color: #fff;
@@ -283,7 +283,7 @@
 	.skin .btn-warning.focus {
 		box-shadow: none;
 	}
-	
+
 	{{-- .btn-outline-warning --}}
 	.skin .btn-outline-warning {
 		color: #ffbf4b;
@@ -308,7 +308,7 @@
 	.skin .btn-outline-warning.focus {
 		box-shadow: none;
 	}
-	
+
 	{{-- .btn-default --}}
 	.skin .btn-default {
 		color: #292b2c;
@@ -333,7 +333,7 @@
 	.skin .btn-default.focus {
 		box-shadow: 0 0 0 2px rgba(204, 204, 204, 0.5);
 	}
-	
+
 	{{-- .btn-default-lite --}}
 	.skin .btn-default-lite {
 		color: #6d6d6d;
@@ -358,7 +358,7 @@
 	.skin .btn-default-lite.focus {
 		box-shadow: 0 0 0 2px rgba(236, 236, 236, 0.5);
 	}
-	
+
 	{{-- .btn-secondary --}}
 	.skin .btn-secondary {
 		color: #fff;
@@ -384,7 +384,7 @@
 	.skin .btn-secondary.focus {
 		box-shadow: none;
 	}
-	
+
 	{{-- .btn-outline-secondary --}}
 	.skin .btn-outline-secondary {
 		color: #474d52;
@@ -409,7 +409,7 @@
 	.skin .btn-outline-secondary.focus {
 		box-shadow: none;
 	}
-	
+
 	{{-- .btn-listing --}}
 	.skin .btn-listing {
 		font-family: "Roboto", Helvetica, Arial, sans-serif;
@@ -445,7 +445,7 @@
 	.skin .btn-listing.focus {
 		box-shadow: none;
 	}
-	
+
 	{{-- .btn- .disabled --}}
 	.skin .btn-primary:disabled,
 	.skin .btn-primary.disabled,
@@ -469,9 +469,9 @@
 		background-color: #e3e3e3;
 		border-color: #999;
 	}
-	
+
 	{{-- ========= END BTN ========= --}}
-	
+
 	.skin a:not(.btn),
 	.skin .nav-link,
 	.skin .link-color {
@@ -480,17 +480,17 @@
 	.skin .text-primary {
 		color: {{ $primaryBgColor10d }} !important;
 	}
-	
+
 	.skin .nav-link:focus,
 	.skin .nav-link:hover {
 		color: {{ $primaryDarkBgColor }};
 	}
-	
+
 	.skin a:not(.btn):hover,
 	.skin a:not(.btn):focus {
 		color: #fa7722;
 	}
-	
+
 	.skin .f-category i {
 		color: {{ $primaryBgColor }};
 	}
@@ -498,53 +498,53 @@
 	.skin .f-category a:focus i {
 		color: #fa7722;
 	}
-	
+
 	.skin .footer-nav li a:not(.btn):hover,
 	.skin .footer-nav li a:not(.btn):focus {
 		color: #333;
 		opacity: .6;
 	}
-	
+
 	.skin .footer-nav-inline.social-list-color li a:hover,
 	.skin .footer-nav-inline.social-list-color li a:focus {
 		color: #fff;
 		opacity: .6;
 	}
-	
+
 	.skin ::selection {
 		color: {{ $primaryColor }};
 		background: {{ $primaryBgColor }};
 	}
-	
+
 	.skin ::-moz-selection {
 		color: {{ $primaryColor }};
 		background: {{ $primaryBgColor }};
 	}
-	
+
 	.skin .pace .pace-progress {
 		background: {{ $primaryBgColor }} none repeat scroll 0 0;
 	}
-	
+
 	.skin .search-row .search-col:first-child .search-col-inner,
 	.skin .search-row .search-col .search-col-inner,
 	.skin .search-row .search-col .search-btn-border {
 		border-color: {{ $primaryBgColor }};
 	}
-	
+
 	.skin .p-price-tag {
 		background: {{ $primaryBgColor10 }};
 	}
 	.skin .p-price-tag::before {
 		border-top-color: {{ $primaryBgColor }};
 	}
-	
+
 	.skin .bg-primary {
 		background-color: {{ $primaryBgColor }} !important;
 	}
 	.skin .border-color-primary {
 		border-color: {{ $primaryBgColor }} !important;
 	}
-	
+
 	.skin .badge-primary {
 		background-color: {{ $primaryBgColor }};
 		color: {{ $primaryColor }};
@@ -553,7 +553,7 @@
 		background-color: {{ $primaryDarkBgColor }};
 		color: {{ $primaryDarkColor }};
 	}
-	
+
 	.skin .form-control,
 	.skin .select2-container--default .select2-selection--multiple {
 		border-color: #ddd;
@@ -564,12 +564,12 @@
 		box-shadow: 0 1px 0 {{ $primaryBgColor }}, 0 -1px 0 {{ $primaryBgColor }}, -1px 0 0 {{ $primaryBgColor }}, 1px 0 0 {{ $primaryBgColor }};
 		outline: 0 none;
 	}
-	
+
 	.skin .logo,
 	.skin .logo-title {
 		color: {{ $primaryBgColor }};
 	}
-	
+
 	.skin .cat-list h3 a,
 	.skin .cat-list h3 {
 		color: {{ $primaryBgColor }};
@@ -578,21 +578,21 @@
 	.skin .cat-list h3 a:focus {
 		color: #ff8c00;
 	}
-	
+
 	.skin .cat-list ul li a:not(.btn):hover,
 	.skin .cat-list a:not(.btn):hover {
 		text-decoration: underline;
 		color: {{ $primaryBgColor20d }};
 	}
-	
+
 	.skin .list-filter ul li p.maxlist-more a {
 		color: {{ $primaryBgColor10d }};
 	}
-	
+
 	.skin ul.list-link li a:not(.btn):hover {
 		color: {{ $primaryBgColor20d }};
 	}
-	
+
 	.skin .bxslider-pager .bx-thumb-item:focus {
 		-webkit-box-shadow: 0 0 2px {{ $primaryBgColor10d }};
 		-moz-box-shadow: 0 0 2px {{ $primaryBgColor10d }};
@@ -604,39 +604,39 @@
 		border: 1px solid {{ $primaryBgColor10d }};
 		border-bottom: 4px solid {{ $primaryBgColor10d }} !important;
 	}
-	
+
 	.skin .page-bottom-info {
 		background: {{ $primaryBgColor }};
 	}
-	
+
 	.skin button.btn-search {
 		text-shadow: 0 2px 2px {{ $primaryBgColor }};
 		-webkit-text-shadow: 0 2px 2px {{ $primaryBgColor }};
 	}
-	
+
 	.skin .nav-pills > li.active > a:not(.btn),
 	.skin .nav-pills > li.active > a:not(.btn):focus,
 	.skin .nav-pills > li.active > a:not(.btn):hover {
 		background-color: {{ $primaryBgColor10 }};
 		color: #fff;
 	}
-	
+
 	.skin .nav-pills .nav-link.active,
 	.skin .nav-pills .nav-link.active:focus,
 	.skin .nav-pills .nav-link.active:hover {
 		background-color: {{ $primaryBgColor10 }};
 		color: #fff;
 	}
-	
+
 	.skin .number-range-slider .noUi-connect {
 		background: {{ $primaryBgColor }};
 	}
-	
+
 	.skin .cat-list li a:not(.btn),
 	.skin .cat-list a:not(.btn) {
 		color: #4e575d;
 	}
-	
+
 	{{-- SHODOW --}}
 	.skin .ln-shadow {
 		background-color: {{ $primaryBgColor }};
@@ -645,25 +645,25 @@
 		-webkit-text-shadow: 1px 1px {{ $primaryBgColor20d }}, 2px 2px {{ $primaryBgColor20d }}, 3px 3px {{ $primaryBgColor20d }}, 4px 4px {{ $primaryBgColor20d }}, 5px 5px {{ $primaryBgColor20d }}, 6px 6px {{ $primaryBgColor20d }}, 7px 7px {{ $primaryBgColor20d }}, 8px 8px {{ $primaryBgColor20d }}, 9px 9px {{ $primaryBgColor20d }}, 10px 10px {{ $primaryBgColor20d }}, 11px 11px {{ $primaryBgColor20d }}, 12px 12px {{ $primaryBgColor20d }}, 13px 13px {{ $primaryBgColor }}, 14px 14px {{ $primaryBgColor }}, 15px 15px {{ $primaryBgColor }}, 16px 16px {{ $primaryBgColor }}, 17px 17px {{ $primaryBgColor }}, 18px 18px {{ $primaryBgColor }}, 19px 19px {{ $primaryBgColor }}, 20px 20px {{ $primaryBgColor }}, 21px 21px {{ $primaryBgColor }}, 22px 22px {{ $primaryBgColor }}, 23px 23px {{ $primaryBgColor }}, 24px 24px {{ $primaryBgColor }}, 25px 25px {{ $primaryBgColor }}, 26px 26px {{ $primaryBgColor }}, 27px 27px {{ $primaryBgColor }}, 28px 28px {{ $primaryBgColor }};
 		-moz-text-shadow: 1px 1px {{ $primaryBgColor20d }}, 2px 2px {{ $primaryBgColor20d }}, 3px 3px {{ $primaryBgColor20d }}, 4px 4px {{ $primaryBgColor20d }}, 5px 5px {{ $primaryBgColor20d }}, 6px 6px {{ $primaryBgColor20d }}, 7px 7px {{ $primaryBgColor20d }}, 8px 8px {{ $primaryBgColor20d }}, 9px 9px {{ $primaryBgColor20d }}, 10px 10px {{ $primaryBgColor20d }}, 11px 11px {{ $primaryBgColor20d }}, 12px 12px {{ $primaryBgColor20d }}, 13px 13px {{ $primaryBgColor }}, 14px 14px {{ $primaryBgColor }}, 15px 15px {{ $primaryBgColor }}, 16px 16px {{ $primaryBgColor }}, 17px 17px {{ $primaryBgColor }}, 18px 18px {{ $primaryBgColor }}, 19px 19px {{ $primaryBgColor }}, 20px 20px {{ $primaryBgColor }}, 21px 21px {{ $primaryBgColor }}, 22px 22px {{ $primaryBgColor }}, 23px 23px {{ $primaryBgColor }}, 24px 24px {{ $primaryBgColor }}, 25px 25px {{ $primaryBgColor }}, 26px 26px {{ $primaryBgColor }}, 27px 27px {{ $primaryBgColor }}, 28px 28px {{ $primaryBgColor }};
 	}
-	
+
 	.skin .shape-0 {
 		text-shadow: 1px 1px {{ $primaryBgColor }}, 2px 2px {{ $primaryBgColor }}, 3px 3px {{ $primaryBgColor }}, 4px 4px {{ $primaryBgColor }}, 5px 5px {{ $primaryBgColor }}, 6px 6px {{ $primaryBgColor }}, 7px 7px {{ $primaryBgColor }}, 8px 8px {{ $primaryBgColor }}, 9px 9px {{ $primaryBgColor }}, 10px 10px {{ $primaryBgColor }}, 11px 11px {{ $primaryBgColor }}, 12px 12px {{ $primaryBgColor }}, 13px 13px {{ $primaryBgColor }}, 14px 14px {{ $primaryBgColor }}, 15px 15px {{ $primaryBgColor }}, 16px 16px {{ $primaryBgColor }}, 17px 17px {{ $primaryBgColor }}, 18px 18px {{ $primaryBgColor }}, 19px 19px {{ $primaryBgColor }}, 20px 20px {{ $primaryBgColor }}, 21px 21px {{ $primaryBgColor }}, 22px 22px {{ $primaryBgColor }}, 23px 23px {{ $primaryBgColor }}, 24px 24px {{ $primaryBgColor }}, 25px 25px {{ $primaryBgColor }}, 26px 26px {{ $primaryBgColor }}, 27px 27px {{ $primaryBgColor }}, 28px 28px {{ $primaryBgColor }};
 		-moz-text-shadow: 1px 1px {{ $primaryBgColor }}, 2px 2px {{ $primaryBgColor }}, 3px 3px {{ $primaryBgColor }}, 4px 4px {{ $primaryBgColor }}, 5px 5px {{ $primaryBgColor }}, 6px 6px {{ $primaryBgColor }}, 7px 7px {{ $primaryBgColor }}, 8px 8px {{ $primaryBgColor }}, 9px 9px {{ $primaryBgColor }}, 10px 10px {{ $primaryBgColor }}, 11px 11px {{ $primaryBgColor }}, 12px 12px {{ $primaryBgColor }}, 13px 13px {{ $primaryBgColor }}, 14px 14px {{ $primaryBgColor }}, 15px 15px {{ $primaryBgColor }}, 16px 16px {{ $primaryBgColor }}, 17px 17px {{ $primaryBgColor }}, 18px 18px {{ $primaryBgColor }}, 19px 19px {{ $primaryBgColor }}, 20px 20px {{ $primaryBgColor }}, 21px 21px {{ $primaryBgColor }}, 22px 22px {{ $primaryBgColor }}, 23px 23px {{ $primaryBgColor }}, 24px 24px {{ $primaryBgColor }}, 25px 25px {{ $primaryBgColor }}, 26px 26px {{ $primaryBgColor }}, 27px 27px {{ $primaryBgColor }}, 28px 28px {{ $primaryBgColor }};
-		
+
 		-webkit-text-shadow: 1px 1px {{ $primaryBgColor }}, 2px 2px {{ $primaryBgColor }}, 3px 3px {{ $primaryBgColor }}, 4px 4px {{ $primaryBgColor }}, 5px 5px {{ $primaryBgColor }}, 6px 6px {{ $primaryBgColor }}, 7px 7px {{ $primaryBgColor }}, 8px 8px {{ $primaryBgColor }}, 9px 9px {{ $primaryBgColor }}, 10px 10px {{ $primaryBgColor }}, 11px 11px {{ $primaryBgColor }}, 12px 12px {{ $primaryBgColor }}, 13px 13px {{ $primaryBgColor }}, 14px 14px {{ $primaryBgColor }}, 15px 15px {{ $primaryBgColor }}, 16px 16px {{ $primaryBgColor }}, 17px 17px {{ $primaryBgColor }}, 18px 18px {{ $primaryBgColor }}, 19px 19px {{ $primaryBgColor }}, 20px 20px {{ $primaryBgColor }}, 21px 21px {{ $primaryBgColor }}, 22px 22px {{ $primaryBgColor }}, 23px 23px {{ $primaryBgColor }}, 24px 24px {{ $primaryBgColor }}, 25px 25px {{ $primaryBgColor }}, 26px 26px {{ $primaryBgColor }}, 27px 27px {{ $primaryBgColor }}, 28px 28px {{ $primaryBgColor }};
-		
+
 		background-color: {{ $primaryBgColor }};
 	}
-	
+
 	.skin .shape-0-shadow {
 		text-shadow: 1px 1px {{ $primaryBgColor20d }}, 2px 2px {{ $primaryBgColor20d }}, 3px 3px {{ $primaryBgColor20d }}, 4px 4px {{ $primaryBgColor20d }}, 5px 5px {{ $primaryBgColor20d }}, 6px 6px {{ $primaryBgColor20d }}, 7px 7px {{ $primaryBgColor20d }}, 8px 8px {{ $primaryBgColor20d }}, 9px 9px {{ $primaryBgColor20d }}, 10px 10px {{ $primaryBgColor20d }}, 11px 11px {{ $primaryBgColor20d }}, 12px 12px {{ $primaryBgColor20d }}, 13px 13px {{ $primaryBgColor }}, 14px 14px {{ $primaryBgColor }}, 15px 15px {{ $primaryBgColor }}, 16px 16px {{ $primaryBgColor }}, 17px 17px {{ $primaryBgColor }}, 18px 18px {{ $primaryBgColor }}, 19px 19px {{ $primaryBgColor }}, 20px 20px {{ $primaryBgColor }}, 21px 21px {{ $primaryBgColor }}, 22px 22px {{ $primaryBgColor }}, 23px 23px {{ $primaryBgColor }}, 24px 24px {{ $primaryBgColor }}, 25px 25px {{ $primaryBgColor }}, 26px 26px {{ $primaryBgColor }}, 27px 27px {{ $primaryBgColor }}, 28px 28px {{ $primaryBgColor }};
 		-moz-text-shadow: 1px 1px {{ $primaryBgColor20d }}, 2px 2px {{ $primaryBgColor20d }}, 3px 3px {{ $primaryBgColor20d }}, 4px 4px {{ $primaryBgColor20d }}, 5px 5px {{ $primaryBgColor20d }}, 6px 6px {{ $primaryBgColor20d }}, 7px 7px {{ $primaryBgColor20d }}, 8px 8px {{ $primaryBgColor20d }}, 9px 9px {{ $primaryBgColor20d }}, 10px 10px {{ $primaryBgColor20d }}, 11px 11px {{ $primaryBgColor20d }}, 12px 12px {{ $primaryBgColor20d }}, 13px 13px {{ $primaryBgColor }}, 14px 14px {{ $primaryBgColor }}, 15px 15px {{ $primaryBgColor }}, 16px 16px {{ $primaryBgColor }}, 17px 17px {{ $primaryBgColor }}, 18px 18px {{ $primaryBgColor }}, 19px 19px {{ $primaryBgColor }}, 20px 20px {{ $primaryBgColor }}, 21px 21px {{ $primaryBgColor }}, 22px 22px {{ $primaryBgColor }}, 23px 23px {{ $primaryBgColor }}, 24px 24px {{ $primaryBgColor }}, 25px 25px {{ $primaryBgColor }}, 26px 26px {{ $primaryBgColor }}, 27px 27px {{ $primaryBgColor }}, 28px 28px {{ $primaryBgColor }};
-		
+
 		-webkit-text-shadow: 1px 1px {{ $primaryBgColor20d }}, 2px 2px {{ $primaryBgColor20d }}, 3px 3px {{ $primaryBgColor20d }}, 4px 4px {{ $primaryBgColor20d }}, 5px 5px {{ $primaryBgColor20d }}, 6px 6px {{ $primaryBgColor20d }}, 7px 7px {{ $primaryBgColor20d }}, 8px 8px {{ $primaryBgColor20d }}, 9px 9px {{ $primaryBgColor20d }}, 10px 10px {{ $primaryBgColor20d }}, 11px 11px {{ $primaryBgColor20d }}, 12px 12px {{ $primaryBgColor20d }}, 13px 13px {{ $primaryBgColor }}, 14px 14px {{ $primaryBgColor }}, 15px 15px {{ $primaryBgColor }}, 16px 16px {{ $primaryBgColor }}, 17px 17px {{ $primaryBgColor }}, 18px 18px {{ $primaryBgColor }}, 19px 19px {{ $primaryBgColor }}, 20px 20px {{ $primaryBgColor }}, 21px 21px {{ $primaryBgColor }}, 22px 22px {{ $primaryBgColor }}, 23px 23px {{ $primaryBgColor }}, 24px 24px {{ $primaryBgColor }}, 25px 25px {{ $primaryBgColor }}, 26px 26px {{ $primaryBgColor }}, 27px 27px {{ $primaryBgColor }}, 28px 28px {{ $primaryBgColor }};
-		
+
 		background-color: {{ $primaryBgColor }};
 	}
-	
+
 	{{-- Bootstrap Pagination Color --}}
 	.skin .pagination > li > a,
 	.skin .pagination > li > span {
@@ -686,7 +686,7 @@
 		border-color: {{ $primaryBgColor }};
 		color: #fff;
 	}
-	
+
 	{{-- Cookie Consent --}}
 	.skin .cookie-consent__agree {
 		background-color: {{ $primaryBgColor }};
@@ -695,20 +695,20 @@
 	.skin .cookie-consent__agree:hover {
 		background-color: {{ $primaryBgColor20d }};
 	}
-	
+
 	.skin .cornerRibbons a {
 		color: #fff;
 	}
-	
+
 	.skin .footer ul li a {
 		color: #999;
 	}
-	
+
 	.skin .dropdown-menu > li a:focus,
 	.skin .dropdown-menu > li a:hover {
 		color: #333;
 	}
-	
+
 	.skin .add-title a {
 		color: #333;
 	}
@@ -719,7 +719,7 @@
 	.skin .tags a:hover {
 		border-color: {{ $primaryBgColor10d }};
 	}
-	
+
 	{{-- Customizations --}}
 	@if (in_array($selectedSkin, ['yellow', 'sunFlower']))
 	.skin .breadcrumb-item a,
@@ -731,7 +731,7 @@
 		font-weight: bold;
 	}
 	@endif
-	
+
 	{{-- Header --}}
 	@if (in_array($selectedSkin, ['yellow', 'sunFlower']))
 	.skin .navbar.navbar-site {
@@ -742,28 +742,29 @@
 		color: {{ $primaryColor }} !important;
 	}
 	@endif
-	
+
 	.skin .custom-checkbox .custom-control-input:checked ~ .custom-control-label::before {
 		background-color: {{ $primaryBgColor10 }};
 	}
-	
+
 	.skin .custom-checkbox .custom-control-input:indeterminate ~ .custom-control-label::before {
 		background-color: {{ $primaryBgColor10 }};
 	}
-	
+
 	.skin .custom-radio .custom-control-input:checked ~ .custom-control-label::before {
 		background-color: {{ $primaryBgColor10 }};
 	}
-	
+
 	.skin .custom-radio .custom-control-input:disabled:checked ~ .custom-control-label::before {
 		background-color: {{ $primaryBgColor10d }};
 	}
-	
+
 	{{-- Swal Alert --}}
 	.skin .swal2-styled.swal2-confirm {
-		background-color: {{ $primaryBgColor }} !important;
+        background-color: var(--accent) !important;
 		color: #fff !important;
 	}
+
 	.skin .swal2-actions:not(.swal2-loading) .swal2-styled:active {
 		background-image: linear-gradient(rgba(0,0,0,.2),rgba(0,0,0,.2)) !important;
 	}
