@@ -234,7 +234,7 @@ if ($multiCountriesIsEnabled) {
 					</li>
 					<li class="header__item hide__mobile">
 						<a href="/account/saved-searches" class=" link">
-                            <i class="fa fa-search" aria-hidden="true"></i>
+                            <i class="fa fa-search" style="font-size: 20px" aria-hidden="true"></i>
 							<span class="header__content-adaptive">Уведомления</span>
 						</a>
 					</li>

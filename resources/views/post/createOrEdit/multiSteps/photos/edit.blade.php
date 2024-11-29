@@ -138,6 +138,7 @@ $nextStepUrl = qsUrl($nextStepUrl, request()->only(['package']), null, false);
 				@endif
                 browseLabel: '{{ t('Select') }}',
                 dropZoneTitle: '{{ t('drag_and_drop') }}',
+                dropZoneClickTitle: '',
                 overwriteInitial: false,
                 showCaption: false,
                 showPreview: true,

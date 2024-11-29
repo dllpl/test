@@ -52,7 +52,10 @@
                         @elseif(\App\Helpers\SuperUser::status() === 2)
                             <h2 class="lk__title title title--medium">{{t('accred_close')}}</h2>
                         @elseif(\App\Helpers\SuperUser::status() === 1)
-                            <h2 class="lk__title title title--medium"><img src="/images/logomost.png" width="48px">{{t('accred_user')}}</h2>
+                            <h2 class="lk__title title title--medium">
+                                <img src="/images/logomost.png" width="48px" class="mr-1">
+                                <span>{{t('accred_user')}}</span>
+                            </h2>
                         @endif
                         <h3 class="mb-3 title">{{t('accred_user_yes')}}</h3>
                         <p class="mb-3">{{t('how_to_get_accred')}}</p>

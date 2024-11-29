@@ -116,6 +116,7 @@
 				@endif
                 browseLabel: '{{ t('Select') }}',
                 dropZoneTitle: '{{ t('drag_and_drop') }}',
+                dropZoneClickTitle: '',
 				overwriteInitial: false,
 				showCaption: false,
 				showPreview: true,
