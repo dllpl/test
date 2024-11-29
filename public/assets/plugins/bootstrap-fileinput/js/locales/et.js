@@ -42,7 +42,7 @@
         msgFilePreviewError: 'An error occurred while reading the file "{name}".',
         msgInvalidFileName: 'Invalid or unsupported characters in file name "{name}".',
         msgInvalidFileType: '"{name}" on vale tüüpi. Ainult "{types}" on lubatud.',
-        msgInvalidFileExtension: 'Invalid extension for file "{name}". Only "{extensions}" files are supported.',
+        msgInvalidFileExtension: 'Недопустимое расширение для файла "{name}". Поддерживаются только файлы "{extensions}".',
         msgFileTypes: {
             'image': 'image',
             'html': 'HTML',
