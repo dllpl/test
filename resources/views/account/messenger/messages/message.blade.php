@@ -29,13 +29,13 @@
 				{{ data_get($message, 'created_at_formatted') }}
 				@php
 					$recipient = data_get($message, 'p_recipient');
-					
+
 					$threadUpdatedAt = new \Illuminate\Support\Carbon(data_get($thread, 'updated_at'));
 					$threadUpdatedAt->timezone(\App\Helpers\Date::getAppTimeZone());
-					
+
 					$recipientLastRead = new \Illuminate\Support\Carbon(data_get($recipient, 'last_read'));
 					$recipientLastRead->timezone(\App\Helpers\Date::getAppTimeZone());
-					
+
 					$threadIsUnreadByThisRecipient = (
 						!empty($recipient)
 						&& (
@@ -54,7 +54,7 @@
 	<div class="chat-item object-user">
 		<div class="object-user-img">
 			<a href="{{ \App\Helpers\UrlGen::user(data_get($message, 'user')) }}">
-				<img src="{{ url(data_get($message, 'user.photo_url')) }}" alt="{{ data_get($message, 'user.name') }}">
+				<img src="{{ url(data_get($message, 'user.photo_url')) }}" alt="{{ data_get($message, 'user.name') }}" style="border-radius: 100%; aspect-ratio: 1/1">
 			</a>
 		</div>
 		<div class="chat-item-content">

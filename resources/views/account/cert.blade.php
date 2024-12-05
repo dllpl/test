@@ -85,12 +85,12 @@
 @section('after_scripts')
     <script>
         $('#super_user_send_request').on('click', function () {
-            jsAlert({{t('make_accred')}}, 'warning');
+            jsAlert("{{t('make_accred')}}", 'warning');
             $.ajax({
                 method: 'POST',
                 url: $(this).data('url'),
                 success: function (data) {
-                    jsAlert(`${data.msg}. {{t('manager_contact_you')}}`, 'success')
+                    jsAlert("{{t('manager_contact_you')}}", 'success')
                     $('#super_user_send_request').attr('disabled', true)
                     $('#super_user_send_request').html('<i class="fa fa-clock"></i> {{t('accred_on_proccess')}}')
                 }

@@ -41,7 +41,7 @@ return [
 	'msgUploadAborted' => 'The file upload was aborted',
 	'msgUploadThreshold' => 'Processing...',
 	'msgUploadBegin' => 'Initializing...',
-	'msgUploadEnd' => 'Done',
+	'msgUploadEnd' => 'Готово',
 	'msgUploadEmpty' => 'No valid data available for upload.',
 	'msgUploadError' => 'Error',
 	'msgValidationError' => 'Validation Error',

@@ -8,9 +8,9 @@
 			<label class="control-label" for="entries"></label>
 		</div>
 	</div>
-	
+
 	<a href="{{ url('account/messages/' . data_get($thread, 'id')) }}" class="list-box-user">
-		<img src="{{ url(data_get($thread, 'p_creator.photo_url', '')) }}" alt="{{ data_get($thread, 'p_creator.name') }}">
+		<img src="{{ url(data_get($thread, 'p_creator.photo_url', '')) }}" alt="{{ data_get($thread, 'p_creator.name') }}" style="border-radius: 100%; aspect-ratio: 1/1">
 		<span class="name">
 			@php
 				$userIsOnline = isUserOnline(data_get($thread, 'p_creator')) ? 'online' : 'offline';
@@ -25,7 +25,7 @@
 		</div>
 		<div class="time text-muted">{{ data_get($thread, 'created_at_formatted') }}</div>
 	</a>
-	
+
 	<div class="list-box-action">
 		@if (data_get($thread, 'p_is_important'))
 			<a href="{{ url('account/messages/' . data_get($thread, 'id') . '/actions?type=markAsNotImportant') }}"

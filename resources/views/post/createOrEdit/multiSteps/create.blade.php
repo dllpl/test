@@ -408,16 +408,16 @@
 												@endif
 											</label>
 											<div class="col-md-9 col-lg-8 col-xl-6">
-												<div class="input-group">
+												<div class="input-group d-flex flex-nowrap">
 													<input id="phone" name="phone"
 														   class="form-control input-md{{ $phoneError }}"
 														   type="tel"
 														   value="{{ $phoneValueOld }}"
 													>
-													<span class="input-group-text iti-group-text">
+													<span class="input-group-text iti-group-text w-auto">
 														<input id="phoneHidden" name="phone_hidden" type="checkbox"
 															   value="1" @checked(old('phone_hidden') == '1')>&nbsp;
-														<small>{{ t('Hide') }}</small>
+														<small>{{ t('hide_on_the_listing') }}</small>
 													</span>
 												</div>
 												<input name="phone_country" type="hidden" value="{{ old('phone_country', $phoneCountryValue) }}">
