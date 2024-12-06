@@ -5,10 +5,14 @@
 	    {{-- Вывод баланса и ссылки на пополнение --}}
         @auth
             <li class="menu-nav__item">
-                <a href="#" class="menu-nav__link link link--flex">
-                    <h4 class="title title--small">Баланс - {{ auth()->user()->balance }} руб.</h4>
-                </a>
-                
+                <div class="d-flex justify-content-between">
+                    <a href="#" class="menu-nav__link link link--flex">
+                        <h4 class="title title--small">Баланс - {{ auth()->user()->balance }} руб.</h4>
+                    </a>
+                    <button class="btn-reset text-decoration-underline font-weight-bold d-block d-md-none" onclick="document.querySelector('.menu-nav').classList.remove('menu-nav-open-js')">{{t('Close')}}</button>
+                </div>
+
+
                 <!-- Ссылка для открытия попапа -->
                 <a href="#balanceFormPopup " data-fancybox class="topup_balance_btn">
                     Пополнить баланс

@@ -6099,7 +6099,7 @@
         msgDeleteError: 'Delete Error',
         msgProgressError: 'Error',
         msgValidationError: 'Validation Error',
-        msgLoading: 'Loading file {index} of {files} &hellip;',
+        msgLoading: 'Загружено {index} из {files} &hellip;',
         msgProgress: 'Loading file {index} of {files} - {name} - {percent}% completed.',
         msgSelected: '{n} {files} selected',
         msgFoldersNotAllowed: 'Drag & drop files only! {n} folder(s) dropped were skipped.',
@@ -6118,7 +6118,7 @@
         ajaxOperations: {
             deleteThumb: 'file delete',
             uploadThumb: 'file upload',
-            uploadBatch: 'batch file upload',
+            uploadBatch: 'Множество файлов запрещено к загрузке',
             uploadExtra: 'form data upload'
         },
         dropZoneTitle: 'Drag & drop files here &hellip;',
