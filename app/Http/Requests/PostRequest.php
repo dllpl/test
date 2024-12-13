@@ -172,9 +172,7 @@ class PostRequest extends Request
 		$rules = [];
 
 		$rules['category_id'] = ['required', 'not_in:0'];
-		if (config('settings.single.show_listing_types')) {
-			$rules['post_type_id'] = ['required', 'not_in:0'];
-		}
+
 		$rules['title'] = [
 			'required',
 			new BetweenRule(

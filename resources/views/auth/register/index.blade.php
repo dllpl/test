@@ -168,7 +168,7 @@ $face_type_list = \DB::table('face_type_list')
 												@endphp
 
 												{{-- username --}}
-												@php
+											{{--	@php
 													$usernameIsEnabled = !config('larapen.core.disable.username');
 												@endphp
 												@if ($usernameIsEnabled)
@@ -183,7 +183,7 @@ $face_type_list = \DB::table('face_type_list')
 															   class="form-control input input--default {{ $usernameError }}"
 														>
 													</li>
-												@endif
+												@endif--}}
 
 												{{-- email --}}
 												@php

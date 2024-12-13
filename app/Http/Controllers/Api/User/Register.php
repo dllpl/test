@@ -20,6 +20,7 @@ use App\Http\Requests\UserRequest;
 use App\Http\Resources\UserResource;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 
 trait Register
 {
@@ -40,6 +41,11 @@ trait Register
 		// New User
 		$user = new User();
 		$input = $request->only($user->getFillable());
+
+        // Generate random username
+        $username = $this->generateRandomUsername();
+        $user->username = $username;
+
 		foreach ($input as $key => $value) {
 			if ($request->has($key)) {
 				$user->{$key} = $value;
@@ -133,4 +139,20 @@ trait Register
 		
 		return $this->apiResponse($data);
 	}
+
+    /**
+     * Generate a random username.
+     *
+     * @return string
+     */
+    private function generateRandomUsername(): string
+    {
+        $username = Str::random(10);
+
+        while (User::where('username', $username)->exists()) {
+            $username = Str::random(10);
+        }
+
+        return $username;
+    }
 }

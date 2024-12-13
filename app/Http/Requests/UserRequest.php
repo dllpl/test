@@ -152,7 +152,7 @@ class UserRequest extends Request
 
 		// username
 		$usernameIsEnabled = !config('larapen.core.disable.username');
-		if ($usernameIsEnabled) {
+		if ($usernameIsEnabled && $this->filled('username')) {
 			if ($this->filled('username')) {
 				$rules['username'] = [
 					'between:3,50',

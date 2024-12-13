@@ -34,7 +34,7 @@ trait ListTrait
 	public function listUpdating($setting, $original)
 	{
 		$minPrice = $setting->value['min_price'] ?? 0;
-		$maxPrice = $setting->value['max_price'] ?? 10000;
+		$maxPrice = $setting->value['max_price'] ?? 100000000;
 		if ($minPrice > $maxPrice) {
 			$message = trans('admin.min_max_error_message', ['attribute' => trans('admin.price_filter')]);
 			

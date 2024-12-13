@@ -42,6 +42,15 @@ $(document).ready(function () {
 
 		return false;
 	});
+	$(document).on('input', '#modalQuery', function (e) {
+		e.preventDefault();
+		let query = $(this).val();
+		let params = getLocationsBrowsingParameters(countryCode, this);
+		params.query = query;
+		browseLocations(params);
+
+		return false;
+	});
 	$(document).on('click', '#browseLocations .is-admin, #browseLocations .page-link, #browseLocations .page-link__custom', function (e) {
 		e.preventDefault();
 

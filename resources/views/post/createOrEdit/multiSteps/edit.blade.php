@@ -71,32 +71,8 @@
 											<input type="hidden" name="category_type" id="categoryType" value="{{ old('category_type', data_get($post, 'category.type')) }}">
 										</div>
 
-										@if (config('settings.single.show_listing_types'))
-											{{-- post_type_id --}}
-											@php
-												$postTypeIdError = (isset($errors) && $errors->has('post_type_id')) ? ' is-invalid' : '';
-												$postTypeId = old('post_type_id', data_get($post, 'post_type_id'));
-											@endphp
-											<div id="postTypeBloc" class="row mb-3 required">
-												<label class="col-md-3 col-form-label{{ $postTypeIdError }}">{{ t('type') }} <sup>*</sup></label>
-												<div class="col-md-8">
-													@foreach ($postTypes as $postType)
-														<div class="form-check form-check-inline">
-															<input name="post_type_id"
-																   id="postTypeId-{{ data_get($postType, 'id') }}"
-																   value="{{ data_get($postType, 'id') }}"
-																   type="radio"
-																   class="form-check-input{{ $postTypeIdError }}" @checked($postTypeId == data_get($postType, 'id'))
-															>
-															<label class="form-check-label mb-0" for="postTypeId-{{ data_get($postType, 'id') }}">
-																{{ data_get($postType, 'name') }}
-															</label>
-														</div>
-													@endforeach
-													<div class="form-text text-muted">{{ t('post_type_hint') }}</div>
-												</div>
-											</div>
-										@endif
+										{{-- post_type_id --}}
+										<input type="hidden" name="post_type_id" value="{{\Illuminate\Support\Facades\Auth::user()->face_type}}">
 
 										{{-- title --}}
 										<?php $titleError = (isset($errors) && $errors->has('title')) ? ' is-invalid' : ''; ?>
