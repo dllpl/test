@@ -74,11 +74,11 @@ $clearFilterBtn = \App\Helpers\UrlGen::getPriceFilterClearLink($cat ?? null, $ci
 		<script src="{{ url('assets/plugins/noUiSlider/15.5.0/nouislider.js') }}"></script>
 		@php
 			$minPrice = (int)config('settings.list.min_price', 0);
-			$maxPrice = (int)config('settings.list.max_price', 100000000);
+            $maxPrice = isset($maxPrice) ? $maxPrice : 100000000;
 			$priceSliderStep = (int)config('settings.list.price_slider_step', 50);
 			
 			$startPrice = (int)request()->get('minPrice', $minPrice);
-			$endPrice = (int)request()->get('maxPrice', $maxPrice);
+			$endPrice = $maxPrice;
 		@endphp
 		<script>
 			$(document).ready(function ()

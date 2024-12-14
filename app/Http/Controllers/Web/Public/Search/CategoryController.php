@@ -16,6 +16,8 @@
 
 namespace App\Http\Controllers\Web\Public\Search;
 
+use App\Models\Category;
+use App\Models\Post;
 use Illuminate\Support\Facades\Route;
 use Larapen\LaravelMetaTags\Facades\MetaTag;
 
@@ -53,12 +55,15 @@ class CategoryController extends BaseController
 			'X-WEB-CONTROLLER' => class_basename(get_class($this)),
 		];
 		$data = makeApiRequest('get', $endpoint, $queryParams, $headers);
+
+        $cat = Category::where('slug', $catSlug)->first();
+        $maxPrice = $this->getMaxPriceFromCategoryAndDescendants($cat->id);
 		
 		$apiMessage = $this->handleHttpError($data);
 		$apiResult = data_get($data, 'result');
 		$apiExtra = data_get($data, 'extra');
 		$preSearch = data_get($apiExtra, 'preSearch');
-		
+
 		// Sidebar
 		$this->bindSidebarVariables((array)data_get($apiExtra, 'sidebar'));
 		
@@ -111,8 +116,23 @@ class CategoryController extends BaseController
 				'apiExtra',
 				'noIndexCategoriesPermalinkPages',
 				'noIndexFiltersOnEntriesPages',
-				'noIndexNoResultPages'
+				'noIndexNoResultPages',
+                'maxPrice'
 			)
 		);
 	}
+
+    public function getMaxPriceFromCategoryAndDescendants($categoryId)
+    {
+        $category = Category::find($categoryId);
+
+        $maxPrice = Post::whereIn('category_id', function ($query) use ($category) {
+            $query->select('id')
+                ->from('categories')
+                ->where('lft', '>=', $category->lft)
+                ->where('rgt', '<=', $category->rgt);
+        })->max('price');
+
+        return (int)$maxPrice > 0 ? (int)$maxPrice : 1000000000;
+    }
 }
