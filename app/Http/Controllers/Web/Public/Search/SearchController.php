@@ -16,6 +16,7 @@
 
 namespace App\Http\Controllers\Web\Public\Search;
 
+use App\Models\Post;
 use Illuminate\Support\Facades\Route;
 use Larapen\LaravelMetaTags\Facades\MetaTag;
 
@@ -68,6 +69,8 @@ class SearchController extends BaseController
 		// Open Graph
 		$this->og->title($title)->description($description)->type('website');
 		view()->share('og', $this->og);
+
+        $maxPrice = $this->getMaxPriceFromCategoryAndDescendants(request()->get('c'));
 		
 		// SEO: noindex
 		// Categories' Listings Pages
@@ -116,8 +119,18 @@ class SearchController extends BaseController
 				'noIndexCategoriesQueryStringPages',
 				'noIndexCitiesQueryStringPages',
 				'noIndexFiltersOnEntriesPages',
-				'noIndexNoResultPages'
+				'noIndexNoResultPages',
+                'maxPrice'
 			)
 		);
 	}
+
+    public function getMaxPriceFromCategoryAndDescendants($city)
+    {
+
+        $maxPrice = Post::where('city_id', $city)
+          ->whereNull('archived_at')->max('price');
+
+        return (int)$maxPrice > 0 ? (int)$maxPrice : 1000000000;
+    }
 }

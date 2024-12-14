@@ -124,14 +124,14 @@ class CategoryController extends BaseController
 
     public function getMaxPriceFromCategoryAndDescendants($categoryId)
     {
-        $category = Category::find($categoryId);
+        $category = Category::where('id',$categoryId)->where('active', 1)->first();
 
         $maxPrice = Post::whereIn('category_id', function ($query) use ($category) {
             $query->select('id')
                 ->from('categories')
                 ->where('lft', '>=', $category->lft)
                 ->where('rgt', '<=', $category->rgt);
-        })->max('price');
+        })->whereNull('archived_at')->max('price');
 
         return (int)$maxPrice > 0 ? (int)$maxPrice : 1000000000;
     }
