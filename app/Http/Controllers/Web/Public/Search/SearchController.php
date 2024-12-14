@@ -70,7 +70,7 @@ class SearchController extends BaseController
 		$this->og->title($title)->description($description)->type('website');
 		view()->share('og', $this->og);
 
-        $maxPrice = $this->getMaxPriceFromCategoryAndDescendants(request()->get('c'));
+        $maxPrice = $this->getMaxPriceFromCategoryAndDescendants(request()->get('l'));
 		
 		// SEO: noindex
 		// Categories' Listings Pages
