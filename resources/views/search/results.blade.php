@@ -587,6 +587,10 @@
                 var goToUrl = $(this).val();
                 redirect(goToUrl);
             });
+            $('.catalog__products .list li').click(function () {
+                let redirectUrl = $(this).data('value');
+                redirect(redirectUrl);
+            });
         });
     </script>
 @endsection
