@@ -76,7 +76,7 @@
 		"watson/sitemap": "^5.1"
 	},
 	"require-dev": {
-		"barryvdh/laravel-debugbar": "^3.7",
+		"barryvdh/laravel-debugbar": "^3.14",
 		"knuckleswtf/scribe": "^4.18",
 		"laravel/pint": "^1.0",
 		"laravel/sail": "^1.18",

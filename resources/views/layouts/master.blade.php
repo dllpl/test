@@ -47,7 +47,7 @@
 		@if (config('services.facebook.client_id'))
 			<meta property="fb:app_id" content="{{ config('services.facebook.client_id') }}" />
 		@endif
-		{!! $og->renderTags() !!}
+		
 		{!! MetaTag::twitterCard() !!}
 	@endif
 	@include('feed::links')
@@ -151,6 +151,8 @@
 	@show
 </head>
 <body class="skin">
+
+
 <div id="wrapper">
 
 	<?php

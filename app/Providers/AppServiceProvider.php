@@ -29,6 +29,9 @@ use Illuminate\Support\Facades\URL;
 use Illuminate\Support\ServiceProvider;
 use Laravel\Sanctum\Sanctum;
 
+use Illuminate\Support\Facades\View;
+use App\Models\Account;
+
 class AppServiceProvider extends ServiceProvider
 {
 	use TelescopeTrait, AclSystemTrait, ConfigTrait, SymlinkTrait;
@@ -89,6 +92,12 @@ class AppServiceProvider extends ServiceProvider
 		
 		// Set locale for PHP
 		SystemLocale::setLocale(config('appLang.locale', 'en_US'));
+
+		// Передаем список счетов в представление header для всех страниц
+		View::composer('layouts.inc.header', function ($view) {
+			$accounts = Account::where('user_id', auth()->id())->get();
+			$view->with('accounts', $accounts);
+		});
 	}
 	
 	/**

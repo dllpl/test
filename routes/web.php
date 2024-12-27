@@ -18,6 +18,14 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\Api\Docs\DocsController;
 use App\Http\Controllers\TinkoffController;
+use App\Http\Controllers\DealController;
+use App\Http\Controllers\DeviceController;
+use App\Http\Controllers\TransactionController;
+use App\Http\Controllers\BillController;
+use App\Http\Controllers\WithdrawController;
+
+
+
 
 /*
 |--------------------------------------------------------------------------
@@ -32,6 +40,38 @@ use App\Http\Controllers\TinkoffController;
 
 // install
 Route::namespace('Install')->group(__DIR__ . '/web/install.php');
+
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/my-deals', [DealController::class, 'myDeals'])->name('deals.my');
+	Route::get('/deals/{id}', [DealController::class, 'view'])->name('deals.view');
+
+	Route::get('deal/create/{id}', [DealController::class, 'create'])->name('deal.create');
+	Route::post('deal/store', [DealController::class, 'store'])->name('deal.store');
+
+	Route::post('/deals/{id}/accept', [DealController::class, 'accept'])->name('deal.accept');
+	Route::post('/deals/{id}/reject', [DealController::class, 'reject'])->name('deal.reject');
+	Route::post('/deals/{id}/complete', [DealController::class, 'complete'])->name('deal.complete');
+	Route::post('/deals/{id}/request-cancel', [DealController::class, 'requestCancel'])->name('deal.request_cancel');
+
+	// История операций
+	Route::get('/bill/history/income-expenses', [TransactionController::class, 'incomeExpenses'])->name('transactions.income_expenses'); // Приходы и расходы
+	Route::get('/bill/history/withdraw-requests', [TransactionController::class, 'withdrawRequests'])->name('transactions.withdraw_requests'); // Запросы на вывод
+
+	// Мои счета
+	Route::get('/bill/accounts', [BillController::class, 'list'])->name('bill.list'); // Список счетов
+	Route::get('/bill/accounts/create', [BillController::class, 'create'])->name('bill.add'); // Форма добавления счета
+	Route::post('/bill/accounts', [BillController::class, 'store'])->name('bill.store'); // Добавление счета
+	Route::delete('/bill/accounts/{id}', [BillController::class, 'destroy'])->name('bill.destroy'); // Удаление счета
+
+	Route::post('/bill/withdraw', [WithdrawController::class, 'submitWithdraw'])->name('bill.withdraw.submit');
+	Route::get('/bill/history', [TransactionController::class, 'transactionHistory'])->name('transactions.history');
+
+});
+
+Route::middleware('auth')->group(function () {
+    Route::get('/devices', [DeviceController::class, 'index'])->name('devices.index');
+});
 
 Route::middleware(['installed'])
 	->group(function () {

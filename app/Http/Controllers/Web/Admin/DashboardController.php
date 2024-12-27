@@ -20,6 +20,7 @@ use App\Http\Controllers\Web\Admin\Traits\Charts\ChartjsTrait;
 use App\Http\Controllers\Web\Admin\Traits\Charts\MorrisTrait;
 use App\Models\Post;
 use App\Models\Country;
+use Illuminate\Support\Facades\DB;
 use App\Models\User;
 use App\Http\Controllers\Web\Admin\Panel\PanelController;
 
@@ -111,7 +112,24 @@ class DashboardController extends PanelController
 			$this->data['usersPerCountry'] = $this->getUsersPerCountryForChartjs($countriesLimit);
 		}
 		
-		// -----
+		// ----- Add balances and withdrawals stats
+		// Получаем общий баланс всех пользователей
+		$this->data['totalBalance'] = DB::table('users')->sum('balance');
+
+		// Получаем сумму ожидающих выплат
+		$this->data['pendingWithdrawals'] = DB::table('withdraw_requests')
+			->where('status', 'pending')
+			->sum('amount');
+
+		// Получаем сумму выплаченных средств
+		$this->data['approvedWithdrawals'] = DB::table('withdraw_requests')
+			->where('status', 'approved')
+			->sum('amount');
+
+		// ----- Получаем сумму всех комиссий в рублях
+    	$this->data['totalCommissions'] = DB::table('deals')
+        	->where('status', 'завершена') // фильтруем по завершенным сделкам
+        	->sum(DB::raw('(deal_amount * commission) / 100')); // вычисляем комиссию по проценту
 		
 		// Page Title
 		$this->data['title'] = trans('admin.dashboard');

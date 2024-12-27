@@ -716,7 +716,43 @@ class User extends BaseUser
 			},
 		);
 	}
+
+	public function hasRdbox()
+	{
+		return $this->userhasRDdevices()->exists();
+	}
+
+	public function getRdboxStatusHtml()
+	{
+		return $this->hasRdbox()
+			? '<span class="badge badge-success" style="color:green;">Да</span>'
+			: '<span class="badge badge-danger" style="color:red;">Нет</span>';
+	}	
+
+	public function userhasRDdevices()
+	{
+		return $this->hasMany(Device::class, 'user_id');
+	}
+
 	
+	public function devices()
+	{
+		return $this->hasMany(Device::class);
+	}
+
+	public function withdrawRequests()
+	{
+		return $this->hasMany(\App\Models\WithdrawRequest::class);
+	}
+
+	// В модели User
+	public function accounts()
+	{
+		return $this->hasMany(\App\Models\Account::class);
+	}
+
+
+
 	/*
 	|--------------------------------------------------------------------------
 	| OTHER PRIVATE METHODS

@@ -2,22 +2,92 @@
 
 <div class="lk__left">
 	<div class="menu-nav">
-	    {{-- Вывод баланса и ссылки на пополнение --}}
-        @auth
-            <li class="menu-nav__item">
-                <div class="d-flex justify-content-between">
-                    <a href="#" class="menu-nav__link link link--flex">
-                        <h4 class="title title--small">Баланс - {{ auth()->user()->balance }} руб.</h4>
-                    </a>
-                    <button class="btn-reset text-decoration-underline font-weight-bold d-block d-md-none" onclick="document.querySelector('.menu-nav').classList.remove('menu-nav-open-js')">{{t('Close')}}</button>
-                </div>
-
-
-                <!-- Ссылка для открытия попапа -->
-                <a href="#balanceFormPopup " data-fancybox class="topup_balance_btn">
-                    Пополнить баланс
+	     @auth
+		 <li class="menu-nav__item">
+            <div class="d-flex justify-content-between mb-4">
+                <a href="#" class="menu-nav__link link link--flex">
+                    <h4 class="title title--small">Баланс - {{ auth()->user()->balance }} руб.</h4>
                 </a>
-            </li>
+                <button class="btn-reset text-decoration-underline font-weight-bold d-block d-md-none" onclick="document.querySelector('.menu-nav').classList.remove('menu-nav-open-js')">{{ t('Close') }}</button>
+            </div>
+
+            <!-- Финансы -->
+            <a href="#" class="menu-nav__link link link--flex">
+                <h4 class="title title--small">Финансы</h4>
+            </a>
+            <ul class="menu-nav__sublist list-reset">
+                <!-- Баланс и вывод -->
+                <li class="menu-nav__subitem">
+                    <h5 class="title title--small">
+                        Баланс и вывод
+					</h5>
+                    <ul class="menu-nav__sublist list-reset">
+                        <li class="menu-nav__subitem">
+                            <a href="#balanceFormPopup " data-fancybox class="menu-nav__link link">
+                                <i class="fas fa-credit-card" style="color: var(--accent)"></i>&nbsp; Пополнить баланс
+                            </a>
+                        </li>
+                        <li class="menu-nav__subitem">
+                            <a href="#withdrawRequestPopup" data-fancybox class="menu-nav__link link">
+                                <i class="fas fa-money-check-alt" style="color: var(--accent)"></i>&nbsp; Запрос вывода
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <!-- История операций -->
+                <li class="menu-nav__subitem">
+					<h5 class="title title--small">
+                        История операций
+					</h5>
+                    <ul class="menu-nav__sublist list-reset">
+                        <li class="menu-nav__subitem">
+                            <a href="{{ route('transactions.history') }}" class="menu-nav__link link">
+                                <i class="fas fa-chart-line" style="color: var(--accent)"></i>&nbsp; Приходы и расходы
+                            </a>
+                        </li>
+                        <li class="menu-nav__subitem">
+                            <a href="{{ route('transactions.withdraw_requests') }}" class="menu-nav__link link">
+                                <i class="fas fa-list-alt" style="color: var(--accent)"></i>&nbsp; Запросы вывода
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <!-- Мои счета -->
+                <li class="menu-nav__subitem">
+					<h5 class="title title--small">
+                        Мои счета
+					</h5>
+                    <ul class="menu-nav__sublist list-reset">
+                        <li class="menu-nav__subitem">
+                            <a href="{{ route('bill.list') }}" class="menu-nav__link link">
+                                <i class="fas fa-wallet" style="color: var(--accent)"></i>&nbsp; Список счетов
+                            </a>
+                        </li>
+                        <li class="menu-nav__subitem">
+                            <a href="{{ route('bill.add') }}" class="menu-nav__link link">
+                                <i class="fas fa-plus-circle" style="color: var(--accent)"></i>&nbsp; Добавить счет
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+
+            <!-- Дополнительные ссылки -->
+            <a href="{{ route('devices.index') }}" class="menu-nav__link link mt-4">
+                <i class="fas fa-cogs" style="color: var(--accent)"></i>&nbsp; Мои устройства
+            </a>
+            <a href="{{ route('deals.my') }}" class="menu-nav__link link">
+                <i class="fas fa-exchange-alt" style="color: var(--accent)"></i>&nbsp; Мои сделки
+            </a>
+        </li>
+
+		<style>
+			.title--small {
+				margin-top: 15px;
+			}
+		</style>
         @endauth
 		@if (isset($userMenu) && !empty($userMenu))
 			@php

@@ -101,6 +101,7 @@
 										</a>
 									</li>
 								@endif
+								
 							</ul>
 						</li>
 					@endif
@@ -161,6 +162,7 @@
 											@endif
 										</a>
 									</li>
+
 							</ul>
 						</li>
 					@endif
@@ -176,6 +178,30 @@
 						<li class="sidebar-item">
 							<a href="{{ admin_url('pages') }}" class="sidebar-link">
 								<i data-feather="book-open" class="feather-icon"></i> <span class="hide-menu">{{ trans('admin.pages') }}</span>
+							</a>
+						</li>
+					@endif
+					@if (userHasSuperAdminPermissions())
+									<li class="sidebar-item">
+										<a href="{{ admin_url('withdraw-requests') }}" class="sidebar-link">
+											<i data-feather="dollar-sign" class="feather-icon"></i> <span class="hide-menu">{{ trans('admin.withdraw_requests') }}</span>
+										</a>
+									</li>
+								@endif
+
+					@if (userHasSuperAdminPermissions())
+						<li class="sidebar-item">
+							<a href="{{ route('admin.deal-list') }}" class="sidebar-link">
+								<i class="mdi mdi-adjust"></i>
+								<span class="hide-menu">Сделки пользователей</span>
+							</a>
+						</li>
+					@endif
+					@if (userHasSuperAdminPermissions())
+						<li class="sidebar-item">
+							<a href="{{ route('admin.deal.cancellation-requests') }}" class="sidebar-link">
+								<i class="mdi mdi-adjust"></i>
+								<span class="hide-menu">Запросы отмены сделок</span>
 							</a>
 						</li>
 					@endif

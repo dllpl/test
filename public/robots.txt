@@ -15,13 +15,14 @@ Disallow: /index.php
 Disallow: /mix-manifest.json
 Disallow: /locale/en
 Disallow: /locale/ru
+Disallow: /locale/zh
 Disallow: /auth/facebook
 Disallow: /auth/linkedin
 Disallow: /auth/twitter
 Disallow: /auth/google
 
 
-Sitemap: /kz/sitemaps.xml
-Sitemap: /kg/sitemaps.xml
-Sitemap: /ru/sitemaps.xml
-Sitemap: /uz/sitemaps.xml
+Sitemap: http://127.0.0.1:8000/kz/sitemaps.xml
+Sitemap: http://127.0.0.1:8000/kg/sitemaps.xml
+Sitemap: http://127.0.0.1:8000/ru/sitemaps.xml
+Sitemap: http://127.0.0.1:8000/uz/sitemaps.xml

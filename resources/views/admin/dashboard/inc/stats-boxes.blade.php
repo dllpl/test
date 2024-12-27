@@ -142,6 +142,131 @@
 		
 	</div>
 	@endif
+
+
+</div>
+
+
+<div class="row">
+    <!-- Денег в системе -->
+    <div class="col-lg-3 col-3">
+        <div class="card bg-primary rounded shadow">
+            <div class="card-body">
+                <div class="row py-1">
+                    <div class="col-8 d-flex align-items-center">
+                        <div>
+                            <h2 class="fw-light">
+                                <a href="{{ admin_url('users') }}" class="text-white" style="font-weight: bold;">
+                                    {{ number_format($totalBalance, 2) }}
+                                </a>
+                            </h2>
+                            <h6 class="text-white">
+                                <a href="{{ admin_url('users') }}" class="text-white">
+                                    Денег в системе
+                                </a>
+                            </h6>
+                        </div>
+                    </div>
+                    <div class="col-4 d-flex align-items-center justify-content-end">
+                        <span class="text-white display-6">
+                            <a href="{{ admin_url('users') }}" class="text-white">
+                                <i class="fa fa-wallet"></i>
+                            </a>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Ожидает выплаты -->
+    <div class="col-lg-3 col-3">
+        <div class="card bg-warning rounded shadow">
+            <div class="card-body">
+                <div class="row py-1">
+                    <div class="col-8 d-flex align-items-center">
+                        <div>
+                            <h2 class="fw-light">
+                                <a href="{{ admin_url('withdraw_requests?status=pending') }}" class="text-white" style="font-weight: bold;">
+                                    {{ number_format($pendingWithdrawals, 2) }}
+                                </a>
+                            </h2>
+                            <h6 class="text-white">
+                                <a href="{{ admin_url('withdraw_requests?status=pending') }}" class="text-white">
+                                    Ожидают выплаты
+                                </a>
+                            </h6>
+                        </div>
+                    </div>
+                    <div class="col-4 d-flex align-items-center justify-content-end">
+                        <span class="text-white display-6">
+                            <a href="{{ admin_url('withdraw_requests?status=pending') }}" class="text-white">
+                                <i class="fa fa-clock"></i>
+                            </a>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Выплачено -->
+    <div class="col-lg-3 col-3">
+        <div class="card bg-success rounded shadow">
+            <div class="card-body">
+                <div class="row py-1">
+                    <div class="col-8 d-flex align-items-center">
+                        <div>
+                            <h2 class="fw-light">
+                                <a href="{{ admin_url('withdraw_requests?status=approved') }}" class="text-white" style="font-weight: bold;">
+                                    {{ number_format($approvedWithdrawals, 2) }}
+                                </a>
+                            </h2>
+                            <h6 class="text-white">
+                                <a href="{{ admin_url('withdraw_requests?status=approved') }}" class="text-white">
+                                    Выплачено
+                                </a>
+                            </h6>
+                        </div>
+                    </div>
+                    <div class="col-4 d-flex align-items-center justify-content-end">
+                        <span class="text-white display-6">
+                            <a href="{{ admin_url('withdraw_requests?status=approved') }}" class="text-white">
+                                <i class="fa fa-check-circle"></i>
+                            </a>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+<div class="col-lg-3 col-3">
+    <div class="card bg-warning rounded shadow">
+        <div class="card-body">
+            <div class="row py-1">
+                <div class="col-8 d-flex align-items-center">
+                    <div>
+                        <h2 class="fw-light">
+                            <span class="text-white" style="font-weight: bold;">
+                                {{ number_format($totalCommissions, 2) }} ₽
+                            </span>
+                        </h2>
+                        <h6 class="text-white">
+                            Заработано комиссий
+                        </h6>
+                    </div>
+                </div>
+                <div class="col-4 d-flex align-items-center justify-content-end">
+                    <span class="text-white display-6">
+                        <i class="fa fa-money-bill-alt"></i>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 </div>
 
 @push('dashboard_styles')

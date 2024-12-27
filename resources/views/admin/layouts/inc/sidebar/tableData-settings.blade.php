@@ -46,6 +46,14 @@
 		</a>
 	</li>
 @endif
+@if (auth()->user()->can('advertising-list') || userHasSuperAdminPermissions())
+	<li class="sidebar-item">
+		<a href="{{ route('admin.deal-settings') }}" class="sidebar-link">
+			<i class="mdi mdi-adjust"></i>
+			<span class="hide-menu">Настройки сделок</span>
+		</a>
+	</li>
+@endif
 @if (
 	auth()->user()->can('country-list')
 	|| auth()->user()->can('currency-list')
@@ -84,6 +92,7 @@
 		</a>
 	</li>
 @endif
+
 @if (auth()->user()->can('report-type-list') || userHasSuperAdminPermissions())
 	<li class="sidebar-item">
 		<a href="{{ admin_url('report_types') }}" class="sidebar-link">

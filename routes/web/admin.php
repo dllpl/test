@@ -53,6 +53,16 @@ use App\Http\Controllers\Web\Admin\SystemController;
 use App\Http\Controllers\Web\Admin\UserController;
 use App\Http\Controllers\Web\Admin\CertController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Web\Admin\WithdrawRequestController;
+use App\Http\Controllers\Web\Admin\DealSettingsController;
+use App\Http\Controllers\DealController;
+use App\Http\Controllers\DeviceController;
+use App\Http\Controllers\WithdrawController;
+
+Route::get('deal-settings', [DealSettingsController::class, 'index'])->name('admin.deal-settings');
+Route::post('deal-settings', [DealSettingsController::class, 'update'])->name('admin.deal-settings.update');
+
+
 
 // Auth
 Route::namespace('Auth')
@@ -82,6 +92,18 @@ Route::middleware(['admin', 'clearance', 'banned.user', 'no.http.cache'])
 				Route::get('dashboard', 'dashboard');
 				Route::get('/', 'redirect');
 			});
+
+		// Для супер-администраторов
+		Route::get('/admin/deal-list', [DealController::class, 'adminDealList'])->name('admin.deal-list');
+		Route::patch('/admin/deals/{id}/update-status', [DealController::class, 'adminUpdateStatus'])->name('admin.deal.update-status');
+
+		Route::get('/admin/deals/cancellation-requests', [DealController::class, 'cancellationRequests'])->name('admin.deal.cancellation-requests');
+		Route::post('/admin/deals/{id}/accept-cancellation', [DealController::class, 'acceptCancellation'])->name('admin.deal.accept-cancellation');
+		Route::post('/admin/deals/{id}/reject-cancellation', [DealController::class, 'rejectCancellation'])->name('admin.deal.reject-cancellation');
+		
+
+		Route::get('withdraw-requests', [WithdrawRequestController::class, 'index'])->name('withdraw.requests.index');
+    	Route::post('withdraw-requests/{id}', [WithdrawRequestController::class, 'update'])->name('withdraw.requests.update');
 
 		// Extra (must be called before CRUD)
 		Route::get('homepage/{action}', [HomeSectionController::class, 'reset'])->where('action', 'reset_(.*)');
@@ -134,6 +156,15 @@ Route::middleware(['admin', 'clearance', 'banned.user', 'no.http.cache'])
 
             Route::get('action/{action}/{request_id}', [CertController::class, 'action'])->name('action');
         });
+
+		Route::get('/devices/create', [DeviceController::class, 'create'])->name('devices.create');
+		Route::delete('/devices/{id}', [DeviceController::class, 'destroy'])->name('devices.destroy');
+		Route::post('/devices', [DeviceController::class, 'store'])->name('devices.store');
+
+		Route::get('/accounts/edit/{id}', [WithdrawController::class, 'edit'])->name('accounts.edit');
+		Route::put('/accounts/update/{id}', [WithdrawController::class, 'update'])->name('accounts.update');
+
+
 
 		// Others
 		Route::get('account', [UserController::class, 'account']);

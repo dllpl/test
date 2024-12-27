@@ -277,6 +277,29 @@ if ($multiCountriesIsEnabled) {
                                         </form>
                                     </div>
 
+									<div style="display: none; width: 30rem; margin: auto;" id="withdrawRequestPopup">
+										<h3 class="headers_balance">Запрос на вывод средств</h3>
+										<form action="{{ route('bill.withdraw.submit') }}" method="POST">
+											@csrf
+											<label for="amount" class="col-form-label">Введите сумму на вывод:</label>
+											<input class="form-control input input--default" type="number" name="amount" required min="1" max="{{ auth()->user()->balance }}">
+											
+											@if (isset($accounts) && $accounts->isNotEmpty())
+											<label for="account_id" class="col-form-label mt-3">Выберите счет:</label>
+											<select name="account_id" class="form-control" required>
+												@foreach ($accounts as $account)
+													<option value="{{ $account->id }}">{{ $account->recipient }} - {{ $account->account_number }}</option>
+												@endforeach
+											</select>
+
+											<button type="submit" class="btn btn-primary mt-3">Отправить запрос</button>
+											@else
+												<p class="mt-4">У вас нет счетов - <a href="{{ route('bill.add') }}">добавить счет</a></p>
+											@endif
+										</form>
+									</div>
+
+
                                     {{-- Вывод баланса и ссылки на пополнение --}}
                                     @auth
                                         <li class="dropdown-item{{ (isset($value['isActive']) && $value['isActive']) ? ' active__lk' : '' }}">

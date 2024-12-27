@@ -171,6 +171,9 @@ class UserController extends PanelController
 		if (request()->segment(2) == 'account') {
 			return;
 		}
+
+		
+		
 		
 		// COLUMNS
 		$this->xPanel->addColumn([
@@ -225,6 +228,20 @@ class UserController extends PanelController
 				'function_name' => 'getVerifiedPhoneHtml',
 			]);
 		}
+
+		$this->xPanel->addColumn([
+			'name'          => 'has_rdbox',
+			'label'         => 'RDBOX',
+			'type'          => 'model_function',
+			'function_name' => 'getRdboxStatusHtml',
+		]);
+		
+
+		$this->xPanel->addColumn([
+			'name'  => 'balance',
+			'label' => 'Баланс',
+			'type'  => 'text',
+		]);
 		
 		$entity = $this->xPanel->getModel()->find(request()->segment(3));
 		
@@ -406,6 +423,51 @@ class UserController extends PanelController
 				], 'update');
 			}
 		}
+		
+		if (!empty($entity)) {
+
+			$this->xPanel->addField([
+				'name'  => 'separator_top',
+				'type'  => 'custom_html',
+				'value' => '<hr>',
+			]);
+
+			// Добавление устройств в форму редактирования
+			$this->xPanel->addField([
+				'name'              => 'devices',
+				'label'             => trans('admin.Devices'),
+				'type'              => 'custom_html',
+				'value'             => view('admin.partials.devices_list', [
+											'devices' => $entity->userhasRDdevices ?? collect(),
+											'userId'  => $entity->id, // Передаем ID пользователя в шаблон
+										])->render(),
+				'wrapperAttributes' => [
+					'class' => 'col-md-12',
+				],
+			]);
+
+			$this->xPanel->addField([
+				'name'  => 'separator_accounts',
+				'type'  => 'custom_html',
+				'value' => '<hr>',
+			]);
+
+			// Добавление счетов клиента в форму редактирования
+			$this->xPanel->addField([
+				'name'              => 'accounts',
+				'label'             => 'Счета',
+				'type'              => 'custom_html',
+				'value'             => view('admin.partials.accounts_list', [
+											'accounts' => $entity->accounts ?? collect(),
+											'userId'   => $entity->id, // Передаем ID пользователя в шаблон
+										])->render(),
+				'wrapperAttributes' => [
+					'class' => 'col-md-12',
+				],
+			]);
+
+		}
+
 		// Only 'super-admin' can assign 'roles' or 'permissions' to users
 		// Also logged admin user cannot manage his own 'role' or 'permissions'
 		if (
@@ -566,6 +628,8 @@ class UserController extends PanelController
 				'class' => 'col-md-6',
 			],
 		]);
+
+		
 		
 		// Get logged user
 		if (!empty($authUser) && isset($authUser->id)) {

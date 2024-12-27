@@ -331,8 +331,13 @@
 											</a>
 										@endif
 									@else
+										
 										{!! genPhoneNumberBtn($post, true) !!}
 										{!! genEmailContactBtn($post, true) !!}
+
+										<a style="max-width: 29%;display: flex;align-items: center;justify-content: space-between;" href="{{ url('deal/create/' . data_get($post, 'id')) }}" class="btn btn-primary btn-block">
+											<i class="fas fa-handshake"></i> Создать сделку
+										</a>
 									@endif
 									@php
 										try {

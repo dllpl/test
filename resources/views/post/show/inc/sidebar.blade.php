@@ -100,6 +100,9 @@
 							</a>
 						@endif
 					@else
+						<a href="{{ url('deal/create/' . data_get($post, 'id')) }}" class="btn btn-primary btn-block">
+							<i class="fas fa-handshake"></i> Создать сделку
+						</a>
 						{!! genPhoneNumberBtn($post, true) !!}
 						{!! genEmailContactBtn($post, true) !!}
 					@endif
@@ -140,6 +143,9 @@
 							} catch (\Throwable $e) {}
 						@endphp
 				@else
+						<a href="{{ url('deal/create/' . data_get($post, 'id')) }}" class="btn btn-primary btn-block">
+							<i class="fas fa-handshake"></i> Создать сделку
+						</a>
 					{!! genPhoneNumberBtn($post, true) !!}
 					{!! genEmailContactBtn($post, true) !!}
 				@endif
